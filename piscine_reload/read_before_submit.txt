@@ -1,0 +1,6 @@
+1/ do ex00 til ex05 at school because wsl incompatibility. 
+- ln for hard link
+- ln -s for symlink
+- chmod for permission change
+
+2/ double check ex17 beacuse strcmp doesn't work correctly.
