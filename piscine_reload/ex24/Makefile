@@ -17,18 +17,18 @@ CFLAGS = -Wall -Wextra -Werror
 all:	${NAME}
 
 .c.o:
-		${GCC} ${CFLAGS} -c -I ${HEADER} $< -o ${<:.c=.o}
+	${GCC} ${CFLAGS} -c -I ${HEADER} $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJECTS}
-		${AR} ${NAME} ${OBJECTS}
-		${INDEX} ${NAME}
+	${AR} ${NAME} ${OBJECTS}
+	${INDEX} ${NAME}
 
 clean:
-		${RM} ${OBJECTS}
+	${RM} ${OBJECTS}
 
-fclean:		clean
-		${RM} ${NAME}
+fclean:	clean
+	${RM} ${NAME}
 
-re:			fclean all
+re:	fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:	all clean fclean re
