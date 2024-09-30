@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 16:49:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/20 21:32:12 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 16:07:22 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 16:08:20 by hoannguy         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

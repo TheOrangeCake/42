@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/21 22:48:12 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/22 17:54:50 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 16:21:28 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 16:21:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
 
 int	ft_strlen(char *str)
 {
@@ -42,13 +41,13 @@ char	*ft_strdup(char *src)
 	return (ptr);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	char	test[40] = "hello, i am a cat";
+// int	main(void)
+// {
+// 	char	test[40] = "hello, i am a cat";
 
-	printf("result: %s\n", test);
-	printf("result: %s\n", ft_strdup(test));
-	return (0);
-}
+// 	printf("result: %s\n", test);
+// 	printf("result: %s\n", ft_strdup(test));
+// 	return (0);
+// }

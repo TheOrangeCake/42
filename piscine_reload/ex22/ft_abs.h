@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_abs.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/22 20:12:09 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/22 20:16:53 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 16:15:49 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 16:17:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 16:26:39 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/20 16:44:42 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 16:02:25 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 16:02:38 by hoannguy         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	ft_putstr(char *str)
 	}
 }
 
-int	main(void)
-{
-	char	test[50] = "hello world, i am a cat";
+// int	main(void)
+// {
+// 	char	test[50] = "hello world, i am a cat";
 
-	ft_putstr(test);
-	return (0);
-}
+// 	ft_putstr(test);
+// 	return (0);
+// }

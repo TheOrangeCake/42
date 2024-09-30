@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/21 00:31:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/21 00:31:43 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 16:07:17 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 16:07:17 by hoannguy         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 13:56:58 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/18 13:57:07 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 15:57:52 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 15:58:03 by hoannguy         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void ft_print_numbers(void)
+void	ft_print_numbers(void)
 {
 	int	a;
 
@@ -24,8 +24,8 @@ void ft_print_numbers(void)
 	}
 }
 
-int	main(void)
-{
-	ft_print_numbers();
-	return (0);
-}
+// int	main(void)
+// {
+// 	ft_print_numbers();
+// 	return (0);
+// }

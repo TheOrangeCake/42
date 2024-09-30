@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/22 19:59:23 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/22 20:11:10 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 16:06:07 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 16:06:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,29 @@ int	*ft_range(int min, int max)
 	return (table);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	int	min;
-	int	max;
-	int	*result;
-	int	i;
+// int	main(void)
+// {
+// 	int	min;
+// 	int	max;
+// 	int	*result;
+// 	int	i;
 
-	min = -9;
-	max = 9;
-	result = ft_range(min, max);
+// 	min = -9;
+// 	max = 9;
+// 	result = ft_range(min, max);
 
-	if (result == NULL)
-	{
-		printf("The result is NULL\n");
-		return (0);
-	}
-	i = 0;
-	while (i < (max - min))
-	{
-		printf("Result: %d\n", result[i]);
-		i++;
-	}
-	return (0);
-}
+// 	if (result == NULL)
+// 	{
+// 		printf("The result is NULL\n");
+// 		return (0);
+// 	}
+// 	i = 0;
+// 	while (i < (max - min))
+// 	{
+// 		printf("Result: %d\n", result[i]);
+// 		i++;
+// 	}
+// 	return (0);
+// }

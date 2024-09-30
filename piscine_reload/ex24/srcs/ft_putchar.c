@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 14:57:42 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/24 14:58:38 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 16:21:46 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 16:21:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

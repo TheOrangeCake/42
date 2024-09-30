@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_negative.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoannguy <hoannguy@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: hoannguy <hoannguy@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 13:58:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/09/18 14:03:17 by hoannguy         ###   ########.ch       */
+/*   Created: 2024/09/29 15:56:50 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/09/29 15:57:41 by hoannguy         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void ft_is_negative(int n)
+void	ft_is_negative(int n)
 {
 	if (n < 0)
 		write(1, "N", 1);
@@ -20,11 +20,11 @@ void ft_is_negative(int n)
 		write(1, "P", 1);
 }
 
-int main(void)
-{
-	int	n;
+// int	main(void)
+// {
+// 	int	n;
 
-	n = -98;
-	ft_is_negative(n);
-	return (0);
-}
+// 	n = -98;
+// 	ft_is_negative(n);
+// 	return (0);
+// }
