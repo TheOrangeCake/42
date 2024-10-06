@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 17:48:27 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/01 17:48:27 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/10/06 20:50:15 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/10/06 20:50:15 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -24,14 +24,42 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*ptr;
+	int		i;
+	size_t	s_len;
+
+	i = 0;
+	start = start - 1;
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (NULL);
+	if (start + len > s_len)
+		len = s_len - start;
+	ptr = malloc(len + 1);
+	if (ptr == NULL)
+		return (NULL);
+	while (len > 0)
+	{
+		ptr[i] = s[start + i];
+		i++;
+		len--;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+
 // #include <stdio.h>
 
 // int	main(void)
 // {
-// 	char	hello[50] = "hello, i am a cat";
-// 	char	hello1[50] = "hello, i am a cat";
+// 	char	test[] = "1234567";
+// 	int		start;
+// 	int		len;
 
-// 	printf("The result is %zu\n", strlen(hello));
-// 	printf("The result is %zu\n", ft_strlen(hello1));
+// 	start = 3;
+// 	len = 6;
+// 	printf("Result: %s\n", ft_substr(test, start, len));
 // 	return (0);
 // }
