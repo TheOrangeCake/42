@@ -6,9 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:35:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/02 17:35:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:42:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {

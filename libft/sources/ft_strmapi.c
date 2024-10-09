@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 12:12:22 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 13:40:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:52:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 static size_t	ft_strlen(const char *s)
 {

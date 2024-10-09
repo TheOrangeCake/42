@@ -6,9 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:05:25 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/04 18:05:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:47:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_atoi(const char *nptr)
 {

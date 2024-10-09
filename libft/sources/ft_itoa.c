@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:47:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 12:09:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:52:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 static int	bit_count(int n)
 {

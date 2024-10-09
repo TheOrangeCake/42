@@ -6,9 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:17:21 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/01 17:17:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:36:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

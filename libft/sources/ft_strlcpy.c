@@ -6,9 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:04:15 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/02 16:04:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:40:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
