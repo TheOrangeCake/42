@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:37:23 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:38:00 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:55:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 176)
-		return (16384);
+		return (1);
 	else
 		return (0);
 }

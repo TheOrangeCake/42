@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:44:34 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 16:26:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:57:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_isalpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1024);
+		return (1);
 	else
 		return (0);
 }
@@ -28,8 +28,8 @@ int	ft_isalpha(int c)
 // 	int	a;
 // 	int b;
 
-// 	a = 9;
-// 	b = 9;
+// 	a = 'g';
+// 	b = 'g';
 // 	printf("the result is %d\n", isalpha(a));
 // 	printf("the result is %d\n", ft_isalpha(a));
 // 	return (0);

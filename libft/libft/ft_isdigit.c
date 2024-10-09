@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:17:21 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:36:12 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:58:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
-		return (2048);
+		return (1);
 	else
 		return (0);
 }

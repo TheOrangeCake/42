@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:34:56 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:40:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:02:20 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-// #include <stdio.h>
+#include <stdio.h>
 
-// int	main(void)
-// {
-// 	char	test[6] = "hello";
-// 	char	test1[6] = "cat";
-// 	char	test2[6] = "hello";
-// 	char	test3[6]= "cat";
+int	main(void)
+{
+	char	test[] = "\0";
+	char	test1[] = "\0";
+	char	test2[] = "\0";
+	char	test3[]= "\0";
 
-// 	memcpy(test, test1, 3);
-// 	ft_memcpy(test2, test3, 3);
-// 	printf("The result is %s\n", test);
-// 	printf("The result is %s\n", test2);
-// 	return (0);
-// }
+	memcpy(test, test1, 3);
+	// ft_memcpy(test2, test3, 3);
+	printf("The result is %s\n", test);
+	// printf("The result is %s\n", test2);
+	return (0);
+}
