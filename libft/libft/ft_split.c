@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:11:00 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 16:31:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:50:44 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static size_t	word_count(char *str, size_t len)
 
 char	**ft_split(char const *s, char c)
 {
-	size_t		i;
+	size_t	i;
 	size_t	j;
 	char	**tab;
 	char	*newstr;

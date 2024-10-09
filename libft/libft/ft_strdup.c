@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:44:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 16:24:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:51:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strdup(const char *s)
 {
 	char	*ptr;
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	ptr = malloc(ft_strlen(s) + 1);
