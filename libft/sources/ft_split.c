@@ -6,98 +6,122 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:11:00 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/08 14:11:00 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:49:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
+#include <stdlib.h>
 
-// static size_t	ft_strlen(const char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		i++;
-// 	}
-// 	return (i);
-// }
-
-// char **ft_split(char const *s, char c)
-// {
-// 	size_t	i;
-// 	size_t	j;
-// 	size_t	s_len;
-// 	char	**tab;
-// 	char	*dup;
-
-// 	i = 0;
-// 	j = 1;
-// 	s_len = ft_strlen(s);
-// 	while (s[i])
-// 	{
-// 		if (s[i] == c)
-// 			j++;
-// 		i++;
-// 	}
-// 	if (s[i - 1] == c)
-// 		j = j - 1;
-// 	tab = malloc(sizeof(char *) * (j + 1));
-// 	if (tab == NULL)
-// 		return (NULL);
-// 	dup = malloc(s_len + j + 1);
-// 	if (dup == NULL)
-// 	{
-// 		free(tab);
-// 		return (NULL);
-// 	}
-// 	i = 0;
-// 	j = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == c)
-// 		{
-// 			dup[j++] = s[i++];
-// 			dup[j++] = '\0';
-// 		}
-// 		else
-// 			dup[j++] = s[i++];
-// 	}
-// 	if (dup[j] != '\0')
-// 		dup[j] = '\0';
-// 	i = 0;
-// 	j = 0;
-// 	tab[i++] = &dup[j++];
-// 	while (j < s_len)
-// 	{
-// 		if (dup[j] == '\0')
-// 		{
-// 			j++;
-// 			tab[i++] = &dup[j];
-// 		}
-// 		j++;
-// 	}
-// 	tab[i] = '\0';
-// 	return (tab);
-// }
-
-#include <stdio.h>
-
-int	main(void)
+static size_t	ft_strlen(char const *str)
 {
-	char	test[] = "abababababaaabaaabaaaabaa";
-	char	split = 'b';
-	int		a;
-	char	**result;
+	size_t	i;
 
-	a = 0;
-	result = ft_split(test, split);
-	while (result[a])
-	{
-		printf("%s\n", result[a]);
-		a++;
-	}
-	return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
+static char	*ft_strdup(char const *src)
+{
+	size_t	i;
+	char	*ptr;
+
+	i = 0;
+	ptr = malloc(ft_strlen(src) * sizeof(char) + 1);
+	if (ptr == NULL)
+		return (NULL);
+	while (src[i])
+	{
+		ptr[i] = src[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+
+static char	*compare(char *str, char c)
+{
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+		{
+			str[i] = '\0';
+		}
+		i++;
+	}
+	return (str);
+}
+
+// count number of word for malloc big array
+static size_t	word_count(char *str, int len)
+{
+	size_t	i;
+	size_t	count;
+
+	count = 0;
+	i = 0;
+	while (i < len)
+	{
+		if (str[i] != '\0')
+			count++;
+		while (str[i] != '\0')
+			i++;
+		i++;
+	}
+	return (count);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	char	**tab;
+	char	*newstr;
+
+	i = 0;
+	j = 0;
+	newstr = ft_strdup(s);
+	newstr = compare(newstr, c);
+	tab = malloc((word_count(newstr, ft_strlen(s)) + 1) * sizeof(char *));
+	if (tab == NULL)
+		return (NULL);
+	while (i < ft_strlen(s))
+	{
+		if (newstr[i] != '\0')
+		{
+			tab[j] = ft_strdup(&newstr[i]);
+			j++;
+			while (newstr[i] != '\0')
+				i++;
+		}
+		i++;
+	}
+	tab[j] = NULL;
+	return (tab);
+}
+
+// #include <stdio.h>
+
+// int main()
+// {
+// 	int	i;
+//     char str[] = "ababbaaab";
+//     char sep = 'a';
+
+// 	i = 0;
+// 	char **result = ft_split(str, sep);
+// 	printf("Original string: \"%s\"\n", str);
+//     printf("Split strings:\n");
+//     while (result[i])
+//     {
+//         printf("[%d]: \"%s\"\n", i, result[i]);
+// 		i++;
+//     }
+// 	printf("[%d]: \"%s\"\n", i, result[i]);
+//     return (0);
+// }
