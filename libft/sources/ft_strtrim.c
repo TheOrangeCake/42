@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:24:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/08 10:24:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:53:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check(char c, char const *set)
 	return (0);
 }
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	j;
@@ -61,13 +61,13 @@ char *ft_strtrim(char const *s1, char const *set)
 	return (ptr);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	char const	s1[] = "1231987asdf123";
-	char const	set[] = "123";
+// int	main(void)
+// {
+// 	char const	s1[] = "1231987asdf123";
+// 	char const	set[] = "123";
 
-	printf("result: %s\n", ft_strtrim(s1, set));
-	return (0);
-}
+// 	printf("result: %s\n", ft_strtrim(s1, set));
+// 	return (0);
+// }
