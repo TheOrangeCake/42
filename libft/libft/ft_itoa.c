@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:47:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:52:07 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:31:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static char	*malloc_itoa(int n, int count)
 
 static char	*exception(char *ptr, int n)
 {
-	int	i;
-
 	if (n == 0)
 	{
 		ptr[0] = '0';

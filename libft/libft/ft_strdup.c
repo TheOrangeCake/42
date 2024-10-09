@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 16:44:34 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:36:27 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/10/04 19:44:26 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/10/09 16:24:33 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int c)
+char	*ft_strdup(const char *s)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1024);
-	else
-		return (0);
+	char	*ptr;
+	size_t		i;
+
+	i = 0;
+	ptr = malloc(ft_strlen(s) + 1);
+	if (ptr == NULL)
+		return (NULL);
+	while (s[i])
+	{
+		ptr[i] = s[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
 
-// #include <ctype.h>
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	int	a;
-// 	int b;
-
-// 	a = 9;
-// 	b = 9;
-// 	printf("the result is %d\n", isalpha(a));
-// 	printf("the result is %d\n", ft_isalpha(a));
-// 	return (0);
-// }

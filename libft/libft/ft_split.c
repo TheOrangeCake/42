@@ -6,44 +6,43 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:11:00 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:51:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:31:41 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_strlen(char const *str)
-{
-	size_t	i;
+// static size_t	ft_strlen(char const *str)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (str[i])
+// 		i++;
+// 	return (i);
+// }
 
-static char	*ft_strdup(char const *src)
-{
-	size_t	i;
-	char	*ptr;
+// static char	*ft_strdup(char const *src)
+// {
+// 	size_t	i;
+// 	char	*ptr;
 
-	i = 0;
-	ptr = malloc(ft_strlen(src) * sizeof(char) + 1);
-	if (ptr == NULL)
-		return (NULL);
-	while (src[i])
-	{
-		ptr[i] = src[i];
-		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
-}
+// 	i = 0;
+// 	ptr = malloc(ft_strlen(src) * sizeof(char) + 1);
+// 	if (ptr == NULL)
+// 		return (NULL);
+// 	while (src[i])
+// 	{
+// 		ptr[i] = src[i];
+// 		i++;
+// 	}
+// 	ptr[i] = '\0';
+// 	return (ptr);
+// }
 
 static char	*compare(char *str, char c)
 {
 	size_t		i;
-	size_t		j;
 
 	i = 0;
 	while (str[i])
@@ -58,7 +57,7 @@ static char	*compare(char *str, char c)
 }
 
 // count number of word for malloc big array
-static size_t	word_count(char *str, int len)
+static size_t	word_count(char *str, size_t len)
 {
 	size_t	i;
 	size_t	count;
@@ -78,8 +77,8 @@ static size_t	word_count(char *str, int len)
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		j;
+	size_t		i;
+	size_t	j;
 	char	**tab;
 	char	*newstr;
 
