@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:24:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 16:25:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 13:00:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// static size_t	ft_strlen(const char *s)
+// size_t	ft_strlen(const char *s)
 // {
 // 	size_t	i;
 
@@ -51,6 +51,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	while (check(s1[j - 1], set) == 1)
 		j--;
+	if (j == 0)
+		i = 0;
 	ptr = malloc(j - i + 1);
 	if (ptr == NULL)
 		return (NULL);
@@ -65,8 +67,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 // int	main(void)
 // {
-// 	char const	s1[] = "1231987asdf123";
-// 	char const	set[] = "123";
+// 	char const	s1[] = "          ";
+// 	char const	set[] = " ";
 
 // 	printf("result: %s\n", ft_strtrim(s1, set));
 // 	return (0);

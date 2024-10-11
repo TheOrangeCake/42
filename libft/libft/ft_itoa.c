@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:47:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 16:31:51 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 12:53:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	bit_count(int n)
+static int	bit_count(long n)
 {
 	int		count;
 
@@ -29,44 +29,24 @@ static int	bit_count(int n)
 	return (count);
 }
 
-static char	*malloc_itoa(int n, int count)
+static char	*malloc_itoa(long n, long count)
 {
 	char	*ptr;
-	int		sign;
+	long	sign;
 
 	sign = n;
 	if (sign >= 0)
-		ptr = malloc(sizeof(char) * count + 1);
+		ptr = malloc(sizeof(char) * (count + 1));
 	if (sign < 0)
-		ptr = malloc(sizeof(char) * count + 2);
+		ptr = malloc(sizeof(char) * (count + 2));
 	if (ptr == NULL)
 		return (NULL);
 	return (ptr);
 }
 
-static char	*exception(char *ptr, int n)
+static char	*exception(char *ptr)
 {
-	if (n == 0)
-	{
-		ptr[0] = '0';
-		ptr[1] = '\0';
-	}
-	if (n == -2147483648)
-	{
-		ptr[0] = '-';
-		ptr[1] = '2';
-		ptr[2] = '1';
-		ptr[3] = '4';
-		ptr[4] = '7';
-		ptr[5] = '4';
-		ptr[6] = '8';
-		ptr[7] = '3';
-		ptr[8] = '6';
-		ptr[9] = '4';
-		ptr[10] = '8';
-		ptr[11] = '\0';
-		return (ptr);
-	}
+	ptr[0] = '0';
 	return (ptr);
 }
 
@@ -74,25 +54,26 @@ char	*ft_itoa(int n)
 {
 	int		count;
 	char	*ptr;
+	long	i;
 
-	count = bit_count(n);
-	ptr = malloc_itoa(n, count);
-	if (n == 0 || n == -2147483648)
-	{
-		ptr = exception(ptr, n);
-		return (ptr);
-	}
-	if (n < 0)
+	i = n;
+	count = bit_count(i);
+	ptr = malloc_itoa(i, count);
+	if (ptr == NULL)
+		return (NULL);
+	if (i == 0)
+		ptr = exception(ptr);
+	if (i < 0)
 	{
 		ptr[0] = '-';
-		n = -n;
+		i = -i;
 		count = count + 1;
 	}
 	ptr[count--] = '\0';
-	while (n > 0)
+	while (i > 0)
 	{
-		ptr[count--] = n % 10 + '0';
-		n = n / 10;
+		ptr[count--] = i % 10 + '0';
+		i = i / 10;
 	}
 	return (ptr);
 }

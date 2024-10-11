@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 13:07:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:40:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 13:08:37 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,26 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-// #include <stdio.h>
+#include <stdio.h>
 
-// int	main()
-// {
-//     char	src[] = "Hello, World!";
-// 	char	src1[] = "Hello, World!";
+int	main()
+{
+    char	src[] = "Hello, World!";
+	char	src1[] = "Hello, World!";
 
-//     printf("before memmove: %s\n", src);
-// 	printf("before memmove: %s\n", src1);
-//     ft_memmove(src + 7, src, 6);
-// 	memmove(src1 + 7, src1, 6);
-//     printf("after memmove: %s\n", src);
-// 	printf("after memmove: %s\n", src1);
-//     strcpy(src, "Hello, World!");
-// 	strcpy(src1, "Hello, World!");
-//     printf("before memmove: %s\n", src);
-// 	printf("before memmove: %s\n", src1);
-//     ft_memmove(src, src + 7, 6);
-// 	memmove(src1, src1 + 7, 6);
-//     printf("after memmove: %s\n", src);
-// 	printf("after memmove: %s\n", src1);
-//     return (0);
-// }
+    printf("before memmove: %s\n", src);
+	printf("before memmove: %s\n", src1);
+    ft_memmove(src + 7, src, 6);
+	memmove(src1 + 7, src1, 6);
+    printf("after memmove: %s\n", src);
+	printf("after memmove: %s\n", src1);
+    strcpy(src, "Hello, World!");
+	strcpy(src1, "Hello, World!");
+    printf("before memmove: %s\n", src);
+	printf("before memmove: %s\n", src1);
+    ft_memmove(src, src + 7, 6);
+	memmove(src1, src1 + 7, 6);
+    printf("after memmove: %s\n", src);
+	printf("after memmove: %s\n", src1);
+    return (0);
+}
