@@ -6,23 +6,23 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:24:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/11 13:00:04 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:56:11 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	i;
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		i++;
-// 	}
-// 	return (i);
-// }
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
+}
 
 static int	check(char c, char const *set)
 {
@@ -46,10 +46,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*ptr;
 
 	i = 0;
+	if (s1 == NULL || set == NULL)
+		return (NULL);
 	j = ft_strlen(s1);
-	while (s1[i] && check(s1[i], set) == 1)
+	while (i < j && s1[i] && check(s1[i], set) == 1)
 		i++;
-	while (check(s1[j - 1], set) == 1)
+	while (j > i && check(s1[j - 1], set) == 1)
 		j--;
 	if (j == 0)
 		i = 0;
@@ -67,8 +69,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 // int	main(void)
 // {
-// 	char const	s1[] = "          ";
-// 	char const	set[] = " ";
+// 	char const	s1[] = "123sdgsd321";
+// 	char const	set[] = "123";
 
 // 	printf("result: %s\n", ft_strtrim(s1, set));
 // 	return (0);

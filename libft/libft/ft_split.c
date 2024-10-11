@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:11:00 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/11 15:19:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:10:02 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ static char	**ft_splitting(char const *s, char *newstr, char **tab)
 				while (j > 0)
 					free(tab[--j]);
 				free(tab);
-				free(newstr);
 				return (NULL);
 			}
 			while (newstr[i] != '\0')
@@ -111,10 +110,7 @@ char	**ft_split(char const *s, char c)
 
 	newstr = ft_strdup(s);
 	if (newstr == NULL)
-	{
-		free(newstr);
 		return (NULL);
-	}
 	newstr = compare(newstr, c);
 	tab = malloc((word_count(newstr, ft_strlen(s)) + 1) * sizeof(char *));
 	if (tab == NULL)
