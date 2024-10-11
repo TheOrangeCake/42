@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:34:56 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/11 13:51:00 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:23:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 	ptrdest = (unsigned char *)dest;
 	ptrsrc = (unsigned char *)src;
-	if (ptrdest == NULL || ptrsrc == NULL)
-		return (NULL);
+	if (n == 0 || src == dest)
+		return (dest);
 	while (n > 0)
 	{
 		*ptrdest = *ptrsrc;

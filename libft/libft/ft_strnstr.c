@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:16:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:46:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:29:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	{
 		ptr = &big[i];
 		j = 0;
-		while (big[i + j] == little[j])
+		while (big[i + j] == little[j] && big[i + j] != '\0')
 		{
 			j++;
 			if (little[j] == '\0' && (i + j) <= len)

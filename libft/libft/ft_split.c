@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:11:00 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 17:50:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:19:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// static size_t	ft_strlen(char const *str)
+// size_t	ft_strlen(char const *str)
 // {
 // 	size_t	i;
 
@@ -22,7 +22,7 @@
 // 	return (i);
 // }
 
-// static char	*ft_strdup(char const *src)
+// char	*ft_strdup(char const *src)
 // {
 // 	size_t	i;
 // 	char	*ptr;
@@ -75,26 +75,26 @@ static size_t	word_count(char *str, size_t len)
 	return (count);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**ft_splitting(char const *s, char *newstr, char **tab)
 {
 	size_t	i;
 	size_t	j;
-	char	**tab;
-	char	*newstr;
 
 	i = 0;
 	j = 0;
-	newstr = ft_strdup(s);
-	newstr = compare(newstr, c);
-	tab = malloc((word_count(newstr, ft_strlen(s)) + 1) * sizeof(char *));
-	if (tab == NULL)
-		return (NULL);
 	while (i < ft_strlen(s))
 	{
 		if (newstr[i] != '\0')
 		{
-			tab[j] = ft_strdup(&newstr[i]);
-			j++;
+			tab[j++] = ft_strdup(&newstr[i]);
+			if (tab[j - 1] == NULL)
+			{
+				while (j > 0)
+					free(tab[--j]);
+				free(tab);
+				free(newstr);
+				return (NULL);
+			}
 			while (newstr[i] != '\0')
 				i++;
 		}
@@ -103,6 +103,70 @@ char	**ft_split(char const *s, char c)
 	tab[j] = NULL;
 	return (tab);
 }
+
+char	**ft_split(char const *s, char c)
+{
+	char	**tab;
+	char	*newstr;
+
+	newstr = ft_strdup(s);
+	if (newstr == NULL)
+	{
+		free(newstr);
+		return (NULL);
+	}
+	newstr = compare(newstr, c);
+	tab = malloc((word_count(newstr, ft_strlen(s)) + 1) * sizeof(char *));
+	if (tab == NULL)
+	{
+		free(newstr);
+		return (NULL);
+	}
+	tab = ft_splitting(s, newstr, tab);
+	free(newstr);
+	return (tab);
+}
+
+// char	**ft_split(char const *s, char c)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	char	**tab;
+// 	char	*newstr;
+
+// 	i = 0;
+// 	j = 0;
+// 	newstr = ft_strdup(s);
+// 	newstr = compare(newstr, c);
+// 	tab = malloc((word_count(newstr, ft_strlen(s)) + 1) * sizeof(char *));
+// 	if (tab == NULL)
+// 	{
+// 		free(newstr);
+// 		return (NULL);
+// 	}
+// 	while (i < ft_strlen(s))
+// 	{
+// 		if (newstr[i] != '\0')
+// 		{
+// 			tab[j] = ft_strdup(&newstr[i]);
+// 			 if (tab[j] == NULL)
+//             {
+//                 while (j > 0)
+//                     free(tab[--j]);
+//                 free(tab);
+//                 free(newstr);
+//                 return (NULL);
+//             }
+// 			j++;
+// 			while (newstr[i] != '\0')
+// 				i++;
+// 		}
+// 		i++;
+// 	}
+// 	tab[j] = NULL;
+// 	free(newstr);
+// 	return (tab);
+// }
 
 // #include <stdio.h>
 

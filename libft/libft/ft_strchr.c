@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:45:21 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/11 13:51:47 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:33:34 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
-	if (c == '\0' && *s == '\0')
+	if ((char)c == '\0' && *s == '\0')
 	{
 		return ((char *)s);
 	}
@@ -36,8 +36,8 @@ char	*ft_strchr(const char *s, int c)
 // 	char	*result;
 // 	char	*result1;
 
-// 	result = ft_strchr(test, '\0');
-// 	result1 = strchr(test1, '\0');
+// 	result = ft_strchr(test, 'e');
+// 	result1 = strchr(test1, 'e');
 // 	if (result == NULL)
 // 		printf("The result is NULL\n");
 // 	else if (*result == '\0')

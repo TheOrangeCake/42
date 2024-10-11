@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:48:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 14:45:20 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:33:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strrchr(const char *s, int c)
 	i = 0;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 		{
 			ptr = s;
 			i = 1;
@@ -29,7 +29,7 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	if (i == 1)
 		return ((char *)ptr);
-	else if (c == '\0' && *s == '\0')
+	else if ((char)c == '\0' && *s == '\0')
 		return ((char *)s);
 	else
 		return (NULL);
