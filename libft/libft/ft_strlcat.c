@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:40:22 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/09 16:25:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:50:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,52 @@
 // 	return (i);
 // }
 
+// size_t	ft_strlcat(char *dst, const char *src, size_t size)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	size_t	dst_length;
+// 	size_t	src_length;
+
+// 	src_length = ft_strlen(src);
+// 	dst_length = ft_strlen(dst);
+// 	j = dst_length;
+// 	i = 0;
+// 	if (dst_length < size - 1 && size > 0)
+// 	{
+// 		while (src[i] && dst_length + i <= size)
+// 		{
+// 			dst[j] = src[i];
+// 			j++;
+// 			i++;
+// 		}
+// 		dst[j] = '\0';
+// 	}
+// 	return (dst_length + src_length);
+// }
+
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 	size_t	j;
-	size_t	dst_length;
-	size_t	src_length;
+	size_t	a;
+	size_t	b;
 
-	src_length = ft_strlen(src);
-	dst_length = ft_strlen(dst);
-	j = dst_length;
 	i = 0;
-	if (dst_length < size - 1 && size > 0)
+	j = 0;
+	a = ft_strlen(dst);
+	b = ft_strlen(src);
+	if (size <= a)
+		return (b + size);
+	else
 	{
-		while (src[i] && dst_length + i <= size)
-		{
-			dst[j] = src[i];
-			j++;
+		while (dst[i])
 			i++;
+		while (src[j] && (a + j) < size - 1)
+		{
+			dst[i++] = src[j++];
 		}
-		dst[j] = '\0';
+		dst[i] = '\0';
 	}
-	return (dst_length + src_length);
+	return (a + b);
 }
