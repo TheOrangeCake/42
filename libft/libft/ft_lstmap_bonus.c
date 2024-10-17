@@ -6,14 +6,12 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 23:13:54 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/16 23:13:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:43:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// t_list	*ft_lstnew(void *content);
-// void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new;

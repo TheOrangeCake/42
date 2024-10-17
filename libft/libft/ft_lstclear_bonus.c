@@ -6,13 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 17:05:59 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/13 17:05:59 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:41:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// void	ft_lstdelone(t_list *lst, void (*del)(void*));
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
