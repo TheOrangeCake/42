@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 23:13:54 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/17 13:43:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:25:00 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,16 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (lst == NULL || f == NULL || del == NULL)
 		return (NULL);
-	temp = ft_lstnew((*f)(lst->content));
-	if (temp == NULL)
-		return (NULL);
-	new = temp;
-	lst = lst->next;
+	new = NULL;
 	while (lst)
 	{
-		temp->next = ft_lstnew((*f)(lst->content));
-		if (temp->next == NULL)
+		temp = ft_lstnew((*f)(lst->content));
+		if (temp == NULL)
 		{
 			ft_lstclear(&new, del);
 			return (NULL);
 		}
-		temp = temp->next;
+		ft_lstadd_back(&new, temp);
 		lst = lst->next;
 	}
 	return (new);

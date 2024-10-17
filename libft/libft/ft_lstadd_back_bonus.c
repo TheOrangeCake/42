@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:49:59 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/13 15:49:59 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:29:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 			temp = temp->next;
 		temp->next = new;
 	}
-	new->next = NULL;
 }
 
 // #include <stdio.h>
