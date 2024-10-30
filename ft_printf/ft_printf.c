@@ -125,7 +125,7 @@ char	*case_hexupper(int i, size_t *count)
 	unsigned		j;
 
 	j = i;
-	table = malloc(sizeof(char) * 16);
+	table = malloc(sizeof(char) * 17);
 	if (table == NULL)
 		return (NULL);
 	table = "0123456789ABCDEF";
@@ -148,7 +148,7 @@ char	*case_hexlower(int i, size_t *count)
 	unsigned		j;
 
 	j = i;
-	table = malloc(sizeof(char) * 16);
+	table = malloc(sizeof(char) * 17);
 	if (table == NULL)
 		return (NULL);
 	table = "0123456789abcdef";
@@ -163,6 +163,12 @@ char	*case_hexlower(int i, size_t *count)
 		(*count)++;
 	}
 	return (table);
+}
+void	case_address(int i, size_t *count)
+{
+	write(1, "0x", 2);
+	(*count) += 2;
+	case_hexlower(i, count);
 }
 
 void	specifier(char c, va_list list, size_t *count)
@@ -184,8 +190,8 @@ void	specifier(char c, va_list list, size_t *count)
 		case_hexlower(va_arg(list, int), count);
 	if (c == 'X')
 		case_hexupper(va_arg(list, int), count);
-	// if (c == 'p')
-	// 	case_address(va_arg(list, int), count);
+	if (c == 'p')
+		case_address(va_arg(list, int), count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -236,12 +242,12 @@ int	main(void)
 	ptr1 = "hello, world";
 	c = 'a';
 	d = 'a';
-	a = -1600;
-	b = -1600;
+	a = 1048576;
+	b = 1048576;
 
-	i = ft_printf("%x\n", a);
+	i = ft_printf("%p\n", ptr1);
 	printf("%i\n", i);
-	j = printf("%x\n", b);
+	j = printf("%p\n", ptr1);
 	printf("%i\n", j);
 	return (0);
 }
