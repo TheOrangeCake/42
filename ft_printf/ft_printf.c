@@ -30,11 +30,6 @@ void	ft_putstr_fd(char *s, int fd)
 
 static void	exception(int n, int fd, size_t *count)
 {
-	if (n == 0)
-	{
-		ft_putstr_fd("0", fd);
-		(*count)++;
-	}
 	if (n == -2147483648)
 	{
 		ft_putstr_fd("-2147483648", fd);
@@ -46,10 +41,8 @@ void	ft_putnbr_fd(int n, int fd, size_t *count)
 {
 	char	base;
 
-	if (n == 0 || n == -2147483648)
-	{
+	if (n == -2147483648)
 		exception(n, fd, count);
-	}
 	else if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
@@ -62,8 +55,7 @@ void	ft_putnbr_fd(int n, int fd, size_t *count)
 		if (n > 9)
 		{
 			ft_putnbr_fd(n / 10, fd, count);
-			ft_putnbr_fd(n % 10, fd,count);
-			(*count)++;
+			ft_putnbr_fd(n % 10, fd, count);
 		}
 		else
 		{
@@ -167,12 +159,12 @@ int	main(void)
 	ptr1 = "hello, world";
 	c = 'a';
 	d = 'a';
-	a = 100;
-	b = 100;
+	a = -80001;
+	b = -80001;
 
-	i = ft_printf("%i,%c\n",a, c);
+	i = ft_printf("%c\n", );
 	printf("%i\n", i);
-	j = printf("%i,%c\n", b, d);
+	j = printf("%c\n", );
 	printf("%i\n", j);
 	return (0);
 }
