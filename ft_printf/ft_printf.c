@@ -27,6 +27,17 @@ void	ft_putstr_fd(char *s, int fd)
 		s++;
 	}
 }
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
+}
 
 static void	exception(int n, int fd, size_t *count)
 {
@@ -66,16 +77,21 @@ void	ft_putnbr_fd(int n, int fd, size_t *count)
 	}
 }
 
-size_t	ft_strlen(const char *s)
+void	ft_putnbr_fd_unsigned(unsigned int n, int fd, size_t *count)
 {
-	size_t	i;
+	char	base;
 
-	i = 0;
-	while (s[i])
+	if (n > 9)
 	{
-		i++;
+		ft_putnbr_fd_unsigned(n / 10, fd, count);
+		ft_putnbr_fd_unsigned(n % 10, fd, count);
 	}
-	return (i);
+	else
+	{
+		base = n + '0';
+		ft_putchar_fd(base, fd);
+		(*count)++;
+	}
 }
 
 void	case_char(int c, size_t *count)
@@ -95,6 +111,14 @@ void	case_interger(int i, size_t *count)
 	ft_putnbr_fd(i, 1, count);
 }
 
+void	case_unsigned(int i, size_t *count)
+{
+	unsigned int	j;
+
+	j = i;
+	ft_putnbr_fd_unsigned(j, 1, count);
+}
+
 void	specifier(char c, va_list list, size_t *count)
 {
 	if (c == '%')
@@ -108,6 +132,14 @@ void	specifier(char c, va_list list, size_t *count)
 		case_string(va_arg(list, char*), count);
 	if (c == 'd' || c == 'i')
 		case_interger(va_arg(list, int), count);
+	if (c == 'u')
+		case_unsigned(va_arg(list, int), count);
+	if (c == 'x')
+		case_hexlower(va_arg(list, int), count);
+	if (c == 'X')
+		case_hexupper(va_arg(list, int), count);
+	if (c == 'p')
+		case_address(va_arg(list, int), count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -131,9 +163,8 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 		{
-			ft_putchar_fd(format[i], 1);
+			ft_putchar_fd(format[i++], 1);
 			(*ptr)++;
-			i++;
 		}
 	}
 	va_end(list);
@@ -159,12 +190,12 @@ int	main(void)
 	ptr1 = "hello, world";
 	c = 'a';
 	d = 'a';
-	a = -80001;
-	b = -80001;
+	a = -90;
+	b = -90;
 
-	i = ft_printf("%c\n", );
+	i = ft_printf("%u\n", a);
 	printf("%i\n", i);
-	j = printf("%c\n", );
+	j = printf("%u\n", b);
 	printf("%i\n", j);
 	return (0);
 }
