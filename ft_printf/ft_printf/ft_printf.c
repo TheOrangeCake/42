@@ -6,45 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 21:54:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/31 17:25:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:19:34 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-// #include <stdarg.h>
-// #include <stdlib.h>
-// #include <unistd.h>
+#include "ft_printf.h"
 
-char	*case_hexupper(int i, size_t *count);
-char	*case_hexlower(int i, size_t *count);
-char	*case_address(long i, size_t *count);
-void	case_unsigned(unsigned int n, int fd, size_t *count);
-
-// void	ft_putchar_fd(char c, int fd)
-// {
-// 	write(fd, &c, 1);
-// }
-// void	ft_putstr_fd(char *s, int fd)
-// {
-// 	while (*s)
-// 	{
-// 		write(fd, s, 1);
-// 		s++;
-// 	}
-// }
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		i++;
-// 	}
-// 	return (i);
-// }
-
-static void	exception(int n, int fd, size_t *count)
+void	exception(int n, int fd, size_t *count)
 {
 	if (n == -2147483648)
 	{

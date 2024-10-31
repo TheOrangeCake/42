@@ -6,18 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:08:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/31 17:25:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:19:37 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-// #include <stdarg.h>
-// #include <stdlib.h>
-// #include <unistd.h>
-
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-size_t	ft_strlen(const char *s);
+#include "ft_printf.h"
 
 char	*case_hexupper(int i, size_t *count)
 {
