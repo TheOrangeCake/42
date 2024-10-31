@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:15:32 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/17 13:43:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:06:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
