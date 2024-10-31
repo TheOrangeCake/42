@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:08:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/31 18:19:37 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/31 19:17:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*case_hexupper(int i, size_t *count)
+void	case_hexupper(int i, size_t *count)
 {
 	char			*table;
 	unsigned int	j;
@@ -20,19 +20,24 @@ char	*case_hexupper(int i, size_t *count)
 	j = i;
 	table = malloc(sizeof(char) * 17);
 	if (table == NULL)
-		return (NULL);
-	table = "0123456789ABCDEF";
-	if (j > 15)
 	{
-		case_hexupper(j / 16, count);
-		case_hexupper(j % 16, count);
+		write(1, "(null)", 6);
+		*count += 6;
 	}
 	else
 	{
-		ft_putchar_fd(table[j], 1);
-		(*count)++;
+			table = "0123456789ABCDEF";
+		if (j > 15)
+		{
+			case_hexupper(j / 16, count);
+			case_hexupper(j % 16, count);
+		}
+		else
+		{
+			ft_putchar_fd(table[j], 1);
+			(*count)++;
+		}
 	}
-	return (table);
 }
 
 char	*case_hexlower(int i, size_t *count)
@@ -43,19 +48,25 @@ char	*case_hexlower(int i, size_t *count)
 	j = i;
 	table = malloc(sizeof(char) * 17);
 	if (table == NULL)
-		return (NULL);
-	table = "0123456789abcdef";
-	if (j > 15)
 	{
-		case_hexlower(j / 16, count);
-		case_hexlower(j % 16, count);
+		write(1, "(null)", 6);
+		*count += 6;
 	}
 	else
 	{
-		ft_putchar_fd(table[j], 1);
-		(*count)++;
+		table = "0123456789abcdef";
+		if (j > 15)
+		{
+			case_hexlower(j / 16, count);
+			case_hexlower(j % 16, count);
+		}
+		else
+		{
+			ft_putchar_fd(table[j], 1);
+			(*count)++;
+		}
 	}
-	return (table);
+	free(table);
 }
 
 char	*case_address(long i, size_t *count)
@@ -64,23 +75,29 @@ char	*case_address(long i, size_t *count)
 	unsigned long	j;
 
 	j = i;
-	write(1, "0x", 2);
-	(*count) += 2;
 	table = malloc(sizeof(char) * 17);
 	if (table == NULL)
-		return (NULL);
-	table = "0123456789abcdef";
-	if (j > 15)
 	{
-		case_hexlower(j / 16, count);
-		case_hexlower(j % 16, count);
+		write(1, "(null)", 6);
+		*count += 6;
 	}
 	else
 	{
-		ft_putchar_fd(table[j], 1);
-		(*count)++;
+		write(1, "0x", 2);
+		(*count) += 2;
+		table = "0123456789abcdef";
+		if (j > 15)
+		{
+			case_hexlower(j / 16, count);
+			case_hexlower(j % 16, count);
+		}
+		else
+		{
+			ft_putchar_fd(table[j], 1);
+			(*count)++;
 	}
-	return (table);
+	}
+	free(table);
 }
 
 void	case_unsigned(unsigned int n, int fd, size_t *count)

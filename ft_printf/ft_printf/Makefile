@@ -2,7 +2,7 @@ SOURCE_PRINT = ft_printf.c ft_printf_helper.c
 
 OBJECTS_PRINT = ${SOURCE_PRINT:.c=.o}
 
-NAME_PRINTF = libftprintf.a
+NAME = libftprintf.a
 
 HEADER = ft_printf.h
 
@@ -17,15 +17,15 @@ RM = rm -f
 GCC = gcc
 FLAGS = -Wall -Wextra -Werror
 
-all:	${NAME_PRINTF}
+all:	${NAME}
 
 .c.o:
 	${GCC} ${FLAGS} -c -I ${HEADER} $< -o ${<:.c=.o}
 
-${NAME_PRINTF}: 	${LIBFT} ${OBJECTS_PRINT}
-	cp ${LIBFT} ${NAME_PRINTF}
-	${AR} ${NAME_PRINTF} ${OBJECTS_PRINT}
-	${INDEX} ${NAME_PRINTF}
+${NAME}: 	${LIBFT} ${OBJECTS_PRINT}
+	cp ${LIBFT} ${NAME}
+	${AR} ${NAME} ${OBJECTS_PRINT}
+	${INDEX} ${NAME}
 
 clean:	
 	${MAKE} -C ${LIBFT_PATH} clean
@@ -33,7 +33,7 @@ clean:
 
 fclean:		clean
 	${MAKE} -C ${LIBFT_PATH} fclean
-	${RM} ${NAME_PRINTF}
+	${RM} ${NAME}
 
 re: fclean all
 
