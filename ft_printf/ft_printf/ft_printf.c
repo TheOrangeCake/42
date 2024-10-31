@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 21:54:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/24 21:54:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:23:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	exception(int n, int fd, size_t *count)
 	}
 }
 
-void	ft_putnbr_fd(int n, int fd, size_t *count)
+void	ft_putnbr_fd_count(int n, int fd, size_t *count)
 {
 	char	base;
 
@@ -59,14 +59,14 @@ void	ft_putnbr_fd(int n, int fd, size_t *count)
 		ft_putchar_fd('-', fd);
 		(*count)++;
 		n = -n;
-		ft_putnbr_fd(n, fd, count);
+		ft_putnbr_fd_count(n, fd, count);
 	}
 	else
 	{
 		if (n > 9)
 		{
-			ft_putnbr_fd(n / 10, fd, count);
-			ft_putnbr_fd(n % 10, fd, count);
+			ft_putnbr_fd_count(n / 10, fd, count);
+			ft_putnbr_fd_count(n % 10, fd, count);
 		}
 		else
 		{
@@ -108,7 +108,7 @@ void	case_string(char *s, size_t *count)
 
 void	case_interger(int i, size_t *count)
 {
-	ft_putnbr_fd(i, 1, count);
+	ft_putnbr_fd_count(i, 1, count);
 }
 
 void	case_unsigned(int i, size_t *count)
@@ -129,7 +129,7 @@ char	*case_hexupper(int i, size_t *count)
 	if (table == NULL)
 		return (NULL);
 	table = "0123456789ABCDEF";
-	if (j > 16)
+	if (j > 15)
 	{
 		case_hexupper(j / 16, count);
 		case_hexupper(j % 16, count);
@@ -152,7 +152,7 @@ char	*case_hexlower(int i, size_t *count)
 	if (table == NULL)
 		return (NULL);
 	table = "0123456789abcdef";
-	if (j > 16)
+	if (j > 15)
 	{
 		case_hexlower(j / 16, count);
 		case_hexlower(j % 16, count);
@@ -164,11 +164,35 @@ char	*case_hexlower(int i, size_t *count)
 	}
 	return (table);
 }
-void	case_address(int i, size_t *count)
+
+char	*case_hexaddress(long i, size_t *count)
+{
+	char			*table;
+	unsigned long	j;
+
+	j = i;
+	table = malloc(sizeof(char) * 17);
+	if (table == NULL)
+		return (NULL);
+	table = "0123456789abcdef";
+	if (j > 15)
+	{
+		case_hexlower(j / 16, count);
+		case_hexlower(j % 16, count);
+	}
+	else
+	{
+		ft_putchar_fd(table[j], 1);
+		(*count)++;
+	}
+	return (table);
+}
+
+void	case_address(long i, size_t *count)
 {
 	write(1, "0x", 2);
 	(*count) += 2;
-	case_hexlower(i, count);
+	case_hexaddress(i, count);
 }
 
 void	specifier(char c, va_list list, size_t *count)
@@ -191,7 +215,7 @@ void	specifier(char c, va_list list, size_t *count)
 	if (c == 'X')
 		case_hexupper(va_arg(list, int), count);
 	if (c == 'p')
-		case_address(va_arg(list, int), count);
+		case_address(va_arg(list, long), count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -245,9 +269,9 @@ int	main(void)
 	a = 1048576;
 	b = 1048576;
 
-	i = ft_printf("%p\n", ptr1);
+	i = ft_printf("%x\n%i\n%X\n%s\n%c\n%p\n", a, a, b, ptr, c, ptr1);
 	printf("%i\n", i);
-	j = printf("%p\n", ptr1);
+	j = printf("%x\n%i\n%X\n%s\n%c\n%p\n", a, a, b, ptr1, d, ptr1);
 	printf("%i\n", j);
 	return (0);
 }
