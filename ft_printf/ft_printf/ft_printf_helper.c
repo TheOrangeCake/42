@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:08:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/31 15:14:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:25:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
+#include "libft.h"
 // #include <stdarg.h>
 // #include <stdlib.h>
 // #include <unistd.h>
