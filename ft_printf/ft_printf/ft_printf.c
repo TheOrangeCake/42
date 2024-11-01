@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 21:54:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/31 19:10:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/01 11:25:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,11 @@ void	specifier(char c, va_list list, size_t *count)
 	if (c == 'u')
 		case_unsigned(va_arg(list, int), 1, count);
 	if (c == 'x')
-		case_hexlower(va_arg(list, int), count);
+		case_hexlower(va_arg(list, unsigned int), count);
 	if (c == 'X')
-		case_hexupper(va_arg(list, int), count);
+		case_hexupper(va_arg(list, unsigned int), count);
 	if (c == 'p')
-		case_address(va_arg(list, long), count);
+		case_address((unsigned long long)va_arg(list, void *), count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -145,31 +145,31 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-// #include <stdio.h>
+#include <stdio.h>
 
-// int	main(void)
-// {
-// 	char	*ptr;
-// 	char	*ptr1;
-// 	int	i;
-// 	int	j;
-// 	char	c;
-// 	char	d;
-// 	int		a;
-// 	int		b;
+int	main(void)
+{
+	char	*ptr;
+	char	*ptr1;
+	int	i;
+	int	j;
+	char	c;
+	char	d;
+	int		a;
+	int		b;
 
-// 	ptr = malloc(sizeof(char) * 12 + 1);
-// 	ptr1 = malloc(sizeof(char) * 12 + 1);
-// 	ptr = "hello, world";
-// 	ptr1 = "hello, world";
-// 	c = 'b';
-// 	d = 'b';
-// 	a = -1;
-// 	b = -1;
+	ptr = malloc(sizeof(char) * 12 + 1);
+	ptr1 = malloc(sizeof(char) * 12 + 1);
+	ptr = "hello, world";
+	ptr1 = "hello, world";
+	c = 'b';
+	d = 'b';
+	a = -2147483648;
+	b = -2147483648;
 
-// 	i = ft_printf("test: %s\n", (char *)NULL);
-// 	printf("%i\n", i);
-// 	j = printf("test: %s\n", (char *)NULL);
-// 	printf("%i\n", j);
-// 	return (0);
-// }
+	i = ft_printf("\001\002\007\v\010\f\r\n");
+	printf("%i\n", i);
+	j = printf("\001\002\007\v\010\f\r\n");
+	printf("%i\n", j);
+	return (0);
+}

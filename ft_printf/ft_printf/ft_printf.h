@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 18:03:27 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/31 19:13:53 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/01 11:04:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	case_hexupper(int i, size_t *count);
-char	*case_hexlower(int i, size_t *count);
-char	*case_address(long i, size_t *count);
+void	case_hexupper(unsigned int j, size_t *count);
+void	case_hexlower(unsigned int j, size_t *count);
+void	case_address(unsigned long long j, size_t *count);
 void	case_unsigned(unsigned int n, int fd, size_t *count);
 int		ft_printf(const char *format, ...);
 
