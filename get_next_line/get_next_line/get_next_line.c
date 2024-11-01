@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/01 16:18:13 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:48:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// char	*get_next_line(int fd)
-// {
-
-// }
+char	*get_next_line(int fd)
+{
+	char	*line;
+	static char	*buffer;
+}
 
 int	main(void)
 {
