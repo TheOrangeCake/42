@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:08:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/01 11:24:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/01 11:50:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	case_hexlower(unsigned int j, size_t *count)
 	}
 }
 
-void	case_address_helper(unsigned long long j, size_t *count)
+void	case_address_helper(unsigned long j, size_t *count)
 {
 	char			table[17];
 
@@ -82,7 +82,7 @@ void	case_address_helper(unsigned long long j, size_t *count)
 	}
 }
 
-void	case_address(unsigned long long j, size_t *count)
+void	case_address(unsigned long j, size_t *count)
 {
 	char			table[17];
 
