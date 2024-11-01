@@ -5,7 +5,7 @@ int	main(void)
 {
 	char	c = 'c';
 	char	*str;;
-	int		i = -2147483648;
+	int		i = 0;
 	int		a;
 	int		b;
 
