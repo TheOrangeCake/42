@@ -17,7 +17,7 @@ typedef struct	line
 {
 	char	*s;
 	struct line	*next;
-};
+} line;
 
 char	*get_next_line(int fd);
 

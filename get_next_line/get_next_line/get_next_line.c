@@ -14,13 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "get_next_line.h"
-
-typedef struct	line
-{
-	char		*s;
-	struct line	*next;
-};
+// #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -34,7 +28,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin_line(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -60,41 +54,14 @@ char	*ft_strjoin_line(char const *s1, char const *s2)
 	return (ptr);
 }
 
-line	*ft_lstnew(void *content)
-{
-	line	*new;
-
-	new = malloc(sizeof(line));
-	if (new == NULL)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
-}
-
-void	ft_lstadd_back(line **lst, line *new)
-{
-	line	*temp;
-
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		temp = *lst;
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = new;
-	}
-}
-
-int	hold_check(char *hold)
+int	buffer_check(char *buffer)
 {
 	int	i;
 
 	i = 0;
-	while (hold[i] != '\0')
+	while (buffer[i] != '\0')
 	{
-		if (hold[i] == '\n')
+		if (buffer[i] == '\n')
 		{
 			return (1);
 		}
@@ -103,24 +70,72 @@ int	hold_check(char *hold)
 	return (0);
 }
 
+char	*buffer_reset(char *buffer, char *whole_line)
+{
+	while (*buffer != '\n')
+	{
+		buffer++;
+	}
+	buffer++;
+	whole_line = ft_strjoin(whole_line, buffer);
+	buffer = NULL;
+	return (whole_line);
+}
+
+char	*new_whole_line(int fd, char *buffer, size_t buffer_size, char *whole_line)
+{
+	while (buffer_check(buffer) == 0)
+	{
+		whole_line = ft_strjoin(whole_line, buffer);
+		read(fd, buffer, BUFFER_SIZE);
+	}
+	return (whole_line);
+}
+
+char	*finish(char *buffer, char *whole_line)
+{
+	char	*temp;
+	int		i;
+
+	i = 0;
+	temp = malloc(sizeof(char) * ft_strlen(buffer) + 1);
+	if (temp == NULL)
+		return (NULL);
+	while (buffer[i - 1] != '\n')
+	{
+		temp[i] = buffer[i];
+		i++;
+	}
+	temp[i] = '\0';
+	whole_line = ft_strjoin(whole_line, temp);
+	free(temp);
+	return (whole_line);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*whole_line;
-	static char	*hold;
+	static char	*buffer;
+	size_t		buffer_size;
 
 	whole_line = malloc(sizeof(char) * 1);
-	hold = malloc(sizeof(char) * BUFFER_SIZE);
-	if (fd < 0 || hold == NULL || whole_line == NULL)
+	if (fd < 0 || whole_line == NULL)
 		return (NULL);
 	whole_line = "\0";
-	read(fd, hold, BUFFER_SIZE);
-	hold[BUFFER_SIZE] = '\0';
-	if (hold_check(hold) == 0)
+	buffer_size = BUFFER_SIZE;
+	if (buffer != NULL)
+		whole_line = buffer_reset(buffer, whole_line);
+	else
 	{
+		buffer = malloc(sizeof(char) * buffer_size);
+		if (buffer == NULL)
+			return (NULL);
 	}
-	if (hold_check(hold) == 1)
-	{
-	}
+	read(fd, buffer, buffer_size);
+	if (buffer_check(buffer) == 0)
+		whole_line = new_whole_line(fd, buffer, buffer_size, whole_line);
+	if (buffer_check(buffer) == 1)
+		whole_line = finish(buffer, whole_line);
 	return (whole_line);
 }
 
@@ -135,9 +150,9 @@ int	main(void)
 		return (-1);
 	fd = open("test.txt", O_RDWR);
 	ptr = get_next_line(fd);
-	printf("%s\n", ptr);
-	// ptr = get_next_line(fd);
-	// printf("%s\n", ptr);
+	printf("%s", ptr);
+	ptr = get_next_line(fd);
+	printf("%s", ptr);
 	close(fd);
 	return (0);
 }
