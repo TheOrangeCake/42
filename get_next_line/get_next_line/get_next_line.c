@@ -51,7 +51,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	ptr[i] = '\0';
-	// free(s1);
 	return (ptr);
 }
 
@@ -86,91 +85,56 @@ int	buffer_check(char *buffer)
 	return (0);
 }
 
-char	*line_with_return(char *line, char *buffer, char **add)
+char	*line_with_return(char *line, char **buffer)
+{
+	int		i;
+	char	*temp;
+	char	*temp1;
+	
+	i = 0;
+	temp = malloc(sizeof(char) * ft_strlen(*buffer) + 1);
+	if (temp == NULL)
+		return (NULL);
+	while ((*buffer)[i] != '\n')
+	{
+		temp[i] = (*buffer)[i];
+		i++;
+	}
+	temp[i] = (*buffer)[i];
+	i++;
+	temp[i] = '\0';
+	temp1 = ft_strjoin(line, temp);
+	*buffer = *buffer + i;
+	free(temp);
+	free(line);
+	return (temp1);
+}
+
+char	*line_without_return(int fd, char *line, char **buffer, size_t buffer_size)
 {
 	int		i;
 	char	*temp;
 	
-	// printf("test3: %s\n", line);
-	i = 0;
-	temp = malloc(sizeof(char) * ft_strlen(buffer) + 1);
-	if (temp == NULL)
-		return (NULL);
-	while (buffer[i] != '\n')
-	{
-		temp[i] = buffer[i];
-		i++;
-	}
-	temp[i] = buffer[i];
-	i++;
-	temp[i] = '\0';
-	// printf("test0: %s\n", temp);
-	// printf("test1: %s\n", buffer);
-	// printf("test3: %s\n", line);
-	line = ft_strjoin(line, temp);
-	// printf("test2: %s\n", line);
-	*add = *add + i;
-	// free(temp);
-	return (line);
-}
-
-// char	*line_without_return(int fd, char *line, char *buffer, size_t buffer_size, char **add)
-// {
-// 	int	i;
-	
-// 	line = ft_strjoin(line, buffer);
-// 	buffer = ft_memset(buffer, '\0', buffer_size);
-// 	i = read(fd, buffer, buffer_size);
-// 	if (i < 0)
-// 		return (NULL);
-// 	buffer[buffer_size] = '\0';
-// 	if (buffer_check(buffer) == 1)
-// 	{
-// 		line = line_with_return(line, buffer, add);
-// 		return (line);
-// 	}
-// 	else
-// 	{
-// 		if (i < buffer_size)
-// 		{
-// 			buffer[i] ='\0';
-// 			line = ft_strjoin(line, buffer);
-// 			return (line);
-// 		}
-// 		line = ft_strjoin(line, buffer);
-// 		line_without_return(fd, line, buffer, buffer_size, add);
-// 	}
-// 	return (line);
-// }
-
-char	*line_without_return(int fd, char *line, char *buffer, size_t buffer_size, char **add)
-{
-	int	i;
-
-	line = ft_strjoin(line, buffer);
-	buffer = ft_memset(buffer, '\0', buffer_size);
-	i = read(fd, buffer, buffer_size);
+	line = ft_strjoin(line, *buffer);
+	*buffer = ft_memset(*buffer, '\0', buffer_size);
+	i = read(fd, *buffer, buffer_size);
 	if (i < 0)
 		return (NULL);
-	buffer[buffer_size] = '\0';
-	line = ft_strjoin(line, buffer);
-	while (i != 0)
+	// (*buffer)[buffer_size] = '\0';
+	if (buffer_check(*buffer) == 1)
 	{
-		if (buffer_check(buffer) == 1)
+		line = line_with_return(line, buffer);
+		return (line);
+	}
+	else
+	{
+		if (i < buffer_size)
 		{
-			line = line_with_return(line, buffer, add);
+			(*buffer)[i] ='\0';
+			line = ft_strjoin(line, *buffer);
 			return (line);
 		}
-		else
-		{
-			if (i < buffer_size)
-			{
-				buffer[i] ='\0';
-				line = ft_strjoin(line, buffer);
-				return (line);
-			}
-			i = read(fd, buffer, buffer_size);
-		}
+		return( line_without_return(fd, line, buffer, buffer_size));
 	}
 	return (line);
 }
@@ -181,8 +145,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	size_t		buffer_size;
 
-	line = malloc(sizeof(char) * 1);
-	if (fd < 0 || line == NULL)
+	if (fd < 0)
 		return (NULL);
 	line = "\0";
 	buffer_size = BUFFER_SIZE;
@@ -193,10 +156,9 @@ char	*get_next_line(int fd)
 			return (NULL);
 	}
 	if (buffer_check(buffer) == 1)
-		line = line_with_return(line, buffer, &buffer);
+		line = line_with_return(line, &buffer);
 	else
-		line = line_without_return(fd, line, buffer, buffer_size, &buffer);
-	// printf("buffer: %s\n", buffer);
+		line = line_without_return(fd, line, &buffer, buffer_size);
 	return (line);
 }
 
@@ -214,11 +176,11 @@ int	main(void)
 	ptr = get_next_line(fd);
 	printf("line1: %s", ptr);
 
-	// ptr = get_next_line(fd);
-	// printf("line2: %s", ptr);
+	ptr = get_next_line(fd);
+	printf("line2: %s", ptr);
 	
-	// ptr = get_next_line(fd);
-	// printf("line3: %s", ptr);
+	ptr = get_next_line(fd);
+	printf("line3: %s", ptr);
 	close(fd);
 	return (0);
 }
