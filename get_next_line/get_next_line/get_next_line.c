@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/01 17:48:45 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:32:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,73 +70,115 @@ int	buffer_check(char *buffer)
 	return (0);
 }
 
-char	*buffer_reset(char *buffer, char *whole_line)
-{
-	while (*buffer != '\n')
-	{
-		buffer++;
-	}
-	buffer++;
-	whole_line = ft_strjoin(whole_line, buffer);
-	buffer = NULL;
-	return (whole_line);
-}
+// char	*buffer_reset(char *buffer, char *whole_line)
+// {
+// 	if (buffer_check(buffer) == 1)
+// 	{
+// 		while (*buffer != '\n')
+// 		{
+// 			buffer++;
+// 		}
+// 		buffer++;
+// 		whole_line = ft_strjoin(whole_line, buffer);
+// 	}
+// 	else
+// 	{
+// 		whole_line = ft_strjoin(whole_line, buffer);
+// 		buffer = NULL;
+// 	}
+// 	return (whole_line);
+// }
 
-char	*new_whole_line(int fd, char *buffer, size_t buffer_size, char *whole_line)
-{
-	while (buffer_check(buffer) == 0)
-	{
-		whole_line = ft_strjoin(whole_line, buffer);
-		read(fd, buffer, BUFFER_SIZE);
-	}
-	return (whole_line);
-}
+// char	*new_whole_line(int fd, char *buffer, size_t buffer_size, char *whole_line)
+// {
+// 	// int	i;
 
-char	*finish(char *buffer, char *whole_line)
-{
-	char	*temp;
-	int		i;
+// 	// i = buffer_size
+// 	while (buffer_check(buffer) == 0)
+// 	{
+// 		whole_line = ft_strjoin(whole_line, buffer);
+// 		read(fd, buffer, buffer_size);
+// 	}
+// 		// if (i < buffer_size)
+// 		// {
+// 		// 	buffer[i + 1] = '\0';
+// 		// 	whole_line = ft_strjoin(whole_line, buffer);
+// 		// }
+// 	return (whole_line);
+// }
 
-	i = 0;
-	temp = malloc(sizeof(char) * ft_strlen(buffer) + 1);
-	if (temp == NULL)
-		return (NULL);
-	while (buffer[i - 1] != '\n')
-	{
-		temp[i] = buffer[i];
-		i++;
-	}
-	temp[i] = '\0';
-	whole_line = ft_strjoin(whole_line, temp);
-	free(temp);
-	return (whole_line);
+// char	*finish(char *buffer, char *whole_line)
+// {
+// 	char	*temp;
+// 	int		i;
+
+// 	i = 0;
+// 	temp = malloc(sizeof(char) * ft_strlen(buffer) + 1);
+// 	if (temp == NULL)
+// 		return (NULL);
+// 	while (buffer[i - 1] != '\n')
+// 	{
+// 		temp[i] = buffer[i];
+// 		i++;
+// 	}
+// 	temp[i] = '\0';
+// 	whole_line = ft_strjoin(whole_line, temp);
+// 	free(temp);
+// 	return (whole_line);
+// }
+
+// char	*get_next_line(int fd)
+// {
+// 	char		*whole_line;
+// 	static char	*buffer;
+// 	size_t		buffer_size;
+
+// 	whole_line = malloc(sizeof(char) * 1);
+// 	if (fd < 0 || whole_line == NULL)
+// 		return (NULL);
+// 	whole_line = "\0";
+// 	buffer_size = BUFFER_SIZE;
+// 	if (buffer != NULL)
+// 		whole_line = buffer_reset(buffer, whole_line);
+// 	else
+// 	{
+// 		buffer = malloc(sizeof(char) * buffer_size);
+// 		if (buffer == NULL)
+// 			return (NULL);
+// 	}
+// 	read(fd, buffer, buffer_size);
+// 	if (buffer_check(buffer) == 0)
+// 		whole_line = new_whole_line(fd, buffer, buffer_size, whole_line);
+// 	if (buffer_check(buffer) == 1)
+// 		whole_line = finish(buffer, whole_line);
+// 	return (whole_line);
+// }
+
+char	*line_with_return(char *line, char *buffer)
+{
+	
 }
 
 char	*get_next_line(int fd)
 {
-	char		*whole_line;
+	char		*line;
 	static char	*buffer;
 	size_t		buffer_size;
-
-	whole_line = malloc(sizeof(char) * 1);
+	
+	line = malloc(sizeof(char) * 1);
 	if (fd < 0 || whole_line == NULL)
 		return (NULL);
-	whole_line = "\0";
+	line = "\0";
 	buffer_size = BUFFER_SIZE;
-	if (buffer != NULL)
-		whole_line = buffer_reset(buffer, whole_line);
+	if (buffer_check == 1)
+	{
+		line = line_with_return(line, buffer);
+	}
 	else
 	{
-		buffer = malloc(sizeof(char) * buffer_size);
-		if (buffer == NULL)
-			return (NULL);
+		
 	}
-	read(fd, buffer, buffer_size);
-	if (buffer_check(buffer) == 0)
-		whole_line = new_whole_line(fd, buffer, buffer_size, whole_line);
-	if (buffer_check(buffer) == 1)
-		whole_line = finish(buffer, whole_line);
-	return (whole_line);
+	return (line);
 }
 
 int	main(void)
@@ -145,7 +187,7 @@ int	main(void)
 	int	fd;
 	int	a;
 
-	ptr = malloc(sizeof(char) * 15);
+	ptr = malloc(sizeof(char) * 100);
 	if (ptr == NULL)
 		return (-1);
 	fd = open("test.txt", O_RDWR);
