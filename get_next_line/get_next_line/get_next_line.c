@@ -89,7 +89,6 @@ char	*line_with_return(char *line, char **buffer)
 {
 	int		i;
 	char	*temp;
-	char	*temp1;
 	
 	i = 0;
 	temp = malloc(sizeof(char) * ft_strlen(*buffer) + 1);
@@ -103,11 +102,9 @@ char	*line_with_return(char *line, char **buffer)
 	temp[i] = (*buffer)[i];
 	i++;
 	temp[i] = '\0';
-	temp1 = ft_strjoin(line, temp);
+	line = ft_strjoin(line, temp);
 	*buffer = *buffer + i;
-	free(temp);
-	free(line);
-	return (temp1);
+	return (line);
 }
 
 char	*line_without_return(int fd, char *line, char **buffer, size_t buffer_size)
@@ -181,6 +178,19 @@ int	main(void)
 	
 	ptr = get_next_line(fd);
 	printf("line3: %s", ptr);
+
+	ptr = get_next_line(fd);
+	printf("line4: %s", ptr);
+
+	ptr = get_next_line(fd);
+	printf("line5: %s", ptr);
+
+	ptr = get_next_line(fd);
+	printf("line6: %s", ptr);
+
+	ptr = get_next_line(fd);
+	printf("line7: %s", ptr);
+
 	close(fd);
 	return (0);
 }
