@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-// #include "get_next_line.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -51,22 +51,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	ptr[i] = '\0';
+	free(s1);
 	return (ptr);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*ptr;
-
-	ptr = (unsigned char *)s;
-	i = 0;
-	while (i < n)
-	{
-		ptr[i] = (unsigned char)c;
-		i++;
-	}
-	return (s);
 }
 
 int	buffer_check(char *buffer)
@@ -89,7 +75,7 @@ char	*line_with_return(char *line, char **buffer)
 {
 	int		i;
 	char	*temp;
-	
+
 	i = 0;
 	temp = malloc(sizeof(char) * ft_strlen(*buffer) + 1);
 	if (temp == NULL)
@@ -104,20 +90,21 @@ char	*line_with_return(char *line, char **buffer)
 	temp[i] = '\0';
 	line = ft_strjoin(line, temp);
 	*buffer = *buffer + i;
+	free(temp);
 	return (line);
 }
 
-char	*line_without_return(int fd, char *line, char **buffer, size_t buffer_size)
+char	*line_no_return(int fd, char *line, char **buffer, size_t buffer_size)
 {
 	int		i;
 	char	*temp;
-	
+
 	line = ft_strjoin(line, *buffer);
-	*buffer = ft_memset(*buffer, '\0', buffer_size);
+	(*buffer)[0] = '\0';
 	i = read(fd, *buffer, buffer_size);
-	if (i < 0)
+	if (i <= 0)
 		return (NULL);
-	// (*buffer)[buffer_size] = '\0';
+	(*buffer)[buffer_size] = '\0';
 	if (buffer_check(*buffer) == 1)
 	{
 		line = line_with_return(line, buffer);
@@ -127,11 +114,11 @@ char	*line_without_return(int fd, char *line, char **buffer, size_t buffer_size)
 	{
 		if (i < buffer_size)
 		{
-			(*buffer)[i] ='\0';
+			(*buffer)[i] = '\0';
 			line = ft_strjoin(line, *buffer);
 			return (line);
 		}
-		return( line_without_return(fd, line, buffer, buffer_size));
+		return (line_no_return(fd, line, buffer, buffer_size));
 	}
 	return (line);
 }
@@ -142,9 +129,10 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	size_t		buffer_size;
 
-	if (fd < 0)
+	line = malloc(sizeof(char) * 1);
+	if (fd < 0 || line == NULL)
 		return (NULL);
-	line = "\0";
+	line[0] = '\0';
 	buffer_size = BUFFER_SIZE;
 	if (buffer == NULL)
 	{
@@ -155,7 +143,7 @@ char	*get_next_line(int fd)
 	if (buffer_check(buffer) == 1)
 		line = line_with_return(line, &buffer);
 	else
-		line = line_without_return(fd, line, &buffer, buffer_size);
+		line = line_no_return(fd, line, &buffer, buffer_size);
 	return (line);
 }
 
@@ -169,28 +157,21 @@ int	main(void)
 	if (ptr == NULL)
 		return (-1);
 	fd = open("test.txt", O_RDWR);
-	
 	ptr = get_next_line(fd);
 	printf("line1: %s", ptr);
-
 	ptr = get_next_line(fd);
 	printf("line2: %s", ptr);
-	
 	ptr = get_next_line(fd);
 	printf("line3: %s", ptr);
-
 	ptr = get_next_line(fd);
 	printf("line4: %s", ptr);
-
 	ptr = get_next_line(fd);
 	printf("line5: %s", ptr);
-
 	ptr = get_next_line(fd);
 	printf("line6: %s", ptr);
-
 	ptr = get_next_line(fd);
 	printf("line7: %s", ptr);
-
+	free(ptr);
 	close(fd);
 	return (0);
 }
