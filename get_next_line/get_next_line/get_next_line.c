@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/08 17:36:37 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:52:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,10 @@ char	*get_next_line(int fd)
 
 	line = malloc(sizeof(char) * 1);
 	if (line == NULL || read(fd, 0, 0) < 0)
+	{
+		free(line);
 		return (NULL);
+	}
 	line[0] = '\0';
 	buffer_size = BUFFER_SIZE;
 	if (buffer == NULL)
@@ -268,30 +271,30 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
-{
-	char	*ptr;
-	int	fd;
+// int	main(void)
+// {
+// 	char	*ptr;
+// 	int	fd;
 
-	ptr = malloc(sizeof(char) * 100);
-	if (ptr == NULL)
-		return (-1);
-	fd = open("test.txt", O_RDWR);
-	ptr = get_next_line(fd);
-	printf("line1: %s", ptr);
-	ptr = get_next_line(fd);
-	printf("line2: %s", ptr);
-	// ptr = get_next_line(fd);
-	// printf("line3: %s", ptr);
-	// ptr = get_next_line(fd);
-	// printf("line4: %s", ptr);
-	// ptr = get_next_line(fd);
-	// printf("line5: %s", ptr);
-	// ptr = get_next_line(fd);
-	// printf("line6: %s", ptr);
-	// ptr = get_next_line(fd);
-	// printf("line7: %s", ptr);
-	// free(ptr);
-	close(fd);
-	return (0);
-}
+// 	ptr = malloc(sizeof(char) * 100);
+// 	if (ptr == NULL)
+// 		return (-1);
+// 	fd = open("test.txt", O_RDWR);
+// 	ptr = get_next_line(fd);
+// 	printf("line1: %s", ptr);
+// 	ptr = get_next_line(fd);
+// 	printf("line2: %s", ptr);
+// 	// ptr = get_next_line(fd);
+// 	// printf("line3: %s", ptr);
+// 	// ptr = get_next_line(fd);
+// 	// printf("line4: %s", ptr);
+// 	// ptr = get_next_line(fd);
+// 	// printf("line5: %s", ptr);
+// 	// ptr = get_next_line(fd);
+// 	// printf("line6: %s", ptr);
+// 	// ptr = get_next_line(fd);
+// 	// printf("line7: %s", ptr);
+// 	// free(ptr);
+// 	close(fd);
+// 	return (0);
+// }
