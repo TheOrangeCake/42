@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/08 14:56:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:36:37 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,14 +184,14 @@ char	*ft_strjoin_line(char *s1, char *s2, int *signal, size_t *buffer_mover)
 		ptr[i] = s1[i];
 		i++;
 	}
-	while (s2[j] || s2[j] == '\n')
+	while (s2[j] && s2[j] != '\n')
 	{
 		ptr[i++] = s2[j++];
 	}
 	if (s2[j] == '\n')
 		ptr[i++] = s2[j++];
 	ptr[i] = '\0';
-	*buffer_mover = i;
+	*buffer_mover = j;
 	free(s1);
 	return (ptr);
 }
@@ -205,17 +205,15 @@ char	*start(char *line, int fd, char *buffer, size_t buffer_size)
 	signal = 0;
 	buffer_mover = 0;
 	i = read(fd, buffer, buffer_size);
-	if (buffer[0] == '\0')
+	if (buffer[0] == '\0' && line[0] == '\0')
 		return (NULL);
 	buffer[i] = '\0';
-	if (i == 0)
-		return (line);
 	line = ft_strjoin_line(line, buffer, &signal, &buffer_mover);
-	if (signal == 1)
+	if (signal == 1 || i < buffer_size)
 	{
 		i = 0;
 		while (buffer[buffer_mover])
-			buffer[i++] = buffer[(buffer_mover)++];
+			buffer[i++] = buffer[buffer_mover++];
 		buffer[i] = '\0';
 		return (line);
 	}
@@ -240,7 +238,10 @@ char	*end(char *line, int fd, char *buffer, size_t buffer_size)
 		return (line);
 	}
 	else
+	{
+		buffer[0] = '\0';
 		line = start(line, fd, buffer, buffer_size);
+	}
 	return (line);
 }
 
@@ -257,45 +258,40 @@ char	*get_next_line(int fd)
 	buffer_size = BUFFER_SIZE;
 	if (buffer == NULL)
 	{
-		buffer = malloc(sizeof(char) * buffer_size);
+		buffer = malloc(sizeof(char) * buffer_size + 1);
 		if (buffer == NULL)
 			return (NULL);
 		line = start(line, fd, buffer, buffer_size);
 	}
 	else
-	{
 		line = end(line, fd, buffer, buffer_size);
-	}
-	if (line == NULL)
-		free(buffer);
 	return (line);
 }
 
-// int	main(void)
-// {
-// 	char	*ptr;
-// 	int	fd;
-// 	int	a;
+int	main(void)
+{
+	char	*ptr;
+	int	fd;
 
-// 	ptr = malloc(sizeof(char) * 100);
-// 	if (ptr == NULL)
-// 		return (-1);
-// 	fd = open("test.txt", O_RDWR);
-// 	ptr = get_next_line(fd);
-// 	printf("line1: %s", ptr);
-// 	ptr = get_next_line(fd);
-// 	printf("line2: %s", ptr);
-// 	// ptr = get_next_line(fd);
-// 	// printf("line3: %s", ptr);
-// 	// ptr = get_next_line(fd);
-// 	// printf("line4: %s", ptr);
-// 	// ptr = get_next_line(fd);
-// 	// printf("line5: %s", ptr);
-// 	// ptr = get_next_line(fd);
-// 	// printf("line6: %s", ptr);
-// 	// ptr = get_next_line(fd);
-// 	// printf("line7: %s", ptr);
-// 	// free(ptr);
-// 	close(fd);
-// 	return (0);
-// }
+	ptr = malloc(sizeof(char) * 100);
+	if (ptr == NULL)
+		return (-1);
+	fd = open("test.txt", O_RDWR);
+	ptr = get_next_line(fd);
+	printf("line1: %s", ptr);
+	ptr = get_next_line(fd);
+	printf("line2: %s", ptr);
+	// ptr = get_next_line(fd);
+	// printf("line3: %s", ptr);
+	// ptr = get_next_line(fd);
+	// printf("line4: %s", ptr);
+	// ptr = get_next_line(fd);
+	// printf("line5: %s", ptr);
+	// ptr = get_next_line(fd);
+	// printf("line6: %s", ptr);
+	// ptr = get_next_line(fd);
+	// printf("line7: %s", ptr);
+	// free(ptr);
+	close(fd);
+	return (0);
+}

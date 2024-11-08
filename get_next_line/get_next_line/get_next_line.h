@@ -6,14 +6,14 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:15:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/01 15:16:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:26:11 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# ifndef BUFFER_SIZE
 
+# ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
 # endif
 
