@@ -1,6 +1,3 @@
-Je 
-suis
-un chat
+Je suis un chat Blanc avec 
 
-Blanc avec des points Noirs et Oranges.
-
+des points Noirs et Oranges.
