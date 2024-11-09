@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/09 13:00:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:18:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,33 +62,33 @@ char	*ft_strjoin_line(char *s1, char *s2, int *signal, size_t *buffer_mover)
 	return (ptr);
 }
 
-void	*free_buffer(char *buffer, size_t *buffer_mover)
+void	*free_buffer(char **buffer, size_t *buffer_mover)
 {
 	char	*temp;
 	int		i;
 	size_t	j;
 
 	i = 0;
-	while (buffer[*buffer_mover])
-		buffer[i++] = buffer[(*buffer_mover)++];
-	buffer[i] = '\0';
+	while ((*buffer)[*buffer_mover])
+		(*buffer)[i++] = (*buffer)[(*buffer_mover)++];
+	(*buffer)[i] = '\0';
 	j = 0;
 	temp = malloc(sizeof(char) * i + 1);
 	if (temp == NULL)
 		return (NULL);
 	while (i >= 0)
 	{
-		temp[j] =  buffer[j];
+		temp[j] =  (*buffer)[j];
 		j++;
 		i--;
 	}
-	// free(buffer);
-	buffer = temp;
+	free(*buffer);
+	(*buffer) = temp;
 	return (NULL);
 }
 
 
-char	*start(char *line, int fd, char *buffer, size_t buffer_size)
+char	*start(char *line, int fd, char **buffer, size_t buffer_size)
 {
 	size_t	i;
 	int		signal;
@@ -96,11 +96,11 @@ char	*start(char *line, int fd, char *buffer, size_t buffer_size)
 
 	signal = 0;
 	buffer_mover = 0;
-	i = read(fd, buffer, buffer_size);
-	if ((buffer[0] == '\0' && line[0] == '\0') || (i == 0 && line[0] == '\0'))
+	i = read(fd, *buffer, buffer_size);
+	if (((*buffer)[0] == '\0' && line[0] == '\0') || (i == 0 && line[0] == '\0'))
 		return (NULL);
-	buffer[i] = '\0';
-	line = ft_strjoin_line(line, buffer, &signal, &buffer_mover);
+	(*buffer)[i] = '\0';
+	line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
 	if (signal == 1 || i < buffer_size)
 	{
 		free_buffer(buffer, &buffer_mover);
@@ -109,15 +109,14 @@ char	*start(char *line, int fd, char *buffer, size_t buffer_size)
 	return (start(line, fd, buffer, buffer_size));
 }
 
-char	*end(char *line, int fd, char *buffer, size_t buffer_size)
+char	*end(char *line, int fd, char **buffer, size_t buffer_size)
 {
 	int		signal;
 	size_t	buffer_mover;
-	int		i;
 
 	signal = 0;
 	buffer_mover = 0;
-	line = ft_strjoin_line(line, buffer, &signal, &buffer_mover);
+	line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
 	if (signal == 1)
 	{
 		free_buffer(buffer, &buffer_mover);
@@ -125,7 +124,7 @@ char	*end(char *line, int fd, char *buffer, size_t buffer_size)
 	}
 	else
 	{
-		buffer[0] = '\0';
+		(*buffer)[0] = '\0';
 		line = start(line, fd, buffer, buffer_size);
 	}
 	return (line);
@@ -152,10 +151,10 @@ char	*get_next_line(int fd)
 			free(line);
 			return (NULL);
 		}
-		line = start(line, fd, buffer, BUFFER_SIZE);
+		line = start(line, fd, &buffer, BUFFER_SIZE);
 	}
 	else
-		line = end(line, fd, buffer, BUFFER_SIZE);
+		line = end(line, fd, &buffer, BUFFER_SIZE);
 	return (line);
 }
 
@@ -172,8 +171,8 @@ int	main(void)
 	printf("line1: %s", ptr);
 	ptr = get_next_line(fd);
 	printf("line2: %s", ptr);
-	// ptr = get_next_line(fd);
-	// printf("line3: %s", ptr);
+	ptr = get_next_line(fd);
+	printf("line3: %s", ptr);
 	// ptr = get_next_line(fd);
 	// printf("line4: %s", ptr);
 	// ptr = get_next_line(fd);
