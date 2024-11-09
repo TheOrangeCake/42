@@ -158,6 +158,7 @@ char	*get_next_line(int fd)
 			free(line);
 			return (NULL);
 		}
+		buffer[0] = '\0';
 		line = start(line, fd, &buffer, BUFFER_SIZE);
 	}
 	else
