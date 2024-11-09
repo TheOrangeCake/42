@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/09 12:50:24 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:00:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,29 @@ char	*ft_strjoin_line(char *s1, char *s2, int *signal, size_t *buffer_mover)
 	return (ptr);
 }
 
-char	*free_buffer(char **buffer, size_t *buffer_mover)
+void	*free_buffer(char *buffer, size_t *buffer_mover)
 {
 	char	*temp;
 	int		i;
 	size_t	j;
 
 	i = 0;
-	while ((*buffer)[*buffer_mover])
-		(*buffer)[i++] = (*buffer)[(*buffer_mover)++];
-	(*buffer)[i] = '\0';
+	while (buffer[*buffer_mover])
+		buffer[i++] = buffer[(*buffer_mover)++];
+	buffer[i] = '\0';
 	j = 0;
 	temp = malloc(sizeof(char) * i + 1);
 	if (temp == NULL)
 		return (NULL);
 	while (i >= 0)
 	{
-		temp[j] =  (*buffer)[j];
+		temp[j] =  buffer[j];
 		j++;
 		i--;
 	}
-	free(*buffer);
-	*buffer = temp;
-	return (*buffer);
+	// free(buffer);
+	buffer = temp;
+	return (NULL);
 }
 
 
@@ -103,7 +103,7 @@ char	*start(char *line, int fd, char *buffer, size_t buffer_size)
 	line = ft_strjoin_line(line, buffer, &signal, &buffer_mover);
 	if (signal == 1 || i < buffer_size)
 	{
-		free_buffer(&buffer, &buffer_mover);
+		free_buffer(buffer, &buffer_mover);
 		return (line);
 	}
 	return (start(line, fd, buffer, buffer_size));
@@ -120,7 +120,7 @@ char	*end(char *line, int fd, char *buffer, size_t buffer_size)
 	line = ft_strjoin_line(line, buffer, &signal, &buffer_mover);
 	if (signal == 1)
 	{
-		free_buffer(&buffer, &buffer_mover);
+		free_buffer(buffer, &buffer_mover);
 		return (line);
 	}
 	else
