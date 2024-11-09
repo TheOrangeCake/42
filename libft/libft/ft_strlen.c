@@ -28,8 +28,8 @@ size_t	ft_strlen(const char *s)
 
 // int	main(void)
 // {
-// 	char	hello[50] = "hello, i am a cat";
-// 	char	hello1[50] = "hello, i am a cat";
+// 	char	hello[50] = "he\nllo";
+// 	char	hello1[50] = "he\nllo";
 
 // 	printf("The result is %zu\n", strlen(hello));
 // 	printf("The result is %zu\n", ft_strlen(hello1));
