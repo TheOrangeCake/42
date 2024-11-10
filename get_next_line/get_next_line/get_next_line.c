@@ -58,20 +58,20 @@ size_t	ft_strlen_line(const char *s, int *signal)
 	return (i);
 }
 
-char	*ft_strjoin_line(char *s1, char *s2, int *signal, size_t *buffer_mover)
+char	*ft_strjoin_line(char **s1, char *s2, int *signal, size_t *buffer_mover)
 {
 	size_t	i;
 	size_t	j;
 	char	*ptr;
 
-	ptr = malloc(ft_strlen_line(s1, signal) + ft_strlen_line(s2, signal) + 1);
+	ptr = malloc(ft_strlen_line(*s1, signal) + ft_strlen_line(s2, signal) + 1);
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s1[i])
+	while ((*s1)[i])
 	{
-		ptr[i] = s1[i];
+		ptr[i] = (*s1)[i];
 		i++;
 	}
 	while (s2[j] && s2[j] != '\n')
@@ -82,11 +82,11 @@ char	*ft_strjoin_line(char *s1, char *s2, int *signal, size_t *buffer_mover)
 		ptr[i++] = s2[j++];
 	ptr[i] = '\0';
 	*buffer_mover = j;
-	free(s1);
+	free(*s1);
 	return (ptr);
 }
 
-char	*start(char *line, int fd, char **buffer, size_t buffer_size)
+char	*start(char **line, int fd, char **buffer, size_t buffer_size)
 {
 	size_t	i;
 	int		signal;
@@ -95,26 +95,26 @@ char	*start(char *line, int fd, char **buffer, size_t buffer_size)
 	signal = 0;
 	buffer_mover = 0;
 	i = read(fd, *buffer, buffer_size);
-	if ((*buffer)[0] == '\0' && line[0] == '\0' && i == 0)
+	if ((*buffer)[0] == '\0' && (*line)[0] == '\0' && i == 0)
 	{
-		// free(buffer);
+		free(*buffer);
+		free(*line);
 		return (NULL);
 	}
 	(*buffer)[i] = '\0';
-	line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
+	*line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
 	if (signal == 1 || i < buffer_size)
 	{
-		// free_buffer(buffer, &buffer_mover);
 		i = 0;
 		while ((*buffer)[buffer_mover])
 			(*buffer)[i++] = (*buffer)[buffer_mover++];
 		(*buffer)[i] = '\0';
-		return (line);
+		return (*line);
 	}
 	return (start(line, fd, buffer, buffer_size));
 }
 
-char	*end(char *line, int fd, char **buffer, size_t buffer_size)
+char	*end(char **line, int fd, char **buffer, size_t buffer_size)
 {
 	int		signal;
 	size_t	buffer_mover;
@@ -122,22 +122,21 @@ char	*end(char *line, int fd, char **buffer, size_t buffer_size)
 
 	signal = 0;
 	buffer_mover = 0;
-	line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
+	*line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
 	if (signal == 1)
 	{
-		// free_buffer(buffer, &buffer_mover);
 		i = 0;
 		while ((*buffer)[buffer_mover])
 			(*buffer)[i++] = (*buffer)[buffer_mover++];
 		(*buffer)[i] = '\0';
-		return (line);
+		return (*line);
 	}
 	else
 	{
 		(*buffer)[0] = '\0';
-		line = start(line, fd, buffer, buffer_size);
+		*line = start(line, fd, buffer, buffer_size);
 	}
-	return (line);
+	return (*line);
 }
 
 char	*get_next_line(int fd)
@@ -162,10 +161,10 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		buffer[0] = '\0';
-		line = start(line, fd, &buffer, BUFFER_SIZE);
+		line = start(&line, fd, &buffer, BUFFER_SIZE);
 	}
 	else
-		line = end(line, fd, &buffer, BUFFER_SIZE);
+		line = end(&line, fd, &buffer, BUFFER_SIZE);
 	return (line);
 }
 
