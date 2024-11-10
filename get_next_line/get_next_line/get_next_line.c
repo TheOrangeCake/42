@@ -95,8 +95,11 @@ char	*start(char *line, int fd, char **buffer, size_t buffer_size)
 	signal = 0;
 	buffer_mover = 0;
 	i = read(fd, *buffer, buffer_size);
-	if (((*buffer)[0] == '\0' && line[0] == '\0') || (i == 0 && line[0] == '\0'))
+	if ((*buffer)[0] == '\0' && line[0] == '\0' && i == 0)
+	{
+		// free(buffer);
 		return (NULL);
+	}
 	(*buffer)[i] = '\0';
 	line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
 	if (signal == 1 || i < buffer_size)
@@ -166,24 +169,24 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
-{
-	char	*ptr;
-	int	fd;
+// int	main(void)
+// {
+// 	char	*ptr;
+// 	int	fd;
 
-	fd = open("test.txt", O_RDWR);
-	ptr = get_next_line(fd);
-	printf("line1: %s", ptr);
-	free(ptr);
-	ptr = get_next_line(fd);
-	printf("line2: %s", ptr);
-	free(ptr);
-	ptr = get_next_line(fd);
-	printf("line3: %s", ptr);
-	free(ptr);
-	close(fd);
-	return (0);
-}
+// 	fd = open("test.txt", O_RDWR);
+// 	ptr = get_next_line(fd);
+// 	printf("line1: %s", ptr);
+// 	free(ptr);
+// 	ptr = get_next_line(fd);
+// 	printf("line2: %s", ptr);
+// 	free(ptr);
+// 	ptr = get_next_line(fd);
+// 	printf("line3: %s", ptr);
+// 	free(ptr);
+// 	close(fd);
+// 	return (0);
+// }
 
 		// i = 0;
 		// while (buffer[buffer_mover])
