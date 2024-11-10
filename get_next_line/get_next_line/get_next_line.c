@@ -9,36 +9,8 @@
 /*   Updated: 2024/11/08 22:20:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+
 #include "get_next_line.h"
-
-// char	*free_buffer(char **buffer, size_t *buffer_mover)
-// {
-// 	char	*temp;
-// 	int		i;
-// 	size_t	j;
-
-// 	i = 0;
-// 	while ((*buffer)[*buffer_mover])
-// 		(*buffer)[i++] = (*buffer)[(*buffer_mover)++];
-// 	(*buffer)[i] = '\0';
-// 	j = 0;
-// 	temp = malloc(sizeof(char) * i + 1);
-// 	if (temp == NULL)
-// 		return (NULL);
-// 	while (i >= 0)
-// 	{
-// 		temp[j] =  (*buffer)[j];
-// 		j++;
-// 		i--;
-// 	}
-// 	free(*buffer);
-// 	*buffer = temp;
-// 	return (*buffer);
-// }
 
 size_t	ft_strlen_line(const char *s, int *signal)
 {
@@ -82,7 +54,7 @@ char	*ft_strjoin_line(char **s1, char *s2, int *signal, size_t *buffer_mover)
 		ptr[i++] = s2[j++];
 	ptr[i] = '\0';
 	*buffer_mover = j;
-	free(*s1);
+	safe_free(s1);
 	return (ptr);
 }
 
@@ -97,9 +69,8 @@ char	*start(char **line, int fd, char **buffer, size_t buffer_size)
 	i = read(fd, *buffer, buffer_size);
 	if ((*buffer)[0] == '\0' && (*line)[0] == '\0' && i == 0)
 	{
-		free(*buffer);
-		*buffer = NULL;
-		free(*line);
+		safe_free(buffer);
+		safe_free(line);
 		return (NULL);
 	}
 	(*buffer)[i] = '\0';
@@ -148,9 +119,8 @@ char	*get_next_line(int fd)
 	line = malloc(sizeof(char) * 1);
 	if (line == NULL || read(fd, 0, 0) < 0)
 	{
-		free(line);
-		free(buffer);
-		buffer = NULL;
+		safe_free(&line);
+		safe_free(&buffer);
 		return (NULL);
 	}
 	line[0] = '\0';
@@ -159,7 +129,7 @@ char	*get_next_line(int fd)
 		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
 		if (buffer == NULL)
 		{
-			free(line);
+			safe_free(&line);
 			return (NULL);
 		}
 		buffer[0] = '\0';

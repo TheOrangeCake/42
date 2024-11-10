@@ -16,7 +16,11 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
 
+void	safe_free(char **s1);
 char	*get_next_line(int fd);
 
 #endif
