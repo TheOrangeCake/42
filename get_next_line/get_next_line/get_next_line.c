@@ -98,6 +98,7 @@ char	*start(char **line, int fd, char **buffer, size_t buffer_size)
 	if ((*buffer)[0] == '\0' && (*line)[0] == '\0' && i == 0)
 	{
 		free(*buffer);
+		*buffer = NULL;
 		free(*line);
 		return (NULL);
 	}
@@ -149,6 +150,7 @@ char	*get_next_line(int fd)
 	{
 		free(line);
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	line[0] = '\0';
