@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:21:32 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/11 09:43:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/11 11:36:21 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strjoin_line(char **s1, char *s2, int *signal, size_t *buffer_mover)
 
 	ptr = malloc(ft_strlen_line(*s1, signal) + ft_strlen_line(s2, signal) + 1);
 	if (ptr == NULL)
-		return (NULL);
+		return (safe_free(s1));
 	i = 0;
 	j = 0;
 	while ((*s1)[i])
@@ -70,11 +70,12 @@ char	*start(char **line, int fd, char **buffer, size_t buffer_size)
 	if ((*buffer)[0] == '\0' && (*line)[0] == '\0' && i == 0)
 	{
 		safe_free(buffer);
-		safe_free(line);
-		return (NULL);
+		return (safe_free(line));
 	}
 	(*buffer)[i] = '\0';
 	*line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
+	if (*line == NULL)
+		return (safe_free(buffer));
 	if (signal == 1 || i < buffer_size)
 	{
 		i = 0;
@@ -95,6 +96,8 @@ char	*end(char **line, int fd, char **buffer, size_t buffer_size)
 	signal = 0;
 	buffer_mover = 0;
 	*line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
+	if (*line == NULL)
+		return (safe_free(buffer));
 	if (signal == 1)
 	{
 		i = 0;
@@ -120,18 +123,14 @@ char	*get_next_line(int fd)
 	if (line == NULL || read(fd, 0, 0) < 0 || BUFFER_SIZE < 0)
 	{
 		safe_free(&line);
-		safe_free(&(buffer[fd]));
-		return (NULL);
+		return (safe_free(&(buffer[fd])));
 	}
 	line[0] = '\0';
 	if (buffer[fd] == NULL)
 	{
 		buffer[fd] = malloc(sizeof(char) * BUFFER_SIZE + 1);
 		if (buffer[fd] == NULL)
-		{
-			safe_free(&line);
-			return (NULL);
-		}
+			return (safe_free(&line));
 		buffer[fd][0] = '\0';
 		line = start(&line, fd, &(buffer[fd]), BUFFER_SIZE);
 	}

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:15:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/11 09:43:49 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/11 11:11:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-void	safe_free(char **s1);
+void	*safe_free(char **s1);
 char	*get_next_line(int fd);
 
 #endif
