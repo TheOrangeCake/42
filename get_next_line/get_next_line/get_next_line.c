@@ -157,8 +157,3 @@ char	*get_next_line(int fd)
 // 	close(fd);
 // 	return (0);
 // }
-
-		// i = 0;
-		// while (buffer[buffer_mover])
-		// 	buffer[i++] = buffer[buffer_mover++];
-		// buffer[i] = '\0';
