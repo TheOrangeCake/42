@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/08 22:20:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/11 09:34:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 
 	line = malloc(sizeof(char) * 1);
-	if (line == NULL || read(fd, 0, 0) < 0)
+	if (line == NULL || read(fd, 0, 0) < 0 || BUFFER_SIZE < 0)
 	{
 		safe_free(&line);
 		safe_free(&buffer);
