@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:13:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/13 10:56:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:46:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*buffer[1024];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (safe_free(&(buffer[fd])));
 	line = malloc(sizeof(char) * 1);
-	if (line == NULL || read(fd, 0, 0) < 0)
+	if (line == NULL)
 	{
 		safe_free(&line);
 		return (safe_free(&(buffer[fd])));
@@ -141,7 +141,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// # include <stdio.h>
+// #include <stdio.h>
 
 // int	main(void)
 // {
