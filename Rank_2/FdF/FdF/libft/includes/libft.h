@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:15:32 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/17 13:43:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:50:11 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdarg.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 typedef struct s_list
 {
@@ -65,5 +71,12 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	case_hexupper(unsigned int j, size_t *count);
+void	case_hexlower(unsigned int j, size_t *count);
+void	case_address(unsigned long j, size_t *count);
+void	case_unsigned(unsigned int n, int fd, size_t *count);
+int		ft_printf(const char *format, ...);
+void	*safe_free(char **s1);
+char	*get_next_line(int fd);
 
 #endif

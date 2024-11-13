@@ -1,4 +1,4 @@
-SOURCE = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
+SOURCE= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c \
 		ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c \
 		ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c \
@@ -8,15 +8,12 @@ SOURCE = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c ft_printf.c ft_printf_helper.c \
 		get_next_line.c get_next_line_utils.c
 
-# PATH := ${addprefix ./srcs/, ${SOURCE}}
-
 HEADER = ./includes
 
 OBJ_DIR = obj
 SRC_DIR = srcs
 
-# OBJECTS = ${PATH:.c=.o}
-OBJECTS =$(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
+OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
 
 NAME = libft.a
 
@@ -26,27 +23,21 @@ RM = rm -f
 GCC = gcc
 FLAGS = -Wall -Wextra -Werror
 
-all:	${NAME}
+all:	$(NAME)
 
-${OBJ_DIR}/%.o:${SRC_DIR}/%.c
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	@${GCC} ${FLAGS} -I${HEADER} -c $< -o $@
+	@$(GCC) $(FLAGS) -I$(HEADER) -c $< -o $@
 
-# .c.o:
-# 		${GCC} ${FLAGS} -c -I${HEADER} $< -o $@
-
-${NAME}: 	${OBJECTS}
-	@${AR} ${NAME} ${OBJECTS} 
-	@${INDEX} ${NAME}
-	@echo "Compiled libft.a"
+$(NAME): 	$(OBJECTS)
+	@$(AR) $(NAME) $(OBJECTS) 
+	@$(INDEX) $(NAME)
 
 clean:
-	@${RM} -r ${OBJ_DIR}
-	@echo "Deleted all temp files"
+	@$(RM) -r $(OBJ_DIR)
 
 fclean:		clean
-	@${RM} ${NAME}
-	@echo "Deleted library"
+	@$(RM) $(NAME)
 
 re: fclean all
 

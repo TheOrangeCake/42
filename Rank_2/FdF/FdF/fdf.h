@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 15:15:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/13 13:19:19 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/11/13 20:52:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FDF_H
+# define FDF_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-void	*safe_free(char **s1);
-char	*get_next_line(int fd);
+#include "libft.h"
 
 #endif

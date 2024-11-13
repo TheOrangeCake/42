@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:21:32 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/13 17:42:45 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:50:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 size_t	ft_strlen_line(const char *s, int *signal)
 {

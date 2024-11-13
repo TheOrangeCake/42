@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 18:03:27 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/13 17:41:54 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/11/13 20:45:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "fdf.h"
 
-# include "libft.h"
-# include <stdarg.h>
-# include <unistd.h>
-
-void	case_hexupper(unsigned int j, size_t *count);
-void	case_hexlower(unsigned int j, size_t *count);
-void	case_address(unsigned long j, size_t *count);
-void	case_unsigned(unsigned int n, int fd, size_t *count);
-int		ft_printf(const char *format, ...);
-
-#endif
+int main()
+{
+    ft_printf("Hello");
+    return (0);
+}

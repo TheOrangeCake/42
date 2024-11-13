@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:22:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/13 17:42:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:50:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 void	*safe_free(char **s1)
 {
