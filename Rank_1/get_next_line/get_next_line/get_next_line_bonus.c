@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:21:32 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/11 11:44:24 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:53:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*buffer[1024];
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	line = malloc(sizeof(char) * 1);
-	if (line == NULL || read(fd, 0, 0) < 0 || BUFFER_SIZE < 0)
+	if (line == NULL || read(fd, 0, 0) < 0)
 	{
 		safe_free(&line);
 		return (safe_free(&(buffer[fd])));
@@ -139,26 +141,38 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+// # include <stdio.h>
+
 // int	main(void)
 // {
 // 	char	*ptr;
-// 	int	fd;
+// 	int	fd1;
+// 	int fd2;
 
-// 	fd = open("test.txt", O_RDWR);
-// 	ptr = get_next_line(fd);
-// 	printf("line1: %s", ptr);
+// 	// fd1 = 42;
+// 	// fd1 = 1098;
+// 	// fd2 = -1;
+// 	fd1 = open("test.txt", O_RDWR);
+// 	fd2 = open("test1.txt", O_RDWR);
+// 	ptr = get_next_line(fd1);
+// 	printf("linef11: %s", ptr);
 // 	free(ptr);
-// 	ptr = get_next_line(fd);
-// 	printf("line2: %s", ptr);
+// 	ptr = get_next_line(fd2);
+// 	printf("linef21: %s", ptr);
 // 	free(ptr);
-// 	ptr = get_next_line(fd);
-// 	printf("line3: %s", ptr);
+// 	ptr = get_next_line(fd1);
+// 	printf("linef12: %s", ptr);
 // 	free(ptr);
-// 	close(fd);
+// 	ptr = get_next_line(fd2);
+// 	printf("linef22: %s", ptr);
+// 	free(ptr);
+// 	ptr = get_next_line(fd1);
+// 	printf("linef32: %s", ptr);
+// 	free(ptr);
+// 	ptr = get_next_line(fd2);
+// 	printf("linef32: %s", ptr);
+// 	free(ptr);
+// 	close(fd1);
+// 	close(fd2);
 // 	return (0);
 // }
-
-		// i = 0;
-		// while (buffer[buffer_mover])
-		// 	buffer[i++] = buffer[buffer_mover++];
-		// buffer[i] = '\0';
