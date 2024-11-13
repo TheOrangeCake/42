@@ -8,15 +8,19 @@ SOURCE = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c ft_printf.c ft_printf_helper.c \
 		get_next_line.c get_next_line_utils.c
 
-PATH = ${addprefix ./srcs/, ${SOURCE}}
+# PATH := ${addprefix ./srcs/, ${SOURCE}}
 
-HEADER = ./includes/
+HEADER = ./includes
 
-OBJECTS = ${PATH:.c=.o}
+OBJ_DIR = obj
+SRC_DIR = srcs
+
+# OBJECTS = ${PATH:.c=.o}
+OBJECTS =$(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
 
 NAME = libft.a
 
-AR = ar rc
+AR = ar rcs
 INDEX = ranlib
 RM = rm -f
 GCC = gcc
@@ -24,18 +28,25 @@ FLAGS = -Wall -Wextra -Werror
 
 all:	${NAME}
 
-.c.o:
-		${GCC} ${FLAGS} -c -I ${HEADER} $< -o $@
+${OBJ_DIR}/%.o:${SRC_DIR}/%.c
+	@mkdir -p $(OBJ_DIR)
+	@${GCC} ${FLAGS} -I${HEADER} -c $< -o $@
+
+# .c.o:
+# 		${GCC} ${FLAGS} -c -I${HEADER} $< -o $@
 
 ${NAME}: 	${OBJECTS}
-	${AR} ${NAME} ${OBJECTS} 
-	${INDEX} ${NAME}
+	@${AR} ${NAME} ${OBJECTS} 
+	@${INDEX} ${NAME}
+	@echo "Compiled libft.a"
 
 clean:
-	${RM} ${OBJECTS}
+	@${RM} -r ${OBJ_DIR}
+	@echo "Deleted all temp files"
 
 fclean:		clean
-	${RM} ${NAME}
+	@${RM} ${NAME}
+	@echo "Deleted library"
 
 re: fclean all
 

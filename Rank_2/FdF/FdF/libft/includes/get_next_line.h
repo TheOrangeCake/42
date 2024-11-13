@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 09:22:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/11 11:28:37 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/11/01 15:15:33 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/11/13 13:19:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	*safe_free(char **s1)
-{
-	free(*s1);
-	*s1 = NULL;
-	return (NULL);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+
+void	*safe_free(char **s1);
+char	*get_next_line(int fd);
+
+#endif

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 18:03:27 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/01 12:22:29 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/11/11 09:22:47 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/11/13 17:42:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "get_next_line.h"
 
-# include "libft/libft.h"
-# include <stdarg.h>
-# include <unistd.h>
-
-void	case_hexupper(unsigned int j, size_t *count);
-void	case_hexlower(unsigned int j, size_t *count);
-void	case_address(unsigned long j, size_t *count);
-void	case_unsigned(unsigned int n, int fd, size_t *count);
-int		ft_printf(const char *format, ...);
-
-#endif
+void	*safe_free(char **s1)
+{
+	free(*s1);
+	*s1 = NULL;
+	return (NULL);
+}

@@ -19,7 +19,7 @@ FLAGS = -Wall -Wextra -Werror
 all:	${NAME}
 
 .c.o:
-	${GCC} ${FLAGS} -c -I ${HEADER} $< -o ${<:.c=.o}
+	${GCC} ${FLAGS} -c -I. $< -o ${<:.c=.o}
 
 ${NAME}: 	${OBJECTS}
 	${AR} ${NAME} ${OBJECTS} 
