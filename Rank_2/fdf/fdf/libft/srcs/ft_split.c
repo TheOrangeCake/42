@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:11:00 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/10/11 16:12:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/14 13:05:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,47 +122,6 @@ char	**ft_split(char const *s, char c)
 	free(newstr);
 	return (tab);
 }
-
-// char	**ft_split(char const *s, char c)
-// {
-// 	size_t	i;
-// 	size_t	j;
-// 	char	**tab;
-// 	char	*newstr;
-
-// 	i = 0;
-// 	j = 0;
-// 	newstr = ft_strdup(s);
-// 	newstr = compare(newstr, c);
-// 	tab = malloc((word_count(newstr, ft_strlen(s)) + 1) * sizeof(char *));
-// 	if (tab == NULL)
-// 	{
-// 		free(newstr);
-// 		return (NULL);
-// 	}
-// 	while (i < ft_strlen(s))
-// 	{
-// 		if (newstr[i] != '\0')
-// 		{
-// 			tab[j] = ft_strdup(&newstr[i]);
-// 			 if (tab[j] == NULL)
-//             {
-//                 while (j > 0)
-//                     free(tab[--j]);
-//                 free(tab);
-//                 free(newstr);
-//                 return (NULL);
-//             }
-// 			j++;
-// 			while (newstr[i] != '\0')
-// 				i++;
-// 		}
-// 		i++;
-// 	}
-// 	tab[j] = NULL;
-// 	free(newstr);
-// 	return (tab);
-// }
 
 // #include <stdio.h>
 
