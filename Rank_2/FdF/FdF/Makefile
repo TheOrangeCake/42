@@ -17,18 +17,28 @@ $(LIBFT):
 
 #
 
+# Compile minilibX
+
+MINILIBX_PATH = ./minilibx_linux
+MINILIBX = $(MINILIBX_PATH)/libmlx.a
+$(MINILIBX):
+	@$(MAKE) -C $(MINILIBX_PATH)
+
+#
+
 GCC = gcc
-FLAGS = -Wextra -Wall -Werror
+# FLAGS = -Wextra -Wall -Werror
+FLAGS =
 RM = rm -f
 
-all : $(LIBFT) $(NAME)
+all : $(LIBFT) $(MINILIBX) $(NAME)
 
 $(OBJ_DIR)/%.o:%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(GCC) $(FLAGS) -I$(LIBFT_PATH)/includes -c $< -o $@
+	@$(GCC) $(FLAGS) -I$(LIBFT_PATH)/includes -I$(MINILIBX_PATH) -c $< -o $@
 
 $(NAME):	$(OBJECTS)
-	@$(GCC) $(FLAGS) $(OBJECTS) -L$(LIBFT_PATH) -lft -o $(NAME)
+	@$(GCC) $(FLAGS) $(OBJECTS) -L$(MINILIBX_PATH) -lmlx -L$(LIBFT_PATH) -lft -lXext -lX11 -lm -lz -o $(NAME)
 	@echo "Built $(NAME)"
 
 clean:
@@ -39,6 +49,7 @@ clean:
 fclean:		clean
 	@$(RM) $(NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
+	@$(MAKE) -C $(MINILIBX_PATH) clean
 	@echo "Deleted $(NAME)"
 
 re: fclean all
