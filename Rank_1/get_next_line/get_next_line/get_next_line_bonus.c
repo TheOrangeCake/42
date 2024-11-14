@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:21:32 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/13 13:43:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:00:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_strjoin_line(char **s1, char *s2, int *signal, size_t *buffer_mover)
 	return (ptr);
 }
 
-char	*start(char **line, int fd, char **buffer, size_t buffer_size)
+char	*start(char **line, int fd, char **buffer)
 {
 	size_t	i;
 	int		signal;
@@ -66,7 +66,7 @@ char	*start(char **line, int fd, char **buffer, size_t buffer_size)
 
 	signal = 0;
 	buffer_mover = 0;
-	i = read(fd, *buffer, buffer_size);
+	i = read(fd, *buffer, BUFFER_SIZE);
 	if ((*buffer)[0] == '\0' && (*line)[0] == '\0' && i == 0)
 	{
 		safe_free(buffer);
@@ -76,7 +76,7 @@ char	*start(char **line, int fd, char **buffer, size_t buffer_size)
 	*line = ft_strjoin_line(line, *buffer, &signal, &buffer_mover);
 	if (*line == NULL)
 		return (safe_free(buffer));
-	if (signal == 1 || i < buffer_size)
+	if (signal == 1 || i < BUFFER_SIZE)
 	{
 		i = 0;
 		while ((*buffer)[buffer_mover])
@@ -84,10 +84,10 @@ char	*start(char **line, int fd, char **buffer, size_t buffer_size)
 		(*buffer)[i] = '\0';
 		return (*line);
 	}
-	return (start(line, fd, buffer, buffer_size));
+	return (start(line, fd, buffer));
 }
 
-char	*end(char **line, int fd, char **buffer, size_t buffer_size)
+char	*end(char **line, int fd, char **buffer)
 {
 	int		signal;
 	size_t	buffer_mover;
@@ -109,7 +109,7 @@ char	*end(char **line, int fd, char **buffer, size_t buffer_size)
 	else
 	{
 		(*buffer)[0] = '\0';
-		*line = start(line, fd, buffer, buffer_size);
+		*line = start(line, fd, buffer);
 	}
 	return (*line);
 }
@@ -134,10 +134,10 @@ char	*get_next_line(int fd)
 		if (buffer[fd] == NULL)
 			return (safe_free(&line));
 		buffer[fd][0] = '\0';
-		line = start(&line, fd, &(buffer[fd]), BUFFER_SIZE);
+		line = start(&line, fd, &(buffer[fd]));
 	}
 	else
-		line = end(&line, fd, &(buffer[fd]), BUFFER_SIZE);
+		line = end(&line, fd, &(buffer[fd]));
 	return (line);
 }
 
