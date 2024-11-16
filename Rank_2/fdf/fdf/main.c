@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/16 20:11:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:16:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main()
 	printf("row: %d\n", row);
 	printf("column: %d\n", column);
 	create_image(&img, &row, &column);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 500, 500);
 		
 	mlx_loop(mlx);
 	close(fd);

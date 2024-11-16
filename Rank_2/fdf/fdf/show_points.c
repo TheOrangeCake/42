@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/16 20:14:03 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:19:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ void    create_image(t_data *data, int *row, int *column)
     int i;
     int j;
 
-    while (j < *row)
+    j = 0;
+    x = 0;
+    while (j < *column)
     {
         i = 0;
-        x = 0;
         y = 0;
-        while (i < *column)
+        while (i < *row)
         {
-            my_mlx_pixel_put(data, x, y, 0x00ff0000);
+            my_mlx_pixel_put(data, x, y, 0x00ffffff);
             i++;
-            x += 5;
-            y += 5;
+            y += 100;
         }
+        x += 100;
         j++;
     }
 }
