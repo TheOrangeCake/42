@@ -6,30 +6,36 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/16 14:01:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:13:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// count y without color
 int	ft_strlen_no_color(char *line)
 {
 	int	i;
-	int	count;
+	int	count_color;
+	int	count_space;
 
 	i = 0;
-	count = 0;
+	count_color = 0;
+	count_space = 0;
 	while (line[i])
 	{
 		i++;
 		if(line[i] == ',')
-			count++;
+			count_color++;
+		if(line[i] == ' ')
+			count_space++;
 	}
-	i = i - (count *9);
+	i = i - (count_color *9) - count_space - 1;
 	return (i);
 }
 
-int	**initiate_2D_map(int *x, int y)
+// malloc the map
+int	**initiate_2D_map(int *x, int *y)
 {
 	int	**map;
 	int	i;
@@ -40,7 +46,7 @@ int	**initiate_2D_map(int *x, int y)
 	i = 0;
 	while (i < (*x))
 	{
-		map[i] = malloc(sizeof(int) * y);
+		map[i] = malloc(sizeof(int) * (*y));
 		if (map[i] == NULL)
 		{
 			while (i > 0)
@@ -53,10 +59,10 @@ int	**initiate_2D_map(int *x, int y)
 	return (map);
 }
 
-int	**check_map(int fd, int *x)
+// check if map is rectangular and no hole
+int	**check_map(int fd, int *x, int *y)
 {
 	char	*line;
-	int		i;
 	int		j;
 
 	line = get_next_line(fd);
@@ -65,21 +71,22 @@ int	**check_map(int fd, int *x)
 		ft_printf("File is empty or error");
 		exit(EXIT_FAILURE);
 	}
-	i = ft_strlen_no_color(line);
+	*y = ft_strlen_no_color(line);
 	*x = 1;
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			return(initiate_2D_map(x, i));
+			return(initiate_2D_map(x, y));
 		j = ft_strlen_no_color(line);
-		if (j != i)
+		if (j != *y)
 		{
-            free(line); // potential leak here, to free all previous get_next_line
+            free(line);
 			ft_printf("Map error");
 			exit(EXIT_FAILURE);
 		}
+		free(line);
 		(*x)++;
 	}
-	return(initiate_2D_map(x, i));
+	return(initiate_2D_map(x, y));
 }

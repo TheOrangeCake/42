@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/16 14:01:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:45:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		**check_map(int fd, int *x);
-int **fill_map(int **map, int fd, int *i);
+int		**check_map(int fd, int *x, int *y);
+int 	**fill_map(int **map, int fd, int *i);
+void    create_image(t_data *img, int *row, int *column);
 
 #endif
