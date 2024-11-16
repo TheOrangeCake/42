@@ -1,12 +1,12 @@
 NAME = fdf
 
-SOURCE = main.c
+SOURCE = main.c check_map.c fill_map.c
 
 HEADER = fdf.h
 
 OBJ_DIR = obj
 
-OBJECTS = $(OBJ_DIR)/$(SOURCE:.c=.o)
+OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
 
 # Compile libft
 
