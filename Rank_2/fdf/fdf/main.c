@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/16 20:16:45 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/17 11:29:09 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,25 @@ int	main()
 	int		column;
 	
 	row = 0;
+	column = 0;
 	fd = open("test.fdf", O_RDONLY);
+	if (fd < 0)
 	{
-		if (fd < 0)
-		{
-			ft_printf("Can't open file");
-			exit(EXIT_FAILURE);
-		}
+		ft_printf("Can't open file");
+		exit(EXIT_FAILURE);
 	}
-	map = check_map(fd, &row, &column);
+	map = start_map(fd, &row, &column);
 	if (map == NULL)
 	{
-		ft_printf("malloc map fail");
+		ft_printf("fail to read file");
+		close(fd);
+		exit(EXIT_FAILURE);
 	}
 	close(fd);
 	fd = open("test.fdf", O_RDONLY);
 	map = fill_map(map, fd, &row);
+	close(fd);
+	
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Let's go FdF");
 	img.img = mlx_new_image(mlx, 1920, 1080);
@@ -50,6 +53,5 @@ int	main()
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 500, 500);
 		
 	mlx_loop(mlx);
-	close(fd);
 	return (0);
 }
