@@ -6,20 +6,20 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/17 14:36:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:15:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // put pixel to screen
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned long color)
 {
 	char	*dest;
 
 	x *= 20;
 	y *= 20;
-	dest = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	dest = img->addr + (x * img->line_length + y * (img->bits_per_pixel / 8));
 	*(unsigned int*)dest = color;
 }
 
@@ -32,9 +32,9 @@ void	create_image(t_data *img, t_point **map)
 	while (map[x] != NULL)
 	{
  		y = 0;
-		while (map[x][y].end == NULL)
+		while (map[x][y].end != 1)
 		{
-			my_mlx_pixel_put(img, x, y, 0xffffff);
+			my_mlx_pixel_put(img, x, y, map[x][y].color);
 			y++;
 		}
 		x++;
