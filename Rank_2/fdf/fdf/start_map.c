@@ -6,11 +6,35 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/17 11:46:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/17 13:24:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+
+t_point	**initiate_map(t_point **map, int *row, int *column)
+{
+	int	x;
+
+	x = 0;
+	map = calloc(sizeof(t_point *), (*row));
+	if (map == NULL)
+		return (NULL);
+	while (x < *row)
+	{
+		map[x] = calloc(sizeof(t_point), (*column));
+		if (map[x] == NULL)
+		{
+			while (--x >= 0)
+				free(map[x]);
+			free(map);
+			return (NULL);
+		}
+		x++;
+	}
+	return (map);
+}
 
 t_point	**start_map(int fd, int *row, int *column)
 {
@@ -23,7 +47,7 @@ t_point	**start_map(int fd, int *row, int *column)
 		return (NULL);
 	*column = ft_strlen(line);
 	*row = 1;
-	while (true)
+	while (1)
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -40,31 +64,3 @@ t_point	**start_map(int fd, int *row, int *column)
 	return (NULL);
 }
 
-t_point	**initiate_map(t_point **map, int *row, int *column)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	map = malloc(sizeof(t_point *) * (*row));
-	if (map == NULL)
-		return (NULL);
-	while (x < *row)
-	{
-		y = 0;
-		while (y < *column)
-		{
-			map[x][y] = malloc(sizeof(t_point) * 1);
-			if (map[x][y] == NULL)
-			{
-				while (--y >= 0)
-					free(map[x][y]);
-				free(map);
-				return (NULL);
-			}
-			y++;
-		}
-		x++;
-	}
-	return (map);
-}

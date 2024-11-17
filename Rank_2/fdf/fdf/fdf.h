@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/17 11:07:00 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/17 13:32:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef struct	s_point
 	unsigned long	color;
 }	t_point;
 
-int 	**fill_map(int **map, int fd, int *i);
-void    create_image(t_data *img, int *row, int *column);
+t_point	**start_map(int fd, int *row, int *column);
+t_point	**fill_map(t_point **map, int fd, int *row);
+void	create_image(&img, map);
 
 #endif

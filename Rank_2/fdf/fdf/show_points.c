@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/16 20:19:32 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/17 13:32:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,7 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 	*(unsigned int*)dest = color;
 }
 
-void    create_image(t_data *data, int *row, int *column)
+void    create_image(&img, map)
 {
-    int x;
-    int y;
-    int i;
-    int j;
-
-    j = 0;
-    x = 0;
-    while (j < *column)
-    {
-        i = 0;
-        y = 0;
-        while (i < *row)
-        {
-            my_mlx_pixel_put(data, x, y, 0x00ffffff);
-            i++;
-            y += 100;
-        }
-        x += 100;
-        j++;
-    }
+    
 }
