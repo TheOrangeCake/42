@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 17:19:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:21:15 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_point	**fill_map(t_point **map, int fd, int *row)
 			map[x][y] = point;
 			y++;
 		}
-		map[x][y].end = 1;
+		map[x][y - 1].end = 1;
 		free_split(array);
 		x++;
 	}

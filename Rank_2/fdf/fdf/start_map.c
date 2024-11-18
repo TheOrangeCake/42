@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 15:08:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:52:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_point	**start_map(int fd, int *row)
 		if (line == NULL)
 		{
 			map = initiate_map(map, row, column);
+			free(line);
 			return (map);
 		}
 		i = ft_strlen(line);

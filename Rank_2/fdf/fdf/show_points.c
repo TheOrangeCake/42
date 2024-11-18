@@ -6,11 +6,12 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 17:45:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:46:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 // put pixel to screen
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
@@ -40,22 +41,21 @@ void	bresenham(t_data *img, int x0, int y0, int x1, int y1)
 		sy = 1;
 	else
 		sy = -1;
-	// drawline(img, dx, dy, sx, sy);
 	err = dx + dy;
 	e2 = 2 * err;
 	while(x0 != x1 || y0 != y1)
 	{
-		my_mlx_pixel_put(img, x0, y0, 0x000000FF);
+		my_mlx_pixel_put(img, x0, y0, 0x0000FF);
 		if (e2 >= dy) 
 		{
 			err += dy;
 			x0 += sx;
-		} /* e_xy+e_x > 0 */
+		}
 		if (e2 <= dx)
 		{
 			err += dx;
 			y0 += sy;
-		} /* e_xy+e_y < 0 */
+		}
 	}
 }
 
@@ -72,13 +72,31 @@ void	create_image(t_data *img, t_point **map)
 		while (map[x][y].end != 1)
 		{
 			my_mlx_pixel_put(img, map[x][y].x, map[x][y].y, map[x][y].color);
-			// bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
-			// bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
 			y++;
 		}
 		x++;
 	}
 	x = 0;
-	y = 0;
-	bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
+	while (map[x + 1] != NULL)
+	{
+		y = 0;
+		// while (map[x][y].end != 1 && map[x][y + 1].end != 1)
+		// {
+			bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
+			// bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
+			printf("map[%d] = %p\n", x, map[x]);
+			printf("map[%d][%d] = %p\n", x, y, &map[x][y]);
+			y++;
+		// }
+		x++;
+	}
+
+	// y = 0;
+	// while (map[x][y + 1].end != 1)
+	// {
+	// 	x = 0;
+	// 	bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
+	// 	y++;
+	// }
+	// y = 0;
 }
