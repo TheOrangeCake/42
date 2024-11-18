@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 14:10:14 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:06:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_point
 	int			end;
 }	t_point;
 
-t_point	**start_map(int fd, int *row, int *column);
+t_point	**start_map(int fd, int *row);
 t_point	**fill_map(t_point **map, int fd, int *row);
 void    create_image(t_data *img, t_point **map);
 

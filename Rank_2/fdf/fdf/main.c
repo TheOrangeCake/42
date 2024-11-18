@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 14:11:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:05:33 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,15 @@ int	main()
 	t_point		**map;
 	int		fd;
 	int		row;
-	int		column;
 	
 	row = 0;
-	column = 0;
 	fd = open("test.fdf", O_RDONLY);
 	if (fd < 0)
 	{
 		ft_printf("Can't open file");
 		exit(EXIT_FAILURE);
 	}
-	map = start_map(fd, &row, &column);
+	map = start_map(fd, &row);
 	if (map == NULL)
 	{
 		ft_printf("fail to read file");

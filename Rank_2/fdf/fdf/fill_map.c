@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 14:28:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:03:23 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@ void	free_split(char **array)
 }
 
 // get color
-int	get_color(char *line)
+int	get_color(const char *line)
 {
+	char	*ptr;
+	int		color;
 	
+	ptr = ft_strchr(line, ',');
+	if (ptr == NULL)
+		color = 0xffffff;
+	else
+		color = ft_atoi_hex(line);
 	return (color);
 }
 
