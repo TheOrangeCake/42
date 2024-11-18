@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 15:05:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:09:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	main()
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	create_image(&img, map);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 100, 100);
-		
 	mlx_loop(mlx);
 	return (0);
 }

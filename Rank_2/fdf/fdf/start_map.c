@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 15:06:18 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:08:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
+// calloc map
 t_point	**initiate_map(t_point **map, int *row, int column)
 {
 	int	x;
@@ -36,6 +36,7 @@ t_point	**initiate_map(t_point **map, int *row, int column)
 	return (map);
 }
 
+// count row and column
 t_point	**start_map(int fd, int *row)
 {
 	int		i;

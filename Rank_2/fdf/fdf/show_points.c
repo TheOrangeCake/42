@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 14:10:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:07:37 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 	*(unsigned int*)dest = color;
 }
 
+// circle through points
 void	create_image(t_data *img, t_point **map)
 {
 	int x;
