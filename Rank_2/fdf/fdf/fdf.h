@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 15:08:39 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:07:30 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ typedef struct	s_data
 
 typedef struct	s_point
 {
-	int				z;
-	unsigned long	color;
-	int			end;
+	int	y;
+	int	x;
+	int	z;
+	int	color;
+	int	end;
 }	t_point;
 
 t_point	**start_map(int fd, int *row);

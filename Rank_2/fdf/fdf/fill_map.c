@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 15:07:42 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:19:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_point	**fill_map(t_point **map, int fd, int *row)
 		y = 0;
 		while (array[y] != NULL)
 		{
+			point.x = x * 20;
+			point.y = y * 20;
 			point.z = ft_atoi(array[y]);
 			point.color = get_color(array[y]);
 			point.end = 0;
