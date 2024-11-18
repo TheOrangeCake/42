@@ -6,14 +6,14 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/17 19:15:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:10:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // put pixel to screen
-void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned long color)
+void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*dest;
 
