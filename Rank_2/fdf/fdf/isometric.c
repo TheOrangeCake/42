@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   isometric.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
+/*   Updated: 2024/11/19 21:35:49 by hoannguy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
+
+void shift_coordinates(t_point **map, int row, int column) {
+    int x, y;
+    double min_x = 0, min_y = 0;
+
+    // Find the minimum transformed coordinates
+    for (x = 0; x < row; x++) {
+        for (y = 0; y < column; y++) {
+            if (map[x][y].x < min_x)
+                min_x = map[x][y].x;
+            if (map[x][y].y < min_y)
+                min_y = map[x][y].y;
+        }
+    }
+
+    // Shift all points to make them positive
+    for (x = 0; x < row; x++) {
+        for (y = 0; y < column; y++) {
+            map[x][y].x -= min_x;
+            map[x][y].y -= min_y;
+        }
+    }
+}
+
+void	isometric(t_point **map, int row, int column)
+{
+	int	x;
+	int	y;
+	int	tempx;
+	int	tempy;
+
+	x = 0;
+	while (x < (row))
+	{
+		y = 0;
+		while (y < (column))
+		{
+			tempx = map[x][y].x;
+			tempy = map[x][y].y;
+			map[x][y].x = tempx * cos(M_PI / 4) + tempy * cos((M_PI / 1.5) + 2) + map[x][y].z * cos((M_PI /4) - 2);
+			map[x][y].y = tempx * sin(M_PI / 4) + tempy * sin((M_PI / 1.5) + 2) + map[x][y].z * sin((M_PI /4) - 2);
+			// map[x][y].x = cos(M_PI / 4) * tempx - sin(M_PI / 4) * tempy;
+			// map[x][y].y = cos(M_PI / 4) * tempx + sin(M_PI / 4) * tempy;
+			y++;
+		}
+		x++;
+	}
+	shift_coordinates(map, row, column);
+}

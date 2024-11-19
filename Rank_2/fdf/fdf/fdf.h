@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 16:33:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:02:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define FDF_H
 #include "libft.h"
 #include "mlx.h"
+#include <math.h>
+
+# ifndef WIDTH
+# define WIDTH 1920
+# endif
+
+# ifndef HEIGHT
+# define HEIGHT 1080
+# endif
 
 typedef struct	s_data 
 {
@@ -52,5 +61,6 @@ t_point	**fill_map(t_point **map, int fd, int *row, int *column);
 void	create_image(t_data *img, t_point **map, int *row, int *column);
 void	bresenham(t_data *img, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
+void	isometric(t_point **map, int row, int column);
 
 #endif

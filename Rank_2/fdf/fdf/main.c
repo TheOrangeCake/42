@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 16:47:30 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:15:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	main()
 	int		row;
 	int		column;
 	
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Let's go FdF");
+	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	row = 1;
 	column = 0;
 	fd = open("test.fdf", O_RDONLY);
@@ -40,12 +44,9 @@ int	main()
 	fd = open("test.fdf", O_RDONLY);
 	map = fill_map(map, fd, &row, &column);
 	close(fd);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Let's go FdF");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	isometric(map, row, column);
 	create_image(&img, map, &row, &column);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 100, 100);
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 700, 200);
 	mlx_loop(mlx);
 	return (0);
 }

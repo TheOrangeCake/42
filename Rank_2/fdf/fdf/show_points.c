@@ -6,12 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 16:47:13 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:22:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 // put pixel to screen
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
@@ -75,6 +74,6 @@ void	create_image(t_data *img, t_point **map, int *row, int *column)
 		}
 		x++;
 	}
-	draw_horizontal(img, map, row, column);
-	draw_vertical(img, map, row, column);
+	// draw_horizontal(img, map, row, column);
+	// draw_vertical(img, map, row, column);
 }
