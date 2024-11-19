@@ -6,12 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 21:46:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:04:11 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 // put pixel to screen
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
@@ -60,16 +59,16 @@ void	bresenham(t_data *img, int x0, int y0, int x1, int y1)
 }
 
 // circle through points
-void	create_image(t_data *img, t_point **map)
+void	create_image(t_data *img, t_point **map, int *row, int *column)
 {
 	int x;
 	int y;
 
 	x = 0;
-	while (map[x] != NULL)
+	while (x < *row)
 	{
  		y = 0;
-		while (map[x][y].end != 1)
+		while (y < *column)
 		{
 			my_mlx_pixel_put(img, map[x][y].x, map[x][y].y, map[x][y].color);
 			y++;
@@ -77,26 +76,41 @@ void	create_image(t_data *img, t_point **map)
 		x++;
 	}
 	x = 0;
-	while (map[x + 1] != NULL)
-	{
-		y = 0;
-		// while (map[x][y].end != 1 && map[x][y + 1].end != 1)
-		// {
-			bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
-			// bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
-			printf("map[%d] = %p\n", x, map[x]);
-			printf("map[%d][%d] = %p\n", x, y, &map[x][y]);
-			y++;
-		// }
-		x++;
-	}
-
-	// y = 0;
-	// while (map[x][y + 1].end != 1)
+	// while (x < *row)
 	// {
-	// 	x = 0;
-	// 	bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
-	// 	y++;
+	// 	y = 0;
+	// 	while (y < *column)
+	// 	{
+	// 		bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
+	// 		bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
+	// 		y++;
+	// 	}
+	// 	x++;
 	// }
-	// y = 0;
+		// y = 0;
+		// x = 0;
+		// while (x < *row - 1)
+		// {
+		// 	bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
+		// 	// bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
+		// 	x++;
+		// }
+
+		// y = 0;
+		// x = 0;
+		// while (y < *column)
+		// {
+		// 	// bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
+		// 	bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
+		// 	y++;
+		// }
+		
+		// y = 0;
+		// x = 1;
+		// while (y < *column)
+		// {
+		// 	// bresenham(img, map[x][y].x, map[x][y].y, map[x + 1][y].x, map[x + 1][y].y);
+		// 	bresenham(img, map[x][y].x, map[x][y].y, map[x][y + 1].x, map[x][y + 1].y);
+		// 	y++;
+		// }
 }

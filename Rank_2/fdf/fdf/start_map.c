@@ -6,64 +6,58 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/18 21:52:22 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:03:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // calloc map
-t_point	**initiate_map(t_point **map, int *row, int column)
+void	**initiate_map(t_point ***map, int *row, int *column)
 {
 	int	x;
 
 	x = 0;
-	map = calloc(sizeof(t_point *), (*row));
-	if (map == NULL)
+	*map = calloc((*row), sizeof(t_point *));
+	if (*map == NULL)
 		return (NULL);
 	while (x < *row)
 	{
-		map[x] = calloc(sizeof(t_point), column);
-		if (map[x] == NULL)
+		(*map)[x] = calloc(*column, sizeof(t_point));
+		if ((*map)[x] == NULL)
 		{
-			while (--x >= 0)
-				free(map[x]);
-			free(map);
-			return (NULL);
+			while (x-- > 0)
+				free((*map)[x]);
+			return (free(*map), NULL);
 		}
 		x++;
 	}
-	return (map);
 }
 
 // count row and column
-t_point	**start_map(int fd, int *row)
+t_point	**start_map(int fd, int *row, int *column)
 {
-	int		i;
-	int		column;
 	char	*line;
 	t_point	**map;
+	char	**temp;
 
+	map = NULL;
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (NULL);
-	column = ft_strlen(line);
-	*row = 1;
+	temp = ft_split(line, ' ');
+	if (temp == NULL)
+		return (free(line), NULL);
+	while (temp[*column] != NULL)
+		(*column)++;
+	free(temp);
 	while (1)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line == NULL)
-		{
-			map = initiate_map(map, row, column);
-			free(line);
-			return (map);
-		}
-		i = ft_strlen(line);
-		if (column < i)
-			column = i;
+			return (initiate_map(&map, row, column), free(line), map);
 		(*row)++;
 	}
 	return (NULL);
 }
-
