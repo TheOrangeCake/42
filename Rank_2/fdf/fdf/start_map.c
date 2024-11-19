@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 12:03:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:19:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_point	**start_map(int fd, int *row, int *column)
 		return (free(line), NULL);
 	while (temp[*column] != NULL)
 		(*column)++;
-	free(temp);
+	free_split(temp);
 	while (1)
 	{
 		free(line);

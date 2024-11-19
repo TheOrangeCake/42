@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 12:04:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:36:00 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main()
 		exit(EXIT_FAILURE);
 	}
 	fd = open("test.fdf", O_RDONLY);
-	map = fill_map(map, fd, &row);
+	map = fill_map(map, fd, &row, &column);
 	close(fd);
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Let's go FdF");

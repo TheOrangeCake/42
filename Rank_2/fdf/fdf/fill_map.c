@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 11:29:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:27:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_color(const char *line)
 {
 	char	*ptr;
 	int		color;
-	
+
 	ptr = ft_strchr(line, ',');
 	if (ptr == NULL)
 		color = 0xffffff;
@@ -40,14 +40,24 @@ int	get_color(const char *line)
 	return (color);
 }
 
-// fill the map with points
-t_point	**fill_map(t_point **map, int fd, int *row)
+// fill points with meta data
+t_point	fill_point(char *array, t_point point, int x, int y)
 {
-	char			*line;
-	char			**array;
-	int				x;
-	int				y;
-	t_point 		point;
+	point.x = x * 20;
+	point.y = y * 20;
+	point.z = ft_atoi(array);
+	point.color = get_color(array);
+	return (point);
+}
+
+// fill the map with points
+t_point	**fill_map(t_point **map, int fd, int *row, int *column)
+{
+	char	*line;
+	char	**array;
+	int		x;
+	int		y;
+	t_point	point;
 
 	x = 0;
 	while (x < (*row))
@@ -58,19 +68,14 @@ t_point	**fill_map(t_point **map, int fd, int *row)
 			return (NULL);
 		free(line);
 		y = 0;
-		while (array[y] != NULL)
+		while (y < *column)
 		{
-			point.x = x * 20;
-			point.y = y * 20;
-			point.z = ft_atoi(array[y]);
-			point.color = get_color(array[y]);
-			point.end = 0;
+			point = fill_point(array[y], point, x, y);
 			map[x][y] = point;
 			y++;
 		}
-		map[x][y - 1].end = 1;
 		free_split(array);
 		x++;
 	}
-    return (map);
+	return (map);
 }

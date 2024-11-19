@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 11:32:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:11:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define FDF_H
 #include "libft.h"
 #include "mlx.h"
-
-# define ABS(Value) (Value * ((Value > 0) - (Value < 0)))
 
 typedef struct	s_data 
 {
@@ -32,12 +30,11 @@ typedef struct	s_point
 	int	x;
 	int	z;
 	int	color;
-	int	end;
 }	t_point;
 
 void	free_split(char **array);
 t_point	**start_map(int fd, int *row, int *colunm);
-t_point	**fill_map(t_point **map, int fd, int *row);
+t_point	**fill_map(t_point **map, int fd, int *row, int *column);
 void	create_image(t_data *img, t_point **map, int *row, int *column);
 
 #endif
