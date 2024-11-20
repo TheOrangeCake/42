@@ -6,11 +6,35 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 21:19:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:30:44 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	map_check(char *line, int column)
+{
+	int		i;
+	char	**array;
+
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == '\n')
+			line[i] = ' ';
+		i++;
+	}
+	i = 0;
+	array = ft_split(line, ' ');
+	if (array == NULL)
+		return (0);
+	while (array[i] != NULL)
+		i++;
+	if (i != column)
+		return (free_split(array), 0);
+	else
+		return (1);
+}
 
 // calloc map
 void	**initiate_map(t_point ***map, int *row, int *column)
@@ -57,6 +81,8 @@ t_point	**start_map(int fd, int *row, int *column)
 		line = get_next_line(fd);
 		if (line == NULL)
 			return (initiate_map(&map, row, column), free(line), map);
+		if (map_check(line, *column) == 0)
+			return(free(line), NULL);
 		(*row)++;
 	}
 	return (NULL);

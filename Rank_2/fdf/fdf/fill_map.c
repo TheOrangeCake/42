@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 20:54:48 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:46:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	get_color(const char *line)
 // fill points with meta data
 t_point	fill_point(char *array, t_point point, int x, int y)
 {
-	point.x = x * 20;
-	point.y = y * 20;
+	point.x = x * 30;
+	point.y = y * 50;
 	point.z = ft_atoi(array);
 	point.color = get_color(array);
 	return (point);

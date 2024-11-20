@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 21:35:49 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:53:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void shift_coordinates(t_point **map, int row, int column) {
         }
     }
 
-    // Shift all points to make them positive
+    //Shift all points to make them positive
     for (x = 0; x < row; x++) {
         for (y = 0; y < column; y++) {
             map[x][y].x -= min_x;
@@ -50,10 +50,8 @@ void	isometric(t_point **map, int row, int column)
 		{
 			tempx = map[x][y].x;
 			tempy = map[x][y].y;
-			map[x][y].x = tempx * cos(M_PI / 4) + tempy * cos((M_PI / 1.5) + 2) + map[x][y].z * cos((M_PI /4) - 2);
-			map[x][y].y = tempx * sin(M_PI / 4) + tempy * sin((M_PI / 1.5) + 2) + map[x][y].z * sin((M_PI /4) - 2);
-			// map[x][y].x = cos(M_PI / 4) * tempx - sin(M_PI / 4) * tempy;
-			// map[x][y].y = cos(M_PI / 4) * tempx + sin(M_PI / 4) * tempy;
+			map[x][y].x = (tempx - tempy) * cos(M_PI / -4);
+			map[x][y].y = (tempx + tempy) * sin(M_PI / -4) - map[x][y].z;
 			y++;
 		}
 		x++;

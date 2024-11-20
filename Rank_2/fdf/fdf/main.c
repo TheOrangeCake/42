@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/19 21:15:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:48:24 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main()
 	map = start_map(fd, &row, &column);
 	if (map == NULL)
 	{
-		ft_printf("fail to read map");
+		ft_printf("Map problem");
 		close(fd);
 		exit(EXIT_FAILURE);
 	}
@@ -46,7 +46,7 @@ int	main()
 	close(fd);
 	isometric(map, row, column);
 	create_image(&img, map, &row, &column);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 700, 200);
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 	return (0);
 }
