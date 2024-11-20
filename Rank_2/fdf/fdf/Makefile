@@ -40,7 +40,6 @@ $(OBJ_DIR)/%.o:%.c
 $(NAME):	$(OBJECTS)
 	@$(GCC) $(FLAGS) $(OBJECTS) -L$(MINILIBX_PATH) -lmlx -L$(LIBFT_PATH) -lft -lXext -lX11 -lm -lz -o $(NAME)
 	@echo "Built $(NAME)"
-	./fdf
 
 clean:
 	@$(RM) -r $(OBJ_DIR)
