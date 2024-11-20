@@ -6,24 +6,32 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/20 14:30:53 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:17:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+char	*replace_return(char **line)
+{
+	int	i;
+
+	i = 0;
+	while ((*line)[i] != '\0')
+	{
+		if ((*line)[i] == '\n')
+			(*line)[i] = ' ';
+		i++;
+	}
+	return (*line);
+}
 
 int	map_check(char *line, int column)
 {
 	int		i;
 	char	**array;
 
-	i = 0;
-	while (line[i] != '\0')
-	{
-		if (line[i] == '\n')
-			line[i] = ' ';
-		i++;
-	}
+	replace_return(&line);
 	i = 0;
 	array = ft_split(line, ' ');
 	if (array == NULL)
@@ -65,10 +73,10 @@ t_point	**start_map(int fd, int *row, int *column)
 	t_point	**map;
 	char	**temp;
 
-	map = NULL;
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (NULL);
+	replace_return(&line);
 	temp = ft_split(line, ' ');
 	if (temp == NULL)
 		return (free(line), NULL);
@@ -82,7 +90,7 @@ t_point	**start_map(int fd, int *row, int *column)
 		if (line == NULL)
 			return (initiate_map(&map, row, column), free(line), map);
 		if (map_check(line, *column) == 0)
-			return(free(line), NULL);
+			return (free(line), NULL);
 		(*row)++;
 	}
 	return (NULL);

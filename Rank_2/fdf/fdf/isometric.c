@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/20 14:05:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:26:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	shift_coordinates(t_point **map, int row, int column) 
+void	shift_coordinates(t_point **map, int row, int column)
 {
 	int	x;
 	int	y;
@@ -28,9 +28,9 @@ void	shift_coordinates(t_point **map, int row, int column)
 		while (y < column)
 		{
 			if (map[x][y].x < min_x)
-                min_x = map[x][y].x;
-            if (map[x][y].y < min_y)
-                min_y = map[x][y].y;
+				min_x = map[x][y].x;
+			if (map[x][y].y < min_y)
+				min_y = map[x][y].y;
 			y++;
 		}
 		x++;
@@ -42,7 +42,7 @@ void	shift_coordinates(t_point **map, int row, int column)
 		while (y < column)
 		{
 			map[x][y].x -= min_x;
-            map[x][y].y -= min_y;
+			map[x][y].y -= min_y;
 			y++;
 		}
 		x++;
@@ -64,10 +64,8 @@ void	isometric(t_point **map, int row, int column)
 		{
 			tempx = map[x][y].y;
 			tempy = -map[x][y].x;
-			map[x][y].x = (tempy - tempx) * sin(M_PI / -10) - map[x][y].z; //change this for vertical rotation
+			map[x][y].x = (tempy - tempx) * sin(M_PI / -10) - map[x][y].z;
 			map[x][y].y = (tempy + tempx) * cos(M_PI / 4);
-			// map[x][y].x -= (WIDTH / 2);
-			// map[x][y].y -= (HEIGHT / 2);
 			y++;
 		}
 		x++;

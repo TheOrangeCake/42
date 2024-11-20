@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/20 15:51:30 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:05:14 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main()
 	map = start_map(fd, &row, &column);
 	if (map == NULL)
 	{
-		ft_printf("Map problem");
+		ft_printf("Map error");
 		close(fd);
 		exit(EXIT_FAILURE);
 	}

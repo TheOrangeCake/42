@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/20 15:51:27 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:18:02 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	get_color(const char *line)
 // fill points with meta data
 t_point	fill_point(char *array, t_point point, int x, int y)
 {
-	point.x = x * 40;	//scale
+	point.x = x * 40;
 	point.y = y * 60;
 	point.z = ft_atoi(array) * 10;
 	point.color = get_color(array);
@@ -71,7 +71,6 @@ t_point	**fill_map(t_point **map, int fd, int *row, int *column)
 		while (y < *column)
 		{
 			point = fill_point(array[y], point, x, y);
-			//if (point.x < HEIGHT && point.y < WIDTH)  //fix this
 			map[x][y] = point;
 			y++;
 		}
