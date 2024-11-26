@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 21:51:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/26 23:03:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include "mlx.h"
 # include <math.h>
 
-# define ESC_KEY 65307
+# define ESC_KEY 0xff1b
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
 # ifndef WIDTH
 #  define WIDTH 1920
@@ -26,16 +28,6 @@
 #  define HEIGHT 1080
 # endif
 
-enum
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
 
 typedef struct s_data
 {
@@ -105,15 +97,20 @@ typedef struct s_map
 	int		column;
 }	t_map;
 
+// helper
 void	free_split(char **array);
 t_point	**start_map(int fd, int *row, int *colunm);
 t_point	**fill_map(t_point **map, int fd, int *row, int *column);
 void	create_image(t_data *img, t_point **map, int *row, int *column);
+// draw
 void	bresenham(t_data *img, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
 void	isometric(t_point **map, int row, int column);
 int		interpolating_color(t_point point1, t_point point0, t_bresenham line);
 int		step(t_bresenham line);
+// hook
 int		close_window(int keycode, t_map *map);
+int		x_close_window(int x11_event, t_map *map);
+int	mouse_scroll(int button, int x, int y, t_map *map);
 
 #endif

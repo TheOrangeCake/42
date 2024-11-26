@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 21:48:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/26 23:27:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ t_map	file_check(t_map map)
 	return (map);
 }
 
+void	hook_helper(t_wins wins, t_map *map)
+{
+	mlx_hook(wins.window, 2, 1L << 0, close_window, map);
+	mlx_hook(wins.window, 33, 1L << 0, x_close_window, map);
+	mlx_hook(wins.window, 4, 1L << 2, mouse_scroll, map);
+}
+
 int	main(void)
 {
 	t_wins	wins;
@@ -52,10 +59,11 @@ int	main(void)
 	fd = open("test.fdf", O_RDONLY);
 	map.map = fill_map(map.map, fd, &(map.row), &(map.column));
 	close(fd);
+	hook_helper(wins, &map);
 	isometric(map.map, map.row, map.column);
 	create_image(&img, map.map, &(map.row), &(map.column));
-	mlx_hook(wins.window, 2, 1L << 0, close_window, &map);
 	mlx_put_image_to_window(wins.mlx, wins.window, img.img, 0, 0);
+	// mlx_destroy_image(wins.mlx, img.img);
 	mlx_loop(wins.mlx);
 	return (0);
 }
