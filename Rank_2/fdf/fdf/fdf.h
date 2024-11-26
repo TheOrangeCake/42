@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 15:17:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:49:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_bresenham
 	int	color0;
 	int	color1;
 	int	step;
+	int	current_step;
 }	t_bresenham;
 
 typedef struct	s_color
@@ -79,7 +80,7 @@ void	create_image(t_data *img, t_point **map, int *row, int *column);
 void	bresenham(t_data *img, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
 void	isometric(t_point **map, int row, int column);
-int		interpolating_color(int color1, int color0, int step, int current_step);
+int	interpolating_color(t_point point1, t_point point0, t_bresenham line);
 int		step(t_bresenham line);
 
 #endif

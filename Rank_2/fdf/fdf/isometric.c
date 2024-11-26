@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/20 16:26:56 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:51:53 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	shift_coordinates(t_point **map, int row, int column)
 		y = 0;
 		while (y < column)
 		{
-			map[x][y].x -= min_x;
-			map[x][y].y -= min_y;
+			map[x][y].x -= min_x - 50;
+			map[x][y].y -= min_y - 50;
 			y++;
 		}
 		x++;

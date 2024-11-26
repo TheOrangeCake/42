@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:34:36 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 15:16:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:49:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	move_vertically(int *err, int *dx, int *y0, int *sy)
 void	bresenham(t_data *img, t_point point0, t_point point1)
 {
 	t_bresenham	line;
-	int	color;
-	int	current_step;
+	int			color;
 
 	line.x0 = point0.x;
 	line.y0 = point0.y;
@@ -53,16 +52,14 @@ void	bresenham(t_data *img, t_point point0, t_point point1)
 	line.dx = abs(line.x1 - line.x0);
 	line.dy = abs(line.y1 - line.y0);
 	line.step = step(line);
-	current_step = line.step;
-	line.color0 = point0.color;
-	line.color1 = point1.color;
+	line.current_step = 0;
 	find_sx(&line.x0, &line.x1, &line.sx);
 	find_sy(&line.y0, &line.y1, &line.sy);
 	line.err = line.dx - line.dy;
 	while (line.x0 != line.x1 || line.y0 != line.y1)
 	{
-		color = interpolating_color(line.color1, line.color0, line.step, current_step);
-		current_step++;
+		color = interpolating_color(point1, point0, line);
+		line.current_step++;
 		my_mlx_pixel_put(img, line.x0, line.y0, color);
 		line.e2 = 2 * line.err;
 		if (line.e2 > -line.dy)
