@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:34:36 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 18:49:22 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:28:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	move_vertically(int *err, int *dx, int *y0, int *sy)
 	*y0 += *sy;
 }
 
-void	bresenham(t_data *img, t_point point0, t_point point1)
+void	bresenham(t_params *params, t_point point0, t_point point1)
 {
 	t_bresenham	line;
 	int			color;
@@ -60,7 +60,7 @@ void	bresenham(t_data *img, t_point point0, t_point point1)
 	{
 		color = interpolating_color(point1, point0, line);
 		line.current_step++;
-		my_mlx_pixel_put(img, line.x0, line.y0, color);
+		my_mlx_pixel_put(params, line.x0, line.y0, color);
 		line.e2 = 2 * line.err;
 		if (line.e2 > -line.dy)
 			move_horizontally(&line.err, &line.dy, &line.x0, &line.sx);

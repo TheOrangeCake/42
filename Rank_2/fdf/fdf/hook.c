@@ -6,21 +6,21 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 14:46:05 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:32:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	key_press(int keycode, t_map *map)
+int	key_press(int keycode, t_params *params)
 {
-	ft_printf("key: %d\n", keycode);
+	// ft_printf("key: %d\n", keycode);
 	if (keycode == ESC_KEY)
-		close_window(map);
+		close_window(params);
 	return (0);
 }
 
-int	x_close_window(int x11_event, t_map *map)
+int	x_close_window(int x11_event, t_params *params)
 {
 	// while (map -> row > 0)
 	// {
@@ -33,7 +33,7 @@ int	x_close_window(int x11_event, t_map *map)
 	return (0);
 }
 
-int	mouse_scroll(int button, int x, int y, t_map *map)
+int	mouse_scroll(int button, int x, int y, t_params *params)
 {
 	int	a;
 	int	b;
@@ -42,19 +42,17 @@ int	mouse_scroll(int button, int x, int y, t_map *map)
 	{
 		a = 0;
 		ft_printf("I am scrolling up\n");
-		ft_printf("old x: %d\n", map -> map[1][1].x);
-		while (a < map -> row)
+		while (a < params -> row)
 		{
 			b = 0;
-			while (y < map -> column)
+			while (y < params -> column)
 			{
-				map -> map[a][b].x *= 1.1;
-				map -> map[a][b].y *= 1.1;
+				params -> map[a][b].x *= 1.1;
+				params -> map[a][b].y *= 1.1;
 				b++; 
 			}
 			a++;
 		}
-		ft_printf("new x: %d\n", map -> map[1][1].x);
 		// isometric(map -> map, map -> row, map -> column);
 	}
 	if (button == SCROLL_DOWN)

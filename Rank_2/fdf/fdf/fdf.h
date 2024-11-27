@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 14:50:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:32:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@
 # endif
 
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
+// typedef struct s_data
+// {
+// 	void	*img;
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// }	t_data;
 
-typedef struct s_wins
-{
-	void	*mlx;
-	void	*window;
-	int		fd;
-}	t_wins;
+// typedef struct s_wins
+// {
+// 	void	*mlx;
+// 	void	*window;
+// 	int		fd;
+// }	t_wins;
 
 typedef struct s_point
 {
@@ -100,30 +100,45 @@ typedef struct s_save_line
 	int	min_y;
 }	t_save_line;
 
-typedef struct s_map
+// typedef struct s_map
+// {
+// 	t_point	**map;
+// 	int		row;
+// 	int		column;
+// }	t_map;
+
+typedef struct s_params
 {
+	void	*mlx;
+	void	*window;
+	int		fd;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 	t_point	**map;
 	int		row;
 	int		column;
-}	t_map;
+}	t_params;
 
 // helper
 void	free_split(char **array);
 t_point	**start_map(int fd, int *row, int *colunm);
 t_point	**fill_map(t_point **map, int fd, int *row, int *column);
-void	create_image(t_data *img, t_map map);
+void	create_image(t_params *params);
 // draw
-void	bresenham(t_data *img, t_point point0, t_point point1);
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
+void	bresenham(t_params *params, t_point point0, t_point point1);
+void	my_mlx_pixel_put(t_params *params, int x, int y, int color);
 void	isometric(t_point **map, int row, int column);
 void	military(t_point **map, int row, int column, float d);
 int		interpolating_color(t_point point1, t_point point0, t_bresenham line);
 int		step(t_bresenham line);
 // hook
-int		key_press(int keycode, t_map *map);
-int		x_close_window(int x11_event, t_map *map);
-int		mouse_scroll(int button, int x, int y, t_map *map);
-void	close_window(t_map *map);
-void	projection(t_map map);
+int		key_press(int keycode, t_params *params);
+int		x_close_window(int x11_event, t_params *params);
+int		mouse_scroll(int button, int x, int y, t_params *params);
+void	close_window(t_params *params);
+void	projection(t_params params);
 
 #endif

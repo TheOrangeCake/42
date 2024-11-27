@@ -6,64 +6,60 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 15:05:27 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:34:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map	file_check(t_map map)
+t_params	file_check(t_params params)
 {
-	int	fd;
-
-	fd = open("test.fdf", O_RDONLY);
-	if (fd < 0)
+	params.fd = open("test.fdf", O_RDONLY);
+	if (params.fd < 0)
 	{
 		ft_printf("Can't open file");
-		close(fd);
+		close(params.fd);
 		exit(EXIT_FAILURE);
 	}
-	map.map = start_map(fd, &(map.row), &(map.column));
-	if (map.map == NULL)
+	params.map = start_map(params.fd, &(params.row), &(params.column));
+	if (params.map == NULL)
 	{
 		ft_printf("Map error");
-		close(fd);
+		close(params.fd);
 		exit(EXIT_FAILURE);
 	}
-	close (fd);
-	return (map);
+	close (params.fd);
+	return (params);
 }
 
-void	hook_helper(t_wins wins, t_map *map)
+void	hook_helper(t_params params)
 {
-	mlx_hook(wins.window, 2, 1L << 0, key_press, map);
-	mlx_hook(wins.window, 33, 1L << 0, x_close_window, map);
-	mlx_hook(wins.window, 4, 1L << 2, mouse_scroll, map);
+	mlx_hook(params.window, 2, 1L << 0, key_press, &params);
+	mlx_hook(params.window, 33, 1L << 0, x_close_window, &params);
+	mlx_hook(params.window, 4, 1L << 2, mouse_scroll, &params);
 }
 
 int	main(void)
 {
-	t_wins	wins;
-	t_data	img;
-	t_map	map;
+	t_params params;
 
-	map.row = 1;
-	map.column = 0;
-	map = file_check(map);
-	wins.fd = open("test.fdf", O_RDONLY);
-	map.map = fill_map(map.map, wins.fd, &(map.row), &(map.column));
-	close(wins.fd);
-	wins.mlx = mlx_init();
-	wins.window = mlx_new_window(wins.mlx, WIDTH, HEIGHT, "Let's go FdF");
-	img.img = mlx_new_image(wins.mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	hook_helper(wins, &map);
-	projection(map);
+	params.row = 1;
+	params.column = 0;
+	params = file_check(params);
+	params.fd = open("test.fdf", O_RDONLY);
+	params.map = fill_map(params.map, params.fd, &(params.row), &(params.column));
+	close(params.fd);
+	params.mlx = mlx_init();
+	params.window = mlx_new_window(params.mlx, WIDTH, HEIGHT, "Let's go FdF");
+	params.img = mlx_new_image(params.mlx, WIDTH, HEIGHT);
+	params.addr = mlx_get_data_addr(params.img, &params.bits_per_pixel,
+			&params.line_length, &params.endian);
+	hook_helper(params);
+	projection(params);
 	// mlx_loop_hook(mlx, render_next_frame, YourStruct);
-	create_image(&img, map);
-	mlx_put_image_to_window(wins.mlx, wins.window, img.img, 0, 0);
+	create_image(&params);
+	mlx_put_image_to_window(params.mlx, params.window, params.img, 0, 0);
 	// mlx_destroy_image(wins.mlx, img.img);
-	mlx_loop(wins.mlx);
+	mlx_loop(params.mlx);
 	return (0);
 }

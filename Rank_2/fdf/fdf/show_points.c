@@ -6,55 +6,55 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 12:59:09 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:30:59 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // put pixel to screen
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_params *params, int x, int y, int color)
 {
 	char	*dest;
 
 	if (x >= 0 && x < HEIGHT && y >= 0 && y < WIDTH)
 	{
-		dest = img->addr + (x * img->line_length + y
-				* (img->bits_per_pixel / 8));
+		dest = params -> addr + (x * params -> line_length + y
+				* (params -> bits_per_pixel / 8));
 		*(unsigned int *)dest = color;
 	}
 }
 
-void	draw_horizontal(t_data *img, t_map map)
+void	draw_horizontal(t_params *params)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	while (x < map.row)
+	while (x < params -> row)
 	{
 		y = 0;
-		while (y < map.column - 1)
+		while (y < params -> column - 1)
 		{
-			bresenham(img, map.map[x][y], map.map[x][y + 1]);
+			bresenham(params, params -> map[x][y], params -> map[x][y + 1]);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	draw_vertical(t_data *img, t_map map)
+void	draw_vertical(t_params *params)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < map.column)
+	while (y < params -> column)
 	{
 		x = 0;
-		while (x < map.row - 1)
+		while (x < params -> row - 1)
 		{
-			bresenham(img, map.map[x][y], map.map[x + 1][y]);
+			bresenham(params, params -> map[x][y], params -> map[x + 1][y]);
 			x++;
 		}
 		y++;
@@ -62,10 +62,10 @@ void	draw_vertical(t_data *img, t_map map)
 }
 
 // circle through points
-void	create_image(t_data *img, t_map map)
+void	create_image(t_params *params)
 {
-	draw_horizontal(img, map);
-	draw_vertical(img, map);
+	draw_horizontal(params);
+	draw_vertical(params);
 }
 
 	// int	x;
