@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 16:44:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:45:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,11 @@ int	key_press(int keycode, t_params *params)
 	if (keycode == ESC_KEY)
 		close_window(params);
 	if (keycode == I_KEY)
-	{
-		fill_map_helper(params);
-		isometric(params -> map, params -> row, params -> column);
-		mlx_clear_window(params -> mlx, params -> window);
-		mlx_destroy_image(params->mlx, params->img);
-		make_image_helper(params);
-	}
+		iso_projection(params);
 	if (keycode == M_KEY)
-	{
-		fill_map_helper(params);
-		military(params -> map, params -> row, params -> column, (M_PI / 4));
-		mlx_clear_window(params -> mlx, params -> window);
-		mlx_destroy_image(params->mlx, params->img);
-		make_image_helper(params);
-	}
+		mili_projection(params);
+	if (keycode == F_KEY)
+		flat_projection(params);
 }
 
 int	x_close_window(int x11_event, t_params *params)
@@ -50,43 +40,16 @@ int	x_close_window(int x11_event, t_params *params)
 
 int	mouse_scroll(int button, int x, int y, t_params *params)
 {
-	int	a;
-	int	b;
-
 	if (button == SCROLL_UP)
 	{
-		a = 0;
-		ft_printf("I am scrolling up\n");
-		while (a < params -> row)
-		{
-			b = 0;
-			while (b < params -> column)
-			{
-				params -> map[a][b].x *= 1.1;
-				params -> map[a][b].y *= 1.1;
-				b++; 
-			}
-			a++;
-		}
+		scroll_up(params);
 		mlx_clear_window(params -> mlx, params -> window);
 		mlx_destroy_image(params->mlx, params->img);
 		make_image_helper(params);
 	}
 	if (button == SCROLL_DOWN)
 	{
-		a = 0;
-		ft_printf("old %d\n", params -> map[1][1].x);
-		while (a < params -> row)
-		{
-			b = 0;
-			while (b < params -> column)
-			{
-				params -> map[a][b].x /= 1.1;
-				params -> map[a][b].y /= 1.1;
-				b++; 
-			}
-			a++;
-		}
+		scroll_down(params);
 		mlx_clear_window(params -> mlx, params -> window);
 		mlx_destroy_image(params->mlx, params->img);
 		make_image_helper(params);

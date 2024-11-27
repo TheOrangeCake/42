@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 15:38:27 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:31:33 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,37 @@ int	get_color(const char *line)
 }
 
 // fill points with meta data
-t_point	fill_point(char *array, t_point point, int x, int y)
+t_point	fill_point(char *array, t_point point, t_params *params)
 {
-	point.x = x * 60;
-	point.y = y * 50;
-	point.z = ft_atoi(array) * 5;
+	point.x = (params -> x) * 60 * (params -> scale);
+	point.y = (params -> y) * 50 * (params -> scale);
+	point.z = ft_atoi(array) * 5 * (params -> scale);
 	point.color = get_color(array);
 	return (point);
 }
 
 // fill the map with points
-t_point	**fill_map(t_point **map, int fd, int *row, int *column)
+t_point	**fill_map(t_params *params)
 {
-	char	*line;
-	char	**array;
-	int		x;
-	int		y;
 	t_point	point;
 
-	x = 0;
-	while (x < (*row))
+	params -> x = 0;
+	while (params -> x < params -> row)
 	{
-		line = get_next_line(fd);
-		array = ft_split(line, ' ');
-		if (array == NULL)
+		params -> line = get_next_line(params -> fd);
+		params -> array = ft_split(params -> line, ' ');
+		if (params -> array == NULL)
 			return (NULL);
-		free(line);
-		y = 0;
-		while (y < *column)
+		free(params -> line);
+		params -> y = 0;
+		while (params -> y < params -> column)
 		{
-			point = fill_point(array[y], point, x, y);
-			map[x][y] = point;
-			y++;
+			point = fill_point(params -> array[params -> y], point, params);
+			params -> map[params -> x][params -> y] = point;
+			params -> y++;
 		}
-		free_split(array);
-		x++;
+		free_split(params -> array);
+		params -> x++;
 	}
-	return (map);
+	return (params -> map);
 }

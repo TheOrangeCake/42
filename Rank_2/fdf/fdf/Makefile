@@ -1,6 +1,6 @@
 NAME = fdf
 
-SOURCE = main.c start_map.c fill_map.c show_points.c bresenham.c isometric.c color.c hook.c key_press.c
+SOURCE = main.c start_map.c fill_map.c show_points.c bresenham.c projections.c color.c hook.c key_press.c helper.c
 
 HEADER = fdf.h
 

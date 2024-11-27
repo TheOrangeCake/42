@@ -6,27 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 16:42:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:38:11 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	fill_map_helper(t_params *params)
-{
-	params -> fd = open("test.fdf", O_RDONLY);
-	params -> map = fill_map(params -> map, params -> fd, &(params -> row), &(params -> column));
-	close(params -> fd);
-}
-
-void	make_image_helper(t_params *params)
-{
-	params -> img = mlx_new_image(params -> mlx, WIDTH, HEIGHT);
-	params -> addr = mlx_get_data_addr(params -> img, &params -> bits_per_pixel,
-			&params -> line_length, &params -> endian);
-	create_image(params);
-	mlx_put_image_to_window(params -> mlx, params -> window, params -> img, 0, 0);
-}
 
 t_params	file_check(t_params params)
 {
@@ -57,10 +41,11 @@ void	hook_helper(t_params *params)
 
 int	main(void)
 {
-	t_params params;
+	t_params	params;
 
 	params.row = 1;
 	params.column = 0;
+	params.scale = 1;
 	params = file_check(params);
 	fill_map_helper(&params);
 	params.mlx = mlx_init();

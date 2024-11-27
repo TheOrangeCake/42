@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:55:57 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 16:12:27 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:44:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,30 @@ void	close_window(t_params *params)
 	// free(params -> map);
 	ft_printf("Program terminated\n");
 	exit(0);
+}
+
+void	iso_projection(t_params *params)
+{
+	fill_map_helper(params);
+	isometric(params -> map, params -> row, params -> column);
+	mlx_clear_window(params -> mlx, params -> window);
+	mlx_destroy_image(params->mlx, params->img);
+	make_image_helper(params);
+}
+
+void	mili_projection(t_params *params)
+{
+	fill_map_helper(params);
+	military(params -> map, params -> row, params -> column, (M_PI / 4));
+	mlx_clear_window(params -> mlx, params -> window);
+	mlx_destroy_image(params->mlx, params->img);
+	make_image_helper(params);
+}
+
+void	flat_projection(t_params *params)
+{
+	flat(params);
+	mlx_clear_window(params -> mlx, params -> window);
+	mlx_destroy_image(params->mlx, params->img);
+	make_image_helper(params);
 }
