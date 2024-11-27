@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 14:44:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:05:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ int	main(void)
 	t_data	img;
 	t_map	map;
 
-	wins.mlx = mlx_init();
-	wins.window = mlx_new_window(wins.mlx, WIDTH, HEIGHT, "Let's go FdF");
-	img.img = mlx_new_image(wins.mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
 	map.row = 1;
 	map.column = 0;
 	map = file_check(map);
 	wins.fd = open("test.fdf", O_RDONLY);
 	map.map = fill_map(map.map, wins.fd, &(map.row), &(map.column));
 	close(wins.fd);
+	wins.mlx = mlx_init();
+	wins.window = mlx_new_window(wins.mlx, WIDTH, HEIGHT, "Let's go FdF");
+	img.img = mlx_new_image(wins.mlx, WIDTH, HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
 	hook_helper(wins, &map);
 	projection(map);
 	// mlx_loop_hook(mlx, render_next_frame, YourStruct);
