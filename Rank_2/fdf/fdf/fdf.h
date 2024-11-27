@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 13:41:42 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:50:15 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@
 # include "mlx.h"
 # include <math.h>
 
-# define ESC_KEY 0xff1b
+# define ESC_KEY 65307
+# define P_KEY 112
+# define ARROW_UP 65362
+# define W_KEY 119
+# define ARROW_DOWN 65364
+# define S_KEY 115
+# define ARROW_LEFT 65361
+# define A_KEY 97
+# define ARROW_RIGHT 65363
+# define D_KEY 100
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 
@@ -107,6 +116,7 @@ void	create_image(t_data *img, t_map map);
 void	bresenham(t_data *img, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
 void	isometric(t_point **map, int row, int column);
+void	military(t_point **map, int row, int column, float d);
 int		interpolating_color(t_point point1, t_point point0, t_bresenham line);
 int		step(t_bresenham line);
 // hook

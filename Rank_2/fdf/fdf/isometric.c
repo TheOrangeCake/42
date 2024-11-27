@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 20:29:27 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:45:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,31 @@ void	isometric(t_point **map, int row, int column)
 	}
 	find_coordinates(map, row, column);
 }
+
+void	military(t_point **map, int row, int column, float d)
+{
+	int		x;
+	int		y;
+	float	cos_d;
+	float	sin_d;
+
+	cos_d = cos(d);
+	sin_d = sin(d);
+	x = 0;
+	while (x < row)
+	{
+		y = 0;
+		while (y < column)
+		{
+			map[x][y].x = map[x][y].x + map[x][y].z * cos_d;
+			map[x][y].y = map[x][y].y + map[x][y].z * sin_d;
+			y++;
+		}
+		x++;
+	}
+	find_coordinates(map, row, column);
+}
+
 
 // rotate the map 90o
 // tempx = map[x][y].x;

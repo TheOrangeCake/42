@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:55:57 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 13:42:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:45:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	close_window(t_map *map)
 
 void	projection(t_map map)
 {
-	isometric(map.map, map.row, map.column);
+	// isometric(map.map, map.row, map.column);
+	military(map.map, map.row, map.column, (M_PI / 4));
 }

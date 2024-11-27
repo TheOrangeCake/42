@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 12:55:08 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:46:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	key_press(int keycode, t_map *map)
 {
+	ft_printf("key: %d\n", keycode);
 	if (keycode == ESC_KEY)
 		close_window(map);
 	return (0);
