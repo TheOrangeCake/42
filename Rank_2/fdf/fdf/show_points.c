@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 18:46:17 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:59:09 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,36 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 	}
 }
 
-void	draw_horizontal(t_data *img, t_point **map, int *row, int *column)
+void	draw_horizontal(t_data *img, t_map map)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	while (x < *row)
+	while (x < map.row)
 	{
 		y = 0;
-		while (y < *column - 1)
+		while (y < map.column - 1)
 		{
-			bresenham(img, map[x][y], map[x][y + 1]);
+			bresenham(img, map.map[x][y], map.map[x][y + 1]);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	draw_vertical(t_data *img, t_point **map, int *row, int *column)
+void	draw_vertical(t_data *img, t_map map)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < *column)
+	while (y < map.column)
 	{
 		x = 0;
-		while (x < *row - 1)
+		while (x < map.row - 1)
 		{
-			bresenham(img, map[x][y], map[x + 1][y]);
+			bresenham(img, map.map[x][y], map.map[x + 1][y]);
 			x++;
 		}
 		y++;
@@ -62,10 +62,10 @@ void	draw_vertical(t_data *img, t_point **map, int *row, int *column)
 }
 
 // circle through points
-void	create_image(t_data *img, t_point **map, int *row, int *column)
+void	create_image(t_data *img, t_map map)
 {
-	draw_horizontal(img, map, row, column);
-	draw_vertical(img, map, row, column);
+	draw_horizontal(img, map);
+	draw_vertical(img, map);
 }
 
 	// int	x;

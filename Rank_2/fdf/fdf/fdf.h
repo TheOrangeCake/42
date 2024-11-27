@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 11:43:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:58:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_wins
 {
 	void	*mlx;
 	void	*window;
+	int		fd;
 }	t_wins;
 
 typedef struct s_point
@@ -101,7 +102,7 @@ typedef struct s_map
 void	free_split(char **array);
 t_point	**start_map(int fd, int *row, int *colunm);
 t_point	**fill_map(t_point **map, int fd, int *row, int *column);
-void	create_image(t_data *img, t_point **map, int *row, int *column);
+void	create_image(t_data *img, t_map map);
 // draw
 void	bresenham(t_data *img, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
@@ -112,6 +113,6 @@ int		step(t_bresenham line);
 int		key_press(int keycode, t_map *map);
 int		x_close_window(int x11_event, t_map *map);
 int		mouse_scroll(int button, int x, int y, t_map *map);
-void	close_window(void);
+void	close_window(t_map *map);
 
 #endif
