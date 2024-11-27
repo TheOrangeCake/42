@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 23:27:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:42:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_map	file_check(t_map map)
 
 void	hook_helper(t_wins wins, t_map *map)
 {
-	mlx_hook(wins.window, 2, 1L << 0, close_window, map);
+	mlx_hook(wins.window, 2, 1L << 0, key_press, map);
 	mlx_hook(wins.window, 33, 1L << 0, x_close_window, map);
 	mlx_hook(wins.window, 4, 1L << 2, mouse_scroll, map);
 }

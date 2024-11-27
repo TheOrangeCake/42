@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 23:03:32 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:43:21 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ void	isometric(t_point **map, int row, int column);
 int		interpolating_color(t_point point1, t_point point0, t_bresenham line);
 int		step(t_bresenham line);
 // hook
-int		close_window(int keycode, t_map *map);
+int		key_press(int keycode, t_map *map);
 int		x_close_window(int x11_event, t_map *map);
-int	mouse_scroll(int button, int x, int y, t_map *map);
+int		mouse_scroll(int button, int x, int y, t_map *map);
+void	close_window(void);
 
 #endif

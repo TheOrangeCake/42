@@ -6,26 +6,16 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 23:25:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:42:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	close_window(int keycode, t_map *map)
+int	key_press(int keycode, t_map *map)
 {
-
 	if (keycode == ESC_KEY)
-	{
-		while (map -> row > 0)
-		{
-			free((map -> map)[map -> row - 1]);
-			map -> row--;
-		}
-		free(map -> map);
-		ft_printf("Program terminated\n");
-		exit(0);
-	}
+		close_window();
 	return (0);
 }
 
