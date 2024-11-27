@@ -6,15 +6,28 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 18:16:47 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:55:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// ESC	: close window
+// I	: isometric projection
+// M	: military projection
+// F	: 2D projection
+// W arrow up 		: move up
+// S arrow down	: move down
+// A arrow left	: move left
+// D arrow right	: move right
+// Y	: rotate y axis counter
+// G	: rotate x axis clockwise
+// H	: rotate y axis counter
+// J	: rotate x axis clockwise
+
 int	key_press(int keycode, t_params *params)
 {
-	// ft_printf("key: %d\n", keycode);
+	ft_printf("key: %d\n", keycode);
 	if (keycode == ESC_KEY)
 		close_window(params);
 	if (keycode == I_KEY)
@@ -31,6 +44,9 @@ int	key_press(int keycode, t_params *params)
 		move_left(params);
 	if (keycode == D_KEY || keycode == ARROW_RIGHT)
 		move_right(params);
+	if (keycode == Y_KEY)
+		y_rotate_counter(params);
+	return (0);
 }
 
 int	x_close_window(int x11_event, t_params *params)

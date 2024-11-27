@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 18:13:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:03:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # define M_KEY 109
 # define I_KEY 105
 # define F_KEY 102
+# define Y_KEY 121
+# define G_KEY 103
+# define H_KEY 104
+# define J_KEY 105
 # define ARROW_UP 65362
 # define W_KEY 119
 # define ARROW_DOWN 65364
@@ -135,5 +139,6 @@ void	move_up(t_params *params);
 void	move_down(t_params *params);
 void	move_right(t_params *params);
 void	move_left(t_params *params);
+void	y_rotate_counter(t_params *params);
 
 #endif

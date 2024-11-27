@@ -6,12 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 17:38:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:23:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// check map validity and malloc map
 t_params	file_check(t_params params)
 {
 	params.fd = open("test.fdf", O_RDONLY);
@@ -31,7 +32,7 @@ t_params	file_check(t_params params)
 	close (params.fd);
 	return (params);
 }
-
+// hook list
 void	hook_helper(t_params *params)
 {
 	mlx_hook(params -> window, 2, 1L << 0, key_press, params);
