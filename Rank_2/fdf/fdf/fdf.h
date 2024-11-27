@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 15:32:45 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:10:11 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <math.h>
 
 # define ESC_KEY 65307
-# define P_KEY 112
+# define M_KEY 109
+# define I_KEY 105
 # define ARROW_UP 65362
 # define W_KEY 119
 # define ARROW_DOWN 65364
@@ -140,5 +141,6 @@ int		x_close_window(int x11_event, t_params *params);
 int		mouse_scroll(int button, int x, int y, t_params *params);
 void	close_window(t_params *params);
 void	projection(t_params params);
+void	fill_map_helper(t_params *params);
 
 #endif

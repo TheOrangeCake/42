@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 15:32:49 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:28:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,28 @@ int	key_press(int keycode, t_params *params)
 	// ft_printf("key: %d\n", keycode);
 	if (keycode == ESC_KEY)
 		close_window(params);
-	return (0);
+	if (keycode == I_KEY)
+	{
+		fill_map_helper(params);
+		isometric(params -> map, params -> row, params -> column);
+		mlx_clear_window(params -> mlx, params -> window);
+		mlx_destroy_image(params->mlx, params->img);
+		params->img = mlx_new_image(params->mlx, WIDTH, HEIGHT);
+		params->addr = mlx_get_data_addr(params->img, &params->bits_per_pixel, &params->line_length, &params->endian);
+		create_image(params);
+		mlx_put_image_to_window(params -> mlx, params -> window, params -> img, 0, 0);
+	}
+	if (keycode == M_KEY)
+	{
+		fill_map_helper(params);
+		military(params -> map, params -> row, params -> column, (M_PI / 4));
+		mlx_clear_window(params -> mlx, params -> window);
+		mlx_destroy_image(params->mlx, params->img);
+		params->img = mlx_new_image(params->mlx, WIDTH, HEIGHT);
+		params->addr = mlx_get_data_addr(params->img, &params->bits_per_pixel, &params->line_length, &params->endian);
+		create_image(params);
+		mlx_put_image_to_window(params -> mlx, params -> window, params -> img, 0, 0);
+	}
 }
 
 int	x_close_window(int x11_event, t_params *params)
@@ -45,7 +66,7 @@ int	mouse_scroll(int button, int x, int y, t_params *params)
 		while (a < params -> row)
 		{
 			b = 0;
-			while (y < params -> column)
+			while (b < params -> column)
 			{
 				params -> map[a][b].x *= 1.1;
 				params -> map[a][b].y *= 1.1;
@@ -53,11 +74,34 @@ int	mouse_scroll(int button, int x, int y, t_params *params)
 			}
 			a++;
 		}
-		// isometric(map -> map, map -> row, map -> column);
+		mlx_clear_window(params -> mlx, params -> window);
+		mlx_destroy_image(params->mlx, params->img);
+		params->img = mlx_new_image(params->mlx, WIDTH, HEIGHT);
+		params->addr = mlx_get_data_addr(params->img, &params->bits_per_pixel, &params->line_length, &params->endian);
+		create_image(params);
+		mlx_put_image_to_window(params -> mlx, params -> window, params -> img, 0, 0);
 	}
 	if (button == SCROLL_DOWN)
 	{
-		ft_printf("I am scrolling down\n");
+		a = 0;
+		ft_printf("old %d\n", params -> map[1][1].x);
+		while (a < params -> row)
+		{
+			b = 0;
+			while (b < params -> column)
+			{
+				params -> map[a][b].x /= 1.1;
+				params -> map[a][b].y /= 1.1;
+				b++; 
+			}
+			a++;
+		}
+		mlx_clear_window(params -> mlx, params -> window);
+		mlx_destroy_image(params->mlx, params->img);
+		params->img = mlx_new_image(params->mlx, WIDTH, HEIGHT);
+		params->addr = mlx_get_data_addr(params->img, &params->bits_per_pixel, &params->line_length, &params->endian);
+		create_image(params);
+		mlx_put_image_to_window(params -> mlx, params -> window, params -> img, 0, 0);
 	}
 	return (0);
 }
