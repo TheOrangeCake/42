@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 16:10:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:37:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,6 @@ int		mouse_scroll(int button, int x, int y, t_params *params);
 void	close_window(t_params *params);
 void	projection(t_params params);
 void	fill_map_helper(t_params *params);
+void	make_image_helper(t_params *params);
 
 #endif
