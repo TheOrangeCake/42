@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 17:45:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:13:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,9 @@ int		x_close_window(int x11_event, t_params *params);
 int		mouse_scroll(int button, int x, int y, t_params *params);
 void	close_window(t_params *params);
 void	projection(t_params params);
+void	move_up(t_params *params);
+void	move_down(t_params *params);
+void	move_right(t_params *params);
+void	move_left(t_params *params);
 
 #endif

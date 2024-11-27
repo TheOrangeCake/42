@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:49:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 17:44:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:01:08 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,18 @@ void	make_image_helper(t_params *params)
 
 void	scroll_down(t_params *params)
 {
-	// params -> scale /= 1.1;
-	// fill_map_helper(params);
 	int	a;
 	int	b;
 
 	a = 0;
+	params -> scale = 1.1;
 	while (a < params -> row)
 	{
 		b = 0;
 		while (b < params -> column)
 		{
-			params -> map[a][b].x /= 1.1;
-			params -> map[a][b].y /= 1.1;
+			params -> map[a][b].x /= params -> scale;
+			params -> map[a][b].y /= params -> scale;
 			b++;
 		}
 		a++;
@@ -52,19 +51,18 @@ void	scroll_down(t_params *params)
 
 void	scroll_up(t_params *params)
 {
-	// params -> scale *= 1.1;
-	// fill_map_helper(params);
 	int	a;
 	int	b;
 
 	a = 0;
+	params -> scale = 1.1;
 	while (a < params -> row)
 	{
 		b = 0;
 		while (b < params -> column)
 		{
-			params -> map[a][b].x *= 1.1;
-			params -> map[a][b].y *= 1.1;
+			params -> map[a][b].x *= params -> scale;
+			params -> map[a][b].y *= params -> scale;
 			b++;
 		}
 		a++;

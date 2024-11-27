@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 17:45:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:16:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ int	key_press(int keycode, t_params *params)
 		mili_projection(params);
 	if (keycode == F_KEY)
 		flat_projection(params);
+	if (keycode == W_KEY || keycode == ARROW_UP)
+		move_up(params);
+	if (keycode == S_KEY || keycode == ARROW_DOWN)
+		move_down(params);
+	if (keycode == A_KEY || keycode == ARROW_LEFT)
+		move_left(params);
+	if (keycode == D_KEY || keycode == ARROW_RIGHT)
+		move_right(params);
 }
 
 int	x_close_window(int x11_event, t_params *params)
