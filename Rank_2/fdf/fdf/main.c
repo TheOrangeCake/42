@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 12:56:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:50:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	main(void)
 	map.map = fill_map(map.map, wins.fd, &(map.row), &(map.column));
 	close(wins.fd);
 	hook_helper(wins, &map);
-	isometric(map.map, map.row, map.column);
+	projection(map);
+	// mlx_loop_hook(mlx, render_next_frame, YourStruct);
 	create_image(&img, map);
 	mlx_put_image_to_window(wins.mlx, wins.window, img.img, 0, 0);
 	// mlx_destroy_image(wins.mlx, img.img);

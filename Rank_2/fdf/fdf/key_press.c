@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:55:57 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 12:43:51 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:42:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	close_window(t_map *map)
 	exit(0);
 }
 
-// void	projection(t_map map)
-// {
-// 	isometric(map);
-// }
+void	projection(t_map map)
+{
+	isometric(map.map, map.row, map.column);
+}

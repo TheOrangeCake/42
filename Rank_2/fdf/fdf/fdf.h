@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 12:58:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:41:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ int		key_press(int keycode, t_map *map);
 int		x_close_window(int x11_event, t_map *map);
 int		mouse_scroll(int button, int x, int y, t_map *map);
 void	close_window(t_map *map);
+void	projection(t_map map);
 
 #endif
