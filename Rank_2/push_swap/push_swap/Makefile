@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SOURCE = main.c move1.c
+SOURCE = main.c
 
 HEADER = pushswap.h
 
