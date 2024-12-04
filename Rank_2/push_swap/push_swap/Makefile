@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SOURCE = main.c
+SOURCE = main.c helper.c
 
 HEADER = pushswap.h
 
@@ -18,7 +18,8 @@ $(LIBFT):
 #
 
 GCC = gcc
-FLAGS = -Wextra -Wall -Werror
+# FLAGS = -Wextra -Wall -Werror
+FLAGS =
 RM = rm -f
 
 all : $(LIBFT) $(NAME)
