@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 12:03:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:47:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,17 @@ int	key_press(int keycode, t_params *params)
 	if (keycode == D_KEY || keycode == ARROW_RIGHT)
 		move_right(params);
 	if (keycode == n4_KEY)
+		x_rotate_counter(params);
+	if (keycode == n5_KEY)
+		x_rotate(params);
+	if (keycode == n6_KEY)
 		y_rotate_counter(params);
+	if (keycode == n7_KEY)
+		y_rotate(params);
+	if (keycode == n8_KEY)
+		z_rotate_counter(params);
+	if (keycode == n9_KEY)
+		z_rotate(params);
 	if (keycode == n0_KEY)
 		change_color(params);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 11:11:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:05:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 // check map validity and malloc map
 t_params	file_check(t_params params)
 {
-	params.fd = open("test.fdf", O_RDONLY);
+	ft_printf("%s\n", params.file_name);
+	params.fd = open(params.file_name, O_RDONLY);
 	if (params.fd < 0)
 	{
 		ft_printf("Can't open file");
@@ -40,15 +41,23 @@ void	hook_helper(t_params *params)
 	mlx_hook(params -> window, 33, 1L << 0, x_close_window, params);
 	mlx_hook(params -> window, 4, 1L << 2, mouse_scroll, params);
 }
-
-int	main(void)
+void	run(char *av)
 {
 	t_params	params;
 
+	params.file_name = ft_strdup(av);
 	params.s_x = 1;
 	params.s_y = 1;
 	params.s_z = 1;
+	params.d = -(M_PI / 4);
 	params.row = 1;
+	params.rotate_x = 0;
+	params.rotate_y = 0;
+	params.rotate_z = 0;
+	params.switch_x = 0;
+	params.switch_y = 0;
+	params.switch_z = 0;
+	params.color_change = 1;
 	params.column = 0;
 	params = file_check(params);
 	fill_map_helper(&params);
@@ -58,5 +67,11 @@ int	main(void)
 	isometric(&params);
 	make_image_helper(&params);
 	mlx_loop(params.mlx);
+}
+
+int	main(int ac, char *av[])
+{
+	if (ac == 2)
+		run(av[1]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:49:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 11:09:04 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:05:23 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fill_map_helper(t_params *params)
 {
-	params -> fd = open("test.fdf", O_RDONLY);
+	params -> fd = open(params -> file_name, O_RDONLY);
 	params -> map = fill_map(params);
 	close(params -> fd);
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:55:57 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 12:28:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:47:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	iso_projection(t_params *params)
 void	mili_projection(t_params *params)
 {
 	fill_map_helper(params);
-	military(params, (M_PI / 4));
+	military(params, params -> d);
 	mlx_clear_window(params -> mlx, params -> window);
 	mlx_destroy_image(params->mlx, params->img);
 	make_image_helper(params);
@@ -58,20 +58,10 @@ void	change_color(t_params *params)
 	x = 0;
 	params->color_change = (params->color_change + 1050) % 16777216;
 	fill_map_helper(params);
-	while (x < params -> row)
-	{
-		y = 0;
-		while (y < params -> column)
-		{
-			params -> map[x][y].color *= params -> color_change;
-			y++;
-		}
-		x++;
-	}
 	if (params -> projection == 1)
 		isometric(params);
 	if (params -> projection == 0)
-		military(params, (M_PI / 4));
+		military(params, params -> d);
 	if (params -> projection == 2)
 		find_coordinates(params -> map, params -> row, params -> column);
 	mlx_clear_window(params -> mlx, params -> window);

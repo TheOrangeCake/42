@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 12:29:04 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:50:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_save_line
 
 typedef struct s_params
 {
+	char	*file_name;
 	void	*mlx;
 	void	*window;
 	int		fd;
@@ -115,8 +116,15 @@ typedef struct s_params
 	float	s_x;
 	float	s_y;
 	float	s_z;
+	float	d;
 	int		projection;
 	int		color_change;
+	float	rotate_x;
+	float	rotate_y;
+	float	rotate_z;
+	int		switch_x;
+	int		switch_y;
+	int		switch_z;
 }	t_params;
 
 // helper
@@ -149,7 +157,12 @@ void	move_up(t_params *params);
 void	move_down(t_params *params);
 void	move_right(t_params *params);
 void	move_left(t_params *params);
+void	x_rotate_counter(t_params *params);
 void	y_rotate_counter(t_params *params);
+void	z_rotate_counter(t_params *params);
+void	z_rotate(t_params *params);
+void	x_rotate(t_params *params);
+void	y_rotate(t_params *params);
 void	change_color(t_params *params);
 void	find_coordinates(t_point **map, int row, int column);
 
