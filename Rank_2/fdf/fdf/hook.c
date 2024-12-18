@@ -6,22 +6,38 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 19:23:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:32:15 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	key_press_helper(int keycode, t_params *params)
+{
+	if (keycode == N4_KEY)
+		x_rotate_counter(params);
+	if (keycode == N5_KEY)
+		x_rotate(params);
+	if (keycode == N6_KEY)
+		y_rotate_counter(params);
+	if (keycode == N7_KEY)
+		y_rotate(params);
+	if (keycode == N8_KEY)
+		z_rotate_counter(params);
+	if (keycode == N9_KEY)
+		z_rotate(params);
+}
 
 int	key_press(int keycode, t_params *params)
 {
 	ft_printf("key: %d\n", keycode);
 	if (keycode == ESC_KEY)
 		close_window(params);
-	if (keycode == n1_KEY)
+	if (keycode == N1_KEY)
 		iso_projection(params);
-	if (keycode == n2_KEY)
+	if (keycode == N2_KEY)
 		mili_projection(params);
-	if (keycode == n3_KEY)
+	if (keycode == N3_KEY)
 		flat_projection(params);
 	if (keycode == W_KEY || keycode == ARROW_UP)
 		move_up(params);
@@ -31,20 +47,11 @@ int	key_press(int keycode, t_params *params)
 		move_left(params);
 	if (keycode == D_KEY || keycode == ARROW_RIGHT)
 		move_right(params);
-	if (keycode == n4_KEY)
-		x_rotate_counter(params);
-	if (keycode == n5_KEY)
-		x_rotate(params);
-	if (keycode == n6_KEY)
-		y_rotate_counter(params);
-	if (keycode == n7_KEY)
-		y_rotate(params);
-	if (keycode == n8_KEY)
-		z_rotate_counter(params);
-	if (keycode == n9_KEY)
-		z_rotate(params);
-	if (keycode == n0_KEY)
+	if (keycode == N0_KEY)
 		change_color(params);
+	if (keycode == N4_KEY || keycode == N5_KEY || keycode == N6_KEY
+		|| keycode == N7_KEY || keycode == N8_KEY || keycode == N9_KEY)
+		key_press_helper(keycode, params);
 	return (0);
 }
 

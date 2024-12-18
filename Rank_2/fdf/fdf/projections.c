@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 16:47:56 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:33:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,10 @@ void	military(t_params *params, float d)
 		y = 0;
 		while (y < params -> column)
 		{
-			params -> map[x][y].x = (params -> map[x][y].x + params -> map[x][y].z * cos_d) * params -> s_x;
-			params -> map[x][y].y = (params -> map[x][y].y + params -> map[x][y].z * sin_d) * params -> s_y;
+			params -> map[x][y].x = (params -> map[x][y].x
+					+ params -> map[x][y].z * cos_d) * params -> s_x;
+			params -> map[x][y].y = (params -> map[x][y].y
+					+ params -> map[x][y].z * sin_d) * params -> s_y;
 			y++;
 		}
 		x++;

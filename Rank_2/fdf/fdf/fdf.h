@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 19:23:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:31:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 # include <math.h>
 
 # define ESC_KEY 65307
-# define n1_KEY 49
-# define n2_KEY 50
-# define n3_KEY 51
-# define n4_KEY 52
-# define n5_KEY 53
-# define n6_KEY 54
-# define n7_KEY 55
-# define n8_KEY 56
-# define n9_KEY 57
-# define n0_KEY 48
+# define N1_KEY 49
+# define N2_KEY 50
+# define N3_KEY 51
+# define N4_KEY 52
+# define N5_KEY 53
+# define N6_KEY 54
+# define N7_KEY 55
+# define N8_KEY 56
+# define N9_KEY 57
+# define N0_KEY 48
 # define G_KEY 103
 # define H_KEY 104
 # define J_KEY 105

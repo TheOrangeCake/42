@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 18:24:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:33:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	map_check(char *line, int column)
 
 t_point	**initiate_map(int *row, int *column)
 {
-	int	x;
-	t_point **map;
+	int		x;
+	t_point	**map;
 
 	x = 0;
 	map = calloc((*row), sizeof(t_point *));
