@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 18:30:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:23:15 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,17 @@ int	key_press(int keycode, t_params *params)
 	return (0);
 }
 
-int	x_close_window(int x11_event, t_params *params)
+int	x_close_window(t_params *params)
 {
-	while (params ->row > 0)
+	while (params -> row > 0)
 	{
 		free((params -> map)[params -> row - 1]);
 		params -> row--;
 	}
 	free(params -> map);
-	(void)x11_event;
+	mlx_destroy_window(params -> mlx, params -> window);
 	ft_printf("Program terminated\n");
 	exit(0);
-	return (0);
 }
 
 int	mouse_scroll(int button, int x, int y, t_params *params)

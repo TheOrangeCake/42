@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 16:50:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:23:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int		interpolating_color(t_point point1, t_point point0, t_bresenham line);
 int		step(t_bresenham line);
 // hook
 int		key_press(int keycode, t_params *params);
-int		x_close_window(int x11_event, t_params *params);
+int		x_close_window(t_params *params);
 int		mouse_scroll(int button, int x, int y, t_params *params);
 void	close_window(t_params *params);
 void	projection(t_params params);

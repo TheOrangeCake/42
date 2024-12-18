@@ -27,7 +27,6 @@ $(MINILIBX):
 #
 
 GCC = gcc
-# FLAGS = -Wextra -Wall -Werror
 FLAGS = -Wextra -Wall -Werror
 RM = rm -f
 
