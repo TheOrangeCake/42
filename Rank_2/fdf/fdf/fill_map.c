@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 18:24:34 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:58:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ t_point	**fill_map(t_params *params)
 		free_split(params -> array);
 		params -> x++;
 	}
+	params -> line = get_next_line(params -> fd);
 	return (params -> map);
 }
