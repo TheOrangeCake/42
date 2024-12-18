@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 17:05:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:20:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // check map validity and malloc map
 t_params	file_check(t_params params)
 {
-	ft_printf("%s\n", params.file_name);
 	params.fd = open(params.file_name, O_RDONLY);
 	if (params.fd < 0)
 	{
@@ -41,11 +40,12 @@ void	hook_helper(t_params *params)
 	mlx_hook(params -> window, 33, 1L << 0, x_close_window, params);
 	mlx_hook(params -> window, 4, 1L << 2, mouse_scroll, params);
 }
+
 void	run(char *av)
 {
 	t_params	params;
 
-	params.file_name = ft_strdup(av);
+	params.file_name = av;
 	params.s_x = 1;
 	params.s_y = 1;
 	params.s_z = 1;
@@ -73,5 +73,9 @@ int	main(int ac, char *av[])
 {
 	if (ac == 2)
 		run(av[1]);
+	else if (ac == 1)
+		ft_printf("Remember to insert file name");
+	else
+		ft_printf("Too many files");
 	return (0);
 }

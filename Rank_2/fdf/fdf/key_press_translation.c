@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:11:39 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 16:47:53 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:31:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	move_up(t_params *params)
 		while (b < params -> column)
 		{
 			params -> map[a][b].x -= 10;
-			params -> map[a][b].y;
 			b++;
 		}
 		a++;
@@ -46,7 +45,6 @@ void	move_down(t_params *params)
 		while (b < params -> column)
 		{
 			params -> map[a][b].x += 10;
-			params -> map[a][b].y;
 			b++;
 		}
 		a++;
@@ -67,7 +65,6 @@ void	move_left(t_params *params)
 		b = 0;
 		while (b < params -> column)
 		{
-			params -> map[a][b].x;
 			params -> map[a][b].y -= 10;
 			b++;
 		}
@@ -89,7 +86,6 @@ void	move_right(t_params *params)
 		b = 0;
 		while (b < params -> column)
 		{
-			params -> map[a][b].x;
 			params -> map[a][b].y += 10;
 			b++;
 		}

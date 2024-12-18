@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/26 21:15:17 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:24:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,39 @@ int	map_check(char *line, int column)
 	if (i != column)
 		return (free_split(array), 0);
 	else
+	{
+		free_split(array);
 		return (1);
+	}
 }
 
-// calloc map
-void	**initiate_map(t_point ***map, int *row, int *column)
+t_point	**initiate_map(int *row, int *column)
 {
 	int	x;
+	t_point **map;
 
 	x = 0;
-	*map = calloc((*row), sizeof(t_point *));
-	if (*map == NULL)
+	map = calloc((*row), sizeof(t_point *));
+	if (map == NULL)
 		return (NULL);
 	while (x < *row)
 	{
-		(*map)[x] = calloc(*column, sizeof(t_point));
-		if ((*map)[x] == NULL)
+		map[x] = calloc(*column, sizeof(t_point));
+		if (map[x] == NULL)
 		{
 			while (x-- > 0)
-				free((*map)[x]);
-			return (free(*map), NULL);
+				free(map[x]);
+			return (free(map), NULL);
 		}
 		x++;
 	}
+	return (map);
 }
 
 // count row and column
 t_point	**start_map(int fd, int *row, int *column)
 {
 	char	*line;
-	t_point	**map;
 	char	**temp;
 
 	line = get_next_line(fd);
@@ -88,7 +91,7 @@ t_point	**start_map(int fd, int *row, int *column)
 		free(line);
 		line = get_next_line(fd);
 		if (line == NULL)
-			return (initiate_map(&map, row, column), free(line), map);
+			return (free(line), initiate_map(row, column));
 		if (map_check(line, *column) == 0)
 			return (free(line), NULL);
 		(*row)++;
