@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:49:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 18:24:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:09:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,44 +27,4 @@ void	make_image_helper(t_params *params)
 	create_image(params);
 	mlx_put_image_to_window(params -> mlx,
 		params -> window, params -> img, 0, 0);
-}
-
-void	scroll_down(t_params *params)
-{
-	int	a;
-	int	b;
-
-	a = 0;
-	params -> scale = 1.1;
-	while (a < params -> row)
-	{
-		b = 0;
-		while (b < params -> column)
-		{
-			params -> map[a][b].x /= params -> scale;
-			params -> map[a][b].y /= params -> scale;
-			b++;
-		}
-		a++;
-	}
-}
-
-void	scroll_up(t_params *params)
-{
-	int	a;
-	int	b;
-
-	a = 0;
-	params -> scale = 1.1;
-	while (a < params -> row)
-	{
-		b = 0;
-		while (b < params -> column)
-		{
-			params -> map[a][b].x *= params -> scale;
-			params -> map[a][b].y *= params -> scale;
-			b++;
-		}
-		a++;
-	}
 }

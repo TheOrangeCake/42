@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 17:44:08 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:11:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	find_coordinates(t_point **map, int row, int column)
 	shift_coordinates(map, save, row, column);
 }
 
-void	isometric(t_point **map, int row, int column)
+void	isometric(t_params *params)
 {
 	int	x;
 	int	y;
@@ -64,23 +64,24 @@ void	isometric(t_point **map, int row, int column)
 	int	tempy;
 
 	x = 0;
-	while (x < (row))
+	params -> projection = 1;
+	while (x < (params -> row))
 	{
 		y = 0;
-		while (y < (column))
+		while (y < (params -> column))
 		{
-			tempx = map[x][y].y;
-			tempy = -map[x][y].x;
-			map[x][y].x = (tempy - tempx) * sin(M_PI / -6) - map[x][y].z;
-			map[x][y].y = (tempy + tempx) * cos(M_PI / 4);
+			tempx = params -> map[x][y].y;
+			tempy = -params -> map[x][y].x;
+			params -> map[x][y].x = ((tempy - tempx) * sin(M_PI / -6) - params -> map[x][y].z) * params -> s_x;
+			params -> map[x][y].y = ((tempy + tempx) * cos(M_PI / 4)) * params -> s_y;
 			y++;
 		}
 		x++;
 	}
-	find_coordinates(map, row, column);
+	find_coordinates(params -> map, params -> row, params -> column);
 }
 
-void	military(t_point **map, int row, int column, float d)
+void	military(t_params *params, float d)
 {
 	int		x;
 	int		y;
@@ -90,22 +91,24 @@ void	military(t_point **map, int row, int column, float d)
 	cos_d = cos(d);
 	sin_d = sin(d);
 	x = 0;
-	while (x < row)
+	params -> projection = 0;
+	while (x < params -> row)
 	{
 		y = 0;
-		while (y < column)
+		while (y < params -> column)
 		{
-			map[x][y].x = map[x][y].x + map[x][y].z * cos_d;
-			map[x][y].y = map[x][y].y + map[x][y].z * sin_d;
+			params -> map[x][y].x = (params -> map[x][y].x + params -> map[x][y].z * cos_d) * params -> s_x;
+			params -> map[x][y].y = (params -> map[x][y].y + params -> map[x][y].z * sin_d) * params -> s_y;
 			y++;
 		}
 		x++;
 	}
-	find_coordinates(map, row, column);
+	find_coordinates(params -> map, params -> row, params -> column);
 }
 
 void	flat(t_params *params)
 {
+	params -> projection = 2;
 	fill_map_helper(params);
 	find_coordinates(params -> map, params -> row, params -> column);
 }

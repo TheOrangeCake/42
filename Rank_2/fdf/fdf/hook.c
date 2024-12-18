@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 18:55:42 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:09:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,27 @@ int	mouse_scroll(int button, int x, int y, t_params *params)
 {
 	if (button == SCROLL_UP)
 	{
-		scroll_up(params);
-		mlx_clear_window(params -> mlx, params -> window);
-		mlx_destroy_image(params->mlx, params->img);
-		make_image_helper(params);
+		params -> s_x *= 1.1;
+		params -> s_y *= 1.1;
+		params -> s_z *= 1.1;
+		if (params -> projection == 1)
+			iso_projection(params);
+		if (params -> projection == 0)
+			mili_projection(params);
+	// if (params -> projection == 2)
+	// 	flat_projection(params);
 	}
 	if (button == SCROLL_DOWN)
 	{
-		scroll_down(params);
-		mlx_clear_window(params -> mlx, params -> window);
-		mlx_destroy_image(params->mlx, params->img);
-		make_image_helper(params);
+		params -> s_x /= 1.1;
+		params -> s_y /= 1.1;
+		params -> s_z /= 1.1;
+		if (params -> projection == 1)
+			iso_projection(params);
+		if (params -> projection == 0)
+			mili_projection(params);
+	// if (params -> projection == 2)
+	// 	flat_projection(params);
 	}
 	return (0);
 }

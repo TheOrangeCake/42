@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/11/27 19:03:04 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:11:44 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,14 @@ typedef struct s_params
 	t_point	**map;
 	int		row;
 	int		column;
-	float	scale;
 	char	*line;
 	char	**array;
 	int		x;
 	int		y;
+	float	s_x;
+	float	s_y;
+	float	s_z;
+	int		projection;
 }	t_params;
 
 // helper
@@ -124,8 +127,8 @@ void	scroll_down(t_params *params);
 // draw
 void	bresenham(t_params *params, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_params *params, int x, int y, int color);
-void	isometric(t_point **map, int row, int column);
-void	military(t_point **map, int row, int column, float d);
+void	isometric(t_params *params);
+void	military(t_params *params, float d);
 void	flat(t_params *params);
 int		interpolating_color(t_point point1, t_point point0, t_bresenham line);
 int		step(t_bresenham line);
