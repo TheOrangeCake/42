@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 11:11:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:29:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@
 # include <math.h>
 
 # define ESC_KEY 65307
-# define M_KEY 109
-# define I_KEY 105
-# define F_KEY 102
-# define Y_KEY 121
+# define n1_KEY 49
+# define n2_KEY 50
+# define n3_KEY 51
+# define n4_KEY 52
+# define n5_KEY 53
+# define n6_KEY 54
+# define n7_KEY 55
+# define n8_KEY 56
+# define n9_KEY 57
+# define n0_KEY 48
 # define G_KEY 103
 # define H_KEY 104
 # define J_KEY 105
@@ -110,6 +116,7 @@ typedef struct s_params
 	float	s_y;
 	float	s_z;
 	int		projection;
+	int		color_change;
 }	t_params;
 
 // helper
@@ -143,5 +150,7 @@ void	move_down(t_params *params);
 void	move_right(t_params *params);
 void	move_left(t_params *params);
 void	y_rotate_counter(t_params *params);
+void	change_color(t_params *params);
+void	find_coordinates(t_point **map, int row, int column);
 
 #endif

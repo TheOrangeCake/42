@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 11:09:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:03:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	key_press(int keycode, t_params *params)
 	ft_printf("key: %d\n", keycode);
 	if (keycode == ESC_KEY)
 		close_window(params);
-	if (keycode == I_KEY)
+	if (keycode == n1_KEY)
 		iso_projection(params);
-	if (keycode == M_KEY)
+	if (keycode == n2_KEY)
 		mili_projection(params);
-	if (keycode == F_KEY)
+	if (keycode == n3_KEY)
 		flat_projection(params);
 	if (keycode == W_KEY || keycode == ARROW_UP)
 		move_up(params);
@@ -44,8 +44,10 @@ int	key_press(int keycode, t_params *params)
 		move_left(params);
 	if (keycode == D_KEY || keycode == ARROW_RIGHT)
 		move_right(params);
-	if (keycode == Y_KEY)
+	if (keycode == n4_KEY)
 		y_rotate_counter(params);
+	if (keycode == n0_KEY)
+		change_color(params);
 	return (0);
 }
 
@@ -73,8 +75,8 @@ int	mouse_scroll(int button, int x, int y, t_params *params)
 			iso_projection(params);
 		if (params -> projection == 0)
 			mili_projection(params);
-	// if (params -> projection == 2)
-	// 	flat_projection(params);
+		if (params -> projection == 2)
+			flat_projection(params);
 	}
 	if (button == SCROLL_DOWN)
 	{
@@ -85,8 +87,8 @@ int	mouse_scroll(int button, int x, int y, t_params *params)
 			iso_projection(params);
 		if (params -> projection == 0)
 			mili_projection(params);
-	// if (params -> projection == 2)
-	// 	flat_projection(params);
+		if (params -> projection == 2)
+			flat_projection(params);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 11:11:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:26:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ void	isometric(t_params *params)
 		{
 			tempx = params -> map[x][y].y;
 			tempy = -params -> map[x][y].x;
-			params -> map[x][y].x = ((tempy - tempx) * sin(M_PI / -6) - params -> map[x][y].z) * params -> s_x;
-			params -> map[x][y].y = ((tempy + tempx) * cos(M_PI / 4)) * params -> s_y;
+			params -> map[x][y].x = ((tempy - tempx) * sin(M_PI / -6)
+					- params -> map[x][y].z) * params -> s_x;
+			params -> map[x][y].y = ((tempy + tempx) * cos(M_PI / 4))
+				* params -> s_y;
 			y++;
 		}
 		x++;
@@ -97,8 +99,10 @@ void	military(t_params *params, float d)
 		y = 0;
 		while (y < params -> column)
 		{
-			params -> map[x][y].x = (params -> map[x][y].x + params -> map[x][y].z * cos_d) * params -> s_x;
-			params -> map[x][y].y = (params -> map[x][y].y + params -> map[x][y].z * sin_d) * params -> s_y;
+			params -> map[x][y].x = (params -> map[x][y].x
+					+ params -> map[x][y].z * cos_d) * params -> s_x;
+			params -> map[x][y].y = (params -> map[x][y].y
+					+ params -> map[x][y].z * sin_d) * params -> s_y;
 			y++;
 		}
 		x++;
@@ -108,13 +112,22 @@ void	military(t_params *params, float d)
 
 void	flat(t_params *params)
 {
+	int	x;
+	int	y;
+
+	x = 0;
 	params -> projection = 2;
 	fill_map_helper(params);
+	while (x < params -> row)
+	{
+		y = 0;
+		while (y < params -> column)
+		{
+			params -> map[x][y].x *= params -> s_x;
+			params -> map[x][y].y *= params -> s_y;
+			y++;
+		}
+		x++;
+	}
 	find_coordinates(params -> map, params -> row, params -> column);
 }
-
-// rotate the map 90o
-// tempx = map[x][y].x;
-// tempy = map[x][y].y;
-// map[x][y].x = (tempy - tempx) * sin(M_PI / -6);
-// map[x][y].y = (tempy + tempx) * cos(M_PI / -4) - map[x][y].z;
