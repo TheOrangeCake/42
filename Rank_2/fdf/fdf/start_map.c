@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 12:55:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:53:23 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ t_params	file_check(t_params params)
 		exit(EXIT_FAILURE);
 	}
 	close (params.fd);
+	params.new_map = initiate_new_map(&(params.row), &(params.column));
 	return (params);
 }

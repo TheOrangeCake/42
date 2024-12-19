@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 12:55:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:15:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	run(char *av)
 	params.column = 0;
 	params = file_check(params);
 	fill_map_helper(&params);
+	reset_map(&params);
 	params.mlx = mlx_init();
 	params.window = mlx_new_window(params.mlx, WIDTH, HEIGHT, "Let's go FdF");
 	hook_helper(&params);

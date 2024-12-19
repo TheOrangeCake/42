@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 12:55:32 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:46:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_params
 	int		line_length;
 	int		endian;
 	t_point	**map;
+	t_point	**new_map;
 	int		row;
 	int		column;
 	char	*line;
@@ -144,6 +145,10 @@ void	scroll_down(t_params *params);
 void	free_split(char **array);
 int		get_color(const char *line);
 t_params	file_check(t_params params);
+void	update_map(t_params *params);
+void	reset_map(t_params *params);
+t_point	**initiate_new_map(int *row, int *column);
+
 // draw
 void	bresenham(t_params *params, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_params *params, int x, int y, int color);

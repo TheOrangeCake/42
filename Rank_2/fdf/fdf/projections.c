@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 11:14:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:06:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	shift_coordinates(t_point **map, t_save_line save, int row, int column)
+void	shift_coordinates(t_point **new_map, t_save_line save, int row, int column)
 {
 	int	x;
 	int	y;
@@ -23,15 +23,15 @@ void	shift_coordinates(t_point **map, t_save_line save, int row, int column)
 		y = 0;
 		while (y < column)
 		{
-			map[x][y].x -= save.min_x - 50;
-			map[x][y].y -= save.min_y - 50;
+			new_map[x][y].x -= save.min_x - 50;
+			new_map[x][y].y -= save.min_y - 50;
 			y++;
 		}
 		x++;
 	}
 }
 
-void	find_coordinates(t_point **map, int row, int column)
+void	find_coordinates(t_point **new_map, int row, int column)
 {
 	int			x;
 	int			y;
@@ -45,15 +45,15 @@ void	find_coordinates(t_point **map, int row, int column)
 		y = 0;
 		while (y < column)
 		{
-			if (map[x][y].x < save.min_x)
-				save.min_x = map[x][y].x;
-			if (map[x][y].y < save.min_y)
-				save.min_y = map[x][y].y;
+			if (new_map[x][y].x < save.min_x)
+				save.min_x = new_map[x][y].x;
+			if (new_map[x][y].y < save.min_y)
+				save.min_y = new_map[x][y].y;
 			y++;
 		}
 		x++;
 	}
-	shift_coordinates(map, save, row, column);
+	shift_coordinates(new_map, save, row, column);
 }
 
 void	isometric(t_params *params)
@@ -70,17 +70,17 @@ void	isometric(t_params *params)
 		y = 0;
 		while (y < (params -> column))
 		{
-			tempx = params -> map[x][y].y;
-			tempy = -params -> map[x][y].x;
-			params -> map[x][y].x = ((tempy - tempx) * sin(M_PI / -6)
-					- params -> map[x][y].z) * params -> s_x;
-			params -> map[x][y].y = ((tempy + tempx) * cos(M_PI / 4))
+			tempx = params -> new_map[x][y].y;
+			tempy = -params -> new_map[x][y].x;
+			params -> new_map[x][y].x = ((tempy - tempx) * sin(M_PI / -6)
+					- params -> new_map[x][y].z) * params -> s_x;
+			params -> new_map[x][y].y = ((tempy + tempx) * cos(M_PI / 4))
 				* params -> s_y;
 			y++;
 		}
 		x++;
 	}
-	find_coordinates(params -> map, params -> row, params -> column);
+	find_coordinates(params -> new_map, params -> row, params -> column);
 }
 
 void	military(t_params *params, float d)
@@ -99,15 +99,15 @@ void	military(t_params *params, float d)
 		y = 0;
 		while (y < params -> column)
 		{
-			params -> map[x][y].x = (params -> map[x][y].x
-					+ params -> map[x][y].z * cos_d) * params -> s_x;
-			params -> map[x][y].y = (params -> map[x][y].y
-					+ params -> map[x][y].z * sin_d) * params -> s_y;
+			params -> new_map[x][y].x = (params -> new_map[x][y].x
+					+ params -> new_map[x][y].z * cos_d) * params -> s_x;
+			params -> new_map[x][y].y = (params -> new_map[x][y].y
+					+ params -> new_map[x][y].z * sin_d) * params -> s_y;
 			y++;
 		}
 		x++;
 	}
-	find_coordinates(params -> map, params -> row, params -> column);
+	find_coordinates(params -> new_map, params -> row, params -> column);
 }
 
 void	flat(t_params *params)
@@ -117,17 +117,16 @@ void	flat(t_params *params)
 
 	x = 0;
 	params -> projection = 2;
-	fill_map_helper(params);
 	while (x < params -> row)
 	{
 		y = 0;
 		while (y < params -> column)
 		{
-			params -> map[x][y].x *= params -> s_x;
-			params -> map[x][y].y *= params -> s_y;
+			params -> new_map[x][y].x *= params -> s_x;
+			params -> new_map[x][y].y *= params -> s_y;
 			y++;
 		}
 		x++;
 	}
-	find_coordinates(params -> map, params -> row, params -> column);
+	find_coordinates(params -> new_map, params -> row, params -> column);
 }

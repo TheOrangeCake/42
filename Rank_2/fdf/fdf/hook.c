@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 19:32:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:28:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ int	x_close_window(t_params *params)
 	while (params -> row > 0)
 	{
 		free((params -> map)[params -> row - 1]);
+		free((params -> new_map)[params -> row - 1]);
 		params -> row--;
 	}
 	free(params -> map);
+	free(params -> new_map);
 	mlx_destroy_window(params -> mlx, params -> window);
 	ft_printf("Program terminated\n");
 	exit(0);

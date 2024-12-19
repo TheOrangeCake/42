@@ -6,80 +6,33 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 13:42:06 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:45:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	apply_rotation_helper2(t_params *params, t_point *point)
+t_point	**initiate_new_map(int *row, int *column)
 {
-	if (params -> switch_y == 2)
-	{
-		params -> temp_x = point->x * cos(params->rotate_y)
-			+ point->z * sin(params->rotate_y);
-		params -> temp_z = -point->x * sin(params->rotate_y)
-			+ point->z * cos(params->rotate_y);
-		point->x = params -> temp_x;
-		point->z = params -> temp_z;
-	}
-	if (params -> switch_z == 2)
-	{
-		params -> temp_x = point->x * cos(params->rotate_z)
-			- point->y * sin(params->rotate_z);
-		params -> temp_y = point->x * sin(params->rotate_z)
-			+ point->y * cos(params->rotate_z);
-		point->x = params -> temp_x;
-		point->y = params -> temp_y;
-	}
-}
+	int		x;
+	t_point	**map;
 
-void	apply_rotation_helper1(t_params *params, t_point *point)
-{
-	if (params -> switch_z == 1)
+	x = 0;
+	map = calloc((*row), sizeof(t_point *));
+	if (map == NULL)
+		return (NULL);
+	while (x < *row)
 	{
-		params -> temp_x = point->x * cos(params->rotate_z)
-			- point->y * sin(params->rotate_z);
-		params -> temp_y = point->x * sin(params->rotate_z)
-			+ point->y * cos(params->rotate_z);
-		point->x = params -> temp_x;
-		point->y = params -> temp_y;
+		map[x] = calloc(*column, sizeof(t_point));
+		if (map[x] == NULL)
+		{
+			while (x-- > 0)
+				free(map[x]);
+			return (free(map), NULL);
+		}
+		x++;
 	}
-	if (params -> switch_x == 2)
-	{
-		params -> temp_y = point->y * cos(params->rotate_x)
-			- point->z * sin(params->rotate_x);
-		params -> temp_z = point->y * sin(params->rotate_x)
-			+ point->z * cos(params->rotate_x);
-		point->y = params -> temp_y;
-		point->z = params -> temp_z;
-	}
-}
-
-void	apply_rotation(t_params *params, t_point *point)
-{
-	if (params -> switch_x == 1)
-	{
-		params -> temp_y = point->y * cos(params->rotate_x)
-			- point->z * sin(params->rotate_x);
-		params -> temp_z = point->y * sin(params->rotate_x)
-			+ point->z * cos(params->rotate_x);
-		point->y = params -> temp_y;
-		point->z = params -> temp_z;
-	}
-	if (params -> switch_y == 1)
-	{
-		params -> temp_x = point->x * cos(params->rotate_y)
-			+ point->z * sin(params->rotate_y);
-		params -> temp_z = -point->x * sin(params->rotate_y)
-			+ point->z * cos(params->rotate_y);
-		point->x = params -> temp_x;
-		point->z = params -> temp_z;
-	}
-	if (params -> switch_z == 1 || params -> switch_x == 2)
-		apply_rotation_helper1(params, point);
-	if (params -> switch_y == 2 || params -> switch_z == 2)
-		apply_rotation_helper2(params, point);
+	return (map);
 }
 
 // fill points with meta data
@@ -89,7 +42,6 @@ t_point	fill_point(char *array, t_point point, t_params *params)
 	point.y = (params -> y) * 50;
 	point.z = ft_atoi(array) * 5;
 	point.color = get_color(array) * params -> color_change;
-	apply_rotation(params, &point);
 	return (point);
 }
 
