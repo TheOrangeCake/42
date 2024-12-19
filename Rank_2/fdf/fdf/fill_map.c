@@ -6,11 +6,37 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 14:45:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:50:34 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	free_split(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+int	get_color(const char *line)
+{
+	char	*ptr;
+	int		color;
+
+	ptr = ft_strchr(line, ',');
+	if (ptr == NULL)
+		color = 0xffffff;
+	else
+		color = ft_atoi_hex(line);
+	return (color);
+}
 
 t_point	**initiate_new_map(int *row, int *column)
 {
@@ -50,6 +76,7 @@ t_point	**fill_map(t_params *params)
 {
 	t_point	point;
 
+	params -> fd = open(params -> file_name, O_RDONLY);
 	params -> x = 0;
 	while (params -> x < params -> row)
 	{
@@ -69,5 +96,6 @@ t_point	**fill_map(t_params *params)
 		params -> x++;
 	}
 	params -> line = get_next_line(params -> fd);
+	close(params -> fd);
 	return (params -> map);
 }

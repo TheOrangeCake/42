@@ -6,11 +6,21 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:15:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:53:44 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	make_image_helper(t_params *params)
+{
+	params -> img = mlx_new_image(params -> mlx, WIDTH, HEIGHT);
+	params -> addr = mlx_get_data_addr(params -> img, &params -> bits_per_pixel,
+			&params -> line_length, &params -> endian);
+	create_image(params);
+	mlx_put_image_to_window(params -> mlx,
+		params -> window, params -> img, 0, 0);
+}
 
 // hook list
 void	hook_helper(t_params *params)
@@ -39,7 +49,7 @@ void	run(char *av)
 	params.color_change = 1;
 	params.column = 0;
 	params = file_check(params);
-	fill_map_helper(&params);
+	params.map = fill_map(&params);
 	reset_map(&params);
 	params.mlx = mlx_init();
 	params.window = mlx_new_window(params.mlx, WIDTH, HEIGHT, "Let's go FdF");
@@ -59,3 +69,5 @@ int	main(int ac, char *av[])
 		ft_printf("Too many files");
 	return (0);
 }
+
+// valgrind --leak-check=full --show-leak-kinds=all ./fdf

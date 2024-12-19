@@ -6,13 +6,12 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 14:33:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:51:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// put pixel to screen
 void	my_mlx_pixel_put(t_params *params, int x, int y, int color)
 {
 	char	*dest;
@@ -61,24 +60,8 @@ void	draw_vertical(t_params *params)
 	}
 }
 
-// circle through points
 void	create_image(t_params *params)
 {
 	draw_horizontal(params);
 	draw_vertical(params);
 }
-
-	// int	x;
-	// int	y;
-
-	// x = 0;
-	// while (x < *row)
-	// {
-	// 	y = 0;
-	// 	while (y < *column)
-	// 	{
-	// 		my_mlx_pixel_put(img, map[x][y].x, map[x][y].y, map[x][y].color);
-	// 		y++;
-	// 	}
-	// 	x++;
-	// }

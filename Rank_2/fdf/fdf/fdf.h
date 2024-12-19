@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 14:46:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:49:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,23 +131,19 @@ typedef struct s_params
 	double	temp_z;
 }	t_params;
 
-void	free_split(char **array);
-t_point	**start_map(int fd, int *row, int *colunm);
-t_point	**fill_map(t_params *params);
-void	create_image(t_params *params);
-void	fill_map_helper(t_params *params);
-void	make_image_helper(t_params *params);
-void	iso_projection(t_params *params);
-void	mili_projection(t_params *params);
-void	flat_projection(t_params *params);
-void	scroll_up(t_params *params);
-void	scroll_down(t_params *params);
-void	free_split(char **array);
-int		get_color(const char *line);
+void		free_split(char **array);
+t_point		**start_map(int fd, int *row, int *colunm);
+t_point		**fill_map(t_params *params);
+void		create_image(t_params *params);
+void		iso_projection(t_params *params);
+void		mili_projection(t_params *params);
+void		flat_projection(t_params *params);
+void		scroll_up(t_params *params);
+void		scroll_down(t_params *params);
 t_params	file_check(t_params params);
-void	update_map(t_params *params);
-void	reset_map(t_params *params);
-t_point	**initiate_new_map(int *row, int *column);
+void		update_map(t_params *params);
+void		reset_map(t_params *params);
+t_point		**initiate_new_map(int *row, int *column);
 
 // draw
 void	bresenham(t_params *params, t_point point0, t_point point1);
