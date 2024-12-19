@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 19:31:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:22:24 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,9 @@ typedef struct s_params
 	int		switch_x;
 	int		switch_y;
 	int		switch_z;
+	double	temp_x;
+	double	temp_y;
+	double	temp_z;
 }	t_params;
 
 // helper
@@ -139,6 +142,8 @@ void	mili_projection(t_params *params);
 void	flat_projection(t_params *params);
 void	scroll_up(t_params *params);
 void	scroll_down(t_params *params);
+void	free_split(char **array);
+int		get_color(const char *line);
 // draw
 void	bresenham(t_params *params, t_point point0, t_point point1);
 void	my_mlx_pixel_put(t_params *params, int x, int y, int color);

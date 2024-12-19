@@ -6,88 +6,80 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 13:05:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 19:29:18 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:26:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// free split
-void	free_split(char **array)
+void	apply_rotation_helper2(t_params *params, t_point *point)
 {
-	int	i;
-
-	i = 0;
-	while (array[i] != NULL)
+	if (params -> switch_y == 2)
 	{
-		free(array[i]);
-		i++;
+		params -> temp_x = point->x * cos(params->rotate_y)
+			+ point->z * sin(params->rotate_y);
+		params -> temp_z = -point->x * sin(params->rotate_y)
+			+ point->z * cos(params->rotate_y);
+		point->x = params -> temp_x;
+		point->z = params -> temp_z;
 	}
-	free(array);
+	if (params -> switch_z == 2)
+	{
+		params -> temp_x = point->x * cos(params->rotate_z)
+			- point->y * sin(params->rotate_z);
+		params -> temp_y = point->x * sin(params->rotate_z)
+			+ point->y * cos(params->rotate_z);
+		point->x = params -> temp_x;
+		point->y = params -> temp_y;
+	}
 }
 
-// get color
-int	get_color(const char *line)
+void	apply_rotation_helper1(t_params *params, t_point *point)
 {
-	char	*ptr;
-	int		color;
-
-	ptr = ft_strchr(line, ',');
-	if (ptr == NULL)
-		color = 0xffffff;
-	else
-		color = ft_atoi_hex(line);
-	return (color);
+	if (params -> switch_z == 1)
+	{
+		params -> temp_x = point->x * cos(params->rotate_z)
+			- point->y * sin(params->rotate_z);
+		params -> temp_y = point->x * sin(params->rotate_z)
+			+ point->y * cos(params->rotate_z);
+		point->x = params -> temp_x;
+		point->y = params -> temp_y;
+	}
+	if (params -> switch_x == 2)
+	{
+		params -> temp_y = point->y * cos(params->rotate_x)
+			- point->z * sin(params->rotate_x);
+		params -> temp_z = point->y * sin(params->rotate_x)
+			+ point->z * cos(params->rotate_x);
+		point->y = params -> temp_y;
+		point->z = params -> temp_z;
+	}
 }
 
 void	apply_rotation(t_params *params, t_point *point)
 {
-	double	temp_x;
-	double	temp_y;
-	double	temp_z;
-
 	if (params -> switch_x == 1)
 	{
-		temp_y = point->y * cos(params->rotate_x) - point->z * sin(params->rotate_x);
-		temp_z = point->y * sin(params->rotate_x) + point->z * cos(params->rotate_x);
-		point->y = temp_y;
-		point->z = temp_z;
+		params -> temp_y = point->y * cos(params->rotate_x)
+			- point->z * sin(params->rotate_x);
+		params -> temp_z = point->y * sin(params->rotate_x)
+			+ point->z * cos(params->rotate_x);
+		point->y = params -> temp_y;
+		point->z = params -> temp_z;
 	}
 	if (params -> switch_y == 1)
 	{
-		temp_x = point->x * cos(params->rotate_y) + point->z * sin(params->rotate_y);
-		temp_z = -point->x * sin(params->rotate_y) + point->z * cos(params->rotate_y);
-		point->x = temp_x;
-		point->z = temp_z;
+		params -> temp_x = point->x * cos(params->rotate_y)
+			+ point->z * sin(params->rotate_y);
+		params -> temp_z = -point->x * sin(params->rotate_y)
+			+ point->z * cos(params->rotate_y);
+		point->x = params -> temp_x;
+		point->z = params -> temp_z;
 	}
-	if (params -> switch_z == 1)
-	{
-		temp_x = point->x * cos(params->rotate_z) - point->y * sin(params->rotate_z);
-		temp_y = point->x * sin(params->rotate_z) + point->y * cos(params->rotate_z);
-		point->x = temp_x;
-		point->y = temp_y;
-	}
-	if (params -> switch_x == 2)
-	{
-		temp_y = point->y * cos(params->rotate_x) - point->z * sin(params->rotate_x);
-		temp_z = point->y * sin(params->rotate_x) + point->z * cos(params->rotate_x);
-		point->y = temp_y;
-		point->z = temp_z;
-	}
-	if (params -> switch_y == 2)
-	{
-		temp_x = point->x * cos(params->rotate_y) + point->z * sin(params->rotate_y);
-		temp_z = -point->x * sin(params->rotate_y) + point->z * cos(params->rotate_y);
-		point->x = temp_x;
-		point->z = temp_z;
-	}
-	if (params -> switch_z == 2)
-	{
-		temp_x = point->x * cos(params->rotate_z) - point->y * sin(params->rotate_z);
-		temp_y = point->x * sin(params->rotate_z) + point->y * cos(params->rotate_z);
-		point->x = temp_x;
-		point->y = temp_y;
-	}
+	if (params -> switch_z == 1 || params -> switch_x == 2)
+		apply_rotation_helper1(params, point);
+	if (params -> switch_y == 2 || params -> switch_z == 2)
+		apply_rotation_helper2(params, point);
 }
 
 // fill points with meta data

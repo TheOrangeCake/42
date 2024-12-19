@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:49:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 17:15:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:22:14 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,30 @@ void	make_image_helper(t_params *params)
 	create_image(params);
 	mlx_put_image_to_window(params -> mlx,
 		params -> window, params -> img, 0, 0);
+}
+
+void	free_split(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+int	get_color(const char *line)
+{
+	char	*ptr;
+	int		color;
+
+	ptr = ft_strchr(line, ',');
+	if (ptr == NULL)
+		color = 0xffffff;
+	else
+		color = ft_atoi_hex(line);
+	return (color);
 }
