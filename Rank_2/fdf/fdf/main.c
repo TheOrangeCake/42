@@ -6,32 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 19:23:14 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:55:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-// check map validity and malloc map
-t_params	file_check(t_params params)
-{
-	params.fd = open(params.file_name, O_RDONLY);
-	if (params.fd < 0)
-	{
-		ft_printf("Can't open file");
-		close(params.fd);
-		exit(EXIT_FAILURE);
-	}
-	params.map = start_map(params.fd, &(params.row), &(params.column));
-	if (params.map == NULL)
-	{
-		ft_printf("Map error");
-		close(params.fd);
-		exit(EXIT_FAILURE);
-	}
-	close (params.fd);
-	return (params);
-}
 
 // hook list
 void	hook_helper(t_params *params)

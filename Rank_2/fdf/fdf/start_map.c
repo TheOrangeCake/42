@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/18 19:33:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:55:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,24 @@ t_point	**start_map(int fd, int *row, int *column)
 		(*row)++;
 	}
 	return (NULL);
+}
+
+t_params	file_check(t_params params)
+{
+	params.fd = open(params.file_name, O_RDONLY);
+	if (params.fd < 0)
+	{
+		ft_printf("Can't open file");
+		close(params.fd);
+		exit(EXIT_FAILURE);
+	}
+	params.map = start_map(params.fd, &(params.row), &(params.column));
+	if (params.map == NULL)
+	{
+		ft_printf("Map error");
+		close(params.fd);
+		exit(EXIT_FAILURE);
+	}
+	close (params.fd);
+	return (params);
 }
