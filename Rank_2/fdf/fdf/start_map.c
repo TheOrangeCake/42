@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 14:53:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:15:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ t_point	**initiate_map(int *row, int *column)
 	t_point	**map;
 
 	x = 0;
-	map = calloc((*row), sizeof(t_point *));
+	map = ft_calloc((*row), sizeof(t_point *));
 	if (map == NULL)
 		return (NULL);
 	while (x < *row)
 	{
-		map[x] = calloc(*column, sizeof(t_point));
+		map[x] = ft_calloc(*column, sizeof(t_point));
 		if (map[x] == NULL)
 		{
 			while (x-- > 0)

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:57:54 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:51:24 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:05:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void	update_map(t_params *params)
 		params -> y = 0;
 		while (params -> y < params -> column)
 		{
-			params -> new_map[params -> x][params -> y].color *= params -> color_change;
-			apply_rotation(params, &params -> new_map[params -> x][params -> y]);
+			params->new_map[params->x][params->y].color *= params->color_change;
+			apply_rotation(params, &params->new_map[params->x][params->y]);
 			params -> y++;
 		}
 		params -> x++;
@@ -106,7 +106,8 @@ void	reset_map(t_params *params)
 		params -> y = 0;
 		while (params -> y < params -> column)
 		{
-			params -> new_map[params -> x][params -> y] = params -> map[params -> x][params -> y];
+			params->new_map[params->x][params->y]
+				= params->map[params->x][params->y];
 			params -> y++;
 		}
 		params -> x++;

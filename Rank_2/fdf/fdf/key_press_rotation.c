@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:16:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:50:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:11:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	z_rotate(t_params *params)
 		military(params, params -> d);
 	if (params -> projection == 2)
 		find_coordinates(params -> new_map, params -> row, params -> column);
-	mlx_clear_window(params -> mlx, params -> window);
 	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 	params -> switch_z = 0;
@@ -42,7 +41,6 @@ void	x_rotate(t_params *params)
 		military(params, params -> d);
 	if (params -> projection == 2)
 		find_coordinates(params -> new_map, params -> row, params -> column);
-	mlx_clear_window(params -> mlx, params -> window);
 	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 	params -> switch_x = 0;
@@ -60,7 +58,6 @@ void	y_rotate(t_params *params)
 		military(params, params -> d);
 	if (params -> projection == 2)
 		find_coordinates(params -> new_map, params -> row, params -> column);
-	mlx_clear_window(params -> mlx, params -> window);
 	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 	params -> switch_y = 0;
@@ -78,7 +75,6 @@ void	x_rotate_counter(t_params *params)
 		military(params, params -> d);
 	if (params -> projection == 2)
 		find_coordinates(params -> new_map, params -> row, params -> column);
-	mlx_clear_window(params -> mlx, params -> window);
 	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 	params -> switch_x = 0;
@@ -96,7 +92,6 @@ void	y_rotate_counter(t_params *params)
 		military(params, params -> d);
 	if (params -> projection == 2)
 		find_coordinates(params -> new_map, params -> row, params -> column);
-	mlx_clear_window(params -> mlx, params -> window);
 	mlx_destroy_image(params->mlx, params -> img);
 	make_image_helper(params);
 	params -> switch_y = 0;

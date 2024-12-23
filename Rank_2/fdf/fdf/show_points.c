@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:20:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:51:05 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:01:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_horizontal(t_params *params)
 		y = 0;
 		while (y < params -> column - 1)
 		{
-			bresenham(params, params -> new_map[x][y], params -> new_map[x][y + 1]);
+			bresenham(params, params->new_map[x][y], params->new_map[x][y + 1]);
 			y++;
 		}
 		x++;
@@ -53,7 +53,7 @@ void	draw_vertical(t_params *params)
 		x = 0;
 		while (x < params -> row - 1)
 		{
-			bresenham(params, params -> new_map[x][y], params -> new_map[x + 1][y]);
+			bresenham(params, params->new_map[x][y], params->new_map[x + 1][y]);
 			x++;
 		}
 		y++;

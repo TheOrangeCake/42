@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:49:37 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:50:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:58:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	shift_coordinates(t_point **new_map, t_save_line save, int row, int column)
+void	shift_coordinates(t_point **new_map, t_save save, int row, int column)
 {
 	int	x;
 	int	y;
@@ -33,9 +33,9 @@ void	shift_coordinates(t_point **new_map, t_save_line save, int row, int column)
 
 void	find_coordinates(t_point **new_map, int row, int column)
 {
-	int			x;
-	int			y;
-	t_save_line	save;
+	int		x;
+	int		y;
+	t_save	save;
 
 	x = 0;
 	save.min_x = 0;

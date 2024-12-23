@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:38:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:49:12 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:04:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ typedef struct s_color
 	int	blue_new;
 }	t_color;
 
-typedef struct s_save_line
+typedef struct s_save
 {
 	int	min_x;
 	int	min_y;
-}	t_save_line;
+}	t_save;
 
 typedef struct s_params
 {
@@ -131,6 +131,7 @@ typedef struct s_params
 	double	temp_z;
 }	t_params;
 
+void		make_image_helper(t_params *params);
 void		free_split(char **array);
 t_point		**start_map(int fd, int *row, int *colunm);
 t_point		**fill_map(t_params *params);
@@ -144,32 +145,30 @@ t_params	file_check(t_params params);
 void		update_map(t_params *params);
 void		reset_map(t_params *params);
 t_point		**initiate_new_map(int *row, int *column);
-
-// draw
-void	bresenham(t_params *params, t_point point0, t_point point1);
-void	my_mlx_pixel_put(t_params *params, int x, int y, int color);
-void	isometric(t_params *params);
-void	military(t_params *params, float d);
-void	flat(t_params *params);
-int		interpolating_color(t_point point1, t_point point0, t_bresenham line);
-int		step(t_bresenham line);
-// hook
-int		key_press(int keycode, t_params *params);
-int		x_close_window(t_params *params);
-int		mouse_scroll(int button, int x, int y, t_params *params);
-void	close_window(t_params *params);
-void	projection(t_params params);
-void	move_up(t_params *params);
-void	move_down(t_params *params);
-void	move_right(t_params *params);
-void	move_left(t_params *params);
-void	x_rotate_counter(t_params *params);
-void	y_rotate_counter(t_params *params);
-void	z_rotate_counter(t_params *params);
-void	z_rotate(t_params *params);
-void	x_rotate(t_params *params);
-void	y_rotate(t_params *params);
-void	change_color(t_params *params);
-void	find_coordinates(t_point **map, int row, int column);
+void		bresenham(t_params *params, t_point point0, t_point point1);
+void		my_mlx_pixel_put(t_params *params, int x, int y, int color);
+void		isometric(t_params *params);
+void		military(t_params *params, float d);
+void		flat(t_params *params);
+int			interpolating_color(t_point point1, t_point point0,
+				t_bresenham line);
+int			step(t_bresenham line);
+int			key_press(int keycode, t_params *params);
+int			x_close_window(t_params *params);
+int			mouse_scroll(int button, int x, int y, t_params *params);
+void		close_window(t_params *params);
+void		projection(t_params params);
+void		move_up(t_params *params);
+void		move_down(t_params *params);
+void		move_right(t_params *params);
+void		move_left(t_params *params);
+void		x_rotate_counter(t_params *params);
+void		y_rotate_counter(t_params *params);
+void		z_rotate_counter(t_params *params);
+void		z_rotate(t_params *params);
+void		x_rotate(t_params *params);
+void		y_rotate(t_params *params);
+void		change_color(t_params *params);
+void		find_coordinates(t_point **map, int row, int column);
 
 #endif
