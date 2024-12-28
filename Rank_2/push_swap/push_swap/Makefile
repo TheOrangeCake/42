@@ -29,7 +29,7 @@ $(OBJ_DIR)/%.o:%.c
 	@$(GCC) $(FLAGS) -I$(LIBFT_PATH)/includes -c $< -o $@
 
 $(NAME):	$(OBJECTS)
-	@$(GCC) $(FLAGS) $(OBJECTS) -o $(NAME)
+	@$(GCC) $(FLAGS) $(OBJECTS) -L$(LIBFT_PATH) -lft -o $(NAME)
 	@echo "Built $(NAME)"
 
 clean:

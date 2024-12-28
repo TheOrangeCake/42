@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:05:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/04 14:49:48 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/28 22:25:34 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-t_pile	*ft_lstnew(void *content)
+t_pile	*lstnew(void *content)
 {
 	t_pile	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_pile));
 	if (new == NULL)
 		return (NULL);
 	new->number = ft_atoi(content);
@@ -39,7 +39,7 @@ t_pile	*ft_lstnew(void *content)
 	return (new);
 }
 
-void	ft_lstadd_back(t_pile **lst, t_pile *new)
+void	lstadd_back(t_pile **lst, t_pile *new)
 {
 	t_pile	*temp;
 
@@ -54,37 +54,24 @@ void	ft_lstadd_back(t_pile **lst, t_pile *new)
 	}
 }
 
-void	ft_lstadd_front(t_pile **lst, t_pile *new)
+// void	ft_lstadd_front(t_pile **lst, t_pile *new)
+// {
+// 	new->next = *lst;
+// 	*lst = new;
+// }
+
+void	lstclear(t_pile **lst)
 {
-	new->next = *lst;
-	*lst = new;
+	t_pile	*temp;
+
+	if (*lst != NULL && lst != NULL)
+	{
+		while (*lst != NULL)
+		{
+			temp = (*lst)->next;
+			free(*lst);
+			*lst = temp;
+		}
+		*lst = NULL;
+	}
 }
-
-// void	del(void *content)
-// {
-// 	free(content);
-// }
-
-// void	ft_lstdelone(t_list *lst, void (*del)(void*))
-// {
-// 	if (lst != NULL && del != NULL)
-// 	{
-// 		del(lst->content);
-// 		free(lst);
-// 	}
-// }
-
-// void	ft_lstclear(t_pile **lst, void (*del)(void *))
-// {
-// 	t_pile	*temp;
-
-// 	if (*lst != NULL && lst != NULL && del != NULL)
-// 	{
-// 		while (*lst != NULL)
-// 		{
-// 			temp = (*lst)->next;
-// 			ft_lstdelone(*lst, del);
-// 			*lst = temp;
-// 		}
-// 	}
-// }

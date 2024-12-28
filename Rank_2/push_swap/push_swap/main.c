@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/04 14:52:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2024/12/28 22:37:20 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,26 @@ int	input_check(char *av[])
 	return (0);
 }
 
-t_pile	initiate_a(char *av[])
+t_pile	**initiate_a(char *av[])
 {
-	t_pile	*a;
-	t_pile	head;
+	t_pile	**a;
+	t_pile	*node;
+	int		i;
 
+	i = 0;
+	a = malloc(sizeof(t_pile *));
+	if (a == NULL)
+		return (NULL);
+	*a = NULL;
+	while (av[i] != NULL)
+	{
+		node = lstnew(av[i]);
+		if (node == NULL)
+			return (lstclear(a), NULL);
+		lstadd_back(a, node);
+		i++;
+	}
+	return (a);
 }
 
 // void	push_swap(char *av[])
@@ -56,7 +71,8 @@ t_pile	initiate_a(char *av[])
 
 int	main(int ac, char *av[])
 {
-	t_pile	a;
+	t_pile	**a;
+	t_pile	**b;
 
 	if (ac > 1)
 	{
@@ -70,5 +86,6 @@ int	main(int ac, char *av[])
 	{
 		printf("placeholder\n");
 	}
+	//free piles and nodes
 	return (0);
 }
