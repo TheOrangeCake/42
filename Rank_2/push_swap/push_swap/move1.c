@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:27 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/01 15:17:13 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/01 22:13:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,38 @@ void	sa(t_pile **a)
 {
 	t_pile	*temp;
 
-	// temp = *a;
-	// *a = (*a) -> next;
-	// temp -> next = *a;
-	// *a = temp;
+	temp = *a;
+	temp = temp -> next;
+	(*a) -> next = temp -> next;
+	temp -> next = *a;
+	*a = temp;
 	ft_printf("sa\n");
+}
+
+void	sb(t_pile **b)
+{
+	t_pile	*temp;
+
+	temp = *b;
+	temp = temp -> next;
+	(*b) -> next = temp -> next;
+	temp -> next = *b;
+	*b = temp;
+	ft_printf("sb\n");
+}
+
+void	ra(t_pile **a)
+{
+	t_pile	*temp;
+	t_pile	*temp2;
+
+	temp = *a;
+	temp2 = *a;
+	while (temp -> next != NULL)
+		temp = temp -> next;
+	temp -> next = *a;
+	temp2 = temp2 -> next;
+	(*a) -> next = NULL;
+	*a = temp2;
+	ft_printf("ra\n");
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/01 15:13:56 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/01 22:14:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,24 @@ t_pile	**push_swap(t_pile **a)
 		return(lstclear(a), NULL);
 	*b = NULL;
 
-	// t_pile	*head2;
-	// head2 = *a;
-	// while (head2 != NULL)
-	// {
-	// 	ft_printf("1:%d\n", head2 -> number);
-	// 	head2 = head2 -> next;
-	// }
-	// head2 = *b;
-	// while (head2 != NULL)
-	// {
-	// 	ft_printf("2:%d\n", head2 -> number);
-	// 	head2 = head2 -> next;
-	// }
+	t_pile	*head2;
+	head2 = *a;
+	while (head2 != NULL)
+	{
+		ft_printf("1:%d\n", head2 -> number);
+		head2 = head2 -> next;
+	}
+	pb(a, b);
+	pb(a, b);
+	pb(a, b);
+	pb(a, b);
+	rb(b);
+	head2 = *b;
+	while (head2 != NULL)
+	{
+		ft_printf("a:%d\n", head2 -> number);
+		head2 = head2 -> next;
+	}
 	
 	return (lstclear(b), free(b), a);
 }
