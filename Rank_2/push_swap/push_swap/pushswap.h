@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/01 22:11:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/01 23:24:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ void	sa(t_pile **a);
 void	sb(t_pile **b);
 void	ra(t_pile **a);
 void	rb(t_pile **b);
+void	rra(t_pile **a);
+void	rrb(t_pile **b);
+void	sort_2(t_pile **a);
+void	sort_3(t_pile **a);
 
 #endif

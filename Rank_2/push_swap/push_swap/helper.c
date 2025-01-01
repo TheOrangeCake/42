@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:05:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/31 16:18:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/01 23:24:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,6 @@ void	lstadd_back(t_pile **lst, t_pile *new)
 		temp->next = new;
 	}
 }
-
-// void	ft_lstadd_front(t_pile **lst, t_pile *new)
-// {
-// 	new->next = *lst;
-// 	*lst = new;
-// }
 
 void	lstclear(t_pile **lst)
 {

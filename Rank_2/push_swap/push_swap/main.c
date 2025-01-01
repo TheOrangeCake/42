@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/01 22:14:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/01 23:24:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_pile	**initiate_a(char *av[], t_pile **a)
 	return (a);
 }
 
-t_pile	**push_swap(t_pile **a)
+t_pile	**push_swap(t_pile **a, int	number)
 {
 	t_pile	**b;
 
@@ -73,25 +73,23 @@ t_pile	**push_swap(t_pile **a)
 	if (b == NULL)
 		return(lstclear(a), NULL);
 	*b = NULL;
-
-	t_pile	*head2;
-	head2 = *a;
-	while (head2 != NULL)
-	{
-		ft_printf("1:%d\n", head2 -> number);
-		head2 = head2 -> next;
-	}
-	pb(a, b);
-	pb(a, b);
-	pb(a, b);
-	pb(a, b);
-	rb(b);
-	head2 = *b;
-	while (head2 != NULL)
-	{
-		ft_printf("a:%d\n", head2 -> number);
-		head2 = head2 -> next;
-	}
+	if (number == 3)
+		sort_2(a);
+	if (number == 4)
+		sort_3(a);
+	// t_pile	*head2;
+	// head2 = *a;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("1:%d\n", head2 -> number);
+	// 	head2 = head2 -> next;
+	// }
+	// head2 = *a;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("a:%d\n", head2 -> number);
+	// 	head2 = head2 -> next;
+	// }
 	
 	return (lstclear(b), free(b), a);
 }
@@ -102,17 +100,17 @@ int	main(int ac, char *av[])
 
 	a = malloc(sizeof(t_pile *));
 	if (a == NULL)
-		return (ft_printf("malloc error\n"), 0);
+		return (write(2, "Error\n", 6), 0);
 	*a = NULL;
 	if (ac > 1)
 	{
 		if (input_check(av) == 1)
-			return (free(a), ft_printf("input error\n"), 0);
+			return (free(a), write(2, "Error\n", 6), 0);
 		else
 			a = initiate_a(av, a);
-		a = push_swap(a);
+		a = push_swap(a, ac);
 		if (a == NULL)
-			return (free(a), ft_printf("malloc error\n"), 0);
+			return (free(a), write(2, "Error\n", 6), 0);
 	}
 	else if (ac == 1)
 	{
