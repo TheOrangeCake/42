@@ -6,12 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/28 22:37:20 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:13:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-#include <stdio.h>
 
 int	input_check(char *av[])
 {
@@ -42,17 +41,12 @@ int	input_check(char *av[])
 	return (0);
 }
 
-t_pile	**initiate_a(char *av[])
+t_pile	**initiate_a(char *av[], t_pile **a)
 {
-	t_pile	**a;
 	t_pile	*node;
 	int		i;
 
-	i = 0;
-	a = malloc(sizeof(t_pile *));
-	if (a == NULL)
-		return (NULL);
-	*a = NULL;
+	i = 1;
 	while (av[i] != NULL)
 	{
 		node = lstnew(av[i]);
@@ -61,31 +55,63 @@ t_pile	**initiate_a(char *av[])
 		lstadd_back(a, node);
 		i++;
 	}
+	// t_pile	**head;
+	// head = a;
+	// while ((*head) != NULL)
+	// {
+	// 	ft_printf("%d\n", (*head) -> number);
+	// 	*head = (*head) -> next;
+	// }
 	return (a);
 }
 
-// void	push_swap(char *av[])
-// {
+t_pile	**push_swap(t_pile **a)
+{
+	t_pile	**b;
 
-// }
+	b = malloc(sizeof(t_pile *));
+	if (b == NULL)
+		return(lstclear(a), NULL);
+	*b = NULL;
+
+	// t_pile	*head2;
+	// head2 = *a;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("1:%d\n", head2 -> number);
+	// 	head2 = head2 -> next;
+	// }
+	// head2 = *b;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("2:%d\n", head2 -> number);
+	// 	head2 = head2 -> next;
+	// }
+	
+	return (lstclear(b), free(b), a);
+}
 
 int	main(int ac, char *av[])
 {
 	t_pile	**a;
-	t_pile	**b;
 
+	a = malloc(sizeof(t_pile *));
+	if (a == NULL)
+		return (ft_printf("malloc error\n"), 0);
+	*a = NULL;
 	if (ac > 1)
 	{
 		if (input_check(av) == 1)
-			return (write(2, "input error\n", 12), 0);
+			return (free(a), ft_printf("input error\n"), 0);
 		else
-			a = initiate_a(av);
-		// push_swap(av);
+			a = initiate_a(av, a);
+		a = push_swap(a);
+		if (a == NULL)
+			return (free(a), ft_printf("malloc error\n"), 0);
 	}
 	else if (ac == 1)
 	{
-		printf("placeholder\n");
+		ft_printf("placeholder\n");
 	}
-	//free piles and nodes
-	return (0);
+	return (lstclear(a), free(a), 0);
 }
