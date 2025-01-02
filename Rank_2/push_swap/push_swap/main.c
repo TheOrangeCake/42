@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 13:24:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:59:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_pile	**initiate_a(char *av[], t_pile **a)
 	return (a);
 }
 
-t_pile	**push_swap(t_pile **a, int number)
+t_pile	**push_swap(t_pile **a, int numb)
 {
 	t_pile	**b;
 
@@ -66,22 +66,22 @@ t_pile	**push_swap(t_pile **a, int number)
 	if (b == NULL)
 		return (lstclear(a), NULL);
 	*b = NULL;
-	if (number == 3)
+	if (numb == 3)
 		sort_2(a);
-	if (number == 4)
+	if (numb == 4)
 		sort_3(a);
 	
 	t_pile	*head2;
 	head2 = *a;
 	while (head2 != NULL)
 	{
-		ft_printf("1:%d\n", head2 -> number);
+		ft_printf("1:%d\n", head2->numb);
 		head2 = head2 -> next;
 	}
 	// head2 = *a;
 	// while (head2 != NULL)
 	// {
-	// 	ft_printf("a:%d\n", head2 -> number);
+	// 	ft_printf("a:%d\n", head2 -> numb);
 	// 	head2 = head2 -> next;
 	// }
 	

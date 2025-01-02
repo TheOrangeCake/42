@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/01 23:24:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:56:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 typedef struct s_pile
 {
-	int		number;
+	int		numb;
 	// int		index;
 	void	*next;
 }	t_pile;

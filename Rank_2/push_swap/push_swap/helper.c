@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:05:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/01 23:24:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:58:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_pile	*lstnew(void *content)
 	new = malloc(sizeof(t_pile));
 	if (new == NULL)
 		return (NULL);
-	new->number = ft_atoi(content);
+	new->numb = ft_atoi(content);
 	new->next = NULL;
 	return (new);
 }
