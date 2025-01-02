@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 22:29:48 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 22:37:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-void	sort_2_reverse(t_pile **b)
+void	sort_two_reverse(t_pile **b)
 {
 	t_pile	*temp;
 
@@ -22,7 +22,7 @@ void	sort_2_reverse(t_pile **b)
 		sb(b);
 }
 
-void	sort_3_reverse(t_pile **a)
+void	sort_three_reverse(t_pile **a)
 {
 	t_pile	*b;
 	t_pile	*c;
@@ -71,18 +71,16 @@ void	sort_all(t_pile **a, t_pile **b, int size)
 	int	i;
 
 	pivot = find_pivot(a, size);
-	ft_printf("pivot: %d\n", pivot);
-	ft_printf("size: %d\n", size);
 	count = 0;
 	i = size;
 	if (size == 2)
 	{
-		sort_2_reverse(b);
+		sort_two_reverse(b);
 		return;
 	}
 	else if (size == 3)
 	{
-		sort_3_reverse(b);
+		sort_three_reverse(b);
 		return;
 	}
 	while (i > 0)

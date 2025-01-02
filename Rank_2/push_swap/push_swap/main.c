@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 22:29:32 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 22:38:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ t_pile	**push_swap(t_pile **a, int numb)
 		return (lstclear(a), NULL);
 	*b = NULL;
 	if (numb == 3)
-		sort_2(a);
+		sort_two(a);
 	else if (numb == 4)
-		sort_3(a);
+		sort_three(a);
 	else if (numb == 5)
-		sort_4(a, b);
+		sort_four(a, b);
 	else if (numb == 6)
-		sort_5(a, b);
+		sort_five(a, b);
 	else
 	{
 		numb = numb - 1;

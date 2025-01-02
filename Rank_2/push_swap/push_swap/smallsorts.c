@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 22:29:02 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 22:38:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-void	sort_2(t_pile **a)
+void	sort_two(t_pile **a)
 {
 	t_pile	*temp;
 
@@ -22,7 +22,7 @@ void	sort_2(t_pile **a)
 		sa(a);
 }
 
-void	sort_3(t_pile **a)
+void	sort_three(t_pile **a)
 {
 	t_pile	*b;
 	t_pile	*c;
@@ -70,7 +70,7 @@ void	find_small(t_pile **a, int *smaller, int *smallest)
 	}
 }
 
-void	sort_4(t_pile **a, t_pile **b)
+void	sort_four(t_pile **a, t_pile **b)
 {
 	int		smallest;
 	int		smaller;
@@ -88,11 +88,11 @@ void	sort_4(t_pile **a, t_pile **b)
 			ra(a);
 		i--;
 	}
-	sort_3(a);
+	sort_three(a);
 	pa(a, b);
 }
 
-void	sort_5(t_pile **a, t_pile **b)
+void	sort_five(t_pile **a, t_pile **b)
 {
 	int		smallest;
 	int		smaller;
@@ -110,8 +110,8 @@ void	sort_5(t_pile **a, t_pile **b)
 			ra(a);
 		i--;
 	}
-	sort_3(a);
-	sort_2_reverse(b);
+	sort_three(a);
+	sort_two_reverse(b);
 	pa(a, b);
 	pa(a, b);
 }
