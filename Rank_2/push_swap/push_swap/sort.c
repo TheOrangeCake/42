@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/01 23:36:17 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:27:06 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,23 @@ void	sort_2(t_pile **a)
 
 	temp = *a;
 	temp = temp -> next;
-	if ((*a) -> number > temp -> number)
+	if ((*a)-> number > temp -> number)
 		sa(a);
 }
 
 void	sort_3(t_pile **a)
 {
-	t_pile	*temp;
-	t_pile	*temp1;
+	t_pile	*b;
+	t_pile	*c;
 
-	temp = *a;
-	temp = temp -> next;
-	temp2 = temp;
-	temp2 = temp2 -> next;
+	b = *a;
+	b = b -> next;
+	c = b;
+	c = c -> next;
+	if ((*a)->number < b->number && b->number > c->number
+		&& c->number > (*a)->number)
+	{
+		rra(a);
+		sa(a);
+	}
 }
