@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 15:35:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 22:28:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	rra(t_pile **a);
 void	rrb(t_pile **b);
 void	sort_2(t_pile **a);
 void	sort_3(t_pile **a);
+void	sort_4(t_pile **a, t_pile **b);
 void	sort_5(t_pile **a, t_pile **b);
 void	sort_all(t_pile **a, t_pile **b, int numb);
+void	sort_2_reverse(t_pile **b);
 void	sort_3_reverse(t_pile **a);
 
 #endif

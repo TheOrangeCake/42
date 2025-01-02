@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 15:32:06 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 22:29:02 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,6 @@ void	sort_3(t_pile **a)
 		sa(a);
 }
 
-void	sort_2_reverse(t_pile **b)
-{
-	t_pile	*temp;
-
-	temp = *b;
-	temp = temp->next;
-	if ((*b)->numb < temp->numb)
-		sb(b);
-}
 
 void	find_small(t_pile **a, int *smaller, int *smallest)
 {
@@ -77,6 +68,28 @@ void	find_small(t_pile **a, int *smaller, int *smallest)
 			*smaller = temp->numb;
 		temp = temp->next;
 	}
+}
+
+void	sort_4(t_pile **a, t_pile **b)
+{
+	int		smallest;
+	int		smaller;
+	int		i;
+
+	smallest = (*a)->numb;
+	smaller = 2147483647;
+	find_small(a, &smaller, &smallest);
+	i = 5;
+	while ((*a) != NULL && i > 0)
+	{
+		if ((*a)->numb == smallest)
+			pb(a, b);
+		else
+			ra(a);
+		i--;
+	}
+	sort_3(a);
+	pa(a, b);
 }
 
 void	sort_5(t_pile **a, t_pile **b)
