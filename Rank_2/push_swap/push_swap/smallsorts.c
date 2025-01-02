@@ -1,0 +1,104 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   smallsorts.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/01/02 15:12:12 by hoannguy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pushswap.h"
+
+void	sort_2(t_pile **a)
+{
+	t_pile	*temp;
+
+	temp = *a;
+	temp = temp->next;
+	if ((*a)->numb > temp->numb)
+		sa(a);
+}
+
+void	sort_3(t_pile **a)
+{
+	t_pile	*b;
+	t_pile	*c;
+
+	b = *a;
+	b = b -> next;
+	c = b;
+	c = c -> next;
+	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
+	{
+		rra(a);
+		sa(a);
+	}
+	else if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)
+		rra(a);
+	else if ((*a)->numb > b->numb && b->numb > c->numb)
+	{
+		sa(a);
+		rra(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
+		ra(a);
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
+		sa(a);
+}
+
+void	sort_2_reverse(t_pile **b)
+{
+	t_pile	*temp;
+
+	temp = *b;
+	temp = temp->next;
+	if ((*b)->numb < temp->numb)
+		sb(b);
+}
+
+void	find_small(t_pile **a, int *smaller, int *smallest)
+{
+	t_pile	*temp;
+
+	temp = (*a);
+	while (temp != NULL)
+	{
+		if (*smallest > temp->numb)
+			*smallest = temp->numb;
+		temp = temp->next;
+	}
+	temp = (*a);
+	while (temp != NULL)
+	{
+		if (*smaller > temp->numb && temp->numb != *smallest)
+			*smaller = temp->numb;
+		temp = temp->next;
+	}
+}
+
+void	sort_5(t_pile **a, t_pile **b)
+{
+	int		smallest;
+	int		smaller;
+	int		i;
+
+	smallest = (*a)->numb;
+	smaller = 2147483647;
+	find_small(a, &smaller, &smallest);
+	i = 5;
+	while ((*a) != NULL && i > 0)
+	{
+		if ((*a)->numb == smaller || (*a)->numb == smallest)
+			pb(a, b);
+		else 
+			ra(a);
+		i--;
+	}
+	sort_3(a);
+	sort_2_reverse(b);
+	pa(a, b);
+	pa(a, b);
+}
