@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 15:12:12 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:32:06 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	sort_5(t_pile **a, t_pile **b)
 	{
 		if ((*a)->numb == smaller || (*a)->numb == smallest)
 			pb(a, b);
-		else 
+		else
 			ra(a);
 		i--;
 	}
