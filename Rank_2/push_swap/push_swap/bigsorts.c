@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 22:37:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/03 23:42:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ void	sort_three_reverse(t_pile **a)
 	c = b;
 	c = c -> next;
 	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
-		ra(a);
+		rb(a);
 	else if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)
-		sa(a);
+		sb(a);
 	else if ((*a)->numb < b->numb && b->numb < c->numb)
 	{
-		sa(a);
-		rra(a);
+		sb(a);
+		rrb(a);
 	}
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
 	{
-		rra(a);
-		sa(a);
+		rrb(a);
+		sb(a);
 	}
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
-		rra(a);
+		rrb(a);
 }
 
 int	find_pivot(t_pile **a, int size)
@@ -64,25 +64,27 @@ int	find_pivot(t_pile **a, int size)
 	return (temp->numb);
 }
 
-void	sort_all(t_pile **a, t_pile **b, int size)
+void	quicksort_a(t_pile **a, t_pile **b, int size)
 {
 	int	pivot;
 	int	count;
 	int	i;
 
+	if (size <= 1 || !(*a))
+        return;
+	if (size == 3)
+	{
+		sort_three(a);
+		return;
+	}
+	else if (size == 2)
+	{
+		sort_two(a);
+		return;
+	}
 	pivot = find_pivot(a, size);
 	count = 0;
 	i = size;
-	if (size == 2)
-	{
-		sort_two_reverse(b);
-		return;
-	}
-	else if (size == 3)
-	{
-		sort_three_reverse(b);
-		return;
-	}
 	while (i > 0)
 	{
 		if ((*a)->numb < pivot)
@@ -94,11 +96,91 @@ void	sort_all(t_pile **a, t_pile **b, int size)
 			ra(a);
 		i--;
 	}
-	sort_all(a, b, size - count);
-	sort_all(b, a, count);
+	while (size - count > 0)
+	{
+		rra(a);
+		size--;
+	}
+	quicksort_a(a, b, size - count);
+	quicksort_b(a, b, count);
 	while (count > 0)
 	{
 		pa(a, b);
 		count--;
 	}
+}
+
+void	quicksort_b(t_pile **a, t_pile **b, int size)
+{
+	int	pivot;
+	int	count;
+	int	i;
+
+	if (size <= 1 || !(*b))
+        return;
+	if (size == 3)
+	{
+		sort_three_reverse(b);
+		return;
+	}
+	else if (size == 2)
+	{
+		sort_two_reverse(b);
+		return;
+	}
+	pivot = find_pivot(b, size);
+	count = 0;
+	i = size;
+	while (i > 0)
+	{
+		if ((*b)->numb > pivot)
+		{
+			pa(a, b);
+			count++;
+		}
+		else
+			rb(b);
+		i--;
+	}
+	while (size - count > 0)
+	{
+		rrb(b);
+		size--;
+	}
+	quicksort_a(a, b, count);
+	quicksort_b(a, b, size - count);
+	while (count > 0)
+	{
+		pb(a, b);
+		count--;
+	}
+}
+
+void	partitioning(t_pile **a, t_pile **b, int size)
+{
+	int	pivot;
+	int	count;
+	int	i;
+
+	pivot = find_pivot(a, size);
+	count = 0;
+	i = size;
+	while (i > 0)
+	{
+		if ((*a)->numb < pivot)
+		{
+			pb(a, b);
+			count++;
+		}
+		else
+			ra(a);
+		i--;
+	}
+	quicksort_a(a, b, size - count);
+	quicksort_b(a, b, count);
+	// while (count > 0)
+	// {
+	// 	pa(a, b);
+	// 	count--;
+	// }
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 23:17:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:34:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ void	sort_two(t_pile **a);
 void	sort_three(t_pile **a);
 void	sort_four(t_pile **a, t_pile **b);
 void	sort_five(t_pile **a, t_pile **b);
-void	sort_all(t_pile **a, t_pile **b, int numb);
 void	sort_two_reverse(t_pile **b);
 void	sort_three_reverse(t_pile **a);
+void	partitioning(t_pile **a, t_pile **b, int numb);
+void	quicksort_b(t_pile **a, t_pile **b, int size);
+void	quicksort_a(t_pile **a, t_pile **b, int size);
 
 #endif

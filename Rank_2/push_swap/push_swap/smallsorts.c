@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 22:38:55 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/03 21:09:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	sort_three(t_pile **a)
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
 		sa(a);
 }
-
 
 void	find_small(t_pile **a, int *smaller, int *smallest)
 {
