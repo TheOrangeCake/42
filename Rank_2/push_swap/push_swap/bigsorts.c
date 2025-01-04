@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/03 23:42:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:16:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,35 @@ void	sort_three_reverse(t_pile **a)
 		rrb(a);
 }
 
+// int	find_pivot(t_pile **a, int size)
+// {
+// 	t_pile	*temp;
+// 	int		i;
+	
+// 	temp = *a;
+// 	i = 1;
+// 	while (i < size/2)
+// 	{
+// 		temp = temp->next;
+// 		i++;
+// 	}
+// 	return (temp->numb);
+// }
+
 int	find_pivot(t_pile **a, int size)
 {
+	int		array[size];
 	t_pile	*temp;
 	int		i;
-	
+
 	temp = *a;
-	i = 0;
-	while (i < size/2)
+	while ((*temp) != NULL)
 	{
+		array[i] = temp->numb;
 		temp = temp->next;
 		i++;
 	}
-	return (temp->numb);
+	return (bubble)
 }
 
 void	quicksort_a(t_pile **a, t_pile **b, int size)
@@ -70,6 +86,7 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 	int	count;
 	int	i;
 
+	ft_printf("size a: %d\n", size);
 	if (size <= 1 || !(*a))
         return;
 	if (size == 3)
@@ -87,7 +104,7 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 	i = size;
 	while (i > 0)
 	{
-		if ((*a)->numb < pivot)
+		if ((*a)->numb <= pivot)
 		{
 			pb(a, b);
 			count++;
@@ -95,11 +112,6 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 		else
 			ra(a);
 		i--;
-	}
-	while (size - count > 0)
-	{
-		rra(a);
-		size--;
 	}
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);
@@ -116,6 +128,7 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 	int	count;
 	int	i;
 
+	ft_printf("size b: %d\n", size);
 	if (size <= 1 || !(*b))
         return;
 	if (size == 3)
@@ -133,7 +146,7 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 	i = size;
 	while (i > 0)
 	{
-		if ((*b)->numb > pivot)
+		if ((*b)->numb >= pivot)
 		{
 			pa(a, b);
 			count++;
@@ -141,11 +154,6 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 		else
 			rb(b);
 		i--;
-	}
-	while (size - count > 0)
-	{
-		rrb(b);
-		size--;
 	}
 	quicksort_a(a, b, count);
 	quicksort_b(a, b, size - count);
@@ -167,7 +175,7 @@ void	partitioning(t_pile **a, t_pile **b, int size)
 	i = size;
 	while (i > 0)
 	{
-		if ((*a)->numb < pivot)
+		if ((*a)->numb <= pivot)
 		{
 			pb(a, b);
 			count++;
@@ -178,9 +186,9 @@ void	partitioning(t_pile **a, t_pile **b, int size)
 	}
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);
-	// while (count > 0)
-	// {
-	// 	pa(a, b);
-	// 	count--;
-	// }
+	while (count > 0)
+	{
+		pa(a, b);
+		count--;
+	}
 }
