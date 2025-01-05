@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/05 22:50:02 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/01/05 22:50:30 by hoannguy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pushswap.h"
+
+void	sort_two_reverse(t_pile **b)
+{
+	t_pile	*temp;
+
+	temp = *b;
+	temp = temp->next;
+	if ((*b)->numb < temp->numb)
+		sb(b);
+}
+
+void	sort_three_reverse(t_pile **a)
+{
+	t_pile	*b;
+	t_pile	*c;
+
+	b = *a;
+	b = b -> next;
+	c = b;
+	c = c -> next;
+	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
+		rb(a);
+	else if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)
+		sb(a);
+	else if ((*a)->numb < b->numb && b->numb < c->numb)
+	{
+		sb(a);
+		rrb(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
+	{
+		rrb(a);
+		sb(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
+		rrb(a);
+}

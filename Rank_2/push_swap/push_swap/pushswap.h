@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/03 22:34:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/05 23:25:53 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_pile
 int		ft_strcmp(char *s1, char *s2);
 void	lstadd_back(t_pile **lst, t_pile *new);
 t_pile	*lstnew(void *content);
+int		lstsize(t_pile **lst);
 void	lstclear(t_pile **lst);
 void	pb(t_pile **a, t_pile **b);
 void	pa(t_pile **a, t_pile **b);
