@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/06 15:10:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/06 23:13:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,33 @@ int	insertionSort(int array[], int size)
 	return (number);
 }
 
-int	find_pivot(t_pile **a, int size)
+int	find_pivot(t_pile **a, t_pile **b, int size)
 {
-	int		array[size];
+	int		*array;
 	t_pile	*temp;
 	int		i;
 
+	array = (int*)malloc(size * sizeof(int));
+	if (array == NULL) 
+	{ 
+		write(2, "Error\n", 6);
+		lstclear(a);
+		free(a);
+		lstclear(b);
+		free(b);
+		exit(1);
+	}
 	temp = *a;
 	i = 0;
-	while (temp != NULL)
+	while (temp != NULL && i < size)
 	{
 		array[i] = temp->numb;
 		temp = temp->next;
 		i++;
 	}
-	return (insertionSort(array, size));
+	i = insertionSort(array, size);
+	free(array);
+	return (i);
 }
 
 void	quicksort_a(t_pile **a, t_pile **b, int size)
@@ -73,8 +85,7 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 		sort_two(a);
 		return;
 	}
-	pivot = find_pivot(a, size);
-	ft_printf("pivot a: %d\n", pivot);
+	pivot = find_pivot(a, b, size);
 	count = 0;
 	i = size;
 	while (i > 0)
@@ -90,6 +101,9 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 	}
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);
+	pivot = 0;
+	while (pivot++ < size - count)
+		rra(a);
 	while (count > 0)
 	{
 		pa(a, b);
@@ -115,8 +129,7 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 		sort_two_reverse(b);
 		return;
 	}
-	pivot = find_pivot(b, size);
-	ft_printf("pivot b: %d\n", pivot);
+	pivot = find_pivot(b, a, size);
 	count = 0;
 	i = size;
 	while (i > 0)
@@ -132,6 +145,9 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 	}
 	quicksort_a(a, b, count);
 	quicksort_b(a, b, size - count);
+	pivot = 0;
+	while (pivot++ < size - count)
+		rra(b);
 	while (count > 0)
 	{
 		pb(a, b);
@@ -145,8 +161,7 @@ void	partitioning(t_pile **a, t_pile **b, int size)
 	int	count;
 	int	i;
 
-	pivot = find_pivot(a, size);
-	ft_printf("pivot: %d\n", pivot);
+	pivot = find_pivot(a, b, size);
 	count = 0;
 	i = size;
 	while (i > 0)
