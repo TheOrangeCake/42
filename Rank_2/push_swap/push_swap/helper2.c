@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 22:50:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/05 22:50:30 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:09:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,86 @@ void	sort_three_reverse(t_pile **a)
 	}
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
 		rrb(a);
+}
+
+void	sort_three_reverse_big(t_pile **a)
+{
+	t_pile	*b;
+	t_pile	*c;
+
+	b = *a;
+	b = b -> next;
+	c = b;
+	c = c -> next;
+	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
+	{
+		sb(a);
+		rb(a);
+		sb(a);
+		rrb(a);
+	}
+	else if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)
+		sb(a);
+	else if ((*a)->numb < b->numb && b->numb < c->numb)
+	{
+		sb(a);
+		rb(a);
+		sb(a);
+		rrb(a);
+		sb(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
+	{
+		rb(a);
+		sb(a);
+		rrb(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
+	{
+		rb(a);
+		sb(a);
+		rrb(a);
+		sb(a);
+	}
+}
+
+void	sort_three_big(t_pile **a)
+{
+	t_pile	*b;
+	t_pile	*c;
+
+	b = *a;
+	b = b -> next;
+	c = b;
+	c = c -> next;
+	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
+	{
+		ra(a);
+		sa(a);
+		rra(a);
+	}
+	else if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)
+	{
+		ra(a);
+		sa(a);
+		rra(a);
+		sa(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb > c->numb)
+	{
+		sa(a);
+		ra(a);
+		sa(a);
+		rra(a);
+		sa(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
+	{
+		sa(a);
+		ra(a);
+		sa(a);
+		rra(a);
+	}
+	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
+		sa(a);
 }
