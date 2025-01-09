@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/06 23:13:42 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/09 19:20:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 
 	if (size <= 1 || !(*a))
         return;
+	// if (size == 5)
+	// {
+	// 	sort_five(a, b);
+	// 	return;
+	// }
 	if (size == 3)
 	{
 		sort_three_big(a);
@@ -99,11 +104,11 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 			ra(a);
 		i--;
 	}
-	quicksort_a(a, b, size - count);
-	quicksort_b(a, b, count);
 	pivot = 0;
 	while (pivot++ < size - count)
 		rra(a);
+	quicksort_a(a, b, size - count);
+	quicksort_b(a, b, count);
 	while (count > 0)
 	{
 		pa(a, b);
@@ -143,11 +148,11 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 			rb(b);
 		i--;
 	}
-	quicksort_a(a, b, count);
-	quicksort_b(a, b, size - count);
 	pivot = 0;
 	while (pivot++ < size - count)
-		rra(b);
+		rrb(b);
+	quicksort_a(a, b, count);
+	quicksort_b(a, b, size - count);
 	while (count > 0)
 	{
 		pb(a, b);

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/06 23:35:13 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/09 19:07:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,19 @@ t_pile	**push_swap(t_pile **a, int numb)
 		partitioning(a, b, numb);
 	}
 	
-	// t_pile	*head2;
-	// head2 = *a;
-	// while (head2 != NULL)
-	// {
-	// 	ft_printf("a:%d\n", head2->numb);
-	// 	head2 = head2 -> next;
-	// }
-	// head2 = *b;
-	// while (head2 != NULL)
-	// {
-	// 	ft_printf("b:%d\n", head2 -> numb);
-	// 	head2 = head2 -> next;
-	// }
+	t_pile	*head2;
+	head2 = *a;
+	while (head2 != NULL)
+	{
+		ft_printf("a:%d\n", head2->numb);
+		head2 = head2 -> next;
+	}
+	head2 = *b;
+	while (head2 != NULL)
+	{
+		ft_printf("b:%d\n", head2 -> numb);
+		head2 = head2 -> next;
+	}
 	
 	return (lstclear(b), free(b), a);
 }
