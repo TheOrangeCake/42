@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/09 19:07:51 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:50:17 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_pile	**initiate_a(char *av[], t_pile **a)
 	return (a);
 }
 
-int	sorted(t_pile **a)
+int	sorted_a(t_pile **a)
 {
 	t_pile	*temp;
 	int		i;
@@ -86,7 +86,7 @@ t_pile	**push_swap(t_pile **a, int numb)
 	*b = NULL;
 	if (numb == 2)
 		return (lstclear(b), free(b), a);
-	if (sorted(a) == 0)
+	if (sorted_a(a) == 0)
 		return (lstclear(b), free(b), a);
 	if (numb == 3)
 		sort_two(a);
@@ -102,19 +102,19 @@ t_pile	**push_swap(t_pile **a, int numb)
 		partitioning(a, b, numb);
 	}
 	
-	t_pile	*head2;
-	head2 = *a;
-	while (head2 != NULL)
-	{
-		ft_printf("a:%d\n", head2->numb);
-		head2 = head2 -> next;
-	}
-	head2 = *b;
-	while (head2 != NULL)
-	{
-		ft_printf("b:%d\n", head2 -> numb);
-		head2 = head2 -> next;
-	}
+	// t_pile	*head2;
+	// head2 = *a;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("a:%d\n", head2->numb);
+	// 	head2 = head2 -> next;
+	// }
+	// head2 = *b;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("b:%d\n", head2 -> numb);
+	// 	head2 = head2 -> next;
+	// }
 	
 	return (lstclear(b), free(b), a);
 }

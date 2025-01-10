@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/09 19:20:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:41:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 
 	if (size <= 1 || !(*a))
         return;
-	// if (size == 5)
-	// {
-	// 	sort_five(a, b);
-	// 	return;
-	// }
-	if (size == 3)
+	else if (size == 5)
+	{
+		sort_five_big(a, b);
+		return;
+	}
+	else if (size == 3)
 	{
 		sort_three_big(a);
 		return;
@@ -124,7 +124,12 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 
 	if (size <= 1 || !(*b))
         return;
-	if (size == 3)
+	else if (size == 5)
+	{
+		sort_five_reverse_big(a, b);
+		return;
+	}
+	else if (size == 3)
 	{
 		sort_three_reverse_big(b);
 		return;
