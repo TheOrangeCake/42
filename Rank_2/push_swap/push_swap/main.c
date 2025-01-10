@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 18:50:17 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:48:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,6 @@ t_pile	**push_swap(t_pile **a, int numb)
 		numb = numb - 1;
 		partitioning(a, b, numb);
 	}
-	
-	// t_pile	*head2;
-	// head2 = *a;
-	// while (head2 != NULL)
-	// {
-	// 	ft_printf("a:%d\n", head2->numb);
-	// 	head2 = head2 -> next;
-	// }
-	// head2 = *b;
-	// while (head2 != NULL)
-	// {
-	// 	ft_printf("b:%d\n", head2 -> numb);
-	// 	head2 = head2 -> next;
-	// }
-	
 	return (lstclear(b), free(b), a);
 }
 
@@ -133,13 +118,27 @@ int	main(int ac, char *av[])
 			return (free(a), write(2, "Error\n", 6), 0);
 		else
 			a = initiate_a(av, a);
+		if (a == NULL)
+			return (free(a), write(2, "Error\n", 6), 0);
 		a = push_swap(a, ac);
 		if (a == NULL)
 			return (free(a), write(2, "Error\n", 6), 0);
 	}
 	else if (ac == 1)
-	{
-		ft_printf("placeholder\n");
-	}
+		write(2, "Error\n", 6);
 	return (lstclear(a), free(a), 0);
 }
+
+	// t_pile	*head2;
+	// head2 = *a;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("a:%d\n", head2->numb);
+	// 	head2 = head2 -> next;
+	// }
+	// head2 = *b;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("b:%d\n", head2 -> numb);
+	// 	head2 = head2 -> next;
+	// }

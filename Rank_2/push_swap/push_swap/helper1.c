@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:05:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 17:53:37 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:56:44 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ t_pile	*lstnew(void *content)
 		return (NULL);
 	new->numb = ft_atoi(content);
 	new->next = NULL;
-	// if (new->numb > 2147483647 || new->numb < -2147483648)
-	// {
-	// 	write(2, "Error\n", 6);
-	// 	return (NULL);
-	// }
+	if (new->numb > 2147483647 || new->numb < -2147483648)
+		return (NULL);
 	return (new);
 }
 

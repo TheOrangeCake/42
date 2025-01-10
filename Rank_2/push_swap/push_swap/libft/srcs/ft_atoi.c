@@ -6,16 +6,16 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:05:25 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/06 23:45:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:52:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
-	int	sign;
-	int	nb;
+	long	sign;
+	long	nb;
 
 	nb = 0;
 	sign = 1;
@@ -41,10 +41,10 @@ int	ft_atoi(const char *nptr)
 
 // int	main(void)
 // {
-// 	char	new[] = "   -1234";
-// 	char	old[] = "   -1234";
+// 	char	new[] = "21474836479";
+// 	char	old[] = "4";
 
-// 	printf("New: %d\n", ft_atoi(new));
+// 	printf("New: %ld\n", ft_atoi(new));
 // 	printf("Old: %d\n", atoi(old));
 // 	return (0);
 // }

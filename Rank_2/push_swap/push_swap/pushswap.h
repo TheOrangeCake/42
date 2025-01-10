@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 18:42:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:14:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 typedef struct s_pile
 {
-	int		numb;
+	long	numb;
 	void	*next;
 }	t_pile;
 
@@ -46,6 +46,8 @@ void	sort_five_reverse_big(t_pile **a, t_pile **b);
 void	find_big_big(t_pile **a, int *bigger, int *biggest);
 void	partitioning(t_pile **a, t_pile **b, int numb);
 void	quicksort_b(t_pile **a, t_pile **b, int size);
+void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size);
 void	quicksort_a(t_pile **a, t_pile **b, int size);
+void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size);
 
 #endif

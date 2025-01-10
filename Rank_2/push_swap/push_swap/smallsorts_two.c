@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 22:50:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 18:50:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:53:03 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ void	sort_three_reverse(t_pile **a)
 	t_pile	*b;
 	t_pile	*c;
 
-	b = *a;
-	b = b -> next;
-	c = b;
-	c = c -> next;
+	b = (*a)->next;
+	c = b->next;
 	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
 		rb(a);
 	else if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)

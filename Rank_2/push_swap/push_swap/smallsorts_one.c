@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 17:22:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:27:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ void	sort_three(t_pile **a)
 	t_pile	*b;
 	t_pile	*c;
 
-	b = *a;
-	b = b -> next;
-	c = b;
-	c = c -> next;
+	b = (*a)->next;
+	c = b->next;
 	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
 	{
 		rra(a);
@@ -93,9 +91,9 @@ void	sort_four(t_pile **a, t_pile **b)
 
 void	sort_five(t_pile **a, t_pile **b)
 {
-	int		smallest;
-	int		smaller;
-	int		i;
+	int	smallest;
+	int	smaller;
+	int	i;
 
 	smallest = (*a)->numb;
 	smaller = 2147483647;
