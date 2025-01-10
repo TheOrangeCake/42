@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:27:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 21:26:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/10 22:51:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size)
 
 	count = 0;
 	i = size;
-	while (i > 0)
+	while (i-- > 0)
 	{
 		if ((*b)->numb > pivot)
 		{
@@ -28,10 +28,9 @@ void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size)
 		}
 		else
 			rb(b);
-		i--;
 	}
-	pivot = 0;
-	while (pivot++ < size - count)
+	i = 0;
+	while (i++ < size - count)
 		rrb(b);
 	quicksort_a(a, b, count);
 	quicksort_b(a, b, size - count);
@@ -46,7 +45,7 @@ void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size)
 
 	count = 0;
 	i = size;
-	while (i > 0)
+	while (i-- > 0)
 	{
 		if ((*a)->numb < pivot)
 		{
@@ -55,10 +54,9 @@ void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size)
 		}
 		else
 			ra(a);
-		i--;
 	}
-	pivot = 0;
-	while (pivot++ < size - count)
+	i = 0;
+	while (i++ < size - count)
 		rra(a);
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);

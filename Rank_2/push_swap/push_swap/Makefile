@@ -18,8 +18,8 @@ $(LIBFT):
 #
 
 GCC = gcc
-# FLAGS = -Wextra -Wall -Werror
-FLAGS =
+FLAGS = -Wextra -Wall -Werror
+# FLAGS =
 RM = rm -f
 
 all : $(LIBFT) $(NAME)
