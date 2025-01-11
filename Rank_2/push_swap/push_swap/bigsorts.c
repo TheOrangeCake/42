@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 22:48:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/11 22:05:17 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,22 +116,16 @@ void	partitioning(t_pile **a, t_pile **b, int size)
 	pivot = find_pivot(a, b, size);
 	count = 0;
 	i = size;
-	while (i > 0)
+	while (i-- > 0)
 	{
-		if ((*a)->numb < pivot)
-		{
+		if ((*a)->numb < pivot && count++ < size)
 			pb(a, b);
-			count++;
-		}
 		else
 			ra(a);
-		i--;
+
 	}
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);
-	while (count > 0)
-	{
+	while (count-- > 0)
 		pa(a, b);
-		count--;
-	}
 }
