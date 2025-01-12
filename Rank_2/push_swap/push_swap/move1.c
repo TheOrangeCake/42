@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:27 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/02 13:26:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:47:41 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	sb(t_pile **b)
 	ft_printf("sb\n");
 }
 
-void	ra(t_pile **a)
+void	ra(t_pile **a, int i)
 {
 	t_pile	*temp;
 	t_pile	*temp2;
@@ -71,5 +71,6 @@ void	ra(t_pile **a)
 	temp2 = temp2->next;
 	(*a)->next = NULL;
 	*a = temp2;
-	ft_printf("ra\n");
+	if (i == 0)
+		ft_printf("ra\n");
 }

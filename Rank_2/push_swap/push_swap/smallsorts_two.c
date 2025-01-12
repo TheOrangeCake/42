@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 22:50:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 22:47:59 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:50:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	sort_three_reverse(t_pile **a)
 	b = (*a)->next;
 	c = b->next;
 	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
-		rb(a);
+		rb(a, 0);
 	else if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)
 		sb(a);
 	else if ((*a)->numb < b->numb && b->numb < c->numb)
@@ -56,13 +56,13 @@ void	sort_three_reverse_big_next(t_pile **a)
 	c = b->next;
 	if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
 	{
-		rb(a);
+		rb(a, 0);
 		sb(a);
 		rrb(a);
 	}
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
 	{
-		rb(a);
+		rb(a, 0);
 		sb(a);
 		rrb(a);
 		sb(a);
@@ -79,7 +79,7 @@ void	sort_three_reverse_big(t_pile **a)
 	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
 	{
 		sb(a);
-		rb(a);
+		rb(a, 0);
 		sb(a);
 		rrb(a);
 	}
@@ -88,7 +88,7 @@ void	sort_three_reverse_big(t_pile **a)
 	else if ((*a)->numb < b->numb && b->numb < c->numb)
 	{
 		sb(a);
-		rb(a);
+		rb(a, 0);
 		sb(a);
 		rrb(a);
 		sb(a);

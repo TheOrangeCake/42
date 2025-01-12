@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/10 21:27:05 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:51:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	sort_three(t_pile **a)
 		rra(a);
 	}
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
-		ra(a);
+		ra(a, 0);
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
 		sa(a);
 }
@@ -82,7 +82,7 @@ void	sort_four(t_pile **a, t_pile **b)
 		if ((*a)->numb == smallest)
 			pb(a, b);
 		else
-			ra(a);
+			ra(a, 0);
 		i--;
 	}
 	sort_three(a);
@@ -104,7 +104,7 @@ void	sort_five(t_pile **a, t_pile **b)
 		if ((*a)->numb == smaller || (*a)->numb == smallest)
 			pb(a, b);
 		else
-			ra(a);
+			ra(a, 0);
 		i--;
 	}
 	sort_three(a);

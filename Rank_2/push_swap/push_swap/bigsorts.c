@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/11 22:05:17 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:17:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,23 @@ void	partitioning(t_pile **a, t_pile **b, int size)
 		if ((*a)->numb < pivot && count++ < size)
 			pb(a, b);
 		else
-			ra(a);
-
+		{
+			if (check_a(a, pivot, size - count) == 1)
+				ra(a, 0);
+			else
+				break ;
+		}
+			// ra(a, 0);
+		// {
+		// 	if ((*a)->numb > pivot && count >= 2
+		// 		&& (*b)->numb < ((t_pile *)((*b)->next))->numb)
+		// 		rrab(a, b);
+		// 	else
+		// 		ra(a, 0);
+		// }
+		// if (count >= 2
+		// 	&& (*b)->numb < ((t_pile *)((*b)->next))->numb)
+		// 	sb(b);
 	}
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);

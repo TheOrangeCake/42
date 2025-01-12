@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:27:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/11 23:05:49 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:05:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size)
 		else
 		{
 			if (check_a(a, pivot, size - count) == 1 && check++ < size)
-				ra(a);
+				ra(a, 0);
 			else
 				break ;
 		}
@@ -85,7 +85,7 @@ void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size)
 		else
 		{
 			if (check_b(b, pivot, size - count) == 1 && check++ < size)
-				rb(b);
+				rb(b, 0);
 			else
 				break ;
 		}

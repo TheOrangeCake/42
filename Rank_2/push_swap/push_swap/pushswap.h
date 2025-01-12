@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/11 21:51:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:44:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	pb(t_pile **a, t_pile **b);
 void	pa(t_pile **a, t_pile **b);
 void	sa(t_pile **a);
 void	sb(t_pile **b);
-void	ra(t_pile **a);
-void	rb(t_pile **b);
+void	ra(t_pile **a, int i);
+void	rb(t_pile **b, int i);
+void	rrab(t_pile **a, t_pile **b);
 void	rra(t_pile **a);
 void	rrb(t_pile **b);
 void	sort_two(t_pile **a);
