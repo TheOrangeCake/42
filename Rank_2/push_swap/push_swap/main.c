@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/17 15:51:56 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:59:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ int	input_check(char *av[])
 		}
 		i++;
 	}
-	return (input_check_helper(av));
-	// return (0);
+	if (input_check_helper(av) == 1 || check_0(av) == 1)
+		return (1);
+	return (0);
 }
 
 t_pile	**initiate_a(char *av[], t_pile **a)

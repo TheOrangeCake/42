@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/17 14:56:00 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:27:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_pile	*lstnew(void *content);
 // int		lstsize(t_pile **lst);
 void	lstclear(t_pile **lst);
 int		input_check_helper(char *av[]);
+int		check_0(char *av[]);
 void	pb(t_pile **a, t_pile **b);
 void	pa(t_pile **a, t_pile **b);
 void	sa(t_pile **a);
