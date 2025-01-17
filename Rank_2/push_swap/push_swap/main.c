@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/12 20:18:27 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:51:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	input_check(char *av[])
 		k = i + 1;
 		while (av[k] != NULL)
 		{
-			if (ft_strcmp(av[i], av[k]) == 0)
+			if (ft_strcmp(av[i], av[k++]) == 0)
 				return (1);
-			k++;
 		}
 		i++;
 	}
-	return (0);
+	return (input_check_helper(av));
+	// return (0);
 }
 
 t_pile	**initiate_a(char *av[], t_pile **a)
@@ -101,6 +101,19 @@ t_pile	**push_swap(t_pile **a, int numb)
 		numb = numb - 1;
 		partitioning(a, b, numb);
 	}
+	// t_pile	*head2;
+	// head2 = *a;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("a:%d\n", head2->numb);
+	// 	head2 = head2 -> next;
+	// }
+	// head2 = *b;
+	// while (head2 != NULL)
+	// {
+	// 	ft_printf("b:%d\n", head2 -> numb);
+	// 	head2 = head2 -> next;
+	// }
 	return (lstclear(b), free(b), a);
 }
 

@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/12 20:17:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:14:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	insertion_sort(int array[], int size)
+int	insertion_sort_pivot(int array[], int size)
 {
 	int	i;
 	int	j;
@@ -62,7 +62,7 @@ int	find_pivot(t_pile **a, t_pile **b, int size)
 		temp = temp->next;
 		i++;
 	}
-	i = insertion_sort(array, size);
+	i = insertion_sort_pivot(array, size);
 	free(array);
 	return (i);
 }
@@ -76,6 +76,8 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 	else if (size == 3)
 	{
 		sort_three_big(a);
+		// insertion_a_push_back(a, b, insertion_sort_a_small(a, b, size));
+		// insertion_a_push_back(a, b, size);
 		return ;
 	}
 	else if (size == 2)
@@ -96,6 +98,7 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 	else if (size == 3)
 	{
 		sort_three_reverse_big(b);
+		// insertion_b_push_back(a, b, insertion_sort_b_small(a, b, size));
 		return ;
 	}
 	else if (size == 2)
@@ -141,6 +144,6 @@ void	partitioning(t_pile **a, t_pile **b, int size)
 	}
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);
-	while (count-- > 0)
+	while ((*b) != NULL)
 		pa(a, b);
 }

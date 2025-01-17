@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/12 19:44:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/17 14:56:00 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ typedef struct s_pile
 int		ft_strcmp(char *s1, char *s2);
 void	lstadd_back(t_pile **lst, t_pile *new);
 t_pile	*lstnew(void *content);
-int		lstsize(t_pile **lst);
+// int		lstsize(t_pile **lst);
 void	lstclear(t_pile **lst);
+int		input_check_helper(char *av[]);
 void	pb(t_pile **a, t_pile **b);
 void	pa(t_pile **a, t_pile **b);
 void	sa(t_pile **a);
@@ -42,12 +43,18 @@ void	sort_two_reverse(t_pile **b);
 void	sort_three_reverse(t_pile **a);
 void	sort_three_big(t_pile **a);
 void	sort_three_reverse_big(t_pile **a);
-void	find_big_big(t_pile **a, int *bigger, int *biggest);
+// void	find_big_big(t_pile **a, int *bigger, int *biggest);
+// void	find_small_big(t_pile **a, int *smaller, int *smallest);
 void	partitioning(t_pile **a, t_pile **b, int numb);
 int		check_a(t_pile **a, int pivot, int size);
 void	quicksort_b(t_pile **a, t_pile **b, int size);
 void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size);
 void	quicksort_a(t_pile **a, t_pile **b, int size);
 void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size);
+int		insertion_sort_a_small(t_pile **a, t_pile **b, int size);
+void	insertion_a_push_back(t_pile **a, t_pile **b, int size);
+int		insertion_sort_b_small(t_pile **a, t_pile **b, int size);
+void	insertion_b_push_back(t_pile **a, t_pile **b, int size);
+
 
 #endif

@@ -6,21 +6,55 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:05:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/12 19:51:59 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:10:18 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
+int	input_check_helper(char *av[])
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (av[i] != NULL)
+	{
+		j = 0;
+		if (((av[i][j] == '-' || av[i][j] == '+' || av[i][j] == ' ')
+			&& av[i][j + 1] == '\0') || av[i][j] == '\0')
+			return (1);
+		if (av[i][j] == '-' || av[i][j] == '+')
+			j++;
+		while (av[i][j] != '\0')
+		{
+			if (!(av[i][j] >= '0' && av[i][j] <= '9'))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
+	j = 0;
+	while (s1[i] == '+' || s1[i] == ' ' || s1[i] == '0')
+		i++;
+	while (s2[j] == '+' || s2[j] == ' ' || s2[j] == '0')
+		j++;
+	while (s1[i] != '\0' || s2[j] != '\0')
 	{
-		if (s1[i] == s2[i])
+		if (s1[i] == s2[j])
+		{
 			i++;
+			j++;
+		}
 		else
 			return (1);
 	}
@@ -56,21 +90,6 @@ void	lstadd_back(t_pile **lst, t_pile *new)
 	}
 }
 
-int	lstsize(t_pile **lst)
-{
-	int		i;
-	t_pile	*temp;
-
-	i = 0;
-	temp = *lst;
-	while (temp != NULL)
-	{
-		i++;
-		temp = temp->next;
-	}
-	return (i);
-}
-
 void	lstclear(t_pile **lst)
 {
 	t_pile	*temp;
@@ -86,3 +105,18 @@ void	lstclear(t_pile **lst)
 		*lst = NULL;
 	}
 }
+
+	// int	lstsize(t_pile **lst)
+	// {
+	// 	int		i;
+	// 	t_pile	*temp;
+
+	// 	i = 0;
+	// 	temp = *lst;
+	// 	while (temp != NULL)
+	// 	{
+	// 		i++;
+	// 		temp = temp->next;
+	// 	}
+	// 	return (i);
+	// }

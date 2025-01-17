@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SOURCE = main.c helper1.c helper2.c move1.c move2.c smallsorts_one.c smallsorts_two.c smallsorts_three.c bigsorts.c
+SOURCE = main.c helper1.c helper2.c helper3.c move1.c move2.c smallsorts_one.c smallsorts_two.c smallsorts_three.c bigsorts.c
 
 HEADER = pushswap.h
 

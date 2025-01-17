@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:27:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/12 20:05:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:18:17 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,24 @@ void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size)
 {
 	int	count;
 	int	i;
-	int	check;
+	int	rotate;
 
 	count = 0;
 	i = size;
-	check = 0;
+	rotate = 0;
 	while (i-- > 0)
 	{
 		if ((*a)->numb < pivot && count++ < size)
 			pb(a, b);
 		else
 		{
-			if (check_a(a, pivot, size - count) == 1 && check++ < size)
+			if (check_a(a, pivot, size - count) == 1 && rotate++ < size)
 				ra(a, 0);
 			else
 				break ;
 		}
 	}
-	while (check-- > 0)
+	while (rotate-- > 0)
 		rra(a);
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);
@@ -73,24 +73,24 @@ void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size)
 {
 	int	count;
 	int	i;
-	int	check;
+	int	rotate;
 
 	count = 0;
 	i = size;
-	check = 0;
+	rotate = 0;
 	while (i-- > 0)
 	{
 		if ((*b)->numb > pivot && count++ < size)
 			pa(a, b);
 		else
 		{
-			if (check_b(b, pivot, size - count) == 1 && check++ < size)
+			if (check_b(b, pivot, size - count) == 1 && rotate++ < size)
 				rb(b, 0);
 			else
 				break ;
 		}
 	}
-	while (check-- > 0)
+	while (rotate-- > 0)
 		rrb(b);
 	quicksort_a(a, b, count);
 	quicksort_b(a, b, size - count);

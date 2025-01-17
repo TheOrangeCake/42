@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/12 19:51:49 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/15 22:40:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	find_small(t_pile **a, int *smaller, int *smallest)
 
 void	sort_four(t_pile **a, t_pile **b)
 {
-	int		smallest;
-	int		smaller;
-	int		i;
+	int	smallest;
+	int	smaller;
+	int	i;
 
 	smallest = (*a)->numb;
 	smaller = 2147483647;
