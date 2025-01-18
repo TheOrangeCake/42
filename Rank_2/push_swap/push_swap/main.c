@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/17 16:59:45 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:04:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	input_check(char *av[])
 {
 	int	i;
 	int	j;
-	int	k;
 
 	i = 1;
 	while (av[i] != NULL)
@@ -29,10 +28,10 @@ int	input_check(char *av[])
 				return (1);
 			j++;
 		}
-		k = i + 1;
-		while (av[k] != NULL)
+		j = i + 1;
+		while (av[j] != NULL)
 		{
-			if (ft_strcmp(av[i], av[k++]) == 0)
+			if (ft_strcmp(av[i], av[j++]) == 0)
 				return (1);
 		}
 		i++;
@@ -85,23 +84,22 @@ t_pile	**push_swap(t_pile **a, int numb)
 	if (b == NULL)
 		return (lstclear(a), NULL);
 	*b = NULL;
-	if (numb == 2)
+	if (numb == 1)
 		return (lstclear(b), free(b), a);
 	if (sorted_a(a) == 0)
 		return (lstclear(b), free(b), a);
-	if (numb == 3)
+	if (numb == 2)
 		sort_two(a);
-	else if (numb == 4)
+	else if (numb == 3)
 		sort_three(a);
-	else if (numb == 5)
+	else if (numb == 4)
 		sort_four(a, b);
-	else if (numb == 6)
+	else if (numb == 5)
 		sort_five(a, b);
+	// else if (numb <= 100)
+	// 	selection_sort(a, b);
 	else
-	{
-		numb = numb - 1;
 		partitioning(a, b, numb);
-	}
 	// t_pile	*head2;
 	// head2 = *a;
 	// while (head2 != NULL)
@@ -134,7 +132,7 @@ int	main(int ac, char *av[])
 			a = initiate_a(av, a);
 		if (a == NULL)
 			return (free(a), write(2, "Error\n", 6), 0);
-		a = push_swap(a, ac);
+		a = push_swap(a, ac - 1);
 		if (a == NULL)
 			return (free(a), write(2, "Error\n", 6), 0);
 	}

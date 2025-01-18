@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/17 16:36:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:46:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	quicksort_a(t_pile **a, t_pile **b, int size)
 	else if (size == 3)
 	{
 		sort_three_big(a);
-		// insertion_a_push_back(a, b, insertion_sort_a_small(a, b, size));
-		// insertion_a_push_back(a, b, size);
 		return ;
 	}
 	else if (size == 2)
@@ -98,7 +96,6 @@ void	quicksort_b(t_pile **a, t_pile **b, int size)
 	else if (size == 3)
 	{
 		sort_three_reverse_big(b);
-		// insertion_b_push_back(a, b, insertion_sort_b_small(a, b, size));
 		return ;
 	}
 	else if (size == 2)
@@ -130,17 +127,6 @@ void	partitioning(t_pile **a, t_pile **b, int size)
 			else
 				break ;
 		}
-			// ra(a, 0);
-		// {
-		// 	if ((*a)->numb > pivot && count >= 2
-		// 		&& (*b)->numb < ((t_pile *)((*b)->next))->numb)
-		// 		rrab(a, b);
-		// 	else
-		// 		ra(a, 0);
-		// }
-		// if (count >= 2
-		// 	&& (*b)->numb < ((t_pile *)((*b)->next))->numb)
-		// 	sb(b);
 	}
 	quicksort_a(a, b, size - count);
 	quicksort_b(a, b, count);

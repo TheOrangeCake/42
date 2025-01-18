@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/17 16:27:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:53:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	quicksort_b(t_pile **a, t_pile **b, int size);
 void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size);
 void	quicksort_a(t_pile **a, t_pile **b, int size);
 void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size);
-int		insertion_sort_a_small(t_pile **a, t_pile **b, int size);
-void	insertion_a_push_back(t_pile **a, t_pile **b, int size);
-int		insertion_sort_b_small(t_pile **a, t_pile **b, int size);
-void	insertion_b_push_back(t_pile **a, t_pile **b, int size);
+void	selection_sort(t_pile **a, t_pile **b);
 
 
 #endif
