@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SOURCE = main.c helper1.c helper2.c helper3.c move1.c move2.c smallsorts1.c smallsorts2.c smallsorts3.c bigsorts.c
+SOURCE = main.c helper1.c helper2.c move1.c move2.c smallsorts1.c smallsorts2.c smallsorts3.c quicksort.c quicksort_next.c
 
 HEADER = pushswap.h
 
@@ -18,8 +18,8 @@ $(LIBFT):
 #
 
 GCC = gcc
-FLAGS = -Wextra -Wall -Werror
-# FLAGS =
+# FLAGS = -Wextra -Wall -Werror
+FLAGS =
 RM = rm -f
 
 all : $(LIBFT) $(NAME)

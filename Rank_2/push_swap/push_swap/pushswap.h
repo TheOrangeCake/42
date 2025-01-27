@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/18 16:53:38 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:03:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ t_pile	*lstnew(void *content);
 void	lstclear(t_pile **lst);
 int		input_check_helper(char *av[]);
 int		check_0(char *av[]);
+int		sorted_a(t_pile **a);
+int		sorted_b(t_pile **a);
 void	pb(t_pile **a, t_pile **b);
 void	pa(t_pile **a, t_pile **b);
 void	sa(t_pile **a);
 void	sb(t_pile **b);
-void	ra(t_pile **a, int i);
-void	rb(t_pile **b, int i);
-void	rrab(t_pile **a, t_pile **b);
+void	ra(t_pile **a);
+void	rb(t_pile **b);
+// void	rrab(t_pile **a, t_pile **b);
 void	rra(t_pile **a);
 void	rrb(t_pile **b);
 void	sort_two(t_pile **a);
@@ -44,15 +46,14 @@ void	sort_two_reverse(t_pile **b);
 void	sort_three_reverse(t_pile **a);
 void	sort_three_big(t_pile **a);
 void	sort_three_reverse_big(t_pile **a);
-// void	find_big_big(t_pile **a, int *bigger, int *biggest);
-// void	find_small_big(t_pile **a, int *smaller, int *smallest);
 void	partitioning(t_pile **a, t_pile **b, int numb);
 int		check_a(t_pile **a, int pivot, int size);
 void	quicksort_b(t_pile **a, t_pile **b, int size);
 void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size);
 void	quicksort_a(t_pile **a, t_pile **b, int size);
 void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size);
-void	selection_sort(t_pile **a, t_pile **b);
+
+// void	selection_sort(t_pile **a, t_pile **b, int size);
 
 
 #endif

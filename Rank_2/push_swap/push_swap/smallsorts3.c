@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   smallsorts_three.c                                 :+:      :+:    :+:   */
+/*   smallsorts3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:05:58 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/12 19:50:02 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/22 22:24:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sort_three_big_next(t_pile **a)
 	c = b->next;
 	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb < (*a)->numb)
 	{
-		ra(a, 0);
+		ra(a);
 		sa(a);
 		rra(a);
 		sa(a);
@@ -29,7 +29,7 @@ void	sort_three_big_next(t_pile **a)
 	else if ((*a)->numb > b->numb && b->numb > c->numb)
 	{
 		sa(a);
-		ra(a, 0);
+		ra(a);
 		sa(a);
 		rra(a);
 		sa(a);
@@ -45,7 +45,7 @@ void	sort_three_big(t_pile **a)
 	c = b->next;
 	if ((*a)->numb < b->numb && b->numb > c->numb && c->numb > (*a)->numb)
 	{
-		ra(a, 0);
+		ra(a);
 		sa(a);
 		rra(a);
 	}
@@ -55,7 +55,7 @@ void	sort_three_big(t_pile **a)
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
 	{
 		sa(a);
-		ra(a, 0);
+		ra(a);
 		sa(a);
 		rra(a);
 	}
