@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 19:46:29 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 19:46:53 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:49:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ void	rb(t_pile **b)
 
 	temp = *b;
 	temp2 = *b;
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = *b;
-	temp2 = temp2->next;
-	(*b)->next = NULL;
-	*b = temp2;
+	if ((*b) != NULL)
+	{
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = *b;
+		temp2 = temp2->next;
+		(*b)->next = NULL;
+		*b = temp2;
+	}
 }
 
 void	rra(t_pile **a)
@@ -34,14 +37,17 @@ void	rra(t_pile **a)
 
 	temp = *a;
 	temp2 = *a;
-	while (temp->next != NULL)
+	if ((*a) != NULL)
 	{
-		temp2 = temp;
-		temp = temp->next;
+		while (temp->next != NULL)
+		{
+			temp2 = temp;
+			temp = temp->next;
+		}
+		temp->next = *a;
+		temp2->next = NULL;
+		*a = temp;
 	}
-	temp->next = *a;
-	temp2->next = NULL;
-	*a = temp;
 }
 
 void	rrb(t_pile **b)
@@ -51,12 +57,24 @@ void	rrb(t_pile **b)
 
 	temp = *b;
 	temp2 = *b;
-	while (temp->next != NULL)
+	if ((*b) != NULL)
 	{
-		temp2 = temp;
-		temp = temp->next;
+		while (temp->next != NULL)
+		{
+			temp2 = temp;
+			temp = temp->next;
+		}
+		temp->next = *b;
+		temp2->next = NULL;
+		*b = temp;
 	}
-	temp->next = *b;
-	temp2->next = NULL;
-	*b = temp;
+}
+
+void	ss(t_pile **a, t_pile **b)
+{
+		if ((*a) != NULL && (*b) != NULL)
+	{
+		sa(a);
+		sb(b);
+	}
 }

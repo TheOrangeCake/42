@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 19:52:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:52:08 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	pb(t_pile **a, t_pile **b);
 void	pa(t_pile **a, t_pile **b);
 void	sa(t_pile **a);
 void	sb(t_pile **b);
+void	ss(t_pile **a, t_pile **b);
 void	ra(t_pile **a);
 void	rb(t_pile **b);
 void	rra(t_pile **a);
@@ -58,5 +59,6 @@ void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size);
 
 // void	selection_sort(t_pile **a, t_pile **b, int size);
 
+int	ft_strcmp_checker(char *s1, char *s2);
 
 #endif

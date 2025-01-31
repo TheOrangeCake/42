@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:24:18 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 19:53:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:52:18 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,21 @@ int	check_0(char *av[])
 		else if (ft_atoi(av[i]) == 0)
 			j = 0;
 		i++;
+	}
+	return (0);
+}
+
+int	ft_strcmp_checker(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+			return (1);
 	}
 	return (0);
 }

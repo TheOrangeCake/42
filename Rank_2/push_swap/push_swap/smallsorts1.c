@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   smallsorts_one.c                                   :+:      :+:    :+:   */
+/*   smallsorts1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 23:10:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/15 22:40:38 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:29:17 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	sort_three(t_pile **a)
 		rra(a);
 	}
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb < (*a)->numb)
-		ra(a, 0);
+		ra(a);
 	else if ((*a)->numb > b->numb && b->numb < c->numb && c->numb > (*a)->numb)
 		sa(a);
 }
@@ -82,7 +82,7 @@ void	sort_four(t_pile **a, t_pile **b)
 		if ((*a)->numb == smallest)
 			pb(a, b);
 		else
-			ra(a, 0);
+			ra(a);
 		i--;
 	}
 	sort_three(a);
@@ -104,7 +104,7 @@ void	sort_five(t_pile **a, t_pile **b)
 		if ((*a)->numb == smaller || (*a)->numb == smallest)
 			pb(a, b);
 		else
-			ra(a, 0);
+			ra(a);
 		i--;
 	}
 	sort_three(a);
