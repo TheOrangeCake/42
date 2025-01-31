@@ -6,75 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/27 22:59:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:53:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-int	input_check(char *av[])
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	while (av[i] != NULL)
-	{
-		j = 0;
-		while (av[i][j] != '\0')
-		{
-			if ((av[i][j] < '0' || av[i][j] > '9') && (av[i][j] != ' '
-					&& av[i][j] != '-' && av[i][j] != '+'))
-				return (1);
-			j++;
-		}
-		j = i + 1;
-		while (av[j] != NULL)
-		{
-			if (ft_strcmp(av[i], av[j++]) == 0)
-				return (1);
-		}
-		i++;
-	}
-	if (input_check_helper(av) == 1 || check_0(av) == 1)
-		return (1);
-	return (0);
-}
-
-t_pile	**initiate_a(char *av[], t_pile **a)
-{
-	t_pile	*node;
-	int		i;
-
-	i = 1;
-	while (av[i] != NULL)
-	{
-		node = lstnew(av[i]);
-		if (node == NULL)
-			return (lstclear(a), NULL);
-		lstadd_back(a, node);
-		i++;
-	}
-	return (a);
-}
-
-int	sorted_a(t_pile **a)
-{
-	t_pile	*temp;
-	int		i;
-
-	temp = *a;
-	i = temp->numb;
-	temp = temp->next;
-	while (temp != NULL)
-	{
-		if (i > temp->numb)
-			return (1);
-		i = temp->numb;
-		temp = temp->next;
-	}
-	return (0);
-}
 
 t_pile	**push_swap(t_pile **a, int numb)
 {
@@ -96,23 +32,8 @@ t_pile	**push_swap(t_pile **a, int numb)
 		sort_four(a, b);
 	else if (numb == 5)
 		sort_five(a, b);
-	// else if (numb <= 100)
-	// 	selection_sort(a, b);
 	else
 		partitioning(a, b ,numb);
-					// t_pile	*head2;
-					// head2 = *a;
-					// while (head2 != NULL)
-					// {
-					// 	ft_printf("a:%d\n", head2->numb);
-					// 	head2 = head2 -> next;
-					// }
-					// head2 = *b;
-					// while (head2 != NULL)
-					// {
-					// 	ft_printf("b:%d\n", head2 -> numb);
-					// 	head2 = head2 -> next;
-					// }
 	return (lstclear(b), free(b), a);
 }
 

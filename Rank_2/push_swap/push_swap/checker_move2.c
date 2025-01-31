@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move2.c                                            :+:      :+:    :+:   */
+/*   checker_move2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 22:10:04 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 19:54:30 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/01/31 19:46:29 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/01/31 19:46:53 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	rb(t_pile **b)
 	temp2 = temp2->next;
 	(*b)->next = NULL;
 	*b = temp2;
-	ft_printf("rb\n");
 }
 
 void	rra(t_pile **a)
@@ -43,7 +42,6 @@ void	rra(t_pile **a)
 	temp->next = *a;
 	temp2->next = NULL;
 	*a = temp;
-	ft_printf("rra\n");
 }
 
 void	rrb(t_pile **b)
@@ -61,5 +59,4 @@ void	rrb(t_pile **b)
 	temp->next = *b;
 	temp2->next = NULL;
 	*b = temp;
-	ft_printf("rrb\n");
 }

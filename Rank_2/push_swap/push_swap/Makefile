@@ -2,6 +2,8 @@ NAME = push_swap
 
 SOURCE = main.c helper1.c helper2.c move1.c move2.c smallsorts1.c smallsorts2.c smallsorts3.c quicksort.c quicksort_next.c
 
+S_BONUS = checker_main.c helper1.c helper2.c checker_move1.c checker_move2.c
+
 HEADER = pushswap.h
 
 OBJ_DIR = obj

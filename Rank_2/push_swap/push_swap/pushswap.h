@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/27 23:03:56 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:52:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,18 @@ int		input_check_helper(char *av[]);
 int		check_0(char *av[]);
 int		sorted_a(t_pile **a);
 int		sorted_b(t_pile **a);
+t_pile	**initiate_a(char *av[], t_pile **a);
+int		input_check(char *av[]);
+
 void	pb(t_pile **a, t_pile **b);
 void	pa(t_pile **a, t_pile **b);
 void	sa(t_pile **a);
 void	sb(t_pile **b);
 void	ra(t_pile **a);
 void	rb(t_pile **b);
-// void	rrab(t_pile **a, t_pile **b);
 void	rra(t_pile **a);
 void	rrb(t_pile **b);
+
 void	sort_two(t_pile **a);
 void	sort_three(t_pile **a);
 void	sort_four(t_pile **a, t_pile **b);
