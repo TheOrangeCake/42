@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 19:45:38 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 22:44:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:34:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ void	sa(t_pile **a)
 	t_pile	*temp;
 
 	temp = *a;
-	if (temp->next != NULL)
+	if ((*a) != NULL)
 	{
-		temp = temp->next;
-		(*a)->next = temp->next;
-		temp->next = *a;
-		*a = temp;
+		if (temp->next != NULL)
+		{
+			temp = temp->next;
+			(*a)->next = temp->next;
+			temp->next = *a;
+			*a = temp;
+		}
 	}
 }
 
@@ -57,12 +60,15 @@ void	sb(t_pile **b)
 	t_pile	*temp;
 
 	temp = *b;
-	if (temp->next != NULL)
+	if ((*b) != NULL)
 	{
-		temp = temp->next;
-		(*b)->next = temp->next;
-		temp->next = *b;
-		*b = temp;
+		if (temp->next != NULL)
+		{
+			temp = temp->next;
+			(*b)->next = temp->next;
+			temp->next = *b;
+			*b = temp;
+		}
 	}
 }
 
