@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:59:53 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 22:00:12 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:06:02 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_pile	**push_swap(t_pile **a, int numb)
 	else if (numb == 5)
 		sort_five(a, b);
 	else
-		partitioning(a, b ,numb);
+		partitioning(a, b, numb);
 	return (lstclear(b), free(b), a);
 }
 

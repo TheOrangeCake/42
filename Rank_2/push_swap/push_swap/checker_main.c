@@ -6,15 +6,19 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 19:44:25 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/02 14:36:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:06:14 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-t_pile	**do_move_next(t_pile **a, t_pile **b, char *line)
+void	**do_move_next(t_pile **a, t_pile **b, char *line)
 {
-	if (line != NULL && ft_strcmp_checker(line, "pb\n") == 0)
+	if (line != NULL && ft_strcmp_checker(line, "ss\n") == 0)
+		ss(a, b);
+	else if (line != NULL && ft_strcmp_checker(line, "pa\n") == 0)
+		pa(a, b);
+	else if (line != NULL && ft_strcmp_checker(line, "pb\n") == 0)
 		pb(a, b);
 	else if (line != NULL && ft_strcmp_checker(line, "ra\n") == 0)
 		ra(a);
@@ -47,22 +51,22 @@ t_pile	**do_move(t_pile **a, t_pile **b, char *line)
 			sa(a);
 		else if (line != NULL && ft_strcmp_checker(line, "sb\n") == 0)
 			sb(b);
-		else if (line != NULL && ft_strcmp_checker(line, "ss\n") == 0)
-			ss(a, b);
-		else if (line != NULL && ft_strcmp_checker(line, "pa\n") == 0)
-			pa(a, b);
 		else if ((line != NULL && ft_strcmp_checker(line, "ra\n") == 0)
-				|| (line != NULL && ft_strcmp_checker(line, "rb\n") == 0)
-				|| (line != NULL && ft_strcmp_checker(line, "rr\n") == 0)
-				|| (line != NULL && ft_strcmp_checker(line, "rra\n") == 0)
-				|| (line != NULL && ft_strcmp_checker(line, "rrb\n") == 0)
-				|| (line != NULL && ft_strcmp_checker(line, "rrr\n") == 0)
-				|| (line != NULL && ft_strcmp_checker(line, "pb\n") == 0))
+			|| (line != NULL && ft_strcmp_checker(line, "rb\n") == 0)
+			|| (line != NULL && ft_strcmp_checker(line, "rr\n") == 0)
+			|| (line != NULL && ft_strcmp_checker(line, "rra\n") == 0)
+			|| (line != NULL && ft_strcmp_checker(line, "rrb\n") == 0)
+			|| (line != NULL && ft_strcmp_checker(line, "rrr\n") == 0)
+			|| (line != NULL && ft_strcmp_checker(line, "pb\n") == 0)
+			|| (line != NULL && ft_strcmp_checker(line, "pa\n") == 0)
+			|| (line != NULL && ft_strcmp_checker(line, "ss\n") == 0))
 			do_move_next(a, b, line);
 		else
-			return (write(2, "Error\n", 6), a);
+			return (free(line), get_next_line(-100),
+				write(2, "Error\n", 6), NULL);
 		free(line);
 	}
+	return (a);
 }
 
 t_pile	**checker(t_pile **a)
@@ -74,13 +78,19 @@ t_pile	**checker(t_pile **a)
 	if (b == NULL)
 		return (lstclear(a), NULL);
 	*b = NULL;
-	do_move(a, b, line);
+	if (do_move(a, b, line) != NULL)
+	{
+		if (sorted_a(a) == 0 && (*b) == NULL)
+			write(1, "OK\n", 3);
+		else
+			write(1, "KO\n", 3);
+	}
 	return (lstclear(b), free(b), a);
 }
 
 int	main(int ac, char *av[])
 {
-		t_pile	**a;
+	t_pile	**a;
 
 	a = malloc(sizeof(t_pile *));
 	if (a == NULL)
@@ -93,10 +103,10 @@ int	main(int ac, char *av[])
 		else
 			a = initiate_a(av, a);
 		if (a == NULL)
-			return (free(a), write(2, "Error\n", 6), 0);
+			return (lstclear(a), free(a), write(2, "Error\n", 6), 0);
 		a = checker(a);
 		if (a == NULL)
-			return (free(a), write(2, "Error\n", 6), 0);
+			return (lstclear(a), free(a), write(2, "Error\n", 6), 0);
 	}
 	else if (ac == 1)
 		write(2, "Error\n", 6);

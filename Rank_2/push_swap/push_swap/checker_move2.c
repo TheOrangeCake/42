@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 19:46:29 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 22:49:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:00:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	rrb(t_pile **b)
 
 void	ss(t_pile **a, t_pile **b)
 {
-		if ((*a) != NULL && (*b) != NULL)
+	if ((*a) != NULL && (*b) != NULL)
 	{
 		sa(a);
 		sb(b);

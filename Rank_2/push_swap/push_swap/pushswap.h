@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/31 22:52:08 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:08:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_pile
 int		ft_strcmp(char *s1, char *s2);
 void	lstadd_back(t_pile **lst, t_pile *new);
 t_pile	*lstnew(void *content);
-// int		lstsize(t_pile **lst);
 void	lstclear(t_pile **lst);
 int		input_check_helper(char *av[]);
 int		check_0(char *av[]);
@@ -57,8 +56,6 @@ void	quicksort_b_next(t_pile **a, t_pile **b, int pivot, int size);
 void	quicksort_a(t_pile **a, t_pile **b, int size);
 void	quicksort_a_next(t_pile **a, t_pile **b, int pivot, int size);
 
-// void	selection_sort(t_pile **a, t_pile **b, int size);
-
-int	ft_strcmp_checker(char *s1, char *s2);
+int		ft_strcmp_checker(char *s1, char *s2);
 
 #endif
