@@ -6,11 +6,24 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/26 21:59:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/27 00:07:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	free_split(char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list[i] != NULL)
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
+}
 
 char	*find_paths(char **envp)
 {
@@ -24,11 +37,12 @@ void	we_gonna_fork_this(t_pipex pipex, char **av, char **envp)
 	pipex.pid1 = fork();
 	if (pipex.pid1 == 0)
 		process1(pipex, av, envp);
+	// waitpid(pipex.pid1, NULL, 0);
 	pipex.pid2 = fork();
 	if (pipex.pid2 == 0)
 		process2(pipex, av, envp);
-	waitpid(pipex.pid1, NULL, 0);
-	waitpid(pipex.pid2, NULL, 0);
+	// waitpid(pipex.pid2, NULL, 0);
+	free_split(pipex.paths);
 }
 
 int	main(int ac, char **av, char **envp)

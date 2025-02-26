@@ -6,14 +6,14 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/26 23:08:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/26 23:32:30 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 # include "libft.h"
-# include "<sys/wait.h>"
+// # include "<sys/wait.h>"
 
 typedef struct s_pipex
 {
