@@ -2,7 +2,7 @@
 
 NAME = pipex
 
-SOURCE = main.c
+SOURCE = main.c children.c
 
 S_BONUS = 
 
