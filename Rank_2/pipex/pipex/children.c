@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/27 15:50:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:58:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**cmd_list(t_pipex pipex, char *cmd)
 char	*cmd_path(t_pipex pipex, char *cmd)
 {
 	char	*temp;
-	
+
 	while (pipex.paths != NULL)
 	{
 		temp = ft_strjoin(*pipex.paths, "/");
@@ -49,7 +49,7 @@ void	process1(t_pipex pipex, char **av, char **envp)
 {
 	int	error;
 
-	error = dup2(pipex.fd_infile, 0);
+	error = dup2(pipex.fd_in, 0);
 	if (error < 0)
 	{
 		free_split(pipex.paths);
@@ -77,14 +77,14 @@ void	process1(t_pipex pipex, char **av, char **envp)
 void	process2(t_pipex pipex, char **av, char **envp)
 {
 	int	error;
-	
+
 	error = dup2(pipex.pipe[0], 0);
 	if (error < 0)
 	{
 		free_split(pipex.paths);
 		exit (1);
 	}
-	error = dup2(pipex.fd_outfile, 1);
+	error = dup2(pipex.fd_out, 1);
 	if (error < 0)
 	{
 		free_split(pipex.paths);

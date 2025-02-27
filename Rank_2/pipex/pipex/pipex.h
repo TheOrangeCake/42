@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/27 15:39:07 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:58:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 typedef struct s_pipex
 {
-	int		fd_infile;
-	int		fd_outfile;
+	int		fd_in;
+	int		fd_out;
 	int		pipe[2];
 	pid_t	pid1;
 	pid_t	pid2;
@@ -26,7 +26,7 @@ typedef struct s_pipex
 	char	**paths;
 	char	*cmd_path;
 	char	**cmd_list;
-} t_pipex;
+}	t_pipex;
 
 void	free_split(char **list);
 void	process1(t_pipex pipex, char **av, char **envp);
