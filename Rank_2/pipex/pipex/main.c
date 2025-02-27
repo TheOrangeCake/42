@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/27 00:07:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:54:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	main(int ac, char **av, char **envp)
 			return (write(2, "fail to create pipe\n", 20), 1);
 		pipex.path_string = find_paths(envp);
 		pipex.paths = ft_split(pipex.path_string, ':');
+		if (pipex.paths == NULL)
+			return (write(2, "Function ft_split failed\n", 25), 1);
 		we_gonna_fork_this(pipex, av, envp);
 	}
 	else
@@ -75,3 +77,5 @@ int	main(int ac, char **av, char **envp)
 // 	ft_printf("%s\n", *pipex.paths);
 // 	pipex.paths++;
 // }
+
+// ./pipex file1.txt "grep a1" "wc -l" file2.txt
