@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := all
+
 NAME = push_swap
 
 N_BONUS = checker
@@ -24,8 +26,8 @@ $(LIBFT):
 #
 
 GCC = gcc
-# FLAGS = -Wextra -Wall -Werror
-FLAGS =
+FLAGS = -Wextra -Wall -Werror
+# FLAGS =
 RM = rm -f
 
 all : $(LIBFT) $(NAME) $(N_BONUS)

@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := all
+
 NAME = fdf
 
 SOURCE = main.c start_map.c fill_map.c show_points.c bresenham.c projections.c color.c hook.c key_press.c key_press_translation.c key_press_rotation.c change.c
