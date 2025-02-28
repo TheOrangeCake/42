@@ -2,9 +2,7 @@
 
 NAME = pipex
 
-SOURCE = main.c children.c
-
-S_BONUS = 
+SOURCE = main.c children.c helper.c
 
 HEADER = pipex.h
 
@@ -24,13 +22,13 @@ $(LIBFT):
 #
 
 GCC = gcc
-# FLAGS = -Wextra -Wall -Werror
-FLAGS =
+FLAGS = -Wextra -Wall -Werror
+# FLAGS =
 RM = rm -f
 
 all : $(LIBFT) $(NAME)
 
-# bonus : $(LIBFT) $(N_BONUS)
+bonus : all
 
 $(OBJ_DIR)/%.o:%.c
 	@mkdir -p $(OBJ_DIR)
@@ -56,4 +54,4 @@ fclean:		clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

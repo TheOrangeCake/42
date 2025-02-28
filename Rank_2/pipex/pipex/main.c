@@ -6,24 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/27 15:59:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:37:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	free_split(char **list)
-{
-	int	i;
-
-	i = 0;
-	while (list[i] != NULL)
-	{
-		free(list[i]);
-		i++;
-	}
-	free(list);
-}
 
 char	*find_paths(char **envp)
 {
@@ -32,17 +19,33 @@ char	*find_paths(char **envp)
 	return (*envp + 5);
 }
 
-void	we_gonna_fork_this(t_pipex pipex, char **av, char **envp)
+void	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 {
+	int	i;
+
+	i = 3;
 	pipex.pid1 = fork();
 	if (pipex.pid1 == 0)
 		process1(pipex, av, envp);
 	// waitpid(pipex.pid1, NULL, 0);
-	pipex.pid2 = fork();
-	if (pipex.pid2 == 0)
-		process2(pipex, av, envp);
-	// waitpid(pipex.pid2, NULL, 0);
+	if (ac > 5)
+	{
+		while(i < (ac - 2))
+		{
+			pipex.pid2 = fork();
+			if (pipex.pid2 == 0)
+				process2(pipex, i, av, envp);
+			// waitpid(pipex.pid2, NULL, 0);
+			i++;
+		}
+	}
+	pipex.pid3 = fork();
+	if (pipex.pid3 == 0)
+		process3(pipex, ac, av, envp);
+	// waitpid(pipex.pid3, NULL, 0);
 	free_split(pipex.paths);
+	close(pipex.fd_in);
+	close(pipex.fd_out);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -59,23 +62,29 @@ int	main(int ac, char **av, char **envp)
 		pipex.fd_out = open(av[ac - 1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 		if (pipex.fd_out < 0)
 			return (write(2, "fail to open outfile\n", 21), 1);
-		if (pipe(pipex.pipe) < 0)
+		if (pipe(pipex.pipe1) < 0)
+			return (write(2, "fail to create pipe\n", 20), 1);
+		if (pipe(pipex.pipe2) < 0)
 			return (write(2, "fail to create pipe\n", 20), 1);
 		pipex.path_string = find_paths(envp);
 		pipex.paths = ft_split(pipex.path_string, ':');
 		if (pipex.paths == NULL)
 			return (write(2, "Function ft_split failed\n", 25), 1);
-		we_gonna_fork_this(pipex, av, envp);
+		we_gonna_fork_this(pipex, ac, av, envp);
 	}
 	else
 		write(2, "Not enough argument\n", 20);
 	return (0);
 }
 
-// while (*pipex.paths != NULL)
-// {
-// 	ft_printf("%s\n", *pipex.paths);
-// 	pipex.paths++;
-// }
+// 2: ./pipex file1.txt "cat" "grep a1" file2.txt
+// < file1.txt cat | grep a1 > file2.txt
 
-// ./pipex file1.txt "grep a1" "wc -l" file2.txt
+// 3: ./pipex file1.txt "cat" "grep a1" "wc -w" file2.txt
+// < file1.txt cat | grep a1 | wc -w > file2.txt
+
+// 4: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" file2.txt
+
+// 5: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" "tr '[:upper:]' '[:lower:]'" file2.txt
+
+// 6: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" "tr '[:upper:]' '[:lower:]'" "wc -w" file2.txt
