@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/28 18:37:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:41:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ char	*cmd_path(t_pipex pipex, char *cmd)
 
 void	process1(t_pipex pipex, char **av, char **envp)
 {
-	pipex.error = dup2(pipex.fd_in, 0);
-	if (pipex.error < 0)
+	if (dup2(pipex.fd_in, 0) < 0)
 		free_exit(pipex);
-	pipex.error = dup2(pipex.pipe1[1], 1);
-	if (pipex.error < 0)
+	if (dup2(pipex.pipe1[1], 1) < 0)
 		free_exit(pipex);
 	close_pipe1(pipex);
 	pipex.cmd_list = cmd_list(pipex, av[2]);
@@ -69,22 +67,18 @@ void	process2(t_pipex pipex, int count, char **av, char **envp)
 {
 	if (count % 2 == 1)
 	{
-		pipex.error = dup2(pipex.pipe1[0], 0);
-		if (pipex.error < 0)
+		if (dup2(pipex.pipe1[0], 0) < 0)
 			free_exit(pipex);
-		pipex.error = dup2(pipex.pipe2[1], 1);
-		if (pipex.error < 0)
+		if (dup2(pipex.pipe2[1], 1) < 0)
 			free_exit(pipex);
 		close_pipe1(pipex);
 		close(pipex.pipe2[0]);
 	}
 	else
 	{
-		pipex.error = dup2(pipex.pipe2[0], 0);
-		if (pipex.error < 0)
+		if (dup2(pipex.pipe2[0], 0) < 0)
 			free_exit(pipex);
-		pipex.error = dup2(pipex.pipe1[1], 1);
-		if (pipex.error < 0)
+		if (dup2(pipex.pipe1[1], 1) < 0)
 			free_exit(pipex);
 		close_pipe2(pipex);
 		close(pipex.pipe1[0]);
