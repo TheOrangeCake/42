@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/01 00:54:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/01 22:50:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 # include "libft.h"
 # include "sys/wait.h"
+# include "stdio.h"
 
 typedef struct s_pipex
 {
@@ -22,6 +23,7 @@ typedef struct s_pipex
 	int		pipe1[2];
 	int		pipe2[2];
 	int		pipe3[2];
+	int		temp[0];
 	pid_t	pid1;
 	pid_t	pid2;
 	pid_t	pid3;
@@ -30,6 +32,7 @@ typedef struct s_pipex
 	char	*cmd_path;
 	char	**cmd_list;
 	int		error;
+	int		i;
 }	t_pipex;
 
 void	free_split(char **list);
