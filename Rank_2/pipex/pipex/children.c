@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/28 18:42:03 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/01 02:05:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	process1(t_pipex pipex, char **av, char **envp)
 	if (dup2(pipex.pipe1[1], 1) < 0)
 		free_exit(pipex);
 	close_pipe1(pipex);
+	close_pipe2(pipex);
 	pipex.cmd_list = cmd_list(pipex, av[2]);
 	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
 	pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
@@ -71,8 +72,6 @@ void	process2(t_pipex pipex, int count, char **av, char **envp)
 			free_exit(pipex);
 		if (dup2(pipex.pipe2[1], 1) < 0)
 			free_exit(pipex);
-		close_pipe1(pipex);
-		close(pipex.pipe2[0]);
 	}
 	else
 	{
@@ -80,9 +79,9 @@ void	process2(t_pipex pipex, int count, char **av, char **envp)
 			free_exit(pipex);
 		if (dup2(pipex.pipe1[1], 1) < 0)
 			free_exit(pipex);
-		close_pipe2(pipex);
-		close(pipex.pipe1[0]);
 	}
+	close_pipe1(pipex);
+	close_pipe2(pipex);
 	pipex.cmd_list = cmd_list(pipex, av[count]);
 	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
 	pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
@@ -92,26 +91,19 @@ void	process2(t_pipex pipex, int count, char **av, char **envp)
 		free_exit(pipex);
 }
 
-void	process3(t_pipex pipex, int ac, char **av, char **envp)
+void	process3(t_pipex pipex, int count, char **av, char **envp)
 {
-	if (ac % 2 == 1)
-	{
+	if (count % 2 == 1)
 		pipex.error = dup2(pipex.pipe1[0], 0);
-		close_pipe1(pipex);
-		close_pipe2(pipex);
-	}	
-	else if (ac % 2 == 0)
-	{
+	else
 		pipex.error = dup2(pipex.pipe2[0], 0);
-		close_pipe1(pipex);
-		close_pipe2(pipex);
-	}
 	if (pipex.error < 0)
 		free_exit(pipex);
-	pipex.error = dup2(pipex.fd_out, 1);
-	if (pipex.error < 0)
+	close_pipe1(pipex);
+	close_pipe2(pipex);
+	if (dup2(pipex.fd_out, 1) < 0)
 		free_exit(pipex);
-	pipex.cmd_list = cmd_list(pipex, av[ac - 2]);
+	pipex.cmd_list = cmd_list(pipex, av[count]);
 	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
 	pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
 	free(pipex.cmd_path);

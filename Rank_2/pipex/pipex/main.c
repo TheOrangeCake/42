@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/28 18:37:39 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/01 02:06:13 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ void	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 			pipex.pid2 = fork();
 			if (pipex.pid2 == 0)
 				process2(pipex, i, av, envp);
-			// waitpid(pipex.pid2, NULL, 0);
 			i++;
 		}
+		// waitpid(pipex.pid2, NULL, 0);
 	}
 	pipex.pid3 = fork();
 	if (pipex.pid3 == 0)
-		process3(pipex, ac, av, envp);
-	// waitpid(pipex.pid3, NULL, 0);
+		process3(pipex, i, av, envp);
+	// waitpid(pipex.pid2, NULL, 0);
+	waitpid(pipex.pid3, NULL, 0);
 	free_split(pipex.paths);
 	close(pipex.fd_in);
 	close(pipex.fd_out);
@@ -80,11 +81,8 @@ int	main(int ac, char **av, char **envp)
 // 2: ./pipex file1.txt "cat" "grep a1" file2.txt
 // < file1.txt cat | grep a1 > file2.txt
 
-// 3: ./pipex file1.txt "cat" "grep a1" "wc -w" file2.txt
-// < file1.txt cat | grep a1 | wc -w > file2.txt
+// 3: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" file2.txt
 
-// 4: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" file2.txt
+// 4: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" "wc -w" file2.txt
 
-// 5: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" "tr '[:upper:]' '[:lower:]'" file2.txt
-
-// 6: ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" "tr '[:upper:]' '[:lower:]'" "wc -w" file2.txt
+// < file1.txt cat | grep a1 | tr '[:lower:]' '[:upper:]' | wc -w > file2.txt
