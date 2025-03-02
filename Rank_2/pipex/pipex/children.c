@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/02 15:32:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:10:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,11 @@ char	*cmd_path(t_pipex pipex, char *cmd)
 
 void	process1(t_pipex pipex, char **av, char **envp)
 {
-	if (pipex.error = dup2(pipex.fd_in, 0) < 0)
+	if (dup2(pipex.fd_in, 0) < 0)
 		free_exit(pipex);
 	if (dup2(pipex.pipe1[1], 1) < 0)
 		free_exit(pipex);
 	close_pipe1(pipex);
-	close_pipe2(pipex);
 	pipex.cmd_list = cmd_list(pipex, av[2]);
 	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
 	pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
@@ -87,7 +86,6 @@ void	process3(t_pipex pipex, int count, char **av, char **envp)
 	if (dup2(pipex.pipe1[0], 0) < 0)
 		free_exit(pipex);
 	close_pipe1(pipex);
-	close_pipe2(pipex);
 	if (dup2(pipex.fd_out, 1) < 0)
 		free_exit(pipex);
 	pipex.cmd_list = cmd_list(pipex, av[count]);

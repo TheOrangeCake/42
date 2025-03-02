@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/02 15:34:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:13:20 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ void	bonus_read(t_pipex pipex, char *LIMITER)
 	while (1)
 	{
 		pipex.line = get_next_line(0);
-		if (pipex.line == NULL || !ft_strncmp(pipex.line, LIMITER, ft_strlen(LIMITER)))
+		if (pipex.line == NULL
+			|| !ft_strncmp(pipex.line, LIMITER, ft_strlen(LIMITER)))
 		{
 			free(pipex.line);
 			get_next_line(-100);
-			break;
+			break ;
 		}
 		ft_printf("%s", pipex.line);
 		free(pipex.line);
@@ -73,7 +74,7 @@ void	bonus(t_pipex pipex, int ac, char **av, char **envp)
 {
 	if (ac < 6)
 		exit(1);
-	pipex.fd_in = open(".temp",  O_CREAT | O_TRUNC | O_RDWR, 0000644);
+	pipex.fd_in = open(".temp", O_CREAT | O_TRUNC | O_RDWR, 0000644);
 	if (pipex.fd_in < 0)
 		exit(1);
 	bonus_read(pipex, av[2]);
@@ -88,6 +89,8 @@ void	bonus(t_pipex pipex, int ac, char **av, char **envp)
 		exit(1);
 	av++;
 	ac--;
+	close(pipex.fd_in);
+	pipex.fd_in = open(".temp", O_RDONLY);
 	we_gonna_fork_this(pipex, ac, av, envp);
 	unlink(".temp");
 }
