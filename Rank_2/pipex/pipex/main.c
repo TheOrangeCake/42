@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/01 23:11:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:34:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,36 @@ void	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 	close(pipex.fd_out);
 }
 
+void	bonus_read(t_pipex pipex, char *LIMITER)
+{
+	if (dup2(pipex.fd_in, 1) < 0)
+	{
+		unlink(".temp");
+		exit(1);
+	}
+	while (1)
+	{
+		pipex.line = get_next_line(0);
+		if (pipex.line == NULL || !ft_strncmp(pipex.line, LIMITER, ft_strlen(LIMITER)))
+		{
+			free(pipex.line);
+			get_next_line(-100);
+			break;
+		}
+		ft_printf("%s", pipex.line);
+		free(pipex.line);
+	}
+}
+
 void	bonus(t_pipex pipex, int ac, char **av, char **envp)
 {
-	pipex.fd_out = open(av[ac - 1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
+	if (ac < 6)
+		exit(1);
+	pipex.fd_in = open(".temp",  O_CREAT | O_TRUNC | O_RDWR, 0000644);
+	if (pipex.fd_in < 0)
+		exit(1);
+	bonus_read(pipex, av[2]);
+	pipex.fd_out = open(av[ac - 1], O_CREAT | O_APPEND | O_WRONLY, 0000644);
 	if (pipex.fd_out < 0)
 		exit(1);
 	if (pipe(pipex.pipe1) < 0)
@@ -59,7 +86,10 @@ void	bonus(t_pipex pipex, int ac, char **av, char **envp)
 	pipex.paths = ft_split(pipex.path_string, ':');
 	if (pipex.paths == NULL)
 		exit(1);
+	av++;
+	ac--;
 	we_gonna_fork_this(pipex, ac, av, envp);
+	unlink(".temp");
 }
 
 int	main(int ac, char **av, char **envp)
@@ -68,12 +98,12 @@ int	main(int ac, char **av, char **envp)
 
 	if (ac >= 5)
 	{
-		if (ft_strncmp(av[1], "here_doc", 7))
+		if (!ft_strncmp(av[1], "here_doc", 8))
 			return (bonus(pipex, ac, av, envp), 0);
 		pipex.fd_in = open(av[1], O_RDONLY);
 		if (pipex.fd_in < 0)
 			exit(1);
-		pipex.fd_out = open(av[ac - 1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
+		pipex.fd_out = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
 		if (pipex.fd_out < 0)
 			exit(1);
 		if (pipe(pipex.pipe1) < 0)

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/01 22:50:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:14:02 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_pipex
 	char	**cmd_list;
 	int		error;
 	int		i;
+	char	*line;
 }	t_pipex;
 
 void	free_split(char **list);

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/01 22:55:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:32:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*cmd_path(t_pipex pipex, char *cmd)
 
 void	process1(t_pipex pipex, char **av, char **envp)
 {
-	if (dup2(pipex.fd_in, 0) < 0)
+	if (pipex.error = dup2(pipex.fd_in, 0) < 0)
 		free_exit(pipex);
 	if (dup2(pipex.pipe1[1], 1) < 0)
 		free_exit(pipex);
