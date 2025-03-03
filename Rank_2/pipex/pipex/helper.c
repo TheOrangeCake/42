@@ -6,21 +6,31 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/01 23:19:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:19:53 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+void	exit_unlink(char *file)
+{
+	perror("Error");
+	if (unlink(file) < 0)
+		perror("Unlink error");
+	exit(1);
+}
+
 void	free_exit(t_pipex pipex)
 {
+	perror("Error");
 	free_split(pipex.paths);
 	close(pipex.fd_in);
 	close(pipex.fd_out);
 	close_pipe1(pipex);
 	close_pipe2(pipex);
-	write(2, "Error\n", 6);
-	exit (1);
+	if (unlink(".temp") < 0)
+		perror("Unlink error");
+	exit(1);
 }
 
 void	free_split(char **list)

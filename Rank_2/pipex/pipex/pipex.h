@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/02 15:14:02 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:18:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,14 @@ typedef struct s_pipex
 
 void	free_split(char **list);
 void	free_exit(t_pipex pipex);
+void	exit_unlink(char *file);
 void	close_pipe1(t_pipex pipex);
 void	close_pipe2(t_pipex pipex);
+
+char	*find_paths(char **envp);
+void	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp);
+
+void	stdin_case(t_pipex pipex, int ac, char **av, char **envp);
 
 void	process1(t_pipex pipex, char **av, char **envp);
 void	process2(t_pipex pipex, int count, char **av, char **envp);

@@ -2,7 +2,7 @@
 
 NAME = pipex
 
-SOURCE = main.c children.c helper.c
+SOURCE = main.c children.c helper.c special_case.c
 
 HEADER = pipex.h
 
