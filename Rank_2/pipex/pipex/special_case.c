@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 18:31:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/04 13:39:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:30:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,66 @@ void	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
 	}
 }
 
+char	**awk_helper2(t_pipex pipex, int i, char *cmd)
+{
+	char	*temp;
+
+	i = 0;
+	while (!(cmd[i] == '\'' && cmd[i + 1] == ' '))
+		i++;
+	i++;
+	temp = cmd + i + 1;
+	cmd[i] = '\0';
+	if (ft_strtrim(cmd, "'") == NULL)
+	{
+		free_split(pipex.cmd_list);
+		free_exit(pipex);
+	}
+	pipex.cmd_list[1] = ft_strdup(cmd);
+	if (pipex.cmd_list[1] == NULL)
+	{
+		free_split(pipex.cmd_list);
+		free_exit(pipex);
+	}
+	if (*temp == '"')
+	{
+		temp = ft_strtrim(temp, "\"");
+		if (temp == NULL)
+		{
+			free_split(pipex.cmd_list);
+			free_exit(pipex);
+		}
+	}
+	pipex.cmd_list[2] = ft_strdup(temp);
+	if (pipex.cmd_list[2] == NULL)
+	{
+		free_split(pipex.cmd_list);
+		free_exit(pipex);
+	}
+	pipex.cmd_list[3] = NULL;
+	return (pipex.cmd_list);
+}
+
+char	**awk_helper1(t_pipex pipex, char *cmd)
+{
+	char *temp;
+
+	temp = ft_strtrim(cmd, "'");
+	if (temp == NULL)
+	{
+		free_split(pipex.cmd_list);
+		free_exit(pipex);
+	}
+	pipex.cmd_list[1] = ft_strdup(temp);
+	if (pipex.cmd_list[1] == NULL)
+	{
+		free_split(pipex.cmd_list);
+		free_exit(pipex);
+	}
+	pipex.cmd_list[2] = NULL;
+	return (pipex.cmd_list);
+}
+
 char	**awk_case(t_pipex pipex, char *cmd)
 {
 	int	i;
@@ -65,19 +125,17 @@ char	**awk_case(t_pipex pipex, char *cmd)
 		free_exit(pipex);
 	pipex.cmd_list[0] = ft_strdup("awk");
 	if (pipex.cmd_list[0] == NULL)
+	{
+		free(pipex.cmd_list);
 		free_exit(pipex);
+	}
 	while (*cmd != '\'')
 		cmd++;
-	while (cmd[i] != '\0')
+	while (cmd[i + 1] != '\0')
 		i++;
 	if (cmd[i] == '\'')
-	{
-		pipex.cmd_list[1] = ft_strdup(cmd);
-		pipex.cmd_list[2] = NULL;
-	}
+		pipex.cmd_list = awk_helper1(pipex, cmd);
 	else
-	{
-		
-	}
+		pipex.cmd_list = awk_helper2(pipex, i, cmd);
 	return (pipex.cmd_list);
 }
