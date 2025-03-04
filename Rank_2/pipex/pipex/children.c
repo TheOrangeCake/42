@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/03 19:37:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:33:06 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 char	**cmd_list(t_pipex pipex, char *cmd)
 {
-	pipex.cmd_list = ft_split(cmd, ' ');
-	if (pipex.cmd_list == NULL)
-		free_exit(pipex);
+	if (!ft_strncmp(cmd, "awk", 3))
+		pipex.cmd_list = awk_case(pipex, cmd);
+	else
+	{
+		pipex.cmd_list = ft_split(cmd, ' ');
+		if (pipex.cmd_list == NULL)
+			free_exit(pipex);
+	}
 	return (pipex.cmd_list);
 }
 

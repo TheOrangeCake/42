@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 18:31:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/03 19:31:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:39:21 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,31 @@ void	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
 		perror("Unlink eror");
 		exit(1);
 	}
+}
+
+char	**awk_case(t_pipex pipex, char *cmd)
+{
+	int	i;
+
+	i = 0;
+	pipex.cmd_list = malloc(sizeof(char *) * 4);
+	if (pipex.cmd_list == NULL)
+		free_exit(pipex);
+	pipex.cmd_list[0] = ft_strdup("awk");
+	if (pipex.cmd_list[0] == NULL)
+		free_exit(pipex);
+	while (*cmd != '\'')
+		cmd++;
+	while (cmd[i] != '\0')
+		i++;
+	if (cmd[i] == '\'')
+	{
+		pipex.cmd_list[1] = ft_strdup(cmd);
+		pipex.cmd_list[2] = NULL;
+	}
+	else
+	{
+		
+	}
+	return (pipex.cmd_list);
 }
