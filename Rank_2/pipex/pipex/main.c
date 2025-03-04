@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/04 16:49:37 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:53:24 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*find_paths(char **envp)
 
 void	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 {
+	(void)ac;
 	pipex.i = 3;
 	pipex.pid1 = fork();
 	if (pipex.pid1 == 0)
