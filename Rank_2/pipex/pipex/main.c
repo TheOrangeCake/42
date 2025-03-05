@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/04 16:53:24 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:57:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 	pipex.pid3 = fork();
 	if (pipex.pid3 == 0)
 		process3(pipex, pipex.i, av, envp);
+	close_pipe1(pipex);
+	waitpid(pipex.pid1, NULL, 0);
+	waitpid(pipex.pid3, NULL, 0);
 	free_split(pipex.paths);
 	close(pipex.fd_in);
 	close(pipex.fd_out);
@@ -63,7 +66,7 @@ int	main(int ac, char **av, char **envp)
 		we_gonna_fork_this(pipex, ac, av, envp);
 	}
 	else
-		return (1);
+		return (ft_printf("Input error\n"), 1);
 	return (0);
 }
 
