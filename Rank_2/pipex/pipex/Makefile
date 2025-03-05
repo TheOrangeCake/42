@@ -2,7 +2,7 @@
 
 NAME = pipex
 
-N_BONUS = pipex_bonus
+N_BONUS = pipex
 
 SOURCE = main.c children.c helper.c special_case.c
 

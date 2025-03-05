@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/04 16:36:22 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:40:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ char	**cmd_list(t_pipex pipex, char *cmd)
 char	*cmd_path(t_pipex pipex, char *cmd)
 {
 	char	*temp;
+	int		i;
 
-	while (pipex.paths != NULL)
+	i = 0;
+	while (pipex.paths[i] != NULL && cmd != NULL)
 	{
-		temp = ft_strjoin(*pipex.paths, "/");
+		temp = ft_strjoin(pipex.paths[i], "/");
 		if (temp == NULL)
 		{
 			free_split(pipex.cmd_list);
@@ -42,17 +44,18 @@ char	*cmd_path(t_pipex pipex, char *cmd)
 			free_split(pipex.cmd_list);
 			free_exit(pipex);
 		}
-		if (access(pipex.cmd_path, 0) == 0)
+		if (access(pipex.cmd_path, F_OK) == 0)
 			return (pipex.cmd_path);
 		free(pipex.cmd_path);
-		pipex.paths++;
+		i++;
 	}
-	free_exit(pipex);
-	return (NULL);
+	pipex.exit_code = 127;
+	return (free_split(pipex.cmd_list), free_exit(pipex), NULL);
 }
 
 void	process1(t_pipex pipex, char **av, char **envp)
 {
+	pipex.error = 0;
 	if (dup2(pipex.fd_in, 0) < 0)
 		free_exit(pipex);
 	if (dup2(pipex.pipe1[1], 1) < 0)
@@ -62,7 +65,8 @@ void	process1(t_pipex pipex, char **av, char **envp)
 	if (pipex.cmd_list == NULL)
 		free_exit(pipex);
 	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
-	pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
+	if (pipex.cmd_path != NULL)
+		pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
 	free(pipex.cmd_path);
 	free_split(pipex.cmd_list);
 	if (pipex.error < 0)
@@ -71,6 +75,7 @@ void	process1(t_pipex pipex, char **av, char **envp)
 
 void	process2(t_pipex pipex, int count, char **av, char **envp)
 {
+	pipex.error = 0;
 	if (dup2(pipex.pipe1[0], 0) < 0)
 		free_exit(pipex);
 	if (dup2(pipex.pipe2[1], 1) < 0)
@@ -81,7 +86,8 @@ void	process2(t_pipex pipex, int count, char **av, char **envp)
 	if (pipex.cmd_list == NULL)
 		free_exit(pipex);
 	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
-	pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
+	if (pipex.cmd_path != NULL)
+		pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
 	free(pipex.cmd_path);
 	free_split(pipex.cmd_list);
 	if (pipex.error < 0)
@@ -90,6 +96,7 @@ void	process2(t_pipex pipex, int count, char **av, char **envp)
 
 void	process3(t_pipex pipex, int count, char **av, char **envp)
 {
+	pipex.error = 0;
 	if (dup2(pipex.pipe1[0], 0) < 0)
 		free_exit(pipex);
 	close_pipe1(pipex);
@@ -99,7 +106,8 @@ void	process3(t_pipex pipex, int count, char **av, char **envp)
 	if (pipex.cmd_list == NULL)
 		free_exit(pipex);
 	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
-	pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
+	if (pipex.cmd_path != NULL)
+		pipex.error = execve(pipex.cmd_path, pipex.cmd_list, envp);
 	free(pipex.cmd_path);
 	free_split(pipex.cmd_list);
 	if (pipex.error < 0)

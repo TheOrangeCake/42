@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/04 16:49:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:12:33 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "libft.h"
 # include "sys/wait.h"
 # include "stdio.h"
+# include "errno.h"
 
 typedef struct s_pipex
 {
@@ -34,6 +35,8 @@ typedef struct s_pipex
 	int		error;
 	int		i;
 	char	*line;
+	int		status;
+	int		exit_code;
 }	t_pipex;
 
 void	free_split(char **list);
@@ -43,9 +46,9 @@ void	close_pipe1(t_pipex pipex);
 void	close_pipe2(t_pipex pipex);
 
 char	*find_paths(char **envp);
-void	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp);
+int		we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp);
 
-void	stdin_case(t_pipex pipex, int ac, char **av, char **envp);
+int		stdin_case(t_pipex pipex, int ac, char **av, char **envp);
 char	**awk_case(t_pipex pipex, char *cmd);
 
 void	process1(t_pipex pipex, char **av, char **envp);

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 18:31:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/04 16:43:02 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:40:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	stdin_read(t_pipex pipex)
 {
 	if (dup2(pipex.fd_in, 1) < 0)
+	{
+		close(pipex.fd_in);
 		exit_unlink(".temp");
+	}
 	while (1)
 	{
 		pipex.line = get_next_line(0);
@@ -30,7 +33,7 @@ void	stdin_read(t_pipex pipex)
 	}
 }
 
-void	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
+int	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
 {
 	pipex.fd_in = open(".temp", O_CREAT | O_TRUNC | O_RDWR, 0000644);
 	if (pipex.fd_in < 0)
@@ -38,21 +41,22 @@ void	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
 	stdin_read(pipex);
 	pipex.fd_out = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
 	if (pipex.fd_out < 0)
-		exit_unlink(".temp");
+		return (close(pipex.fd_in), exit_unlink(".temp"), 1);
 	if (pipe(pipex.pipe1) < 0)
-		exit_unlink(".temp");
+		return (close(pipex.fd_in), close(pipex.fd_out), exit_unlink(".temp"), 1);
 	pipex.path_string = find_paths(envp);
 	pipex.paths = ft_split(pipex.path_string, ':');
 	if (pipex.paths == NULL)
-		exit_unlink(".temp");
+		return (close(pipex.fd_in), close(pipex.fd_out), close_pipe1(pipex), exit_unlink(".temp"), 1);
 	close(pipex.fd_in);
 	pipex.fd_in = open(".temp", O_RDONLY);
-	we_gonna_fork_this(pipex, ac, av, envp);
+	pipex.exit_code = we_gonna_fork_this(pipex, ac, av, envp);
 	if (unlink(".temp") < 0)
 	{
 		perror("Unlink eror");
 		exit(1);
 	}
+	return (pipex.exit_code);
 }
 
 char	**awk_with_file(t_pipex pipex, int i, char *cmd)
