@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:00:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/26 19:50:08 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:39:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_pile
 {
 	long	numb;
 	void	*next;
+	int		flag;
 }	t_pile;
 
 int		ft_strcmp(char *s1, char *s2);
