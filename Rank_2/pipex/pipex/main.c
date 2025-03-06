@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/05 20:39:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/06 06:22:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 	if (pipex.exit_code != 0 && pipex.exit_code != 127)
 		free_exit(pipex);
 	free_split(pipex.paths);
-	close(pipex.fd_in);
-	close(pipex.fd_out);
+	close(pipex.fdi);
+	close(pipex.fdo);
 	if (pipex.exit_code == 127)
 		return (127);
 	return (0);
@@ -65,16 +65,16 @@ int	main(int ac, char **av, char **envp)
 			pipex.exit_code = stdin_case(pipex, ac, av, envp);
 		else
 		{
-			pipex.fd_in = open(av[1], O_RDONLY);
-			if (pipex.fd_in < 0)
-				pipex.fd_in = 1000;
-			pipex.fd_out = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
+			pipex.fdi = open(av[1], O_RDONLY);
+			if (pipex.fdi < 0)
+				pipex.fdi = 1000;
+			pipex.fdo = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
 			if (pipe(pipex.pipe1) < 0)
-				return (close(pipex.fd_in), close(pipex.fd_out), 1);
+				return (close_fd(pipex), 1);
 			pipex.path_string = find_paths(envp);
 			pipex.paths = ft_split(pipex.path_string, ':');
 			if (pipex.paths == NULL)
-				return (close(pipex.fd_in), close(pipex.fd_out), close_pipe1(pipex), 1);
+				return (close_fd(pipex), close_pipe1(pipex), 1);
 			pipex.exit_code = we_gonna_fork_this(pipex, ac, av, envp);
 		}
 	}

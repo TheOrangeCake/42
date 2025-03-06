@@ -4,9 +4,9 @@ NAME = pipex
 
 N_BONUS = pipex
 
-SOURCE = main.c children.c helper.c special_case.c
+SOURCE = main.c children.c helper.c helper2.c special_case.c
 
-S_BONUS = bonus_main_bonus.c bonus_children_bonus.c bonus_helper_bonus.c special_case.c
+S_BONUS = bonus_main_bonus.c bonus_children_bonus.c bonus_helper_bonus.c bonus_helper2_bonus.c special_case.c
 
 HEADER = pipex.h
 

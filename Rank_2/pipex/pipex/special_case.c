@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 18:31:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/05 20:40:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/06 06:22:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	stdin_read(t_pipex pipex)
 {
-	if (dup2(pipex.fd_in, 1) < 0)
+	if (dup2(pipex.fdi, 1) < 0)
 	{
-		close(pipex.fd_in);
+		close(pipex.fdi);
 		exit_unlink(".temp");
 	}
 	while (1)
@@ -35,21 +35,23 @@ void	stdin_read(t_pipex pipex)
 
 int	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
 {
-	pipex.fd_in = open(".temp", O_CREAT | O_TRUNC | O_RDWR, 0000644);
-	if (pipex.fd_in < 0)
+	pipex.fdi = open(".temp", O_CREAT | O_TRUNC | O_RDWR, 0000644);
+	if (pipex.fdi < 0)
 		exit(1);
 	stdin_read(pipex);
-	pipex.fd_out = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
-	if (pipex.fd_out < 0)
-		return (close(pipex.fd_in), exit_unlink(".temp"), 1);
+	pipex.fdo = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
+	if (pipex.fdo < 0)
+		return (close(pipex.fdi), exit_unlink(".temp"), 1);
 	if (pipe(pipex.pipe1) < 0)
-		return (close(pipex.fd_in), close(pipex.fd_out), exit_unlink(".temp"), 1);
+		return (close(pipex.fdi), close(pipex.fdo),
+			exit_unlink(".temp"), 1);
 	pipex.path_string = find_paths(envp);
 	pipex.paths = ft_split(pipex.path_string, ':');
 	if (pipex.paths == NULL)
-		return (close(pipex.fd_in), close(pipex.fd_out), close_pipe1(pipex), exit_unlink(".temp"), 1);
-	close(pipex.fd_in);
-	pipex.fd_in = open(".temp", O_RDONLY);
+		return (close(pipex.fdi), close(pipex.fdo),
+			close_pipe1(pipex), exit_unlink(".temp"), 1);
+	close(pipex.fdi);
+	pipex.fdi = open(".temp", O_RDONLY);
 	pipex.exit_code = we_gonna_fork_this(pipex, ac, av, envp);
 	if (unlink(".temp") < 0)
 	{

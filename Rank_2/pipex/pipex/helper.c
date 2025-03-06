@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/05 20:18:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/06 06:22:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	exit_unlink(char *file)
 void	free_exit(t_pipex pipex)
 {
 	free_split(pipex.paths);
-	close(pipex.fd_in);
-	close(pipex.fd_out);
+	close(pipex.fdi);
+	close(pipex.fdo);
 	close_pipe1(pipex);
 	unlink(".temp");
 	if (pipex.exit_code == 127)

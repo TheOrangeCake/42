@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/05 20:42:08 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/06 06:22:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,19 @@ char	**cmd_list(t_pipex pipex, char *cmd)
 
 char	*cmd_path(t_pipex pipex, char *cmd)
 {
-	char	*temp;
 	int		i;
 
 	i = 0;
 	while (pipex.paths[i] != NULL && cmd != NULL)
 	{
-		temp = ft_strjoin(pipex.paths[i], "/");
-		if (temp == NULL)
+		pipex.line = ft_strjoin(pipex.paths[i], "/");
+		if (pipex.line == NULL)
 		{
 			free_split(pipex.cmd_list);
 			free_exit(pipex);
 		}
-		pipex.cmd_path = ft_strjoin(temp, cmd);
-		free(temp);
+		pipex.cmd_path = ft_strjoin(pipex.line, cmd);
+		free(pipex.line);
 		if (pipex.cmd_path == NULL)
 		{
 			free_split(pipex.cmd_list);
@@ -56,7 +55,7 @@ char	*cmd_path(t_pipex pipex, char *cmd)
 void	process1(t_pipex pipex, char **av, char **envp)
 {
 	pipex.error = 0;
-	if (dup2(pipex.fd_in, 0) < 0)
+	if (dup2(pipex.fdi, 0) < 0)
 		free_exit(pipex);
 	if (dup2(pipex.pipe1[1], 1) < 0)
 		free_exit(pipex);
@@ -79,7 +78,7 @@ void	process3(t_pipex pipex, int count, char **av, char **envp)
 	if (dup2(pipex.pipe1[0], 0) < 0)
 		free_exit(pipex);
 	close_pipe1(pipex);
-	if (dup2(pipex.fd_out, 1) < 0)
+	if (dup2(pipex.fdo, 1) < 0)
 		free_exit(pipex);
 	pipex.cmd_list = cmd_list(pipex, av[count]);
 	if (pipex.cmd_list == NULL)
