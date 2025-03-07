@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 06:16:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/06 23:54:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 23:16:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	close_fd(t_pipex pipex)
 char	*find_paths(char **envp)
 {
 	if (envp == NULL)
-		return ("/usr/bin:/bin");
+		return (NULL);
 	while (*envp != NULL)
 	{
-		if (ft_strncmp(*envp, "PATH", 4) == 0)
+		if (ft_strncmp(*envp, "PATH=", 5) == 0)
 			return (*envp + 5);
 		envp++;
 	}
-	return ("/usr/bin:/bin");
+	return (NULL);
 }
 
 void	wait_all(t_pipex pipex, int *status, int ac)

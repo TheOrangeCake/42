@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/07 01:02:51 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 23:28:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 char	*find_paths(char **envp)
 {
 	if (envp == NULL)
-		return ("/usr/bin:/bin");
+		return (NULL);
 	while (*envp != NULL)
 	{
-		if (ft_strncmp(*envp, "PATH", 4) == 0)
+		if (ft_strncmp(*envp, "PATH=", 5) == 0)
 			return (*envp + 5);
 		envp++;
 	}
-	return ("/usr/bin:/bin");
+	return (NULL);
 }
 
 int	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
@@ -43,15 +43,14 @@ int	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 	close_pipe1(pipex);
 	waitpid(pipex.pid1, &pipex.status, 0);
 	waitpid(pipex.pid3, &pipex.status, 0);
-	pipex.exit_code = WEXITSTATUS(pipex.status);
-	if (pipex.exit_code != 0 && pipex.exit_code != 127)
+	pipex.code = WEXITSTATUS(pipex.status);
+	if (pipex.code != 0 && pipex.code != 127 && pipex.code != 126)
 		free_exit(pipex);
-	free_split(pipex.paths);
-	close(pipex.fdi);
-	close(pipex.fdo);
-	if (pipex.exit_code == 127)
-		return (127);
-	return (0);
+	if (pipex.code == 127)
+		return (free_split(pipex.paths), close_fd(pipex), 127);
+	else if (pipex.code == 126)
+		return (free_split(pipex.paths), close_fd(pipex), 126);
+	return (free_split(pipex.paths), close_fd(pipex), 0);
 }
 
 int	run(t_pipex pipex, int ac, char **av, char **envp)
@@ -68,26 +67,24 @@ int	run(t_pipex pipex, int ac, char **av, char **envp)
 	if (pipe(pipex.pipe1) < 0)
 		return (close_fd(pipex), 1);
 	pipex.path_string = find_paths(envp);
-	pipex.paths = ft_split(pipex.path_string, ':');
-	if (pipex.paths == NULL)
-		return (close_fd(pipex), close_pipe1(pipex), 1);
-	pipex.exit_code = we_gonna_fork_this(pipex, ac, av, envp);
-	return (pipex.exit_code);
+	if (pipex.path_string != NULL)
+	{
+		pipex.paths = ft_split(pipex.path_string, ':');
+		if (pipex.paths == NULL)
+			return (close_fd(pipex), close_pipe1(pipex), 1);
+	}
+	pipex.code = we_gonna_fork_this(pipex, ac, av, envp);
+	return (pipex.code);
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
 
-	pipex.exit_code = 0;
-	if (ac == 5 && ft_strncmp(av[1], "/dev/urandom", 12))
-	{
-		if (!ft_strncmp(av[1], "/dev/stdin", 10))
-			pipex.exit_code = stdin_case(pipex, ac, av, envp);
-		else
-			pipex.exit_code = run(pipex, ac, av, envp);
-	}
+	pipex.code = 0;
+	if (ac == 5)
+			pipex.code = run(pipex, ac, av, envp);
 	else
 		return (ft_printf("Input error\n"), 1);
-	return (pipex.exit_code);
+	return (pipex.code);
 }

@@ -6,60 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 18:31:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/07 00:41:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:43:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	stdin_read(t_pipex pipex)
-{
-	if (dup2(pipex.fdi, 1) < 0)
-	{
-		close(pipex.fdi);
-		exit_unlink(".temp");
-	}
-	while (1)
-	{
-		pipex.line = get_next_line(0);
-		if (pipex.line == NULL)
-		{
-			free(pipex.line);
-			get_next_line(-100);
-			break ;
-		}
-		ft_printf("%s", pipex.line);
-		free(pipex.line);
-	}
-}
-
-int	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
-{
-	pipex.fdi = open(".temp", O_CREAT | O_TRUNC | O_RDWR, 0000644);
-	if (pipex.fdi < 0)
-		exit(1);
-	stdin_read(pipex);
-	pipex.fdo = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
-	if (pipex.fdo < 0)
-		perror("Error");
-	if (pipe(pipex.pipe1) < 0)
-		return (close(pipex.fdi), close(pipex.fdo),
-			exit_unlink(".temp"), 1);
-	pipex.path_string = find_paths(envp);
-	pipex.paths = ft_split(pipex.path_string, ':');
-	if (pipex.paths == NULL)
-		return (close(pipex.fdi), close(pipex.fdo),
-			close_pipe1(pipex), exit_unlink(".temp"), 1);
-	close(pipex.fdi);
-	pipex.fdi = open(".temp", O_RDONLY);
-	pipex.exit_code = we_gonna_fork_this(pipex, ac, av, envp);
-	if (unlink(".temp") < 0)
-	{
-		perror("Unlink eror");
-		exit(1);
-	}
-	return (pipex.exit_code);
-}
 
 char	**awk_with_file(t_pipex pipex, int i, char *cmd)
 {
