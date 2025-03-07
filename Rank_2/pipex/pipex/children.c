@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/06 06:22:05 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 00:47:13 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ char	*cmd_path(t_pipex pipex, char *cmd)
 	{
 		pipex.line = ft_strjoin(pipex.paths[i], "/");
 		if (pipex.line == NULL)
-		{
 			free_split(pipex.cmd_list);
+		if (pipex.line == NULL)
 			free_exit(pipex);
-		}
 		pipex.cmd_path = ft_strjoin(pipex.line, cmd);
 		free(pipex.line);
 		if (pipex.cmd_path == NULL)

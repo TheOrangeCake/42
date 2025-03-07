@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 18:31:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/06 06:22:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 00:41:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	stdin_case(t_pipex pipex, int ac, char **av, char **envp)
 	stdin_read(pipex);
 	pipex.fdo = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
 	if (pipex.fdo < 0)
-		return (close(pipex.fdi), exit_unlink(".temp"), 1);
+		perror("Error");
 	if (pipe(pipex.pipe1) < 0)
 		return (close(pipex.fdi), close(pipex.fdo),
 			exit_unlink(".temp"), 1);

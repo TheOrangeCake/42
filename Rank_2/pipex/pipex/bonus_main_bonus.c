@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/06 06:57:00 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 01:02:33 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	bonus(t_pipex pipex, int ac, char **av, char **envp)
 	bonus_read(pipex, av[2]);
 	pipex.fdo = open(av[ac - 1], O_CREAT | O_APPEND | O_WRONLY, 0000644);
 	if (pipex.fdo < 0)
-		exit_unlink(".temp");
+		perror("Error");
 	if (pipe(pipex.pipe1) < 0)
 		exit_unlink(".temp");
 	pipex.path_string = find_paths(envp);
@@ -89,16 +89,21 @@ int	bonus(t_pipex pipex, int ac, char **av, char **envp)
 
 int	run(t_pipex pipex, int ac, char **av, char **envp)
 {
+	pipex.fdo = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
+	if (pipex.fdo < 0)
+		perror("Error");
 	pipex.fdi = open(av[1], O_RDONLY);
 	if (pipex.fdi < 0)
-		pipex.fdi = 1000;
-	pipex.fdo = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
+	{
+		perror("Error");
+		pipex.fdi = open("/dev/null", O_RDONLY);
+	}
 	if (pipe(pipex.pipe1) < 0)
-		return (close(pipex.fdi), close(pipex.fdo), 1);
+		return (close_fd(pipex), 1);
 	pipex.path_string = find_paths(envp);
 	pipex.paths = ft_split(pipex.path_string, ':');
 	if (pipex.paths == NULL)
-		return (close(pipex.fdi), close(pipex.fdo), close_pipe1(pipex), 1);
+		return (close_fd(pipex), close_pipe1(pipex), 1);
 	pipex.exit_code = we_gonna_fork_this(pipex, ac, av, envp);
 	return (pipex.exit_code);
 }
@@ -121,13 +126,3 @@ int	main(int ac, char **av, char **envp)
 		return (ft_printf("Input error\n"), 1);
 	return (pipex.exit_code);
 }
-
-// ./pipex file1.txt "cat" "grep a1" file2.txt
-// < file1.txt cat | grep a1 > file2.txt
-
-// ./pipex file1.txt "cat" "grep a1" "tr '[:lower:]' '[:upper:]'" file2.txt
-
-// ./pipex file1.txt "cat" "grep a1" 
-// "tr '[:lower:]' '[:upper:]'" "wc -w" file2.txt
-
-// < file1.txt cat | grep a1 | tr '[:lower:]' '[:upper:]' | wc -w > file2.txt
