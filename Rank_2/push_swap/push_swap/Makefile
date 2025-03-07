@@ -4,9 +4,9 @@ NAME = push_swap
 
 N_BONUS = checker
 
-SOURCE = main.c helper1.c helper2.c move1.c move2.c smallsorts1.c smallsorts2.c smallsorts3.c quicksort.c quicksort_next.c
+SOURCE = main.c helper1.c helper2.c helper3.c move1.c move2.c smallsorts1.c smallsorts2.c smallsorts3.c quicksort.c quicksort_next.c
 
-S_BONUS = checker_main.c helper1.c helper2.c checker_move1.c checker_move2.c
+S_BONUS = checker_main.c helper1.c helper2.c checker_helper.c checker_move1.c checker_move2.c
 
 HEADER = pushswap.h
 
@@ -26,8 +26,8 @@ $(LIBFT):
 #
 
 GCC = gcc
-FLAGS = -Wextra -Wall -Werror
-# FLAGS =
+# FLAGS = -Wextra -Wall -Werror
+FLAGS =
 RM = rm -f
 
 all : $(LIBFT) $(NAME) $(N_BONUS)

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:56:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:53:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/05 11:05:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int ac, char *av[])
 	if (ac == 2)
 		run(av[1]);
 	else if (ac == 1)
-		ft_printf("Remember to insert file name");
+		ft_printf("Insert file name");
 	else
 		ft_printf("Too many files");
 	return (0);

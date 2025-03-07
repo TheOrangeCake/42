@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/19 15:49:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/05 10:55:48 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	key_press_helper(int keycode, t_params *params)
 
 int	key_press(int keycode, t_params *params)
 {
-	ft_printf("key: %d\n", keycode);
 	if (keycode == ESC_KEY)
 		close_window(params);
 	if (keycode == N1_KEY)

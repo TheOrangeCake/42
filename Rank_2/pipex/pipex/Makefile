@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := all
 
-NAME = pipex
+NAME = pipex_normal
 
 N_BONUS = pipex
 

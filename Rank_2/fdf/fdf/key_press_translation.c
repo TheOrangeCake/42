@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:11:39 by hoannguy          #+#    #+#             */
-/*   Updated: 2024/12/23 17:11:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/05 11:02:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	move_up(t_params *params)
 		}
 		a++;
 	}
-	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 }
 
@@ -48,7 +47,6 @@ void	move_down(t_params *params)
 		}
 		a++;
 	}
-	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 }
 
@@ -68,7 +66,6 @@ void	move_left(t_params *params)
 		}
 		a++;
 	}
-	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 }
 
@@ -88,7 +85,6 @@ void	move_right(t_params *params)
 		}
 		a++;
 	}
-	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 }
 
@@ -104,7 +100,6 @@ void	z_rotate_counter(t_params *params)
 		military(params, params -> d);
 	if (params -> projection == 2)
 		find_coordinates(params -> new_map, params -> row, params -> column);
-	mlx_destroy_image(params -> mlx, params -> img);
 	make_image_helper(params);
 	params -> switch_z = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:05:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/01/27 21:44:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:51:22 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_pile	*lstnew(void *content)
 	new->numb = ft_atoi(content);
 	new->next = NULL;
 	if (new->numb > 2147483647 || new->numb < -2147483648)
-		return (NULL);
+		return (free(new), NULL);
 	return (new);
 }
 
@@ -110,18 +110,3 @@ void	lstclear(t_pile **lst)
 		*lst = NULL;
 	}
 }
-
-	// int	lstsize(t_pile **lst)
-	// {
-	// 	int		i;
-	// 	t_pile	*temp;
-
-	// 	i = 0;
-	// 	temp = *lst;
-	// 	while (temp != NULL)
-	// 	{
-	// 		i++;
-	// 		temp = temp->next;
-	// 	}
-	// 	return (i);
-	// }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 19:44:25 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/02/17 18:28:48 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:03:20 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,21 @@ t_pile	**checker(t_pile **a)
 int	main(int ac, char *av[])
 {
 	t_pile	**a;
+	char	**split;
 
 	a = malloc(sizeof(t_pile *));
 	if (a == NULL)
 		return (write(2, "Error\n", 6), 0);
 	*a = NULL;
-	if (ac > 1)
+	if (ac > 1 && av[1] != NULL && av[1][0] != '\0')
 	{
-		if (input_check(av) == 1)
-			return (free(a), write(2, "Error\n", 6), 0);
-		else
-			a = initiate_a(av, a);
-		if (a == NULL)
-			return (lstclear(a), free(a), write(2, "Error\n", 6), 0);
-		a = checker(a);
-		if (a == NULL)
-			return (lstclear(a), free(a), write(2, "Error\n", 6), 0);
+		split = transform(av);
+		if (split == NULL || split[1] == NULL )
+			return (free_split(split), write(2, "Error\n", 6), free(a), 1);
+		ac = ac_count(split);
+		if (run(a, ac, split) == NULL)
+			return (free_split(split), free(a), write(2, "Error\n", 6), 1);
+		free_split(split);
 	}
 	else if (ac == 1)
 		write(2, "Error\n", 6);
