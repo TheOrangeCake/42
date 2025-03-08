@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/07 23:29:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:59:02 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ int	we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp)
 	pipex.status = 0;
 	pipex.pid1 = fork();
 	if (pipex.pid1 < 0)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	else if (pipex.pid1 == 0)
 		process1(pipex, av, envp);
 	if (ac > 5)
 		loop2(&pipex, ac, av, envp);
 	pipex.pid3 = fork();
 	if (pipex.pid3 < 0)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	else if (pipex.pid3 == 0)
 		process3(pipex, pipex.i, av, envp);
 	close_pipe1(pipex);
 	wait_all(pipex, &pipex.status, ac);
 	pipex.code = WEXITSTATUS(pipex.status);
 	if (pipex.code != 0 && pipex.code != 127 && pipex.code != 126)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	if (pipex.code == 127)
 		return (free_split(pipex.paths), close_fd(pipex), 127);
 	else if (pipex.code == 126)
@@ -101,12 +101,9 @@ int	run(t_pipex pipex, int ac, char **av, char **envp)
 	if (pipe(pipex.pipe1) < 0)
 		return (close_fd(pipex), 1);
 	pipex.path_string = find_paths(envp);
-	if (pipex.path_string != NULL)
-	{
-		pipex.paths = ft_split(pipex.path_string, ':');
-		if (pipex.paths == NULL)
-			return (close_fd(pipex), close_pipe1(pipex), 1);
-	}
+	pipex.paths = ft_split(pipex.path_string, ':');
+	if (pipex.paths == NULL)
+		return (close_fd(pipex), close_pipe1(pipex), 1);
 	pipex.code = we_gonna_fork_this(pipex, ac, av, envp);
 	return (pipex.code);
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 18:31:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/07 18:43:42 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:01:03 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	**awk_with_file(t_pipex pipex, int i, char *cmd)
 	cmd = ft_strtrim(cmd, "'");
 	if (cmd == NULL)
 		return (NULL);
-	pipex.cmd_list[1] = ft_strdup(cmd);
-	if (pipex.cmd_list[1] == NULL)
+	pipex.cmd[1] = ft_strdup(cmd);
+	if (pipex.cmd[1] == NULL)
 		return (NULL);
 	if (*temp == '"')
 	{
@@ -34,11 +34,11 @@ char	**awk_with_file(t_pipex pipex, int i, char *cmd)
 		if (temp == NULL)
 			return (NULL);
 	}
-	pipex.cmd_list[2] = ft_strdup(temp);
-	if (pipex.cmd_list[2] == NULL)
+	pipex.cmd[2] = ft_strdup(temp);
+	if (pipex.cmd[2] == NULL)
 		return (NULL);
-	pipex.cmd_list[3] = NULL;
-	return (pipex.cmd_list);
+	pipex.cmd[3] = NULL;
+	return (pipex.cmd);
 }
 
 char	**awk_no_file(t_pipex pipex, char *cmd)
@@ -48,11 +48,11 @@ char	**awk_no_file(t_pipex pipex, char *cmd)
 	temp = ft_strtrim(cmd, "'");
 	if (temp == NULL)
 		return (NULL);
-	pipex.cmd_list[1] = ft_strdup(temp);
-	if (pipex.cmd_list[1] == NULL)
+	pipex.cmd[1] = ft_strdup(temp);
+	if (pipex.cmd[1] == NULL)
 		return (NULL);
-	pipex.cmd_list[2] = NULL;
-	return (pipex.cmd_list);
+	pipex.cmd[2] = NULL;
+	return (pipex.cmd);
 }
 
 char	**awk_case(t_pipex pipex, char *cmd)
@@ -60,24 +60,24 @@ char	**awk_case(t_pipex pipex, char *cmd)
 	int	i;
 
 	i = 0;
-	pipex.cmd_list = malloc(sizeof(char *) * 4);
-	if (pipex.cmd_list == NULL)
-		free_exit(pipex);
-	pipex.cmd_list[0] = ft_strdup("awk");
-	if (pipex.cmd_list[0] == NULL)
+	pipex.cmd = malloc(sizeof(char *) * 4);
+	if (pipex.cmd == NULL)
+		free_exit(pipex, 1);
+	pipex.cmd[0] = ft_strdup("awk");
+	if (pipex.cmd[0] == NULL)
 	{
-		free(pipex.cmd_list);
-		free_exit(pipex);
+		free(pipex.cmd);
+		free_exit(pipex, 1);
 	}
 	while (*cmd != '\'')
 		cmd++;
 	while (cmd[i + 1] != '\0')
 		i++;
 	if (cmd[i] == '\'')
-		pipex.cmd_list = awk_no_file(pipex, cmd);
+		pipex.cmd = awk_no_file(pipex, cmd);
 	else
-		pipex.cmd_list = awk_with_file(pipex, i, cmd);
-	if (pipex.cmd_list == NULL)
-		return (free_split(pipex.cmd_list), NULL);
-	return (pipex.cmd_list);
+		pipex.cmd = awk_with_file(pipex, i, cmd);
+	if (pipex.cmd == NULL)
+		return (free_split(pipex.cmd), NULL);
+	return (pipex.cmd);
 }

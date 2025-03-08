@@ -6,124 +6,120 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 21:52:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/07 23:40:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:02:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**cmd_list(t_pipex pipex, char *cmd)
+char	*cmd_path_helper(t_pipex pipex)
 {
-	if (!ft_strncmp(cmd, "awk", 3))
-		pipex.cmd_list = awk_case(pipex, cmd);
-	else
-		pipex.cmd_list = ft_split(cmd, ' ');
-	if (pipex.cmd_list == NULL)
-		return (NULL);
-	return (pipex.cmd_list);
+	while (pipex.copy != NULL)
+	{
+		pipex.cmd_path = ft_strjoin(pipex.copy, pipex.line);
+		if (pipex.cmd_path == NULL)
+			free(pipex.line);
+		if (pipex.cmd_path == NULL)
+			return (free_split(pipex.cmd), free_exit(pipex, 1), NULL);
+		if (access(pipex.cmd_path, F_OK) == 0)
+		{
+			if (access(pipex.cmd_path, X_OK) == 0)
+				return (pipex.cmd_path);
+			else
+				return (free_split(pipex.cmd), free_exit(pipex, 126), NULL);
+		}
+		free(pipex.cmd_path);
+		pipex.temp = ft_strrchr(pipex.copy, '/');
+		if (pipex.temp != NULL)
+			*pipex.temp = '\0';
+		else
+		{
+			free(pipex.copy);
+			break ;
+		}
+	}
+	return (NULL);
 }
 
 char	*cmd_path(t_pipex pipex, char *cmd)
 {
-	int		i;
-	char	*copy;
-	char	*temp;
-
-	i = 0;
+	pipex.count = 0;
 	if (cmd != NULL && cmd[0] != '/' )
 		pipex.line = ft_strjoin("/", cmd);
 	else if (cmd != NULL)
 		pipex.line = ft_strdup(cmd);
-	if (pipex.line == NULL)
-		return (free_split(pipex.cmd_list), free_exit(pipex), NULL);
-	while (pipex.paths[i] != NULL)
+	else
 	{
-		copy = ft_strdup(pipex.paths[i]);
-		if (copy == NULL)
-			return (free_split(pipex.cmd_list), free_exit(pipex), NULL);
-		while (copy != NULL)
-		{
-			pipex.cmd_path = ft_strjoin(copy, pipex.line);
-			if (pipex.cmd_path == NULL)
-				return (free(pipex.line), free_split(pipex.cmd_list), free_exit(pipex), NULL);
-			if (access(pipex.cmd_path, F_OK) == 0)
-			{
-				if (access(pipex.cmd_path, X_OK) == 0)
-					return (pipex.cmd_path);
-				else
-				{
-					pipex.code = 126;
-					return (free_split(pipex.cmd_list), free_exit(pipex), NULL);
-				}
-			}
-			free(pipex.cmd_path);
-			temp = ft_strrchr(copy, '/');
-			if (temp != NULL && *temp != '\0')
-				*temp = '\0';
-			else
-			{
-				free(copy);
-				break;
-			}
-		i++;
-		}
+		pipex.code = 127;
+		return (free_split(pipex.cmd), free_exit(pipex, 1), NULL);
+	}
+	if (pipex.line == NULL)
+		return (free_split(pipex.cmd), free_exit(pipex, 1), NULL);
+	while (pipex.paths[pipex.count] != NULL)
+	{
+		pipex.copy = ft_strdup(pipex.paths[pipex.count]);
+		if (pipex.copy == NULL)
+			return (free_split(pipex.cmd), free_exit(pipex, 1), NULL);
+		pipex.cmd_path = cmd_path_helper(pipex);
+		if (pipex.cmd_path != NULL)
+			return (pipex.cmd_path);
+		pipex.count++;
 	}
 	free(pipex.line);
-	pipex.code = 127;
-	return (free_split(pipex.cmd_list), free_exit(pipex), NULL);
+	return (free_split(pipex.cmd), free_exit(pipex, 127), NULL);
 }
 
 void	process1(t_pipex pipex, char **av, char **envp)
 {
 	if (dup2(pipex.fdi, 0) < 0)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	if (dup2(pipex.pipe1[1], 1) < 0)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	close_pipe1(pipex);
-	pipex.cmd_list = cmd_list(pipex, av[2]);
-	if (pipex.cmd_list == NULL)
-		free_exit(pipex);
-	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
+	pipex.cmd = cmd_list(pipex, av[2]);
+	if (pipex.cmd == NULL)
+		free_exit(pipex, 1);
+	pipex.cmd_path = cmd_path(pipex, pipex.cmd[0]);
 	if (pipex.cmd_path != NULL)
-		execve(pipex.cmd_path, pipex.cmd_list, envp);
+		execve(pipex.cmd_path, pipex.cmd, envp);
 	free(pipex.cmd_path);
-	free_split(pipex.cmd_list);
-	free_exit(pipex);
+	free_split(pipex.cmd);
+	free_exit(pipex, 1);
 }
 
 void	process2(t_pipex pipex, int count, char **av, char **envp)
 {
 	if (dup2(pipex.pipe1[0], 0) < 0)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	if (dup2(pipex.pipe2[1], 1) < 0)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	close_pipe1(pipex);
 	close_pipe2(pipex);
-	pipex.cmd_list = cmd_list(pipex, av[count]);
-	if (pipex.cmd_list == NULL)
-		free_exit(pipex);
-	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
+	pipex.cmd = cmd_list(pipex, av[count]);
+	if (pipex.cmd == NULL)
+		free_exit(pipex, 1);
+	pipex.cmd_path = cmd_path(pipex, pipex.cmd[0]);
 	if (pipex.cmd_path != NULL)
-		execve(pipex.cmd_path, pipex.cmd_list, envp);
+		execve(pipex.cmd_path, pipex.cmd, envp);
 	free(pipex.cmd_path);
-	free_split(pipex.cmd_list);
-	free_exit(pipex);
+	free_split(pipex.cmd);
+	free_exit(pipex, 1);
 }
 
 void	process3(t_pipex pipex, int count, char **av, char **envp)
 {
 	if (dup2(pipex.pipe1[0], 0) < 0)
-		free_exit(pipex);
+		free_exit(pipex, 1);
 	close_pipe1(pipex);
 	if (dup2(pipex.fdo, 1) < 0)
-		free_exit(pipex);
-	pipex.cmd_list = cmd_list(pipex, av[count]);
-	if (pipex.cmd_list == NULL)
-		free_exit(pipex);
-	pipex.cmd_path = cmd_path(pipex, pipex.cmd_list[0]);
+		free_exit(pipex, 1);
+	pipex.cmd = cmd_list(pipex, av[count]);
+	if (pipex.cmd == NULL)
+		free_exit(pipex, 1);
+	pipex.cmd_path = cmd_path(pipex, pipex.cmd[0]);
 	if (pipex.cmd_path != NULL)
-		execve(pipex.cmd_path, pipex.cmd_list, envp);
+		execve(pipex.cmd_path, pipex.cmd, envp);
 	free(pipex.cmd_path);
-	free_split(pipex.cmd_list);
-	free_exit(pipex);
+	free_split(pipex.cmd);
+	free_exit(pipex, 1);
 }

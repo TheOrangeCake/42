@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:56:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/07 23:40:45 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:58:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,18 @@ typedef struct s_pipex
 	char	*path_string;
 	char	**paths;
 	char	*cmd_path;
-	char	**cmd_list;
+	char	**cmd;
 	int		i;
 	char	*line;
 	int		status;
 	int		code;
+	int		count;
+	char	*copy;
+	char	*temp;
 }	t_pipex;
 
 void	free_split(char **list);
-void	free_exit(t_pipex pipex);
+void	free_exit(t_pipex pipex, int code);
 void	exit_unlink(char *file);
 void	close_pipe1(t_pipex pipex);
 void	close_pipe2(t_pipex pipex);
@@ -48,6 +51,7 @@ char	*find_paths(char **envp);
 int		we_gonna_fork_this(t_pipex pipex, int ac, char **av, char **envp);
 void	wait_all(t_pipex pipex, int *status, int ac);
 void	loop2(t_pipex *pipex, int ac, char **av, char **envp);
+char	**cmd_list(t_pipex pipex, char *cmd);
 
 char	**awk_case(t_pipex pipex, char *cmd);
 

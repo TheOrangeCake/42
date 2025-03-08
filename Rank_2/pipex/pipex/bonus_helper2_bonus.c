@@ -6,11 +6,22 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 06:16:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/07 23:16:32 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:58:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+char	**cmd_list(t_pipex pipex, char *cmd)
+{
+	if (!ft_strncmp(cmd, "awk", 3))
+		pipex.cmd = awk_case(pipex, cmd);
+	else
+		pipex.cmd = ft_split(cmd, ' ');
+	if (pipex.cmd == NULL)
+		return (NULL);
+	return (pipex.cmd);
+}
 
 void	close_fd(t_pipex pipex)
 {
@@ -21,14 +32,14 @@ void	close_fd(t_pipex pipex)
 char	*find_paths(char **envp)
 {
 	if (envp == NULL)
-		return (NULL);
+		return ("/");
 	while (*envp != NULL)
 	{
 		if (ft_strncmp(*envp, "PATH=", 5) == 0)
 			return (*envp + 5);
 		envp++;
 	}
-	return (NULL);
+	return ("/");
 }
 
 void	wait_all(t_pipex pipex, int *status, int ac)
@@ -47,10 +58,10 @@ void	loop2(t_pipex *pipex, int ac, char **av, char **envp)
 	while (pipex->i < (ac - 2))
 	{
 		if (pipe(pipex->pipe2) < 0)
-			free_exit(*pipex);
+			free_exit(*pipex, 1);
 		pipex->pid2 = fork();
 		if (pipex->pid2 < 0)
-			free_exit(*pipex);
+			free_exit(*pipex, 1);
 		if (pipex->pid2 == 0)
 			process2(*pipex, pipex->i, av, envp);
 		close_pipe1(*pipex);
