@@ -6,16 +6,24 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:15:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/13 12:18:06 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:53:09 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char *nptr)
+void	showtime(void)
 {
-	int	sign;
-	int	nb;
+	struct timeval	t;
+	
+	tofday(&t, NULL);
+	printf("%ld ", t.tv_usec / 1000 + t.tv_sec * 1000);
+}
+
+long	ft_atoi(char *nptr)
+{
+	long	sign;
+	long	nb;
 
 	nb = 0;
 	sign = 1;

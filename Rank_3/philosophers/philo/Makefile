@@ -2,7 +2,7 @@
 
 NAME = philo
 
-SOURCE = main.c helper1.c
+SOURCE = main.c case_of_one.c helper1.c
 
 HEADER = philo.h
 
