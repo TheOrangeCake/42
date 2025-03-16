@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/13 18:04:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/16 11:16:24 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*philo_thread(void *arg)
 		flag = 1;
 		take_fork(&philo, i);
 		pthread_mutex_unlock(&philo.mutex);
-		if (flag = 1)
+		if (flag == 1)
 		{
 			showtime();
 			printf(" %d is sleeping\n", i);
@@ -68,12 +68,12 @@ void	*philo_thread(void *arg)
 
 int	run(t_philo philo)
 {
-	// philo.a_philo = malloc(sizeof(int) * philo.numb);
-	// 	if (philo.a_philo == NULL)
-	// 	return (1);
+	pthread_t	a_philo[philo.numb];
+	int	*a;
+
 	philo.fork = malloc(sizeof(int) * philo.numb);
 	if (philo.fork == NULL)
-		return (free(philo.a_philo), 1);
+		return (1);
 	philo.i = 0;
 	while (philo.i < philo.numb)
 		philo.fork[philo.i++] = 1;
@@ -82,19 +82,18 @@ int	run(t_philo philo)
 	while (philo.i < philo.numb)
 	{
 		if (pthread_create(&a_philo[philo.i], NULL, &philo_thread, &philo) != 0)
-			return (free(philo.a_philo), free(philo.fork), 1);
+			return (free(philo.fork), 1);
 		philo.i++;
 	}
 	philo.j = 0;
 	while (philo.j < philo.numb)
 	{
 		if (pthread_join(a_philo[philo.j], NULL) != 0)
-			return (free(philo.a_philo), free(philo.fork), 1);
+			return (free(philo.fork), 1);
 		philo.j++;
 	}
 	pthread_mutex_destroy(&philo.mutex);
 	free(philo.fork);
-	free(philo.a_philo);
 	return (0);
 }
 
@@ -124,10 +123,6 @@ int	main(int ac, char **av)
 		}
 	}
 	else
-		return (printf("Wrong ner of input\n"), 1);
+		return (printf("Wrong number of input\n"), 1);
 	return (0);
 }
-
-	// t_time			time;
-	// time = showtime(t);
-	// printf("time: %d:%d:%d\n", time.hour, time.minute, time.second);

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/13 17:55:45 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:21:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_philo
 	long			sleep;
 	long			must_eat;
 	pthread_mutex_t	mutex;
-	pthread_t		a_philo;
 	int				i;
 	int				j;
 	int				*fork;
