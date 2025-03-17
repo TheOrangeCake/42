@@ -6,19 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:15:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/13 17:53:09 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:44:30 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	showtime(void)
-{
-	struct timeval	t;
-	
-	tofday(&t, NULL);
-	printf("%ld ", t.tv_usec / 1000 + t.tv_sec * 1000);
-}
 
 long	ft_atoi(char *nptr)
 {
@@ -42,4 +34,21 @@ long	ft_atoi(char *nptr)
 		nptr++;
 	}
 	return (nb * sign);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char	*ptr;
+	size_t	total_size;
+
+	total_size = nmemb * size;
+	ptr = malloc(total_size);
+	if (ptr == NULL)
+		return (NULL);
+	while (total_size > 0)
+	{
+		ptr[total_size - 1] = 0;
+		total_size--;
+	}
+	return ((void *)ptr);
 }

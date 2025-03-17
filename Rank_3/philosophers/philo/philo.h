@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/15 10:21:49 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:56:53 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,23 @@ typedef struct s_philo
 	long			eat;
 	long			sleep;
 	long			must_eat;
-	pthread_mutex_t	mutex;
-	int				i;
-	int				j;
+	pthread_mutex_t	*mutex;
+	pthread_t		*single;
 	int				*fork;
 	struct timeval	t;
+	int				index;
+	int				i;
+	int				j;
 }	t_philo;
 
-typedef struct s_time
+typedef struct s_wrapper
 {
-	int	hour;
-	int	minute;
-	int	second;
-}	t_time;
+	t_philo	*philo;
+	int		index;
+}	t_wrapper;
 
 long	ft_atoi(char *nptr);
-void	showtime(void);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 int	case_of_one(t_philo philo);
 
