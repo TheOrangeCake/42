@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/17 22:22:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/17 22:44:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ typedef struct s_philo
 {
 	pthread_mutex_t	*mutex;
 	pthread_t		*single;
+	int				*fork;
 	struct timeval	time;
+	int				die;
 	int				eaten;
 	int				front_fork;
 	int				left_fork;
@@ -54,6 +56,6 @@ int		input_check(char **av);
 int		init_parameters(t_parameter *params, char **av, int ac);
 void	print_message(t_parameter *params, int index, int code);
 
-int	case_of_one(t_parameter *params);
+int		case_of_one(t_parameter *params);
 
 #endif

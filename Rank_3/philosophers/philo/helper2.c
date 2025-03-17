@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:51:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/17 22:21:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/17 22:44:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	init_parameters(t_parameter *params, char **av, int ac)
 		params->must_eat = 0;
 	if (params->numb == 0 || params->time_die > 2147483647
 		|| params->time_eat > 2147483647
-		|| params->time_sleep > 2147483647 
+		|| params->time_sleep > 2147483647
 		|| params->must_eat > 2147483647)
 		return (1);
 	return (0);
