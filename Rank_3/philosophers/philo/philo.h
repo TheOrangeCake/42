@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/17 15:56:53 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/17 22:22:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,41 @@
 # include <unistd.h>
 # include <sys/time.h>
 
+# define THINK 1
+# define F_FORK 2
+# define L_FORK 3
+# define EAT 4
+# define SLEEP 5
+# define DIE 6
+
 typedef struct s_philo
 {
-	int				numb;
-	long			die;
-	long			eat;
-	long			sleep;
-	long			must_eat;
 	pthread_mutex_t	*mutex;
 	pthread_t		*single;
-	int				*fork;
-	struct timeval	t;
-	int				index;
-	int				i;
-	int				j;
+	struct timeval	time;
+	int				eaten;
+	int				front_fork;
+	int				left_fork;
 }	t_philo;
 
-typedef struct s_wrapper
+typedef struct s_parameter
 {
 	t_philo	*philo;
+	int		numb;
+	long	time_die;
+	long	time_eat;
+	long	time_sleep;
+	long	must_eat;
+	long	start_time;
 	int		index;
-}	t_wrapper;
+}	t_parameter;
 
-long	ft_atoi(char *nptr);
+long	ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
+int		input_check(char **av);
+int		init_parameters(t_parameter *params, char **av, int ac);
+void	print_message(t_parameter *params, int index, int code);
 
-int	case_of_one(t_philo philo);
+int	case_of_one(t_parameter *params);
 
 #endif

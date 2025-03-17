@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:15:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/17 15:44:30 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/17 21:30:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	ft_atoi(char *nptr)
+long	ft_atoi(const char *nptr)
 {
 	long	sign;
 	long	nb;

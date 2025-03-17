@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:27:55 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/17 15:37:04 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/17 22:22:23 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,29 @@
 
 void	*case_of_one_next(void *arg)
 {
-	t_philo	philo;
+	t_parameter	*params;
 
-	philo = *(t_philo *)arg;
-	gettimeofday(&philo.t, NULL);
-	printf("%ld 1 has taken the front fork\n", philo.t.tv_usec
-		/ 1000 + philo.t.tv_sec * 1000);
-	usleep(philo.die * 1000);
-	gettimeofday(&philo.t, NULL);
-	printf("%ld 1 died\n", philo.t.tv_usec / 1000 + philo.t.tv_sec * 1000);
+	params = (t_parameter *)arg;
+	print_message(params, 1, THINK);
+	print_message(params, 1, F_FORK);
+	usleep(params->time_die * 1000);
+	print_message(params, 1, DIE);
 	return (NULL);
 }
 
-int	case_of_one(t_philo philo)
+int	case_of_one(t_parameter *params)
 {
-	philo.single = malloc(sizeof(pthread_t) * philo.numb);
-		if (philo.single == NULL)
+	params->philo->single = malloc(sizeof(pthread_t));
+	if (params->philo->single == NULL)
 		return (1);
-	if (pthread_create(&philo.single[0], NULL, &case_of_one_next, &philo) != 0)
-	{
-		free(philo.single);
-		return (1);
-	}
-	if (pthread_join(philo.single[0], NULL) != 0)
-	{
-		free(philo.single);
-		return (1);
-	}
-	free(philo.single);
+	gettimeofday(&params->philo->time, NULL);
+	params->start_time = params->philo->time.tv_usec
+		/ 1000 + params->philo->time.tv_sec * 1000;
+	if (pthread_create(&params->philo->single[0], NULL,
+			&case_of_one_next, params) != 0)
+		return (free(params->philo->single), 1);
+	if (pthread_join(params->philo->single[0], NULL) != 0)
+		return (free(params->philo->single), 1);
+	free(params->philo->single);
 	return (0);
 }
