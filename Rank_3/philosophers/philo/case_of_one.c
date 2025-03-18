@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:27:55 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/17 22:44:34 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:10:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	*case_of_one_next(void *arg)
 
 int	case_of_one(t_parameter *params)
 {
-	params->philo->single = malloc(sizeof(pthread_t));
-	if (params->philo->single == NULL)
+	params->philo = malloc(sizeof(pthread_t));
+	if (params->philo == NULL)
 		return (1);
-	gettimeofday(&params->philo->time, NULL);
-	params->start_time = params->philo->time.tv_usec
-		/ 1000 + params->philo->time.tv_sec * 1000;
-	if (pthread_create(&params->philo->single[0], NULL,
+	gettimeofday(&params->time, NULL);
+	params->start_time = params->time.tv_usec
+		/ 1000 + params->time.tv_sec * 1000;
+	if (pthread_create(&params->philo[0], NULL,
 			&case_of_one_next, params) != 0)
-		return (free(params->philo->single), 1);
-	if (pthread_join(params->philo->single[0], NULL) != 0)
-		return (free(params->philo->single), 1);
-	free(params->philo->single);
+		return (free(params->philo), 1);
+	if (pthread_join(params->philo[0], NULL) != 0)
+		return (free(params->philo), 1);
+	free(params->philo);
 	return (0);
 }

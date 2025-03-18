@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:51:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/17 22:44:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:10:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	print_message(t_parameter *params, int index, int code)
 {
 	long	current_time;
 
-	gettimeofday(&params->philo->time, NULL);
-	current_time = params->philo->time.tv_usec
-		/ 1000 + params->philo->time.tv_sec * 1000;
+	gettimeofday(&params->time, NULL);
+	current_time = params->time.tv_usec
+		/ 1000 + params->time.tv_sec * 1000;
 	if (code == 1)
 		printf("%10ld %5d is thinking\n",
 			current_time - params->start_time, index);
