@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 12:45:20 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:44:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,38 @@ typedef struct s_parameter
 	struct timeval	time;
 	long			start_time;
 	pthread_mutex_t	*mutex;
+	pthread_mutex_t	*p;
 	pthread_t		*philo;
 	int				die;
-	int				eaten;
-	int				*front_fork;
-	int				*left_fork;
 }	t_parameter;
 
 typedef struct s_index
 {
-	t_parameter	*params;
+	t_parameter	*param;
 	int			index;
 }	t_index;
+
+typedef struct s_local
+{
+	int				index;
+	int				flag;
+	int				eaten;
+	int				finish;
+	struct timeval	time;
+	long			last_eat;
+	long			expected_dead;
+	long			current_time;
+}	t_local;
 
 long	ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		input_check(char **av);
 void	free_all(t_parameter *params);
 int		init_parameters(t_parameter *params, char **av, int ac);
+void	init_local(t_parameter *params, t_local *local);
+int		init_rest(t_parameter *params);
 void	print_message(t_parameter *params, int index, int code);
+
 int		case_of_one(t_parameter *params);
 
 #endif

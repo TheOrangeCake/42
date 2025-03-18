@@ -6,21 +6,23 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:15:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 12:46:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:46:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_all(t_parameter *params)
+void	free_all(t_parameter *param)
 {
 	int	i;
 
 	i = -1;
-	while (++i < params->numb)
-		pthread_mutex_destroy(&params->mutex[i]);
-	free(params->mutex);
-	free(params->philo);
+	while (++i < param->numb)
+		pthread_mutex_destroy(&param->mutex[i]);
+	pthread_mutex_destroy(param->p);
+	free(param->mutex);
+	free(param->p);
+	free(param->philo);
 }
 
 long	ft_atoi(const char *nptr)

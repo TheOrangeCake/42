@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:27:55 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:45:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,33 @@
 
 void	*case_of_one_next(void *arg)
 {
-	t_parameter	*params;
+	t_parameter	*param;
 
-	params = (t_parameter *)arg;
-	print_message(params, 1, THINK);
-	print_message(params, 1, F_FORK);
-	usleep(params->time_die * 1000);
-	print_message(params, 1, DIE);
+	param = (t_parameter *)arg;
+	print_message(param, 1, THINK);
+	print_message(param, 1, F_FORK);
+	usleep(param->time_die * 1000);
+	print_message(param, 1, DIE);
 	return (NULL);
 }
 
-int	case_of_one(t_parameter *params)
+int	case_of_one(t_parameter *param)
 {
-	params->philo = malloc(sizeof(pthread_t));
-	if (params->philo == NULL)
+	param->p = ft_calloc(1, sizeof(pthread_mutex_t));
+	if (param->p == NULL)
 		return (1);
-	gettimeofday(&params->time, NULL);
-	params->start_time = params->time.tv_usec
-		/ 1000 + params->time.tv_sec * 1000;
-	if (pthread_create(&params->philo[0], NULL,
-			&case_of_one_next, params) != 0)
-		return (free(params->philo), 1);
-	if (pthread_join(params->philo[0], NULL) != 0)
-		return (free(params->philo), 1);
-	free(params->philo);
+	param->philo = malloc(sizeof(pthread_t));
+	if (param->philo == NULL)
+		return (free(param->p), 1);
+	gettimeofday(&param->time, NULL);
+	param->start_time = param->time.tv_usec
+		/ 1000 + param->time.tv_sec * 1000;
+	if (pthread_create(&param->philo[0], NULL,
+			&case_of_one_next, param) != 0)
+		return (free(param->philo), 1);
+	if (pthread_join(param->philo[0], NULL) != 0)
+		return (free(param->philo), 1);
+	free(param->philo);
+	free(param->p);
 	return (0);
 }
