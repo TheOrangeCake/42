@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 15:44:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:03:24 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ typedef struct s_parameter
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*p;
 	pthread_t		*philo;
+	pthread_t		monitor;
+	long			*timetable;
 	int				die;
+	int				monitor_flag;
 }	t_parameter;
 
 typedef struct s_index
@@ -55,8 +58,6 @@ typedef struct s_local
 	int				finish;
 	struct timeval	time;
 	long			last_eat;
-	long			expected_dead;
-	long			current_time;
 }	t_local;
 
 long	ft_atoi(const char *nptr);
@@ -68,6 +69,7 @@ void	init_local(t_parameter *params, t_local *local);
 int		init_rest(t_parameter *params);
 void	print_message(t_parameter *params, int index, int code);
 
+void	*routine(void *arg);
 int		case_of_one(t_parameter *params);
 
 #endif

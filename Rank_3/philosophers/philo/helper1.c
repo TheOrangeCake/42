@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:15:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 15:46:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:01:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,29 @@ void	free_all(t_parameter *param)
 		pthread_mutex_destroy(&param->mutex[i]);
 	pthread_mutex_destroy(param->p);
 	free(param->mutex);
+	free(param->timetable);
 	free(param->p);
 	free(param->philo);
+}
+
+int	input_check(char **av)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (av[i] != NULL)
+	{
+		j = 0;
+		while (av[i][j] != '\0')
+		{
+			if ((av[i][j] < '0' || av[i][j] > '9') && av[i][j] != '+')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 long	ft_atoi(const char *nptr)
