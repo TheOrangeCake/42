@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:27:14 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/20 19:13:42 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:00:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	takefork_left(t_parameter *param, t_local *local)
 	pthread_mutex_unlock(&param->mutex[local->index]);
 	pthread_mutex_unlock(&param->mutex[left_fork]);
 	if (local->eaten == param->must_eat)
+	{
 		local->finish = 1;
+		param->timetable[local->index] = -1;
+	}
 }
 
 void	takefork(t_parameter *param, t_local *local)

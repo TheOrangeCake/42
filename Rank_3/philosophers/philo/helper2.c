@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:51:10 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 18:01:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/20 19:43:06 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	print_message(t_parameter *param, int index, int code)
 			current - param->start_time, index);
 	else if (code == 5)
 		printf("%10ld %5d is sleeping\n",
+			current - param->start_time, index);
+	else if (code == 6)
+		printf("%10ld %5d died\n",
 			current - param->start_time, index);
 	pthread_mutex_unlock(param->p);
 }
