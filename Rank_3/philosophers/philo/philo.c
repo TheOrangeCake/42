@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:27:14 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 18:38:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/20 19:13:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	takefork(t_parameter *param, t_local *local)
 	if (local->eaten == param->must_eat)
 	{
 		local->finish = 1;
-		param->timetable[local->index] = 18000000000000;
+		param->timetable[local->index] = -1;
 	}
 }
 

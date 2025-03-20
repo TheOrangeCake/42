@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 18:38:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/20 19:13:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	*monitor(void *arg)
 	t_parameter		*param;
 	int				i;
 	long			current;
+	int				count;
 	struct timeval	time;
 
+	count = 0;
 	param = (t_parameter *)arg;
 	param->monitor_flag = 0;
 	while (param->monitor_flag == 0)
@@ -28,12 +30,17 @@ void	*monitor(void *arg)
 		i = param->numb;
 		while (--i >= 0)
 		{
-			if (current > param->timetable[i])
+			if (current > param->timetable[i] && param->timetable[i] != -1)
 			{
 				param->die = 1;
 				param->monitor_flag = 1;
 				printf("%10ld %5d died\n", current - param->start_time, i + 1);
 				break ;
+			}
+			if (param->timetable[i] == -1)
+			{
+				count++;
+				param->timetable[i] = -2;
 			}
 		}
 	}
