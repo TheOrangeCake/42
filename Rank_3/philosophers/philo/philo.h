@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 18:03:24 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:10:59 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@
 # include <sys/time.h>
 
 # define THINK 1
-# define F_FORK 2
-# define L_FORK 3
-# define EAT 4
-# define SLEEP 5
-# define DIE 6
+# define FORK 2
+# define EAT 3
+# define SLEEP 4
 
 typedef struct s_parameter
 {
@@ -36,7 +34,9 @@ typedef struct s_parameter
 	struct timeval	time;
 	long			start_time;
 	pthread_mutex_t	*mutex;
-	pthread_mutex_t	*p;
+	pthread_mutex_t	*t;
+	pthread_mutex_t	p;
+	pthread_mutex_t	dead;
 	pthread_t		*philo;
 	pthread_t		monitor;
 	long			*timetable;
@@ -58,6 +58,7 @@ typedef struct s_local
 	int				finish;
 	struct timeval	time;
 	long			last_eat;
+	int				left_fork;
 }	t_local;
 
 long	ft_atoi(const char *nptr);
@@ -65,7 +66,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 int		input_check(char **av);
 void	free_all(t_parameter *params);
 int		init_parameters(t_parameter *params, char **av, int ac);
-void	init_local(t_parameter *params, t_local *local);
+void	init_local(t_parameter *params, t_local *local, int index);
 int		init_rest(t_parameter *params);
 void	print_message(t_parameter *params, int index, int code);
 

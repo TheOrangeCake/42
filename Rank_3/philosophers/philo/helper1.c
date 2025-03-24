@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:15:02 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/18 18:01:47 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:10:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ void	free_all(t_parameter *param)
 	i = -1;
 	while (++i < param->numb)
 		pthread_mutex_destroy(&param->mutex[i]);
-	pthread_mutex_destroy(param->p);
+	i = -1;
+	while (++i < param->numb)
+		pthread_mutex_destroy(&param->t[i]);
+	pthread_mutex_destroy(&param->p);
+	pthread_mutex_destroy(&param->dead);
+	free(param->t);
 	free(param->mutex);
 	free(param->timetable);
-	free(param->p);
 	free(param->philo);
 }
 

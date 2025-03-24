@@ -6,11 +6,37 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/20 19:40:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:10:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	monitor_helper(t_parameter *param, int i, long *current, int *count)
+{
+	if (param->timetable[i] == -1)
+	{
+		(*count)++;
+		param->timetable[i] = -2;
+	}
+	if (*count == param->numb)
+	{
+		param->monitor_flag = 1;
+		pthread_mutex_unlock(&param->t[i]);
+		return (1);
+	}
+	if (*current > param->timetable[i] && param->timetable[i] != -2)
+	{
+		pthread_mutex_lock(&param->dead);
+		param->die = 1;
+		param->monitor_flag = 1;
+		pthread_mutex_unlock(&param->dead);
+		printf("%10ld %5d died\n", *current - param->start_time, i + 1);
+		pthread_mutex_unlock(&param->t[i]);
+		return (1);
+	}
+	return (0);
+}
 
 void	*monitor(void *arg)
 {
@@ -20,7 +46,7 @@ void	*monitor(void *arg)
 	int				count;
 	struct timeval	time;
 
-	count = 1;
+	count = 0;
 	param = (t_parameter *)arg;
 	param->monitor_flag = 0;
 	while (param->monitor_flag == 0)
@@ -30,23 +56,10 @@ void	*monitor(void *arg)
 		i = param->numb;
 		while (--i >= 0)
 		{
-			if (param->timetable[i] == -1)
-			{
-				count++;
-				param->timetable[i] = -2;
-			}
-			if (count == param->numb)
-			{
-				param->monitor_flag = 1;
-				break;
-			}
-			if (current > param->timetable[i] && param->timetable[i] != -2)
-			{
-				param->die = 1;
-				param->monitor_flag = 1;
-				printf("%10ld %5d died\n", current - param->start_time, i + 1);
+			pthread_mutex_lock(&param->t[i]);
+			if (monitor_helper(param, i, &current, &count) == 1)
 				break ;
-			}
+			pthread_mutex_unlock(&param->t[i]);
 		}
 	}
 }
@@ -58,7 +71,6 @@ int	join_thread(t_parameter *param, int i)
 		if (pthread_join(param->philo[i], NULL) < 0)
 			return (1);
 	}
-	param->monitor_flag = 1;
 	if (pthread_join(param->monitor, NULL) < 0)
 		return (1);
 	return (0);
