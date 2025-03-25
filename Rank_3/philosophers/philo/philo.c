@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:27:14 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/24 12:10:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/25 09:45:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	routine_helper(t_parameter *param, t_local *local)
 		takefork(param, local);
 	else
 	{
-		usleep(500);
+		usleep(1000);
 		takefork(param, local);
 	}
 	if (local->flag == 1 && local->finish == 0)

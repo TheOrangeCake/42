@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/24 12:10:59 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/25 09:50:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ typedef struct s_index
 	t_parameter	*param;
 	int			index;
 }	t_index;
+
+typedef struct s_monitor
+{
+	int				i;
+	long			current;
+	int				count;
+	struct timeval	time;
+	int				flag;
+}	t_monitor;
 
 typedef struct s_local
 {

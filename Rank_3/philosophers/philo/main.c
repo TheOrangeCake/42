@@ -6,60 +6,58 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/24 12:10:56 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:07:59 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	monitor_helper(t_parameter *param, int i, long *current, int *count)
+int	monitor_helper(t_parameter *param, t_monitor *monitor)
 {
-	if (param->timetable[i] == -1)
+	pthread_mutex_lock(&param->t[monitor->i]);
+	if (param->timetable[monitor->i] == -1)
 	{
-		(*count)++;
-		param->timetable[i] = -2;
+		(monitor->count)++;
+		param->timetable[monitor->i] = -2;
 	}
-	if (*count == param->numb)
+	if (monitor->count == param->numb)
 	{
-		param->monitor_flag = 1;
-		pthread_mutex_unlock(&param->t[i]);
-		return (1);
+		monitor->flag = 1;
+		return (pthread_mutex_unlock(&param->t[monitor->i]), 1);
 	}
-	if (*current > param->timetable[i] && param->timetable[i] != -2)
+	if (monitor->current > param->timetable[monitor->i]
+		&& param->timetable[monitor->i] != -2)
 	{
 		pthread_mutex_lock(&param->dead);
 		param->die = 1;
-		param->monitor_flag = 1;
+		monitor->flag = 1;
 		pthread_mutex_unlock(&param->dead);
-		printf("%10ld %5d died\n", *current - param->start_time, i + 1);
-		pthread_mutex_unlock(&param->t[i]);
-		return (1);
+		printf("%10ld %5d died\n",
+			monitor->current - param->start_time, monitor->i + 1);
+		return (pthread_mutex_unlock(&param->t[monitor->i]), 1);
 	}
+	pthread_mutex_unlock(&param->t[monitor->i]);
 	return (0);
 }
 
 void	*monitor(void *arg)
 {
 	t_parameter		*param;
-	int				i;
-	long			current;
-	int				count;
-	struct timeval	time;
+	t_monitor		monitor;
 
-	count = 0;
+	monitor.count = 0;
 	param = (t_parameter *)arg;
-	param->monitor_flag = 0;
-	while (param->monitor_flag == 0)
+	monitor.flag = 0;
+	while (monitor.flag == 0)
 	{
-		gettimeofday(&time, NULL);
-		current = time.tv_usec / 1000 + time.tv_sec * 1000;
-		i = param->numb;
-		while (--i >= 0)
+		gettimeofday(&monitor.time, NULL);
+		monitor.current = monitor.time.tv_usec
+			/ 1000 + monitor.time.tv_sec * 1000;
+		monitor.i = param->numb;
+		while (--monitor.i >= 0)
 		{
-			pthread_mutex_lock(&param->t[i]);
-			if (monitor_helper(param, i, &current, &count) == 1)
+			if (monitor_helper(param, &monitor) == 1)
 				break ;
-			pthread_mutex_unlock(&param->t[i]);
 		}
 	}
 }
