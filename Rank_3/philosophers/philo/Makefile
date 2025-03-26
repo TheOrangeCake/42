@@ -20,8 +20,8 @@ OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
 #
 
 GCC = gcc
-# FLAGS = -Wextra -Wall -Werror -pthread
-FLAGS = -pthread
+FLAGS = -Wextra -Wall -Werror -pthread
+# FLAGS = -pthread
 RM = rm -f
 
 all : $(NAME)

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:27:14 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/25 09:45:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:01:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	*routine(void *arg)
 		pthread_mutex_unlock(&param->dead);
 		routine_helper(param, &local);
 	}
+	return (NULL);
 }

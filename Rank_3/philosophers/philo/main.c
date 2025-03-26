@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:34:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/03/25 10:07:59 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:00:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	*monitor(void *arg)
 				break ;
 		}
 	}
+	return (NULL);
 }
 
 int	join_thread(t_parameter *param, int i)
