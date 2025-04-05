@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer_helper_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 15:15:04 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/04/05 21:28:18 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/04/05 21:37:01 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/04/05 21:46:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "input.h"
 
-#endif
+int	ft_isspace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\r' || c == '\f')
+		return (1);
+	else
+		return (0);
+}
