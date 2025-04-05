@@ -2,7 +2,7 @@
 
 NAME = shell
 
-SOURCE = main.c lexer.c lexer_helper_1.c lexer_helper_2.c
+SOURCE = main.c lexer.c lexer_case_single.c lexer_case_double.c lexer_helper_1.c lexer_helper_2.c
 
 OBJ_DIR = obj
 

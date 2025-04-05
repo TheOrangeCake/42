@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/04 17:50:55 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/05 23:48:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
 	char	*line;
 

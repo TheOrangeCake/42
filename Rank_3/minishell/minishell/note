@@ -1,0 +1,15 @@
+-- Unquoted String ($test):
+
+Variable Expansion: Like $test, the shell will expand the variable test to its value.
+
+Word Splitting: If the value of test contains spaces or special characters (like newlines), the shell will split the value into separate words.
+
+Filename Expansion (Glob Expansion): The shell will also expand any patterns like * or ? in the value of the variable if present.
+
+-- Double-Quoted String ("$test"):
+
+Variable Expansion: The value of test will still be expanded.
+
+No Word Splitting: Spaces or special characters in the value of test will not cause the value to be split into separate arguments.
+
+No Filename Expansion (Glob Expansion): No globbing will happen within the variable's value.
