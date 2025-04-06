@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/04/06 10:35:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/06 11:06:41 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ enum	e_token_t
 {
 	TK_Null,
 	TK_String,
-	TK_Number,
 	TK_In,
 	TK_Out,
 	TK_Pipe,
