@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:46:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/06 11:22:39 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/06 11:42:13 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_token	*lexer(char *line, t_token **head)
 		}
 		else if (ft_isprintable(line[i]))
 		{
-			if(case_printable(head, &line[i], &count) == NULL)
+			if (case_printable(head, &line[i], &count) == NULL)
 				return (ft_lstclear(head), NULL);
 			i += count - 1;
 		}

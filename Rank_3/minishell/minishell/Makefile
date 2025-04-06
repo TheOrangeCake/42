@@ -9,8 +9,8 @@ OBJ_DIR = obj
 OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
 
 GCC = gcc
-# FLAGS = -Wextra -Wall -Werror
-FLAGS =
+FLAGS = -Wextra -Wall -Werror
+# FLAGS =
 RM = rm -f
 
 all : $(NAME)
