@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 15:39:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/05 22:05:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:13:18 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,19 @@ void	ft_lstadd_back(t_token **lst, t_token *new_token)
 	}
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-// extract the substring, here extract the token from the input
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+// copy the substring from the input
+char	*ft_substring(char *s, int len)
 {
 	char	*ptr;
 	size_t	i;
-	size_t	s_len;
 
 	i = 0;
-	s_len = ft_strlen(s);
-	if (start + len > s_len)
-		len = s_len - start;
-	if (start >= s_len)
-		len = 0;
 	ptr = malloc(sizeof(char) * (len + 1));
 	if (ptr == NULL)
 		return (NULL);
 	while (len > 0)
 	{
-		ptr[i] = s[start + i];
+		ptr[i] = s[i];
 		i++;
 		len--;
 	}

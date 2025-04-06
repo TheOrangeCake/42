@@ -6,11 +6,27 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 21:37:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/05 22:19:39 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:51:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+
+int	ft_isnumber(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_isprintable(int c)
+{
+	if (c >= 32 && c <= 126)
+		return (1);
+	else
+		return (0);
+}
 
 int	ft_isspace(char c)
 {

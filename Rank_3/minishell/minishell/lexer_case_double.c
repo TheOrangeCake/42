@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 22:15:44 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/05 22:24:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/06 08:36:30 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	case_and(t_token *token)
 	token->next = NULL;
 }
 
+// Handle || , && , >> , <<
 t_token	**case_double_char(t_token **head, char character)
 {
 	t_token	*token;

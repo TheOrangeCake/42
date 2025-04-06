@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 22:14:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/05 22:27:02 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:20:09 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	case_usd(t_token *token)
 	token->next = NULL;
 }
 
+// Handle $ , | , > , <
 t_token	**case_single_char(t_token **head, char character)
 {
 	t_token	*token;
