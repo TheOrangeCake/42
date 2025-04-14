@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:49:29 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/14 11:23:02 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:02:20 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-void	case_pipe(t_node *tree, int *i)
+void	case_pipe(t_node *tree, int *i, char **envp)
 {
 	/*code to open pipe and change redirection to next pipe
 	
@@ -20,24 +20,24 @@ void	case_pipe(t_node *tree, int *i)
 	
 	
 	*/
-	executor(tree->lnode, i);
-	executor(tree->rnode, i);
+	executor(tree->lnode, i, envp);
+	executor(tree->rnode, i, envp);
 }
 
-void	case_operator(t_node *tree, int *i)
+void	case_operator(t_node *tree, int *i, char **envp)
 {
 	if (tree->type == NT_Or)
 	{
-		executor(tree->lnode, i);
+		executor(tree->lnode, i, envp);
 		if (*i != 0)
-			executor(tree->rnode, i);
+			executor(tree->rnode, i, envp);
 		return ;
 	}
 	else if (tree->type == NT_And)
 	{
-		executor(tree->lnode, i);
+		executor(tree->lnode, i, envp);
 		if (*i == 0)
-			executor(tree->rnode, i);
+			executor(tree->rnode, i, envp);
 		return ;
 	}
 }
