@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = shell
+NAME = buildin
 
-SOURCE = main.c lexer.c lexer_case_single.c lexer_case_double.c lexer_case_string.c lexer_helper_1.c lexer_helper_2.c
+SOURCE = main.c
 
 OBJ_DIR = obj
 

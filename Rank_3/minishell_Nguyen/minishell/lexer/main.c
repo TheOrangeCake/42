@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/10 16:26:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:01:09 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,37 @@ void	history_handler(char *line)
 	}
 }
 
+void	signal_handler()
+{
+
+}
+
+void	signal_c()
+{
+
+}
+
+void	signal_d()
+{
+
+}
+
+void	signal_slash()
+{
+
+}
+
 int	main(int ac, char **av, char **envp)
 {
-	char	*line;
-	t_token	*head;
+	char				*line;
+	t_token				*head;
+	struct sigaction	signal;
 
 	(void) ac;
 	(void) av;
 	(void) envp;
 	head = NULL;
+	signal.sa_handler = signal_c;
 	while (1)
 	{
 		line = readline("Minishell> ");

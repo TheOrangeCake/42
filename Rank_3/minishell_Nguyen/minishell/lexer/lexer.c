@@ -6,11 +6,12 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:46:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/10 19:35:07 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:31:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "shellsignal.h"
 
 int	lexer_helper(char *line, t_token **head, int *i)
 {

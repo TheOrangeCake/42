@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   buildin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 15:15:04 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/04/05 21:28:18 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/04/14 10:50:58 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/04/16 14:26:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#ifndef BUILDIN_H
+# define BUILDIN_H
+# include "minishell.h"
+
 
 #endif

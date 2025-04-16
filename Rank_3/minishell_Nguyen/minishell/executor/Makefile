@@ -2,7 +2,7 @@
 
 NAME = shell
 
-SOURCE = main.c case_command.c case_operator_pipe.c case_redirection.c
+SOURCE = main.c
 
 OBJ_DIR = obj
 
