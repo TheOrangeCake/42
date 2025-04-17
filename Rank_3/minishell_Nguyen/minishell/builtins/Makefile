@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = buildin
+NAME = shell
 
-SOURCE = main.c
+SOURCE = main.c 
 
 OBJ_DIR = obj
 

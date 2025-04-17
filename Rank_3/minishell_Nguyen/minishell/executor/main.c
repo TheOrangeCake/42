@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:26:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/14 12:02:24 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:10:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 // 	NT_Or = TK_Or,
 // };
 
+// should create a linked list, each node is a KEY and its VALUE
+// When expansion $ is called, loop through this linked list to find the KEY and get its VALUE
 void	case_assign(t_node *tree, int *i, char **envp)
 {
 	/* code to do assignement
@@ -44,6 +46,7 @@ void	case_assign(t_node *tree, int *i, char **envp)
 	*/
 }
 
+// From the root of the tree, recursively apply the executor
 void	executor(t_node *tree, int *i, char **envp)
 {
 	if (tree->type == NT_Candidate || tree == NULL)
