@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/18 21:20:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:33:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	ast_builder(t_token *head, char **envp)
 	}
 }
 
+// handle history
 void	history_handler(char *line)
 {
 	if (line != NULL && line[0] != '\0')
