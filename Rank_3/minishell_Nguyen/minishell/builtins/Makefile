@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = shell
+NAME = builtins
 
-SOURCE = main.c 
+SOURCE = main.c builtins_echo.c builtins_helper.c
 
 OBJ_DIR = obj
 
