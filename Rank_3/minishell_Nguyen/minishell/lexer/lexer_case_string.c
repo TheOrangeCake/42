@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 10:31:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/10 19:42:34 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/20 20:31:14 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_token	*case_string(t_token *token, char *line, int *count)
 			&& line[*count] != '<' && line[*count] != '>'
 			&& line[*count] != '|')
 		{
-			if (line[*count] == '=' && line[*count + 1] != ' ')
+			if (line[*count] == '=')
 				token->type = TK_Assign;
 			(*count)++;
 		}
