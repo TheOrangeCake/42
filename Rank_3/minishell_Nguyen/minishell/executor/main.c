@@ -6,11 +6,18 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:26:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/14 12:10:27 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/20 11:14:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+
+// union u_data
+// {
+// 	t_args	*args;
+// 	char	*field;
+// 	t_token	*token;
+// };
 
 // typedef struct s_node
 // {
