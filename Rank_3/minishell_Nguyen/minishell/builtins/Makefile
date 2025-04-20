@@ -2,15 +2,15 @@
 
 NAME = builtins
 
-SOURCE = main.c builtins_echo.c builtins_helper.c
+SOURCE = main.c builtins_echo_pwd_env.c builtins_helper.c
 
 OBJ_DIR = obj
 
 OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
 
 GCC = gcc
-FLAGS = -Wextra -Wall -Werror
-# FLAGS =
+# FLAGS = -Wextra -Wall -Werror
+FLAGS =
 RM = rm -f
 
 all : $(NAME)

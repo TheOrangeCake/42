@@ -6,11 +6,41 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:52:44 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/20 12:17:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:36:33 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+char	*ft_strdup(const char *s)
+{
+	char	*ptr;
+	size_t	i;
+
+	i = 0;
+	ptr = malloc(ft_strlen(s) + 1);
+	if (ptr == NULL)
+		return (NULL);
+	while (s[i])
+	{
+		ptr[i] = s[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
+}
 
 int	ft_isspace(char c)
 {
