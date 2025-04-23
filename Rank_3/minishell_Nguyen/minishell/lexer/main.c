@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 19:25:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:22:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@ char	*dollar_handler(char *s, t_env **env)
 	char	*new_str;
 	int		i;
 	
-	while (s[i] != '\0')
-	{
-		if (s[i] == '$')
-		{
+	new_str = s;
+	// while (s[i] != '\0')
+	// {
+	// 	if (s[i] == '$')
+	// 	{
 			
-		}
-		i++;
-	}
+	// 	}
+	// 	i++;
+	// }
 	return (new_str);
 }
 
@@ -71,7 +72,7 @@ int	run(t_token **head, t_env **env)
 		if (line != NULL && line[0] != '\0')
 		{
 			tmp = dollar_handler(line, env);
-			free(line);
+			// free(line);
 			if (tmp == NULL)
 				return (1);
 			if (lexer(tmp, head))
