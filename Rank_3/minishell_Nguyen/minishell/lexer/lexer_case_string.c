@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 10:31:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 14:59:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:15:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_token	**case_printable(t_token **head, char *line, int *count)
 
 	token = malloc(sizeof(t_token));
 	if (token == NULL)
-		return (NULL);
+		return (perror("Error"), NULL);
 	*count = 0;
 	if (line[*count] == '\"')
 	{

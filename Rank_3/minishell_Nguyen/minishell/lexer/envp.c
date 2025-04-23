@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 18:09:38 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:17:18 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ char	**env_to_envp(t_env **env)
 		envp[i] = NULL;
 		tmp = ft_strjoin(temp->key, "=");
 		if (tmp == NULL)
-			return (perror("Error"), free_envp(envp), NULL);
+			return (free_envp(envp), NULL);
 		envp[i] = ft_strjoin(tmp, temp->value);
 		free(tmp);
 		if (envp[i] == NULL)
-			return (perror("Error"), free_envp(envp), NULL);
+			return (free_envp(envp), NULL);
 		i++;
 		temp = temp->next;
 	}

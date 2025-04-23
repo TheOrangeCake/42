@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 22:15:44 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 15:01:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:16:08 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ t_token	**case_double_char(t_token **head, char character)
 
 	token = malloc(sizeof(t_token));
 	if (token == NULL)
-		return (NULL);
+		return (perror("Error"), NULL);
 	token->str = malloc(sizeof(char) * 3);
 	if (token->str == NULL)
-		return (free(token), NULL);
+		return (perror("Error"), free(token), NULL);
 	if (character == '&')
 		case_and(token);
 	else if (character == '|')

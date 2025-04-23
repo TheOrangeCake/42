@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 18:10:03 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:06:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	run(t_token **head, t_env **env)
 		if (line != NULL && line[0] != '\0')
 		{
 			if (lexer(line, head))
-				return (free(line), perror("Error: "), 1);
+				return (free(line), 1);
 			ast_builder(head, env);
 			ft_lstclear_token(head);
 		}

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 22:14:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 15:01:32 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:15:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ t_token	**case_single_char(t_token **head, char character)
 
 	token = malloc(sizeof(t_token));
 	if (token == NULL)
-		return (NULL);
+		return (perror("Error"), NULL);
 	token->str = malloc(sizeof(char) * 2);
 	if (token->str == NULL)
-		return (free(token), NULL);
+		return (perror("Error"), free(token), NULL);
 	if (character == '$')
 		case_usd(token);
 	else if (character == '|')

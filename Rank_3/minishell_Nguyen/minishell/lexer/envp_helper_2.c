@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:26:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 18:01:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:17:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (ptr == NULL)
-		return (NULL);
+		return (perror("Error"), NULL);
 	i = 0;
 	j = 0;
 	while (s1[i])

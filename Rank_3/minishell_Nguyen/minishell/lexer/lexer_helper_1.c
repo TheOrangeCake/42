@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 15:39:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 15:02:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:15:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_substring(char *s, int len)
 	i = 0;
 	ptr = malloc(sizeof(char) * (len + 1));
 	if (ptr == NULL)
-		return (NULL);
+		return (perror("Error"), NULL);
 	while (len > 0)
 	{
 		ptr[i] = s[i];
