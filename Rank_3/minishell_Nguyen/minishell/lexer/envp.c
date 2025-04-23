@@ -6,12 +6,56 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 15:52:18 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:09:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "envp.h"
 
+void	free_envp(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		free(envp[i]);
+		i++;
+	}
+	free(envp);
+}
+
+// transform LIST env to ARRAY envp
+char	**env_to_envp(t_env **env)
+{
+	t_env	*temp;
+	char	**envp;
+	char	*tmp;
+	int		i;
+
+	envp = malloc(sizeof(char *) * (ft_lstsize(*env) + 1));
+	if (envp == NULL)
+		return (perror("Error"), NULL);
+	temp = *env;
+	i = 0;
+	while (temp != NULL)
+	{
+		envp[i] = NULL;
+		tmp = ft_strjoin(temp->key, "=");
+		if (tmp == NULL)
+			return (perror("Error"), free_envp(envp), NULL);
+		envp[i] = ft_strjoin(tmp, temp->value);
+		free(tmp);
+		if (envp[i] == NULL)
+			return (perror("Error"), free_envp(envp), NULL);
+		i++;
+		temp = temp->next;
+	}
+	envp[i] = NULL;
+	return (envp);
+}
+
+// transform ARRAY envp to LIST env
 int	transform_env(t_env **env, char **envp)
 {
 	t_env	*var;

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 15:57:30 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:10:03 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	history_handler(char *line)
 	}
 }
 
+// main helper because of line count
 int	run(t_token **head, t_env **env)
 {
 	char	*line;
@@ -78,3 +79,22 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	return (rl_clear_history(), ft_lstclear_env(&env), 0);
 }
+
+// // loop to show ARRAY to LIST env
+// while (env != NULL)
+// {
+// 	printf("%s", env->key);
+// 	printf("=");
+// 	printf("%s", env->value);
+// 	printf("\n");
+// 	env = env->next;
+// }
+
+// // loop to show LIST to ARRAY envp
+// char **test;
+// test = env_to_envp(&env);
+// for (int i=0; test[i]; i++)
+// {
+// 	printf("%s\n", test[i]);
+// }
+// free_envp(test);
