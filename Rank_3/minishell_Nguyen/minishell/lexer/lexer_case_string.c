@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 10:31:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/20 20:31:14 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:59:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ t_token	**case_printable(t_token **head, char *line, int *count)
 		if (case_string(token, line, count) == NULL)
 			return (free(token), NULL);
 	}
-	ft_lstadd_back(head, token);
+	ft_lstadd_back_token(head, token);
 	return (head);
 }

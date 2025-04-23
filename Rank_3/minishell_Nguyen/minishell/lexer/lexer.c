@@ -6,12 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:46:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/16 17:31:55 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:01:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
-#include "shellsignal.h"
 
 int	lexer_helper(char *line, t_token **head, int *i)
 {
@@ -22,7 +21,7 @@ int	lexer_helper(char *line, t_token **head, int *i)
 		|| (line[*i] == '>' && line[*i + 1] != '>'))
 	{
 		if (case_single_char(head, line[*i]) == NULL)
-			return (ft_lstclear(head), 1);
+			return (ft_lstclear_token(head), 1);
 	}
 	else if ((line[*i] == '|' && line[*i + 1] == '|')
 		|| (line[*i] == '<' && line[*i + 1] == '<')
@@ -30,13 +29,13 @@ int	lexer_helper(char *line, t_token **head, int *i)
 		|| (line[*i] == '&' && line[*i + 1] == '&'))
 	{
 		if (case_double_char(head, line[*i]) == NULL)
-			return (ft_lstclear(head), 1);
+			return (ft_lstclear_token(head), 1);
 		(*i)++;
 	}
 	else if (ft_isprintable(line[*i]) && !ft_isspace(line[*i]))
 	{
 		if (case_printable(head, &line[*i], &count) == NULL)
-			return (ft_lstclear(head), 1);
+			return (ft_lstclear_token(head), 1);
 		*i += count - 1;
 	}
 	return (0);
@@ -57,7 +56,7 @@ int	lexer(char *line, t_token **head)
 			&& line[i + 1] != '<' && line[i + 1] != '>' && line[i + 1] != '|')
 		{
 			if (case_single_char(head, line[i]) == NULL)
-				return (ft_lstclear(head), 1);
+				return (ft_lstclear_token(head), 1);
 		}
 		else
 		{

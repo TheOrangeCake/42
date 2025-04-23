@@ -6,57 +6,23 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/18 21:33:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:57:30 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
-#include "shellsignal.h"
+#include "envp.h"
 
 // to clarify on utility
-volatile sig_atomic_t	g_signal;
-
-// change signal type
-void	signal_change(int signal_attribute)
-{
-	g_signal = signal_attribute;
-	if (g_signal == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_signal = 0;
-	}
-	else if (g_signal == SIGQUIT)
-	{
-		printf("^\\Quit (Core dumped)\n");
-		rl_clear_history();
-		exit (0);
-	}
-}
-
-int	signal_handler(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = signal_change;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	if (sigaction(SIGINT, &sa, NULL) != 0)
-		return (perror("Error"), 1);
-	if (sigaction(SIGQUIT, &sa, NULL) != 0)
-		return (perror("Error"), 1);
-	return (0);
-}
+sig_atomic_t	g_signal;
 
 // to replace with ast
-void	ast_builder(t_token *head, char **envp)
+void	ast_builder(t_token **head, t_env **env)
 {
 	t_token	*temp;
 
-	(void) envp;
-	temp = head;
+	(void) env;
+	temp = *head;
 	while (temp != NULL)
 	{
 		printf("token: %s \\ type: %d\n", temp->str, temp->type);
@@ -74,17 +40,10 @@ void	history_handler(char *line)
 	}
 }
 
-int	main(int ac, char **av, char **envp)
+int	run(t_token **head, t_env **env)
 {
-	char				*line;
-	t_token				*head;
+	char	*line;
 
-	(void) ac;
-	(void) av;
-	g_signal = 0;
-	head = NULL;
-	if (signal_handler())
-		return (1);
 	while (1)
 	{
 		line = readline("Minishell> ");
@@ -93,12 +52,29 @@ int	main(int ac, char **av, char **envp)
 		history_handler(line);
 		if (line != NULL && line[0] != '\0')
 		{
-			if (lexer(line, &head))
+			if (lexer(line, head))
 				return (free(line), perror("Error: "), 1);
-			ast_builder(head, envp);
-			ft_lstclear(&head);
+			ast_builder(head, env);
+			ft_lstclear_token(head);
 		}
 		free(line);
 	}
-	return (rl_clear_history(), 0);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_token	*head;
+	t_env	*env;
+
+	(void) ac;
+	(void) av;
+	head = NULL;
+	env = NULL;
+	if (signal_handler())
+		return (1);
+	if (transform_env(&env, envp))
+		return (1);
+	if (run(&head, &env))
+		return (1);
+	return (rl_clear_history(), ft_lstclear_env(&env), 0);
 }

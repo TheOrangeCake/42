@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 22:15:44 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/10 19:23:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:01:57 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ t_token	**case_double_char(t_token **head, char character)
 		case_heredoc(token);
 	else if (character == '>')
 		case_append(token);
-	ft_lstadd_back(head, token);
+	ft_lstadd_back_token(head, token);
 	return (head);
 }
