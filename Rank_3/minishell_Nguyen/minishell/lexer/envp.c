@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 15:37:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:40:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_envp(char **envp)
 char	**env_to_envp_helper(char **envp, t_env *temp, int i)
 {
 	char	*tmp;
-	
+
 	envp[i] = NULL;
 	tmp = ft_strjoin(temp->key, "=");
 	if (tmp == NULL)
@@ -57,7 +57,7 @@ char	**env_to_envp(t_env **env)
 		if (temp->exported == true)
 		{
 			envp = env_to_envp_helper(envp, temp, i);
-			if ( envp == NULL)
+			if (envp == NULL)
 				return (NULL);
 			i++;
 		}

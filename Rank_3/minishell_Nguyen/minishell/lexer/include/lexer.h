@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/04/24 18:06:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:40:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # define GROUP1     16
 # define GROUP2     32
 # define GROUP3     48
-
-extern sig_atomic_t	g_signal;
 
 enum	e_token_t
 {
@@ -65,6 +63,11 @@ char	**env_to_envp(t_env **env);
 void	free_envp(char **envp);
 
 // DOLLAR ------------------------------------------------------
+char	*ft_strdup(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_isalnum(int c);
+
+char	*ft_strjoin_variable(char *s1, char *s2, int i);
 char	*dollar_handler(char *s, t_env **env);
 
 // TOKEN -------------------------------------------------------
