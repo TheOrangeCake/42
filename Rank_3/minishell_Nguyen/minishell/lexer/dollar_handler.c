@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:38:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 18:39:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:46:41 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*find_variable(char *s, t_env **env)
 	return (line);
 }
 
+// expand the $ by replacing the $variable by its value
 char	*case_expand(char *s, int i, t_env **env)
 {
 	int		count;
@@ -71,6 +72,7 @@ char	*case_expand(char *s, int i, t_env **env)
 	return (value);
 }
 
+// edit this to handle $? later
 char	*dollar_handler_helper(char	*s, int i, t_env **env)
 {
 	char	*expand;
@@ -89,6 +91,8 @@ char	*dollar_handler_helper(char	*s, int i, t_env **env)
 	}
 }
 
+// handle variable expansion
+// NOTE: Not handle $? yet, would segfault.
 char	*dollar_handler(char *s, t_env **env)
 {
 	int		i;
