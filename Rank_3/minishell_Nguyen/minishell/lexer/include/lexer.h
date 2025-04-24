@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/04/23 16:01:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:06:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUT_H
-# define INPUT_H
+#ifndef LEXER_H
+# define LEXER_H
 # include "minishell.h"
 # define GROUP_MASK 0b11110000
 # define GROUP1     16
@@ -43,6 +43,31 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	bool			exported;
+	struct s_env	*next;
+}	t_env;
+
+// ENVP -------------------------------------------------------
+void	ft_lstadd_back_env(t_env **lst, t_env *new_env);
+void	ft_lstclear_env(t_env **lst);
+int		ft_lstsize(t_env *lst);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substring_key(char *s);
+char	*ft_substring_value(char *s);
+
+int		transform_env(t_env **env, char **envp);
+char	**env_to_envp(t_env **env);
+void	free_envp(char **envp);
+
+// DOLLAR ------------------------------------------------------
+char	*dollar_handler(char *s, t_env **env);
+
+// TOKEN -------------------------------------------------------
 char	*ft_substring(char *s, int len);
 int		ft_isalphabet(int c);
 int		ft_isspace(char c);
@@ -57,6 +82,7 @@ t_token	**case_double_char(t_token **head, char character);
 t_token	**case_printable(t_token **head, char *line, int *count);
 void	case_string_helper2(t_token **token, char *line, int *count);
 
+// SIGNAL -------------------------------------------------------
 int		signal_handler(void);
 
 #endif

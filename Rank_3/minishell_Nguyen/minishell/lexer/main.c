@@ -6,12 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 20:22:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:06:08 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
-#include "envp.h"
+#include "lexer.h"
 
 // to clarify on utility
 sig_atomic_t	g_signal;
@@ -40,23 +39,6 @@ void	history_handler(char *line)
 	}
 }
 
-char	*dollar_handler(char *s, t_env **env)
-{
-	char	*new_str;
-	int		i;
-	
-	new_str = s;
-	// while (s[i] != '\0')
-	// {
-	// 	if (s[i] == '$')
-	// 	{
-			
-	// 	}
-	// 	i++;
-	// }
-	return (new_str);
-}
-
 // main helper because of line count
 int	run(t_token **head, t_env **env)
 {
@@ -72,12 +54,13 @@ int	run(t_token **head, t_env **env)
 		if (line != NULL && line[0] != '\0')
 		{
 			tmp = dollar_handler(line, env);
-			// free(line);
+			free(line);
 			if (tmp == NULL)
 				return (1);
-			if (lexer(tmp, head))
-				return (free(tmp), 1);
-			ast_builder(head, env);
+			printf("%s\n", tmp);
+			// if (lexer(tmp, head))
+			// 	return (free(tmp), 1);
+			// ast_builder(head, env);
 			ft_lstclear_token(head);
 		}
 		free(tmp);
@@ -98,7 +81,7 @@ int	main(int ac, char **av, char **envp)
 	if (transform_env(&env, envp))
 		return (1);
 	if (run(&head, &env))
-		return (1);
+		return (rl_clear_history(), ft_lstclear_env(&env), 1);
 	return (rl_clear_history(), ft_lstclear_env(&env), 0);
 }
 

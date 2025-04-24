@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:26:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 18:17:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:37:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "envp.h"
+#include "lexer.h"
 
 size_t	ft_strlen(const char *s)
 {

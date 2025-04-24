@@ -3,7 +3,8 @@
 NAME = shell
 
 SOURCE = main.c signal.c lexer.c lexer_case_single.c lexer_case_double.c lexer_case_string.c lexer_helper_1.c lexer_helper_2.c\
-		envp.c envp_helper_1.c envp_helper_2.c
+		envp.c envp_helper_1.c envp_helper_2.c\
+		dollar_handler.c
 
 OBJ_DIR = obj
 

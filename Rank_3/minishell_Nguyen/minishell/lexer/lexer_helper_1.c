@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 15:39:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 18:15:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:37:59 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "lexer.h"
 
 // TOKEN: free individual node
 void	ft_lstdelone_token(t_token *lst)

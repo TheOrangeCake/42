@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 21:37:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/07 11:01:15 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:38:03 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "lexer.h"
 
 int	ft_isalphabet(int c)
 {

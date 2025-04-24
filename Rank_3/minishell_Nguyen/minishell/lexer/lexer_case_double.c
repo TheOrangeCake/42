@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 22:15:44 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 18:16:08 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:37:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "lexer.h"
 
 void	case_append(t_token *token)
 {

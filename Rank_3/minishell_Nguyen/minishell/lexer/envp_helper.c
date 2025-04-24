@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:38 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 15:58:32 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:37:33 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "envp.h"
+#include "lexer.h"
 
 // ENVP: free individual node
 void	ft_lstdelone_env(t_env *lst)

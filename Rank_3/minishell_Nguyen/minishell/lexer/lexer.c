@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:46:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 19:06:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:38:08 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "lexer.h"
 
 int	lexer_helper(char *line, t_token **head, int *i)
 {

@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:34:42 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/23 14:44:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:41:14 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "lexer.h"
 
 // change signal type
 void	signal_change(int signal_attribute)
