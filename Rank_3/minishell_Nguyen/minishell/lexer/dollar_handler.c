@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:38:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 18:03:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:26:21 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ char	*dollar_handler(char *s, t_env **env)
 			i++;
 			while (s[i] && s[i] != '\'')
 				i++;
-			i++;
 		}
 		else if (s[i] == '$' && s[i + 1] != '\0')
 		{
