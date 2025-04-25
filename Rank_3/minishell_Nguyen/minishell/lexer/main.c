@@ -6,14 +6,14 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 18:43:55 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:34:21 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
 // to clarify on utility
-sig_atomic_t	g_signal;
+int	g_signal;
 
 // to replace with ast
 void	ast_builder(t_token **head, t_env **env)
@@ -57,6 +57,7 @@ int	run(t_token **head, t_env **env)
 			free(line);
 			if (tmp == NULL)
 				return (1);
+			printf("%s\n", tmp);//delete
 			if (lexer(tmp, head))
 				return (free(tmp), 1);
 			ast_builder(head, env);

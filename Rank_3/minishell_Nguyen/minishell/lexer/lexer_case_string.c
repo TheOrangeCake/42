@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 10:31:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 15:37:53 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:22:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 t_token	*case_singlequote(t_token *token, char *line, int *cnt)
 {
+	char	*temp;
+
 	(*cnt)++;
 	while (line[*cnt] != '\'' && line[*cnt] != '\0')
 		(*cnt)++;
 	(*cnt)++;
 	token->type = TK_String;
-	token->str = ft_substring(line, *cnt);
+	temp = ft_substring(line, *cnt);
+	if (temp == NULL)
+		return (NULL);
+	token->str = ft_strtrim(temp, "\'");
+	free(temp);
 	if (token->str == NULL)
 		return (NULL);
 	token->next = NULL;
@@ -28,12 +34,18 @@ t_token	*case_singlequote(t_token *token, char *line, int *cnt)
 
 t_token	*case_doublequote(t_token *token, char *line, int *cnt)
 {
+	char	*temp;
+
 	(*cnt)++;
 	while (line[*cnt] != '\"' && line[*cnt] != '\0')
 		(*cnt)++;
 	(*cnt)++;
 	token->type = TK_String;
-	token->str = ft_substring(line, *cnt);
+	temp = ft_substring(line, *cnt);
+	if (temp == NULL)
+		return (NULL);
+	token->str = ft_strtrim(temp, "\"");
+	free(temp);
 	if (token->str == NULL)
 		return (NULL);
 	token->next = NULL;
@@ -83,8 +95,7 @@ t_token	*case_string(t_token *token, char *line, int *cnt)
 	else if (ft_isprintable(line[0]) && token->type == TK_String)
 	{
 		while (line[*cnt] != ' ' && line[*cnt] != '\0'
-			&& line[*cnt] != '<' && line[*cnt] != '>'
-			&& line[*cnt] != '|')
+			&& line[*cnt] != '<' && line[*cnt] != '>' && line[*cnt] != '|')
 			(*cnt)++;
 	}
 	token->str = ft_substring(line, *cnt);

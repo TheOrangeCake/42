@@ -6,111 +6,75 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:38:11 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 18:46:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:30:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-void	case_exit_code(void)
+// Placeholder for handling $?
+char	*handle_exit_code(void)
 {
-	printf("repalce this with exit code\n");
+	return (ft_strdup("0"));
 }
 
-// find the value of the variable, return an empty string if no match
-char	*find_variable(char *s, t_env **env)
-{
-	t_env	*temp;
-	char	*line;
-
-	temp = *env;
-	line = ft_strdup("\0");
-	if (line == NULL)
-		return (perror("Error"), NULL);
-	while (temp != NULL)
-	{
-		if (!ft_strncmp(s, temp->key, ft_strlen(s)))
-		{
-			free(line);
-			line = ft_strdup(temp->value);
-			if (line == NULL)
-				return (perror("Error"), NULL);
-			return (line);
-		}
-		temp = temp->next;
-	}
-	return (line);
-}
-
-// expand the $ by replacing the $variable by its value
-char	*case_expand(char *s, int i, t_env **env)
-{
-	int		count;
-	char	*temp;
-	char	*value;
-
-	count = i;
-	i++;
-	while (ft_isalnum(s[i]))
-		i++;
-	i--;
-	temp = ft_substring(&(s[count + 1]), i - count);
-	if (temp == NULL)
-		return (NULL);
-	value = find_variable(temp, env);
-	free(temp);
-	if (value == NULL)
-		return (NULL);
-	temp = ft_strjoin_variable(s, value, count);
-	free(value);
-	if (temp == NULL)
-		return (NULL);
-	value = ft_strjoin(temp, &(s[i + 1]));
-	free(temp);
-	if (value == NULL)
-		return (NULL);
-	return (value);
-}
-
-// edit this to handle $? later
-char	*dollar_handler_helper(char	*s, int i, t_env **env)
+// Handle variable expansion without quotes
+char	*case_dollar(char *s, int i, t_env **env)
 {
 	char	*expand;
 	char	*final;
 
-	if (s[i + 1] == '?')
-		case_exit_code();
-	else if (ft_isalphabet(s[i + 1]) || s[i + 1] == '_')
-	{
-		expand = case_expand(s, i, env);
-		if (expand == NULL)
-			return (NULL);
-		final = dollar_handler(expand, env);
-		free(expand);
-		return (final);
-	}
+	expand = expand_variable(s, i, env);
+	if (!expand)
+		return (NULL);
+	final = dollar_handler(expand, env);
+	free(expand);
+	return (final);
 }
 
-// handle variable expansion
-// NOTE: Not handle $? yet, would segfault.
+// No variable expansion inside single quotes
+void	case_single_quotes(char *s, int *i)
+{
+	(*i)++;
+	while (s[*i] && s[*i] != '\'')
+		(*i)++;
+}
+
+// Handle variable expansion inside double quotes
+char	*case_double_quotes(char *s, int *i, t_env **env)
+{
+	(*i)++;
+	while (s[*i] && s[*i] != '\"')
+	{
+		if (s[*i] == '$' && s[*i + 1])
+			return (case_dollar(s, *i, env));
+		(*i)++;
+	}
+	return (NULL);
+}
+
+// Handle variable expansion
 char	*dollar_handler(char *s, t_env **env)
 {
 	int		i;
 	char	*final;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		if (s[i] == '\'')
+		if (s[i] == '\"')
 		{
-			i++;
-			while (s[i] && s[i] != '\'')
-				i++;
+			final = case_double_quotes(s, &i, env);
+			if (final)
+				return (final);
 		}
-		else if (s[i] == '$' && s[i + 1] != '\0')
+		else if (s[i] == '\'')
+			case_single_quotes(s, &i);
+		else if (s[i] == '$' && s[i + 1])
 		{
-			final = dollar_handler_helper(s, i, env);
-			return (final);
+			final = case_dollar(s, i, env);
+			if (final)
+				return (final);
 		}
 		i++;
 	}

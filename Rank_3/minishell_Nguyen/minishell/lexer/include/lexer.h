@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/04/24 18:40:58 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:32:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 # define GROUP2     32
 # define GROUP3     48
 
+extern int	g_signal;
+
 enum	e_token_t
 {
 	TK_Null,
 	TK_String,
 	TK_Assign,
-	TK_USD,
 	TK_In,
 	TK_Out,
 	TK_HereDoc,
@@ -68,10 +69,15 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isalnum(int c);
 
 char	*ft_strjoin_variable(char *s1, char *s2, int i);
+char	*case_expand(char *s, int i, t_env **env);
+char	*find_variable(char *s, t_env **env);
 char	*dollar_handler(char *s, t_env **env);
+char	*expand_variable(char *s, int i, t_env **env);
+char	*handle_exit_code(void);
 
 // TOKEN -------------------------------------------------------
 char	*ft_substring(char *s, int len);
+char	*ft_strtrim(char *s1, char *set);
 int		ft_isalphabet(int c);
 int		ft_isspace(char c);
 int		ft_isnumber(int c);

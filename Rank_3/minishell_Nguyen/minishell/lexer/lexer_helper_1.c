@@ -6,11 +6,19 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 15:39:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 15:37:59 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:06:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+int	ft_isalphabet(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
+}
 
 // TOKEN: free individual node
 void	ft_lstdelone_token(t_token *lst)
