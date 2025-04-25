@@ -6,41 +6,17 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:53:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/20 18:35:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:05:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-// // placeholder for dollar case
-// char	*replace_dollar(char *str)
-// {
-// 	char	*new_str;
-
-// 	new_str = malloc(sizeof(char) * 12);
-//  if (new_str == NULL)
-//  	return (perror("Error"), NULL);
-// 	new_str = "hello world";
-// 	free(str);
-// 	return (new_str);
-// }
-
-// int	check_dollar(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (str[i] == '\'')
-// 		return (0);
-// 	while (str[i] != '\0')
-// 	{
-// 		if (str[i] == '$' && !ft_isspace(str[i + 1]))
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
+// case export
+int	builtin_export(t_node *node, t_env **env)
+{
+	
+}
 
 // case echo
 int	builtin_echo(t_node *node)
@@ -56,12 +32,6 @@ int	builtin_echo(t_node *node)
 	}
 	while (node->data != NULL)
 	{
-		// if(check_dollar(node->data->str))
-		// {
-		// 	node->data->str = replace_dollar(node->data->str);
-		// 	if (node->data->str == NULL)
-		// 		return (1);
-		// }
 		printf("%s", node->data->str);
 		if (node->data->next != NULL)
 			printf(" ");
@@ -73,18 +43,25 @@ int	builtin_echo(t_node *node)
 }
 
 // case env
-void	builtin_env(char **envp)
+int	builtin_env(t_env **env)
 {
-	int	i;
+	t_env	*temp;
 
-	i = 0;
-	if (envp == NULL && *envp == NULL)
-		return ;
-	while (envp[i] != NULL)
+	if (env == NULL && *env == NULL)
+		return (0);
+	temp = *env;
+	while (temp != NULL)
 	{
-		printf("%s\n", envp[i]);
-		i++;
+		if (temp->exported = true)
+		{
+			printf("%s", temp->key);
+			printf("=");
+			printf("%s", temp->value);
+			printf("\n");
+		}
+		temp = temp->next;
 	}
+	return (0);
 }
 
 // case pwd

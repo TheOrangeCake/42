@@ -6,11 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 14:24:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:56:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "builtins.h"
 
 void	free_envp(char **envp)
 {
@@ -72,8 +72,6 @@ int	transform_env(t_env **env, char **envp)
 {
 	t_env	*var;
 
-	if (envp == NULL || *envp == NULL)
-		return (0);
 	while (*envp != NULL)
 	{
 		var = malloc(sizeof(t_env));

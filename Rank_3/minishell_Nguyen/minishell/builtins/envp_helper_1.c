@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_helper.c                                      :+:      :+:    :+:   */
+/*   envp_helper_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:38 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 15:37:33 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:55:00 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "builtins.h"
 
 // ENVP: free individual node
 void	ft_lstdelone_env(t_env *lst)
@@ -55,6 +55,7 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new_env)
 	}
 }
 
+// ENVP: extract value
 char	*ft_substring_value(char *s)
 {
 	char	*ptr;
@@ -79,6 +80,7 @@ char	*ft_substring_value(char *s)
 	return (ptr);
 }
 
+// ENVP: extract key
 char	*ft_substring_key(char *s)
 {
 	char	*ptr;

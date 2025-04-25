@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:37:47 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 11:34:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:29:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	run(t_token **head, t_env **env)
 			printf("%s\n", tmp);//delete
 			if (lexer(tmp, head))
 				return (free(tmp), 1);
-			ast_builder(head, env);
+			ast_builder(head, env);//replace
 			ft_lstclear_token(head);
 		}
 		free(tmp);

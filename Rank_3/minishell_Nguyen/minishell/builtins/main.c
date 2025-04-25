@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:05:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/20 18:26:38 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:59:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ int	main(int ac, char **av, char **envp)
 {
 	t_node 	node;
 	t_token *head;
+	t_env	*env;
 	int		i;
 
 	if (ac > 1)
 	{
 		i = 1;
 		head = NULL;
+		env = NULL;
 		while (i < ac)
 		{
 			head = create_token(head, av[i]);
@@ -54,6 +56,7 @@ int	main(int ac, char **av, char **envp)
 		node.lnode = NULL;
 		node.rnode = NULL;
 		node.data = head;
+		transform_env(&env, envp);
 		if (!ft_strncmp(node.data->str, "echo", 5))
 		{
 			if (builtin_echo(&node))
@@ -66,7 +69,7 @@ int	main(int ac, char **av, char **envp)
 		}
 		else if (!ft_strncmp(node.data->str, "env", 4))
 		{
-			if (builtin_env(envp))
+			if (builtin_env(&env))
 				return (1);
 		}
 	}
