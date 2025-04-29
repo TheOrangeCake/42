@@ -6,17 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:53:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 17:21:49 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:59:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-// case export
-int	builtin_export(t_node *node, t_env **env)
-{
-	
-}
 
 // case echo
 int	builtin_echo(t_node *node)
@@ -52,7 +46,7 @@ int	builtin_env(t_env **env)
 	temp = *env;
 	while (temp != NULL)
 	{
-		if (temp->exported = true)
+		if (temp->exported == true && temp->code == false)
 		{
 			printf("%s", temp->key);
 			printf("=");

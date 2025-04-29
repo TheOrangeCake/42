@@ -6,13 +6,29 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:50:58 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 14:54:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:59:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 # include "minishell.h"
+
+// to delete after
+enum	e_token_t
+{
+	TK_Null,
+	TK_String,
+	TK_Assign,
+	TK_In,
+	TK_Out,
+	TK_HereDoc,
+	TK_Append,
+	TK_Pipe,
+	TK_And,
+	TK_Or,
+	TK_Number,
+};
 
 // to delete after
 enum	e_node_t
@@ -40,6 +56,8 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	bool			exported;
+	bool			only_key;
+	bool			code;
 	struct s_env	*next;
 }	t_env;
 
@@ -65,4 +83,5 @@ size_t	ft_strlen(const char *s);
 int		builtin_echo(t_node *node);
 int		builtin_pwd(void);
 int		builtin_env(t_env **env);
+int		builtin_export(t_node *node, t_env **env);
 #endif

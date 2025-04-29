@@ -2,7 +2,7 @@
 
 NAME = builtins
 
-SOURCE = main.c builtins_echo_pwd_env.c builtins_helper.c\
+SOURCE = main.c builtins_echo_pwd_env.c builtins_export.c builtins_helper.c\
 		envp.c envp_helper_1.c envp_helper_2.c
 
 OBJ_DIR = obj

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:05:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 14:59:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:59:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_token	*create_token(t_token *head, char *av)
 	token = malloc(sizeof(t_token));
 	token->type = 1;
 	token->str = ft_strdup(av);
+	if (token->str[0] == 'U')
+		token->type = TK_Assign;
 	token->next = NULL;
 	if (head == NULL)
 		head = token;
@@ -37,8 +39,8 @@ t_token	*create_token(t_token *head, char *av)
 // test, to be delete, leak since no free
 int	main(int ac, char **av, char **envp)
 {
-	t_node 	node;
-	t_token *head;
+	t_node	node;
+	t_token	*head;
 	t_env	*env;
 	int		i;
 
@@ -70,6 +72,11 @@ int	main(int ac, char **av, char **envp)
 		else if (!ft_strncmp(node.data->str, "env", 4))
 		{
 			if (builtin_env(&env))
+				return (1);
+		}
+		else if (!ft_strncmp(node.data->str, "export", 7))
+		{
+			if (builtin_export(&node, &env))
 				return (1);
 		}
 	}
