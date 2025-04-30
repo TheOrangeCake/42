@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:53:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:59:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ int	builtin_env(t_env **env)
 	{
 		if (temp->exported == true && temp->code == false)
 		{
-			printf("%s", temp->key);
-			printf("=");
-			printf("%s", temp->value);
-			printf("\n");
+			printf("%s=%s\n", temp->key, temp->value);
 		}
 		temp = temp->next;
 	}

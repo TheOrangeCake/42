@@ -6,47 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:11:29 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:01:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	print_env(t_env **env)
-{
-	t_env	*temp;
-
-	temp = *env;
-	while (temp != NULL)
-	{
-		if (temp->code == true)
-			temp = temp->next;
-		if (temp->exported == true)
-		{
-			printf("declare -x ");
-			printf("%s", temp->key);
-			printf("=");
-			printf("\"%s\"", temp->value);
-			printf("\n");
-		}
-		else
-		{
-			if (temp->only_key == true)
-			{
-				printf("declare -x ");
-				printf("%s", temp->key);
-				printf("\n");
-			}
-		}
-		temp = temp->next;
-	}
-}
-
-void	export_no_arg(t_env **env)
-{
-	print_env(env);
-}
-
+// create new env variable
 int	new_assign(char *key, char *value, t_env **env)
 {
 	t_env	*var;
@@ -63,6 +29,9 @@ int	new_assign(char *key, char *value, t_env **env)
 	return (0);
 }
 
+//case export follow by assign, like export test=
+// if test exist, update the value
+// if test doesn't exist, create new env variable
 int	export_assign(char *s, t_env **env)
 {
 	char	*key;
@@ -81,9 +50,9 @@ int	export_assign(char *s, t_env **env)
 		if (!ft_strncmp(key, temp->key, ft_strlen(key)))
 		{
 			temp->exported = true;
+			temp->only_key = false;
 			free(temp->value);
 			temp->value = value;
-			print_env(env);//delete
 			return (0);
 		}
 		temp = temp->next;
@@ -91,6 +60,9 @@ int	export_assign(char *s, t_env **env)
 	return (new_assign(key, value, env));
 }
 
+// case export follow by a string, like export a
+// if a existe, export it
+// if a doesn't exist, put it in linked list but not export
 int	export_string(char *key, t_env **env)
 {
 	t_env	*temp;
@@ -117,7 +89,6 @@ int	export_string(char *key, t_env **env)
 	var->only_key = true;
 	var->code = false;
 	ft_lstadd_back_env(env, var);
-	print_env(env);//delete
 	return (0);
 }
 

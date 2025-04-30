@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 14:56:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:54:48 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ int	transform_env(t_env **env, char **envp)
 		if (var->value == NULL)
 			return (perror("Error"), ft_lstclear_env(env), 1);
 		var->exported = true;
+		var->only_key = false;
+		var->code = false;
+		var->printed = false;
 		var->next = NULL;
 		ft_lstadd_back_env(env, var);
 		envp++;

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:50:58 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:29 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:56:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_env
 	bool			exported;
 	bool			only_key;
 	bool			code;
+	bool			printed;
 	struct s_env	*next;
 }	t_env;
 
@@ -79,9 +80,14 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isspace(char c);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
+int		ft_compare(char *s1, char *s2);
+void	ft_lstdelone_env(t_env *lst);
 
 int		builtin_echo(t_node *node);
 int		builtin_pwd(void);
 int		builtin_env(t_env **env);
 int		builtin_export(t_node *node, t_env **env);
+int		export_no_arg(t_env **env);
+int		builtin_unset(t_node *node, t_env **env);
+int		builtin_cd(t_node *node);
 #endif

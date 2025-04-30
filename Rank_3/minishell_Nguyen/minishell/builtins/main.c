@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:05:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:56:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	main(int ac, char **av, char **envp)
 		transform_env(&env, envp);
 		if (!ft_strncmp(node.data->str, "echo", 5))
 		{
-			if (builtin_echo(&node))
-				return (1);
+			builtin_echo(&node);
 		}
 		else if (!ft_strncmp(node.data->str, "pwd", 4))
 		{
@@ -71,13 +70,19 @@ int	main(int ac, char **av, char **envp)
 		}
 		else if (!ft_strncmp(node.data->str, "env", 4))
 		{
-			if (builtin_env(&env))
-				return (1);
+			builtin_env(&env);
 		}
 		else if (!ft_strncmp(node.data->str, "export", 7))
 		{
-			if (builtin_export(&node, &env))
-				return (1);
+			builtin_export(&node, &env);
+		}
+		else if (!ft_strncmp(node.data->str, "unset", 6))
+		{
+			builtin_unset(&node, &env);
+		}
+		else if (!ft_strncmp(node.data->str, "cd", 3))
+		{
+			builtin_cd(&node);
 		}
 	}
 	return (0);
