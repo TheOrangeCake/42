@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:05:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/30 17:56:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:42:35 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int ac, char **av, char **envp)
 		}
 		else if (!ft_strncmp(node.data->str, "cd", 3))
 		{
-			builtin_cd(&node);
+			builtin_cd(&node, &env);
 		}
 	}
 	return (0);
