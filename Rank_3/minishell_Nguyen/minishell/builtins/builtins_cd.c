@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:39:54 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/03 15:27:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:01:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	case_cd_path(char *path, t_env **env)
 	free(oldpwd->value);
 	oldpwd->value = pwd->value;
 	pwd->value = line;
+	builtin_env(env);
 	return (0);
 }
 
@@ -61,7 +62,30 @@ int	case_cd_previous(t_env **env)
 	return (0);
 }
 
-// handle cd
+int	case_cd_home(char *path, t_env **env)
+{
+	t_env	*home;
+	char	*new_path;
+	char	*temp;
+
+	(void)new_path;
+	home = find_home(env);
+	if (home == NULL)
+		return (printf("bash: cd: HOME not set\n"), 1);
+	temp = ft_strdup(&path[1]);
+	if (temp == NULL)
+		return (1);
+	new_path = ft_strjoin(home->value, temp);
+	free(temp);
+	if (new_path == NULL)
+		return (1);
+	if (case_cd_path(new_path, env) != 0)
+		return (1);
+	free(new_path);
+	return (0);
+}
+
+// handle cd without argument
 int	case_cd_no_arg(t_env **env)
 {
 	t_env	*home;
@@ -72,9 +96,7 @@ int	case_cd_no_arg(t_env **env)
 	return (case_cd_path(home->value, env));
 }
 
-// Dont manage ~ becaue it is a special character similar to $,
-// Character ~ expands at parse time and doesn't rely on envp. 
-// It is beyond the scope of minishell.
+// case cd
 int	builtin_cd(t_node *node, t_env **env)
 {
 	if (node->data->next == NULL)
@@ -82,6 +104,8 @@ int	builtin_cd(t_node *node, t_env **env)
 	if (node->data->next->next != NULL)
 		return (printf("bash: cd: too many arguments\n"), 1);
 	node->data = node->data->next;
+	if (!ft_strncmp(node->data->str, "~", 1))
+		return (case_cd_home(node->data->str, env));
 	if (!ft_strncmp(node->data->str, "-", 2))
 		return (case_cd_previous(env));
 	else
