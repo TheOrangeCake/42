@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:50:58 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/02 20:21:39 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:24:46 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,15 @@ typedef struct s_env
 void	ft_lstadd_back_env(t_env **lst, t_env *new_env);
 void	ft_lstclear_env(t_env **lst);
 int		ft_lstsize(t_env *lst);
-size_t	ft_strlen(const char *s);
+int		ft_atoi(const char *nptr);
+char	*ft_itoa(int n);
+char	*exception(char *ptr);
+char	*malloc_itoa(long n, long count);
+int		bit_count(long n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substring_key(char *s);
 char	*ft_substring_value(char *s);
+int		initiate_base_env(t_env **env);
 
 int		transform_env(t_env **env, char **envp);
 char	**env_to_envp(t_env **env);
@@ -92,4 +97,5 @@ int		builtin_unset(t_node *node, t_env **env);
 int		builtin_cd(t_node *node, t_env **env);
 t_env	*find_pwd(t_env **env);
 t_env	*find_oldpwd(t_env **env);
+t_env	*find_home(t_env **env);
 #endif

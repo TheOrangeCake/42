@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/05/02 18:33:37 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:54:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,15 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new_env);
 void	ft_lstclear_env(t_env **lst);
 int		ft_lstsize(t_env *lst);
 size_t	ft_strlen(const char *s);
+int		ft_atoi(const char *nptr);
+char	*ft_itoa(int n);
+char	*exception(char *ptr);
+char	*malloc_itoa(long n, long count);
+int		bit_count(long n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substring_key(char *s);
 char	*ft_substring_value(char *s);
+int		initiate_base_env(t_env **env);
 
 int		transform_env(t_env **env, char **envp);
 char	**env_to_envp(t_env **env);

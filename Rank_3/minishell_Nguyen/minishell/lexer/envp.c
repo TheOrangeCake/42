@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:24 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:55:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,38 @@ char	**env_to_envp(t_env **env)
 	return (envp);
 }
 
+// update shlvl to reflect current shell level
+// default behavior when executing shell in shell
+int	update_shlvl(t_env **env)
+{
+	t_env	*temp;
+	int		count;
+
+	temp = *env;
+	while (temp != NULL)
+	{
+		if (!ft_strncmp(temp->key, "SHLVL", 6))
+		{
+			count = ft_atoi(temp->value);
+			free(temp->value);
+			count += 1;
+			temp->value = ft_itoa(count);
+			if (temp->value == NULL)
+				return (perror("Error"), ft_lstclear_env(env), 1);
+			return (0);
+		}
+		temp = temp->next;
+	}
+	return (0);
+}
+
 // transform ARRAY envp to LIST env
 int	transform_env(t_env **env, char **envp)
 {
 	t_env	*var;
 
 	if (envp == NULL || *envp == NULL)
-		return (0);
+		return (initiate_base_env(env));
 	while (*envp != NULL)
 	{
 		var = malloc(sizeof(t_env));
@@ -93,5 +118,5 @@ int	transform_env(t_env **env, char **envp)
 		ft_lstadd_back_env(env, var);
 		envp++;
 	}
-	return (0);
+	return (update_shlvl(env));
 }

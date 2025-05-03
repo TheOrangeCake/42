@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:26:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/24 15:37:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:51:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,56 @@ int	ft_lstsize(t_env *lst)
 		lst = lst->next;
 	}
 	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	int		count;
+	char	*ptr;
+	long	i;
+
+	i = n;
+	count = bit_count(i);
+	ptr = malloc_itoa(i, count);
+	if (ptr == NULL)
+		return (NULL);
+	if (i == 0)
+		ptr = exception(ptr);
+	if (i < 0)
+	{
+		ptr[0] = '-';
+		i = -i;
+		count = count + 1;
+	}
+	ptr[count--] = '\0';
+	while (i > 0)
+	{
+		ptr[count--] = i % 10 + '0';
+		i = i / 10;
+	}
+	return (ptr);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	sign;
+	int	nb;
+
+	nb = 0;
+	sign = 1;
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '-')
+	{
+		sign = -sign;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		nb = nb * 10 + *nptr - '0';
+		nptr++;
+	}
+	return (nb * sign);
 }
