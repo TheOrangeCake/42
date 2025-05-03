@@ -88,6 +88,7 @@ int	transform_env(t_env **env, char **envp)
 		var->exported = true;
 		var->only_key = false;
 		var->code = false;
+		var->printed = false;
 		var->next = NULL;
 		ft_lstadd_back_env(env, var);
 		envp++;
