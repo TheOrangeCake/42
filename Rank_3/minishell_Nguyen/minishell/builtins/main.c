@@ -6,11 +6,37 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:05:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/02 17:42:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/02 21:16:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+// TOKEN: free individual node
+void	ft_lstdelone_token(t_token *lst)
+{
+	if (lst != NULL)
+	{
+		free(lst->str);
+		free(lst);
+	}
+}
+
+// TOKEN: clear and free the linked list
+void	ft_lstclear_token(t_token **lst)
+{
+	t_token	*temp;
+
+	if (*lst != NULL && lst != NULL)
+	{
+		while (*lst != NULL)
+		{
+			temp = (*lst)->next;
+			ft_lstdelone_token(*lst);
+			*lst = temp;
+		}
+	}
+}
 
 // test, to be delete, leak since no free
 t_token	*create_token(t_token *head, char *av)
@@ -85,5 +111,7 @@ int	main(int ac, char **av, char **envp)
 			builtin_cd(&node, &env);
 		}
 	}
+	ft_lstclear_token(&head);
+	ft_lstclear_env(&env);
 	return (0);
 }

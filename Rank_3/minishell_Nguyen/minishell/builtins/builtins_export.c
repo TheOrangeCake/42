@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:11:29 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/30 17:01:55 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/02 21:14:18 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	export_assign(char *s, t_env **env)
 			temp->only_key = false;
 			free(temp->value);
 			temp->value = value;
+			free(key);
 			return (0);
 		}
 		temp = temp->next;

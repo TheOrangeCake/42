@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/04/25 11:32:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:33:37 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	bool			exported;
+	bool			only_key;
+	bool			code;
 	struct s_env	*next;
 }	t_env;
 
