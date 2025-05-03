@@ -49,6 +49,7 @@ typedef struct s_env
 	bool			exported;
 	bool			only_key;
 	bool			code;
+	bool			printed;
 	struct s_env	*next;
 }	t_env;
 
