@@ -6,24 +6,11 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/03 14:55:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:17:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-void	free_envp(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i] != NULL)
-	{
-		free(envp[i]);
-		i++;
-	}
-	free(envp);
-}
 
 char	**env_to_envp_helper(char **envp, t_env *temp, int i)
 {
@@ -92,6 +79,25 @@ int	update_shlvl(t_env **env)
 	return (0);
 }
 
+int	initiate_exit_code(t_env **env)
+{
+	*env = malloc(sizeof(t_env));
+	if (*env == NULL)
+		return (perror("Error"), 1);
+	(*env)->key = ft_strdup("?");
+	if ((*env)->key == NULL)
+		return (1);
+	(*env)->value = ft_strdup("0");
+	if ((*env)->value == NULL)
+		return (perror("Error"), 1);
+	(*env)->exported = false;
+	(*env)->only_key = false;
+	(*env)->code = true;
+	(*env)->printed = false;
+	(*env)->next = NULL;
+	return (0);
+}
+
 // transform ARRAY envp to LIST env
 int	transform_env(t_env **env, char **envp)
 {
@@ -99,16 +105,16 @@ int	transform_env(t_env **env, char **envp)
 
 	if (envp == NULL || *envp == NULL)
 		return (initiate_base_env(env));
+	if (initiate_exit_code(env) != 0)
+		return (perror("Error"), 1);
 	while (*envp != NULL)
 	{
 		var = malloc(sizeof(t_env));
 		if (var == NULL)
 			return (perror("Error"), ft_lstclear_env(env), 1);
 		var->key = ft_substring_key(*envp);
-		if (var->key == NULL)
-			return (perror("Error"), ft_lstclear_env(env), 1);
 		var->value = ft_substring_value(*envp);
-		if (var->value == NULL)
+		if (var->key == NULL || var->value == NULL)
 			return (perror("Error"), ft_lstclear_env(env), 1);
 		var->exported = true;
 		var->only_key = false;

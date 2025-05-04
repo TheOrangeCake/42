@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/05/03 14:54:28 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:54:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-// ENVP -------------------------------------------------------
+// ENVP _____________________________________________________
 void	ft_lstadd_back_env(t_env **lst, t_env *new_env);
 void	ft_lstclear_env(t_env **lst);
 int		ft_lstsize(t_env *lst);
@@ -72,7 +72,7 @@ int		transform_env(t_env **env, char **envp);
 char	**env_to_envp(t_env **env);
 void	free_envp(char **envp);
 
-// DOLLAR ------------------------------------------------------
+// DOLLAR ___________________________________________________
 char	*ft_strdup(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isalnum(int c);
@@ -82,9 +82,9 @@ char	*case_expand(char *s, int i, t_env **env);
 char	*find_variable(char *s, t_env **env);
 char	*dollar_handler(char *s, t_env **env);
 char	*expand_variable(char *s, int i, t_env **env);
-char	*handle_exit_code(void);
+char	*handle_exit_code(char *s, int i, t_env **env);
 
-// TOKEN -------------------------------------------------------
+// TOKEN ____________________________________________________
 char	*ft_substring(char *s, int len);
 char	*ft_strtrim(char *s1, char *set);
 int		ft_isalphabet(int c);
@@ -100,7 +100,10 @@ t_token	**case_double_char(t_token **head, char character);
 t_token	**case_printable(t_token **head, char *line, int *count);
 void	case_string_helper2(t_token **token, char *line, int *count);
 
-// SIGNAL -------------------------------------------------------
+// SIGNAL ___________________________________________________
 int		signal_handler(void);
+
+// EXIT CODE ________________________________________________
+int	set_get_code(int code, t_env **env);
 
 #endif

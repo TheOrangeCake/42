@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:52:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 14:29:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:25:06 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*case_expand(char *s, int i, t_env **env)
 char	*expand_variable(char *s, int i, t_env **env)
 {
 	if (s[i + 1] == '?')
-		return (handle_exit_code());
+		return (handle_exit_code(s, i, env));
 	if (ft_isalphabet(s[i + 1]) || s[i + 1] == '_')
 		return (case_expand(s, i, env));
 	return (NULL);
