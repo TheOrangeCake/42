@@ -1,0 +1,24 @@
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+#include <string>
+
+class Contact {
+	private:
+		std::string f_name;
+		std::string l_name;
+		std::string nickname;
+		std::string phone;
+		std::string secret;
+
+	public:
+		Contact();
+		Contact(std::string f_name, std::string l_name,
+			std::string nickname, std::string phone, std::string secret);
+		std::string f_name_getter();
+		std::string l_name_getter();
+		std::string nickname_getter();
+		std::string phone_getter();
+		std::string secret_getter();
+};
+
+#endif

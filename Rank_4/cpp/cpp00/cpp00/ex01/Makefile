@@ -2,7 +2,7 @@
 
 NAME = PhoneBook
 
-SOURCE = PhoneBook.cpp
+SOURCE = main.cpp PhoneBook.cpp Contact.cpp
 
 OBJ_DIR = obj
 
@@ -18,7 +18,6 @@ all : $(NAME)
 $(OBJ_DIR)/%.o:%.cpp
 	@mkdir -p $(OBJ_DIR)
 	@$(GCC) $(FLAGS) -c $< -o $@
-# @$(GCC) $(FLAGS) -I include/ -c $< -o $@
 
 
 $(NAME):	$(OBJECTS)

@@ -16,22 +16,23 @@
 
 int main(int ac, char **av) 
 {
-	int	i;
-
-	i = 1;
-	if (ac == 1)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-	else
+	switch (ac)
 	{
-		while (av[i] != NULL)
-		{
-			std::string replace = av[i];
-			for (size_t j = 0; j < replace.size(); j++)
-				replace[j] = (char)std::toupper((int)av[i][j]);
-			std::cout << replace;
-			i++;
-		}
-		std::cout << std::endl;
+		case 1:
+			std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+			break;
+		default:
+			int	i = 1;
+			while (av[i] != NULL)
+			{
+				std::string replace = av[i];
+				for (size_t j = 0; j < replace.size(); j++)
+					replace[j] = (char)std::toupper((int)av[i][j]);
+				std::cout << replace;
+				i++;
+			}
+			std::cout << std::endl;
+			break;
 	}
 	return 0;
   }
