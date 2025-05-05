@@ -6,18 +6,20 @@ SOURCE = megaphone.cpp
 
 OBJ_DIR = obj
 
-OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
+OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.cpp=.o))
 
-GCC = cpp
+GCC = g++
 FLAGS = -Wextra -Wall -Werror -std=c++98
 # FLAGS =
 RM = rm -f
 
 all : $(NAME)
 
-$(OBJ_DIR)/%.o:%.c
+$(OBJ_DIR)/%.o:%.cpp
 	@mkdir -p $(OBJ_DIR)
-	@$(GCC) $(FLAGS) -I include/ -c $< -o $@
+	@$(GCC) $(FLAGS) -c $< -o $@
+# @$(GCC) $(FLAGS) -I include/ -c $< -o $@
+
 
 $(NAME):	$(OBJECTS)
 	@$(GCC) $(FLAGS) $(OBJECTS) -o $(NAME)
