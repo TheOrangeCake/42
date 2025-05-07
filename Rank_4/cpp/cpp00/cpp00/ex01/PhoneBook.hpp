@@ -3,7 +3,7 @@
 #include "Contact.hpp"
 
 class PhoneBook {
-	public:
+	private:
 		Contact contacts[8];
 		int	total_contacts;
 	
