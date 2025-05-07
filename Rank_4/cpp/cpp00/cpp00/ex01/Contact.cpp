@@ -1,11 +1,7 @@
 #include "Contact.hpp"
 
 Contact::Contact() {
-	// f_name = "Test";
-	// l_name = "TEST";
-	// nickname = "Placeholder";
-	// phone = "0791234567";
-	// secret = "This is a test";
+
 }
 
 Contact::Contact(std::string f_name, std::string l_name,

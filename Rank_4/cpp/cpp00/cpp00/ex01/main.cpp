@@ -4,6 +4,31 @@
 #include <iostream>
 #include <limits>
 
+void print_list(PhoneBook phonebook) {
+	std::cout << std::setfill (' ') << std::setw(10) << "index";
+	std::cout << "   |   ";
+	std::cout << std::setfill (' ') << std::setw(10) << "First name";
+	std::cout << "   |   ";
+	std::cout << std::setfill (' ') << std::setw(10) << "Last name";
+	std::cout << "   |   ";
+	std::cout << std::setfill (' ') << std::setw(10) << "Nickname" << std::endl;
+	for (int i = 0; i < 8; i++) {
+		Contact contact = phonebook.get_contact(i);
+		if (contact.f_name_getter().empty())
+			break;
+		else
+		{
+			std::cout << std::setfill (' ') << std::setw(10) << i;
+			std::cout << "   |   ";
+			std::cout << std::setfill (' ') << std::setw(10) << contact.f_name_getter();
+			std::cout << "   |   ";
+			std::cout << std::setfill (' ') << std::setw(10) << contact.l_name_getter();
+			std::cout << "   |   ";
+			std::cout << std::setfill (' ') << std::setw(10) << contact.nickname_getter() << std::endl;
+		}
+	}
+}
+
 void print_contact(PhoneBook phonebook) {
 	int	index;
 	std::cout << "Enter index: ";
@@ -19,7 +44,7 @@ void print_contact(PhoneBook phonebook) {
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (index >= 0 && index < 8)
 		{
-			Contact contact = phonebook.search_contact(index);
+			Contact contact = phonebook.get_contact(index);
 			if (contact.f_name_getter().empty())
 				std::cout << "Contact is empty" << std::endl;
 			else
@@ -107,6 +132,7 @@ int main(void) {
 		}
 		else if (!command.compare("SEARCH"))
 		{
+			print_list(phonebook);
 			print_contact(phonebook);
 		}
 		else if (!command.compare("EXIT"))

@@ -11,7 +11,7 @@ class PhoneBook {
 		PhoneBook();
 		void add_contact(Contact contact);
 		void show_contact();
-		Contact search_contact(int index);
+		Contact get_contact(int index);
 };
 
 #endif

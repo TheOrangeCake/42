@@ -1,4 +1,4 @@
-#include "Phonebook.hpp"
+#include "PhoneBook.hpp"
 #include <iostream>
 
 PhoneBook::PhoneBook() {
@@ -18,6 +18,6 @@ void PhoneBook::show_contact() {
 	}
 }
 
-Contact PhoneBook::search_contact(int index) {
+Contact PhoneBook::get_contact(int index) {
 	return (contacts[index]);
 }
