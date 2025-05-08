@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = sed
+NAME = Harl
 
-SOURCE = main.cpp 
+SOURCE = main.cpp Harl.cpp
 
 OBJ_DIR = obj
 
