@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:25:23 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/08 20:32:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:07:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,16 @@ int	main(int ac, char **av)
 		size_t s1_size = s1.size();
 		while (std::getline(file, line))
 		{
-			while (true)
+			if (av[2] != NULL && av[2][0] != '\0')
 			{
-				std::size_t pos = line.find(s1);
-				if (pos == std::string::npos)
-					break;
-				line.erase(pos, s1_size);
-				line.insert(pos, s2);
+				while (true)
+				{
+					std::size_t pos = line.find(s1);
+					if (pos == std::string::npos)
+						break;
+					line.erase(pos, s1_size);
+					line.insert(pos, s2);
+				}
 			}
 			new_file << line << std::endl;
 		}
