@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 13:57:20 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/07 19:13:02 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/05/08 15:45:42 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/08 16:56:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-#define CONTACT_HPP
+#ifndef WEAPON_HPP
+#define WEAPON_HPP
 #include <string>
 
-class Contact {
+class Weapon {
 	private:
-		std::string f_name;
-		std::string l_name;
-		std::string nickname;
-		std::string phone;
-		std::string secret;
+		std::string type;
 
 	public:
-		Contact();
-		Contact(std::string f_name, std::string l_name,
-			std::string nickname, std::string phone, std::string secret);
-		std::string f_name_getter();
-		std::string l_name_getter();
-		std::string nickname_getter();
-		std::string phone_getter();
-		std::string secret_getter();
+		Weapon();
+		Weapon(std::string type);
+		~Weapon();
+
+		const std::string &getType();
+		void setType(std::string type);
 };
 
 #endif

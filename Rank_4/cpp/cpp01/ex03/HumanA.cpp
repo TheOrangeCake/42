@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 13:57:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/07 13:57:33 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/05/08 15:45:07 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/08 18:05:55 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
-#include "Contact.hpp"
+#include "HumanA.hpp"
 
-class PhoneBook {
-	private:
-		Contact contacts[8];
-		int	total_contacts;
+HumanA::HumanA(std::string name, Weapon &weapon) 
+	: name(name), weapon(weapon) {
+}
+
+HumanA::~HumanA() {
 	
-	public:
-		PhoneBook();
-		void add_contact(Contact contact);
-		void show_contact();
-		Contact get_contact(int index);
-};
+}
 
-#endif
+void HumanA::attack() {
+	std::cout << name << " attacks with their " << weapon.getType() << std::endl;
+}

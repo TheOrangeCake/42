@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 13:57:20 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/07 19:13:02 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/05/07 17:48:41 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/07 20:29:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-#define CONTACT_HPP
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
+#include <iostream>
 #include <string>
 
-class Contact {
+class Zombie {
 	private:
-		std::string f_name;
-		std::string l_name;
-		std::string nickname;
-		std::string phone;
-		std::string secret;
+		std::string name;
 
 	public:
-		Contact();
-		Contact(std::string f_name, std::string l_name,
-			std::string nickname, std::string phone, std::string secret);
-		std::string f_name_getter();
-		std::string l_name_getter();
-		std::string nickname_getter();
-		std::string phone_getter();
-		std::string secret_getter();
+		Zombie();
+		Zombie(std::string name);
+		~Zombie();
+		
+		void announce(void);
 };
 
+Zombie *newZombie(std::string name);
+void randomChump(std::string name);
+	
 #endif
