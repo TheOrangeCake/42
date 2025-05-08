@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:50:52 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/07 22:21:51 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/08 19:15:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(void)
 	the_horde = zombieHorde(number, name);
 	if (the_horde == NULL)
 	{
-		std::cout << "Memory allocation error" << std::endl;
+		std::cerr << "Memory allocation error" << std::endl;
 		return (1);
 	}
 	for (int i = 0; i < number; i++) {

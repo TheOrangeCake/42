@@ -1,0 +1,3 @@
+this is a test,
+the word "test" will be replaced.
+The replacing word is "duck"
