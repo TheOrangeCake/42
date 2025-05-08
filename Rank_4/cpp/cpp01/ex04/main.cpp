@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:25:23 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/08 22:07:01 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:08:05 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		std::cerr << "Incorrect argument" << std::endl;
+		std::cerr << "Incorrect number of argument" << std::endl;
 		return (1);
 	}
 	return (0);
