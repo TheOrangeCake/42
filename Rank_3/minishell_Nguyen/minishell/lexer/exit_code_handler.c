@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:48:40 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/04 16:57:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 13:13:21 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	set_get_code(int code, t_env **env)
 {
 	t_env	*temp;
 	char	*tmp;
-	
+
 	temp = *env;
 	while (temp != NULL)
 	{

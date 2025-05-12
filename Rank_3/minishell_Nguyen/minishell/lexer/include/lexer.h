@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/05/04 16:54:52 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:24:38 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # define GROUP1     16
 # define GROUP2     32
 # define GROUP3     48
-
-extern int	g_signal;
 
 enum	e_token_t
 {
@@ -104,6 +102,6 @@ void	case_string_helper2(t_token **token, char *line, int *count);
 int		signal_handler(void);
 
 // EXIT CODE ________________________________________________
-int	set_get_code(int code, t_env **env);
+int		set_get_code(int code, t_env **env);
 
 #endif
