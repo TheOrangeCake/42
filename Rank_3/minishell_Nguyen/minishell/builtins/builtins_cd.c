@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:39:54 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/12 22:22:47 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:58:24 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	case_cd_path(char *path, t_env **env)
 	free(oldpwd->value);
 	oldpwd->value = pwd->value;
 	pwd->value = line;
-	builtin_env(env);
 	return (set_get_code(0, env));
 }
 
