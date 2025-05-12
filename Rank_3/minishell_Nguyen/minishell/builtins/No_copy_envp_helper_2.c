@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_helper_3.c                                    :+:      :+:    :+:   */
+/*   No_copy_envp_helper_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 14:45:49 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/04 16:11:47 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/04/23 17:26:08 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/12 16:28:20 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "builtins.h"
 
-int	bit_count(long n)
+void	free_envp(char **envp)
 {
-	int		count;
+	int	i;
 
-	count = 0;
-	if (n < 0)
-		n = -n;
-	if (n == 0)
-		count = 1;
-	while (n > 0)
+	i = 0;
+	while (envp[i] != NULL)
 	{
-		n = n / 10;
-		count++;
+		free(envp[i]);
+		i++;
 	}
-	return (count);
+	free(envp);
 }
 
-char	*exception(char *ptr)
+int	ft_lstsize_env(t_env *lst)
 {
-	ptr[0] = '0';
-	return (ptr);
+	int	i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }
 
 int	initiate_base_env_helper_helper(t_env **env)

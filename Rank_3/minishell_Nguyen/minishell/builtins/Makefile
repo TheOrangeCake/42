@@ -2,9 +2,13 @@
 
 NAME = builtins
 
-SOURCE = main.c builtins_echo_pwd_env.c builtins_export.c builtins_helper.c\
-		builtins_export_helper.c builtins_unset_exit.c builtins_cd.c builtins_cd_helper.c\
-		envp.c envp_helper_1.c envp_helper_2.c envp_helper_3.c
+SOURCE = No_copy_main.c\
+		No_copy_envp.c No_copy_envp_helper_1.c No_copy_envp_helper_2.c\
+		No_copy_exit_code_handler.c\
+		No_copy_libft.c\
+		builtins_echo_pwd_env.c builtins_export.c\
+		builtins_export_helper.c builtins_unset.c builtins_exit.c builtins_cd.c builtins_cd_helper.c\
+
 
 OBJ_DIR = obj
 

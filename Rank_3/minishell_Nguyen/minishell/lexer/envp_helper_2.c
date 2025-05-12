@@ -6,51 +6,26 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:26:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/03 14:51:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:14:54 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-size_t	ft_strlen(const char *s)
+void	free_envp(char **envp)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s[i])
+	while (envp[i] != NULL)
 	{
+		free(envp[i]);
 		i++;
 	}
-	return (i);
+	free(envp);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	i;
-	size_t	j;
-	char	*ptr;
-
-	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (ptr == NULL)
-		return (perror("Error"), NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		ptr[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		ptr[i] = s2[j];
-		i++;
-		j++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
-}
-
-int	ft_lstsize(t_env *lst)
+int	ft_lstsize_env(t_env *lst)
 {
 	int	i;
 
@@ -63,54 +38,67 @@ int	ft_lstsize(t_env *lst)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+int	initiate_base_env_helper_helper(t_env **env)
 {
-	int		count;
-	char	*ptr;
-	long	i;
+	t_env	*exit_code;
 
-	i = n;
-	count = bit_count(i);
-	ptr = malloc_itoa(i, count);
-	if (ptr == NULL)
-		return (NULL);
-	if (i == 0)
-		ptr = exception(ptr);
-	if (i < 0)
-	{
-		ptr[0] = '-';
-		i = -i;
-		count = count + 1;
-	}
-	ptr[count--] = '\0';
-	while (i > 0)
-	{
-		ptr[count--] = i % 10 + '0';
-		i = i / 10;
-	}
-	return (ptr);
+	exit_code = malloc(sizeof(t_env));
+	if (exit_code == NULL)
+		return (perror("Error"), ft_lstclear_env(env), 1);
+	exit_code->key = ft_strdup("?");
+	if (exit_code->key == NULL)
+		return (1);
+	exit_code->value = ft_strdup("0");
+	if (exit_code->value == NULL)
+		return (1);
+	exit_code->exported = false;
+	exit_code->only_key = false;
+	exit_code->code = true;
+	exit_code->printed = false;
+	exit_code->next = NULL;
+	(*env)->next->next = exit_code;
+	return (0);
 }
 
-int	ft_atoi(const char *nptr)
+int	initiate_base_env_helper(t_env **env)
 {
-	int	sign;
-	int	nb;
+	t_env	*shlvl;
 
-	nb = 0;
-	sign = 1;
-	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
-		nptr++;
-	if (*nptr == '-')
-	{
-		sign = -sign;
-		nptr++;
-	}
-	else if (*nptr == '+')
-		nptr++;
-	while (*nptr >= '0' && *nptr <= '9')
-	{
-		nb = nb * 10 + *nptr - '0';
-		nptr++;
-	}
-	return (nb * sign);
+	shlvl = malloc(sizeof(t_env));
+	if (shlvl == NULL)
+		return (perror("Error"), ft_lstclear_env(env), 1);
+	shlvl->key = ft_strdup("SHLVL");
+	if (shlvl->key == NULL)
+		return (1);
+	shlvl->value = ft_strdup("1");
+	if (shlvl->value == NULL)
+		return (1);
+	shlvl->exported = true;
+	shlvl->only_key = false;
+	shlvl->code = false;
+	shlvl->printed = false;
+	shlvl->next = NULL;
+	(*env)->next = shlvl;
+	return (initiate_base_env_helper_helper(env));
+}
+
+// in case of NULL envp,
+// initiate 3 environnement variables PWD, SHLVL and exit code.
+int	initiate_base_env(t_env **env)
+{
+	*env = malloc(sizeof(t_env));
+	if (*env == NULL)
+		return (perror("Error"), 1);
+	(*env)->key = ft_strdup("PWD");
+	if ((*env)->key == NULL)
+		return (1);
+	(*env)->value = getcwd(NULL, 0);
+	if ((*env)->value == NULL)
+		return (perror("Error"), 1);
+	(*env)->exported = true;
+	(*env)->only_key = false;
+	(*env)->code = false;
+	(*env)->printed = false;
+	(*env)->next = NULL;
+	return (initiate_base_env_helper(env));
 }

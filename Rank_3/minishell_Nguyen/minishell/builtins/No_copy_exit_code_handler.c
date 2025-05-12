@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_helper_4.c                                    :+:      :+:    :+:   */
+/*   No_copy_exit_code_handler.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 15:52:41 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/04 16:45:30 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/05/04 16:48:40 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/12 16:28:14 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "builtins.h"
 
-void	free_envp(char **envp)
+int	set_get_code(int code, t_env **env)
 {
-	int	i;
+	t_env	*temp;
+	char	*tmp;
 
-	i = 0;
-	while (envp[i] != NULL)
+	temp = *env;
+	while (temp != NULL)
 	{
-		free(envp[i]);
-		i++;
+		if (!ft_strncmp(temp->key, "?", 2))
+			break ;
+		temp = temp->next;
 	}
-	free(envp);
-}
-
-char	*malloc_itoa(long n, long count)
-{
-	char	*ptr;
-	long	sign;
-
-	sign = n;
-	if (sign >= 0)
-		ptr = malloc(sizeof(char) * (count + 1));
-	if (sign < 0)
-		ptr = malloc(sizeof(char) * (count + 2));
-	if (ptr == NULL)
-		return (NULL);
-	return (ptr);
+	if (code == -1)
+		code = ft_atoi(temp->value);
+	else
+	{
+		tmp = ft_itoa(code);
+		if (tmp == NULL)
+			return (perror("Error"), 1);
+		free(temp->value);
+		temp->value = tmp;
+	}
+	return (code);
 }

@@ -2,11 +2,13 @@
 
 NAME = shell
 
-SOURCE = main.c lexer.c lexer_case_single.c lexer_case_double.c lexer_case_string.c lexer_helper_1.c lexer_helper_2.c\
+SOURCE = main.c\
 		signal.c\
-		envp.c envp_helper_1.c envp_helper_2.c envp_helper_3.c envp_helper_4.c\
-		dollar_handler.c dollar_handler_helper_1.c dollar_handler_helper_2.c\
-		exit_code_handler.c
+		lexer.c lexer_case_single.c lexer_case_double.c lexer_case_string.c lexer_helper_1.c\
+		envp.c envp_helper_1.c envp_helper_2.c\
+		dollar_handler.c dollar_handler_helper_1.c\
+		exit_code_handler.c\
+		No_copy_libft.c
 
 OBJ_DIR = obj
 

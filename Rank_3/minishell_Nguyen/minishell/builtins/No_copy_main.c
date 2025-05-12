@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   No_copy_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:05:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/12 12:31:14 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:29:21 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ int	main(int ac, char **av, char **envp)
 		{
 			builtin_cd(&node, &env);
 		}
-		else if (!ft_strncmp(node.data->str, "exit", 5))
-		{
-			builtin_exit(&node, &env);
-		}
+		// else if (!ft_strncmp(node.data->str, "exit", 5))
+		// {
+		// 	builtin_exit(&node, &env);
+		// }
 	}
 	ft_lstclear_token(&head);
 	ft_lstclear_env(&env);
