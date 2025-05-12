@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:11:29 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/02 21:14:18 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:20:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	new_assign(char *key, char *value, t_env **env)
 
 	var = malloc(sizeof(t_env));
 	if (var == NULL)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	var->key = key;
 	var->value = value;
 	var->exported = true;
 	var->only_key = false;
 	var->code = false;
 	ft_lstadd_back_env(env, var);
-	return (0);
+	return (set_get_code(0, env));
 }
 
 //case export follow by assign, like export test=
@@ -40,10 +40,10 @@ int	export_assign(char *s, t_env **env)
 
 	key = ft_substring_key(s);
 	if (key == NULL)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	value = ft_substring_value(s);
 	if (value == NULL)
-		return (perror("Error"), free(key), 1);
+		return (perror("Error"), free(key), set_get_code(1, env));
 	temp = *env;
 	while (temp != NULL)
 	{
@@ -54,7 +54,7 @@ int	export_assign(char *s, t_env **env)
 			free(temp->value);
 			temp->value = value;
 			free(key);
-			return (0);
+			return (set_get_code(0, env));
 		}
 		temp = temp->next;
 	}
@@ -75,33 +75,33 @@ int	export_string(char *key, t_env **env)
 		if (!ft_strncmp(key, temp->key, ft_strlen(key)) && temp->code == false)
 		{
 			temp->exported = true;
-			return (0);
+			return (set_get_code(0, env));
 		}
 		temp = temp->next;
 	}
 	var = malloc(sizeof(t_env));
 	if (var == NULL)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	var->key = ft_strdup(key);
 	if (var->key == NULL)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	var->value = NULL;
 	var->exported = false;
 	var->only_key = true;
 	var->code = false;
 	ft_lstadd_back_env(env, var);
-	return (0);
+	return (set_get_code(0, env));
 }
 
 // case export
 int	builtin_export(t_node *node, t_env **env)
 {
 	if (env == NULL && *env == NULL)
-		return (0);
+		return (set_get_code(0, env));
 	if (node->data->next == NULL)
 	{
 		export_no_arg(env);
-		return (0);
+		return (set_get_code(0, env));
 	}
 	else
 	{
@@ -111,5 +111,5 @@ int	builtin_export(t_node *node, t_env **env)
 		else if (node->data->type == TK_String)
 			return (export_string(node->data->str, env));
 	}
-	return (0);
+	return (set_get_code(0, env));
 }

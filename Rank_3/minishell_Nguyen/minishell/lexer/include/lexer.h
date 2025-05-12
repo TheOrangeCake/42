@@ -6,13 +6,14 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:37 by kcsajka           #+#    #+#             */
-/*   Updated: 2025/05/12 16:20:00 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:54:56 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 # include "minishell.h"
+
 enum	e_token_t
 {
 	TK_Null,
@@ -89,7 +90,7 @@ void	ft_lstadd_back_token(t_token **lst, t_token *new_token);
 void	ft_lstclear_token(t_token **lst);
 char	*ft_substring(char *s, int len);
 
-int		lexer(char *line, t_token **head);
+int		lexer(char *line, t_token **head, t_env **env);
 t_token	**case_single_char(t_token **head, char character);
 t_token	**case_double_char(t_token **head, char character);
 t_token	**case_printable(t_token **head, char *line, int *count);

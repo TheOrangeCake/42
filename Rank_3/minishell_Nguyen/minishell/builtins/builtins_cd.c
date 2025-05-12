@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:39:54 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/12 16:31:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:22:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ int	case_cd_path(char *path, t_env **env)
 	char	*line;
 
 	if (chdir(path) != 0)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	line = getcwd(NULL, 0);
 	if (line == NULL)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	oldpwd = find_oldpwd(env);
 	pwd = find_pwd(env);
 	free(oldpwd->value);
 	oldpwd->value = pwd->value;
 	pwd->value = line;
 	builtin_env(env);
-	return (0);
+	return (set_get_code(0, env));
 }
 
 // handle cd -
@@ -42,7 +42,7 @@ int	case_cd_previous(t_env **env)
 
 	oldpwd = find_oldpwd(env);
 	if (oldpwd == NULL)
-		return (printf("bash: cd: OLDPWD not set\n"), 1);
+		return (printf("bash: cd: OLDPWD not set\n"), set_get_code(1, env));
 	pwd = find_pwd(env);
 	if (pwd != NULL)
 		tmp = pwd->value;
@@ -50,16 +50,16 @@ int	case_cd_previous(t_env **env)
 	{
 		tmp = getcwd(NULL, 0);
 		if (tmp == NULL)
-			return (perror("Error"), 1);
+			return (perror("Error"), set_get_code(1, env));
 	}
 	if (chdir(oldpwd->value) != 0)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	if (pwd != NULL)
 		pwd->value = oldpwd->value;
 	else
 		free(oldpwd->value);
 	oldpwd->value = tmp;
-	return (0);
+	return (set_get_code(0, env));
 }
 
 int	case_cd_home(char *path, t_env **env)
@@ -71,18 +71,18 @@ int	case_cd_home(char *path, t_env **env)
 	(void)new_path;
 	home = find_home(env);
 	if (home == NULL)
-		return (printf("bash: cd: HOME not set\n"), 1);
+		return (printf("bash: cd: HOME not set\n"), set_get_code(1, env));
 	temp = ft_strdup(&path[1]);
 	if (temp == NULL)
-		return (1);
+		return (perror("Error"), set_get_code(1, env));
 	new_path = ft_strjoin(home->value, temp);
 	free(temp);
 	if (new_path == NULL)
-		return (1);
+		return (perror ("Error"), set_get_code(1, env));
 	if (case_cd_path(new_path, env) != 0)
-		return (1);
+		return (set_get_code(1, env));
 	free(new_path);
-	return (0);
+	return (set_get_code(0, env));
 }
 
 // handle cd without argument
@@ -92,7 +92,7 @@ int	case_cd_no_arg(t_env **env)
 
 	home = find_home(env);
 	if (home == NULL)
-		return (printf("bash: cd: HOME not set\n"), 1);
+		return (printf("bash: cd: HOME not set\n"), set_get_code(1, env));
 	return (case_cd_path(home->value, env));
 }
 
@@ -110,5 +110,5 @@ int	builtin_cd(t_node *node, t_env **env)
 		return (case_cd_previous(env));
 	else
 		return (case_cd_path(node->data->str, env));
-	return (0);
+	return (set_get_code(0, env));
 }

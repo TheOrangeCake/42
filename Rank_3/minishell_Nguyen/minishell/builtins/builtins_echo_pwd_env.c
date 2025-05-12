@@ -6,14 +6,14 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:53:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/30 16:59:05 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:24:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
 // case echo
-int	builtin_echo(t_node *node)
+int	builtin_echo(t_node *node, t_env **env)
 {
 	int	flag;
 
@@ -33,7 +33,7 @@ int	builtin_echo(t_node *node)
 	}
 	if (flag == 0)
 		printf("\n");
-	return (0);
+	return (set_get_code(0, env));
 }
 
 // case env
@@ -42,7 +42,7 @@ int	builtin_env(t_env **env)
 	t_env	*temp;
 
 	if (env == NULL && *env == NULL)
-		return (0);
+		return (set_get_code(0, env));
 	temp = *env;
 	while (temp != NULL)
 	{
@@ -52,18 +52,18 @@ int	builtin_env(t_env **env)
 		}
 		temp = temp->next;
 	}
-	return (0);
+	return (set_get_code(0, env));
 }
 
 // case pwd
-int	builtin_pwd(void)
+int	builtin_pwd(t_env **env)
 {
 	char	*line;
 
 	line = getcwd(NULL, 0);
 	if (line == NULL)
-		return (perror("Error"), 1);
+		return (perror("Error"), set_get_code(1, env));
 	printf("%s\n", line);
 	free(line);
-	return (0);
+	return (set_get_code(0, env));
 }

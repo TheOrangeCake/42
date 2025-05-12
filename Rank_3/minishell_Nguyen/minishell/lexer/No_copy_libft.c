@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:07:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/12 16:37:54 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:28:00 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_strtrim(char *s1, char *set)
 		i = 0;
 	ptr = malloc(j - i + 1);
 	if (ptr == NULL)
-		return (perror("Error"), NULL);
+		return (NULL);
 	k = 0;
 	while (i < j)
 		ptr[k++] = s1[i++];
@@ -144,7 +144,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (ptr == NULL)
-		return (perror("Error"), NULL);
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (s1[i])

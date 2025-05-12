@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:50:58 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/12 16:32:40 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:27:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ char	**env_to_envp(t_env **env);
 void	free_envp(char **envp);
 
 // EXIT CODE ____________________________ NE PAS COPY
-int	set_get_code(int code, t_env **env);
+int		set_get_code(int code, t_env **env);
 
 // BUILTINS -------------------------------
 int		ft_compare(char *s1, char *s2);
 
-int		builtin_echo(t_node *node);
-int		builtin_pwd(void);
+int		builtin_echo(t_node *node, t_env **env);
+int		builtin_pwd(t_env **env);
 int		builtin_env(t_env **env);
 int		builtin_export(t_node *node, t_env **env);
 int		export_no_arg(t_env **env);

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:47:06 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/12 16:23:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:39:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char	**env_to_envp_helper(char **envp, t_env *temp, int i)
 	envp[i] = NULL;
 	tmp = ft_strjoin(temp->key, "=");
 	if (tmp == NULL)
-		return (free_envp(envp), NULL);
+		return (perror("Error"), free_envp(envp), NULL);
 	envp[i] = ft_strjoin(tmp, temp->value);
 	free(tmp);
 	if (envp[i] == NULL)
-		return (free_envp(envp), NULL);
+		return (perror("Error"), free_envp(envp), NULL);
 	return (envp);
 }
 
@@ -86,7 +86,7 @@ int	initiate_exit_code(t_env **env)
 		return (perror("Error"), 1);
 	(*env)->key = ft_strdup("?");
 	if ((*env)->key == NULL)
-		return (1);
+		return (perror("Error"), 1);
 	(*env)->value = ft_strdup("0");
 	if ((*env)->value == NULL)
 		return (perror("Error"), 1);

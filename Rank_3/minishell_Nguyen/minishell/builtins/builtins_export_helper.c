@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:57:17 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/30 17:00:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:17:52 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ int	export_no_arg(t_env **env)
 	t_env	*temp;
 
 	if (env == NULL || *env == NULL)
-		return (0);
+		return (set_get_code(0, env));
 	while (1)
 	{
 		temp = get_variable(env);
 		if (temp == NULL)
-			return (0);
+			return (set_get_code(0, env));
 		else
 		{
 			if (temp->only_key == false)
@@ -115,5 +115,5 @@ int	export_no_arg(t_env **env)
 				printf("declare -x %s\n", temp->key);
 		}
 	}
-	return (0);
+	return (set_get_code(0, env));
 }

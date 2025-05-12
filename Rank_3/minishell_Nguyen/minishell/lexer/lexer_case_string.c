@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 10:31:26 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/04/25 10:22:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:49:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_token	*case_singlequote(t_token *token, char *line, int *cnt)
 	token->str = ft_strtrim(temp, "\'");
 	free(temp);
 	if (token->str == NULL)
-		return (NULL);
+		return (perror("Error"), NULL);
 	token->next = NULL;
 	return (token);
 }
@@ -47,7 +47,7 @@ t_token	*case_doublequote(t_token *token, char *line, int *cnt)
 	token->str = ft_strtrim(temp, "\"");
 	free(temp);
 	if (token->str == NULL)
-		return (NULL);
+		return (perror("Error"), NULL);
 	token->next = NULL;
 	return (token);
 }

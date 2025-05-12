@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_unset_exit.c                              :+:      :+:    :+:   */
+/*   builtins_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:59:30 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/12 12:09:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:23:36 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int	builtin_unset(t_node *node, t_env **env)
 	t_env	*temp;
 
 	if (env == NULL || *env == NULL || node->data == NULL)
-		return (0);
+		return (set_get_code(0, env));
 	node->data = node->data->next;
+	if (!ft_strncmp(node->data->str, "?", 2))
+		return (printf("Can not unset exit code\n"), 0);
 	while (node->data != NULL)
 	{
 		temp = *env;
@@ -52,6 +54,5 @@ int	builtin_unset(t_node *node, t_env **env)
 		}
 		node->data = node->data->next;
 	}
-	builtin_env(env);
-	return (0);
+	return (set_get_code(0, env));
 }
