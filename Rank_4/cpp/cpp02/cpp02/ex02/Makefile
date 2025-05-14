@@ -2,7 +2,7 @@
 
 NAME = fixedpoint
 
-SOURCE = main.cpp Fixed.cpp Fixed_arithmetic.cpp Fixed_compare.cpp
+SOURCE = main.cpp Fixed.cpp Fixed_arithmetic.cpp Fixed_compare.cpp Fixed_pre_post.cpp Fixed_min_max.cpp
 
 OBJ_DIR = obj
 

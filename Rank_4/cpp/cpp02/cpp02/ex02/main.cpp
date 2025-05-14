@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:13:31 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/14 18:29:56 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:54:37 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 int	main(void)
 {
-	Fixed 		a(3.5f);
-	Fixed 		b(2.5f);
+	Fixed 		a;
+	Fixed const b(Fixed(5.05f) * Fixed(2));
 
-	if (a != b)
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+
+	std::cout << b << std::endl;
+
+	std::cout << Fixed::max(a, b) << std::endl;
+
 	return (0);
 }
 
