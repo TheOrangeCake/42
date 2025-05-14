@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = harlFilter
+NAME = fixedpoint
 
-SOURCE = main.cpp Harl.cpp
+SOURCE = main.cpp Fixed.cpp
 
 OBJ_DIR = obj
 

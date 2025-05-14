@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:14:15 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/14 17:38:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:35:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,39 +34,11 @@ Fixed::~Fixed() {
 }
 
 int Fixed::getRawBits(void) const {
+	std::cout << "getRawBits member function called" << std::endl;
 	return (this->_value);
 }
 
 void Fixed::setRawBits(int const raw) {
+	std::cout << "setRawBits member function called" << std::endl;
 	this->_value = raw;
-}
-
-Fixed::Fixed(int const number) {
-	std::cout << "Int constructor called" << std::endl;
-	this->_value = number * ( 1 << _fraction);
-}
-
-Fixed::Fixed(float const number) {
-	std::cout << "Float constructor called" << std::endl;
-	this->_value = roundf(number * (1 << _fraction));
-}
-
-float Fixed::toFloat(void) const {
-	float i;
-	
-	i = (float)this->_value;
-	i = i / (1 << _fraction);
-	return (i);
-}
-
-int	Fixed::toInt(void) const {
-	int	i;
-
-	i = roundf(this->_value / (1 << _fraction));
-	return (i);
-}
-
-std::ostream& operator<<(std::ostream& o, const Fixed& number) {
-	o << number.toFloat();
-	return (o);
 }

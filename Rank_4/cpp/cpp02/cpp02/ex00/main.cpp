@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:13:31 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/14 17:38:53 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:34:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,15 @@
 
 int	main(void)
 {
-	Fixed 		a;
-	Fixed const b(10);
-	Fixed const	c(42.42f);
-	Fixed const	d(b);
+	Fixed a;
+	Fixed b(a);
+	Fixed c;
 
-	a = Fixed(1234.4321f);
-
-	std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	std::cout << "c is " << c << std::endl;
-	std::cout << "d is " << d << std::endl;
+	c = b;
 	
-	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
 	
 	return (0);
 }
-
-// Note: The second assignment operator call is because of compiler optimisation.
-// To illustrate simply: 
-// Fixed temp = Fixed(1234.4321f);
-// a = temp;
-// So the first assignment is temp, second is a. The destructor call is for temp.
