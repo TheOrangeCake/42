@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:58:09 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/14 22:35:50 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:51:43 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Point::Point(const Point& copy) : _x(copy._x), _y(copy._y){
 
 // not in use because const _x and const _y
 Point& Point::operator=(const Point& assign) {
+	(void)assign;
 	return (*this);
 }
 

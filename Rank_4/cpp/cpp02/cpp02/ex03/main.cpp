@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:13:31 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/14 22:32:57 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:53:49 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 
 int	main(void)
 {
-	Point	a(2.5f, 5);
-	Point	b(a);
+	Point const	a(1, 1);
+	Point const	b(7, 4);
+	Point const	c(3, 6);
+	Point const	point(2.5f, 3.5f);
 
-	std::cout << a.getPoint_x() << std::endl;
-	std::cout << a.getPoint_y() << std::endl;
-	std::cout << b.getPoint_x() << std::endl;
-	std::cout << b.getPoint_y() << std::endl;
+	if (bsp(a, b, c, point))
+		std::cout << "True" << std::endl;
+	else
+		std::cout << "False" << std::endl;
 	
 	return (0);
 }
-
-// Note: The second assignment operator call is because of compiler optimisation.
-// To illustrate simply: 
-// Fixed temp = Fixed(1234.4321f);
-// a = temp;
-// So the first assignment is temp, second is a. The destructor call is for temp.
