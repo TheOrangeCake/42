@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:01:48 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/15 16:22:46 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:00:23 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class ClapTrap {
 		ClapTrap& operator=(const ClapTrap& assign);
 		~ClapTrap();
 
-		void	attack(const std::string* target);
+		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 		void	printClapTrap() const;

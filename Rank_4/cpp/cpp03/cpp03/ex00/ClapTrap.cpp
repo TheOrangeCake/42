@@ -6,13 +6,13 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:02:24 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/15 16:29:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:17:20 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name("Minion"), _hp(10), _mp(10), _atk(0) {
+ClapTrap::ClapTrap() : _name("Crab"), _hp(10), _mp(10), _atk(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
@@ -37,6 +37,37 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& assign) {
 
 ClapTrap::~ClapTrap() {
 	std::cout << "Destructor called" << std::endl;
+}
+
+void ClapTrap::attack(const std::string& target) {
+	if (this->_mp > 0 && this->_hp > 0)
+	{
+		std::cout << "ClapTrap " << this->_name << " attacks " << target;
+		std::cout << ", causing " << this->_atk << " points of damage!" << std::endl;
+		this->_mp -= 1;
+	}
+	else if (this->_hp <= 0)
+		std::cout << "Failed! " << this->_name << " has no health left!" << std::endl;
+	else
+		std::cout << "Failed! " << this->_name << " has no energy point left!" << std::endl;
+}
+
+void ClapTrap::takeDamage(unsigned int amount) {
+	std::cout << this->_name << "has taken " << amount << " damages." << std::endl;
+	this->_hp -= amount;
+	if (this->_hp < 0)
+		this->_hp = 0;
+}
+
+void ClapTrap::beRepaired(unsigned int amount) {
+	if (this->_mp > 0)
+	{
+		std::cout << this->_name << " is healed for " << amount << " hp." << std::endl;
+		this->_hp += amount;
+		this->_mp -= 1;
+	}
+	else
+		std::cout << "Failed! " << this->_name << " has no energy point left!" << std::endl;
 }
 
 void ClapTrap::printClapTrap() const {
