@@ -6,11 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:14:15 by hoannguy          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/14 17:35:07 by hoannguy         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/13 22:16:11 by hoannguy         ###   ########.fr       */
->>>>>>> 0a3deaf (test)
+/*   Updated: 2025/05/16 23:10:17 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +41,4 @@ int Fixed::getRawBits(void) const {
 void Fixed::setRawBits(int const raw) {
 	std::cout << "setRawBits member function called" << std::endl;
 	this->_value = raw;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0a3deaf (test)
