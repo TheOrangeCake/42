@@ -2,7 +2,7 @@
 
 NAME = claptrap
 
-SOURCE = main.cpp ClapTrap.cpp
+SOURCE = main.cpp ClapTrap.cpp ScavTrap.cpp
 
 OBJ_DIR = obj
 
