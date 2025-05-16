@@ -10,7 +10,6 @@
 /*   Updated: 2025/05/14 17:35:10 by hoannguy         ###   ########.fr       */
 =======
 /*   Updated: 2025/05/13 23:27:53 by hoannguy         ###   ########.fr       */
->>>>>>> 0a3deaf (test)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +17,7 @@
 # define FIXED_HPP
 
 #include <iostream>
-<<<<<<< HEAD
 #include <cmath>
-=======
->>>>>>> 0a3deaf (test)
 
 class Fixed {
 	private:
@@ -36,10 +32,6 @@ class Fixed {
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
-<<<<<<< HEAD
-
-=======
->>>>>>> 0a3deaf (test)
 };
 
 #endif
