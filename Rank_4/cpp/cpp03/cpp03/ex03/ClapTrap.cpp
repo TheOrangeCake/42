@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:02:24 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/19 13:18:08 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:17:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,8 @@ void ClapTrap::beRepaired(unsigned int amount) {
 void ClapTrap::printClapTrap() const {
 	std::cout << "ClapTrap " << this->_name << " has " << this->_hp << " hp, ";
 	std::cout << this->_mp << " mp and " << this->_atk << " atk." << std::endl;
+}
+
+std::string ClapTrap::getName() const {
+	return this->_name;
 }

@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 23:27:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/17 00:41:56 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/05/15 16:03:13 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/19 13:17:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
-class ScavTrap : public ClapTrap {
-	public:
-		ScavTrap();
-		ScavTrap(std::string name);
-		ScavTrap(const ScavTrap& copy);
-		ScavTrap& operator=(const ScavTrap& assign);
-		~ScavTrap();
+int	main(void)
+{
+	DiamondTrap	diamond;
+	diamond.printClapTrap();
+	diamond.whoAmI();
+	diamond.attack("Clam");
+	diamond.guardGate();
+	diamond.highFivesGuys();
+	diamond.takeDamage(20);
+	diamond.printClapTrap();
 
-		void	attack(const std::string& target);
-		void	guardGate();
-		void	printClapTrap() const;
-};
+	ScavTrap scav;
+	scav.printClapTrap();
 
-#endif
+	FragTrap frag;
+	frag.printClapTrap();
+	
+	return (0);
+}

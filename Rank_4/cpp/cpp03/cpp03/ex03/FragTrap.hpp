@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 23:27:16 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/17 00:41:56 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/05/17 00:33:03 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/19 12:56:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
-#include "ClapTrap.hpp"
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
+#include "ScavTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class FragTrap : virtual public ClapTrap {
 	public:
-		ScavTrap();
-		ScavTrap(std::string name);
-		ScavTrap(const ScavTrap& copy);
-		ScavTrap& operator=(const ScavTrap& assign);
-		~ScavTrap();
+		FragTrap();
+		FragTrap(std::string name);
+		FragTrap(const FragTrap& copy);
+		FragTrap& operator=(const FragTrap& assign);
+		~FragTrap();
 
-		void	attack(const std::string& target);
-		void	guardGate();
-		void	printClapTrap() const;
+		void highFivesGuys(void);
+		void printClapTrap() const;
+
+	static const int frag_hp = 100;
+	static const int frag_mp = 100;
+	static const int frag_atk = 30;
 };
 
 #endif

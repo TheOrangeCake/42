@@ -6,23 +6,23 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 23:26:56 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/17 00:42:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:55:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() : ClapTrap() {
-	_hp = 100;
-	_mp = 50;
-	_atk = 20;
+	_hp = scav_hp;
+	_mp = scav_mp;
+	_atk = scav_atk;
 	std::cout << "ScavTrap: Default constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-	_hp = 100;
-	_mp = 50;
-	_atk = 20;
+	_hp = scav_hp;
+	_mp = scav_mp;
+	_atk = scav_atk;
 	std::cout << "ScavTrap: Name constructor called" << std::endl;
 }
 

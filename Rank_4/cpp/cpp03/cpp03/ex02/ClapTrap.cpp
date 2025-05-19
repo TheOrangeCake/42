@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:02:24 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/17 00:13:30 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:17:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-	std::cout << this->_name << "has taken " << amount << " damages." << std::endl;
+	std::cout << this->_name << " has taken " << amount << " damages." << std::endl;
 	this->_hp -= amount;
 	if (this->_hp < 0)
 		this->_hp = 0;
