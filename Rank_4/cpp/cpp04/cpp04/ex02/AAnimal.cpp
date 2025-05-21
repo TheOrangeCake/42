@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   AAnimal.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 14:48:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/21 15:57:43 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/05/21 13:58:30 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/05/21 18:57:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "AAnimal.hpp"
 
-Cat::Cat() : Animal() {
-	std::cout << "A Cat was born" << std::endl;
-	this->type = "Cat";
+AAnimal::AAnimal() : type("Mammals") {
+	std::cout << "An AAnimal was born" << std::endl;
 }
 
-Cat::Cat(const Cat& copy) : Animal() {
-	std::cout << "Cat cloned" << std::endl;
+AAnimal::AAnimal(const AAnimal& copy) {
+	std::cout << "AAnimal cloned" << std::endl;
 	*this = copy;
 }
 
-Cat& Cat::operator=(const Cat& assign) {
+AAnimal& AAnimal::operator=(const AAnimal& assign) {
 	if (this != &assign)
 	{
-		std::cout << "Cat reassigned" << std::endl;
+		std::cout << "AAnimal reassigned" << std::endl;
 		this->type = assign.type;
 	}
 	return (*this);
 }
 
-Cat::~Cat() {
-	std::cout << "Cat petted and went to sleep" << std::endl;
+AAnimal::~AAnimal() {
+	std::cout << "An AAnimal was blasted to oblivion" << std::endl;
 }
 
-void Cat::makeSound() const {
-	std::cout << "Miao Miao" << std::endl;
+std::string AAnimal::getType() const {
+	return (this->type);
 }
