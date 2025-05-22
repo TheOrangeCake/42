@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = animal
+NAME = game
 
-SOURCE = main.cpp 
+SOURCE = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp Discard.cpp MateriaSource.cpp
 
 OBJ_DIR = obj
 
