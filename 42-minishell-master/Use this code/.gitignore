@@ -1,5 +1,0 @@
-extra/
-target/
-minishell
-*.o
-src/test/
