@@ -1,16 +1,16 @@
 .DEFAULT_GOAL := all
 
-NAME = PhoneBook
+NAME = account
 
-SOURCE = main.cpp PhoneBook.cpp Contact.cpp
+SOURCE = Account.cpp tests.cpp
 
 OBJ_DIR = obj
 
 OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCE:.cpp=.o))
 
 GCC = g++
-FLAGS = -Wextra -Wall -Werror -std=c++98
-# FLAGS =
+# FLAGS = -Wextra -Wall -Werror -std=c++98
+FLAGS =
 RM = rm -f
 
 all : $(NAME)
