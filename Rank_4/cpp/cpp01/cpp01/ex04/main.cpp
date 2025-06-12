@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:25:23 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/08 22:08:05 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:44:24 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	main(int ac, char **av)
 		std::ifstream file(file_name.c_str());
 		if (!file.is_open())
 		{
-			std::cerr << "Fail to open fail" <<std::endl;
+			std::cerr << "Fail to open file" <<std::endl;
 			return (1);
 		}
 		std::ofstream new_file((file_name + ".replace").c_str());
 		if (!new_file.is_open())
 		{
-			std::cerr << "Fail to open fail" <<std::endl;
+			std::cerr << "Fail to open file" <<std::endl;
 			return (1);
 		}
 

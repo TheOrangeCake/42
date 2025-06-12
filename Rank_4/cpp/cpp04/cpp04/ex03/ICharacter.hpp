@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:51:25 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/22 18:01:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/06/12 23:29:42 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class AMateria;
 
 class ICharacter {
 	public:
-		virtual ~ICharacter() {}
+		virtual ~ICharacter() {};
 		virtual std::string const & getName() const = 0;
 		virtual void equip(AMateria* m) = 0;
 		virtual void unequip(int idx) = 0;
