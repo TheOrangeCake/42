@@ -26,6 +26,7 @@ void	alarm_handler(int signal)
 			kill(g_pid, SIGKILL);
 	}
 }
+
 int	sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 {
 	struct sigaction	sa_default;
@@ -43,7 +44,6 @@ int	sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 	sigemptyset(&sa_alarm.sa_mask);
 	sa_alarm.sa_flags = SA_RESTART;
 	sa_alarm.sa_handler = alarm_handler;
-
 	if (sigaction(SIGTERM, &sa_ignore, NULL) < 0
 	||	sigaction(SIGINT, &sa_ignore, NULL) < 0
 	||	sigaction(SIGQUIT, &sa_ignore, NULL) < 0)
