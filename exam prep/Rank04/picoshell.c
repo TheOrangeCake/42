@@ -59,7 +59,7 @@ int	picoshell(char ***cmds)
 	while (wait(NULL) > 0);
 	if (prev >= 0)
 	{
-		close (prev);
+		close(prev);
 		prev = -1;
 	}
 	return (0);

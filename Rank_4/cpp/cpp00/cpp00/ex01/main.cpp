@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 13:57:24 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/05/09 14:54:39 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/06/29 22:48:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ std::string get_input(std::string question, std::string err_message)
 	while (true)
 	{
 		std::cout << question;
-		std::getline(std::cin, temp);
-		if (temp.empty())
-			std::cout << err_message << std::endl;
-		else
-			return (temp);
+		while (std::getline(std::cin, temp))
+		{
+			if (temp.empty())
+				std::cout << err_message << std::endl;
+			else
+				return (temp);
+		}
 	}
 	return (temp);
 }
