@@ -21,6 +21,69 @@ int main() {
 
 Hint: Do not leak file descriptors! */
 
+#include <unistd.h>
+#include <stdlib.h>
+
+char	*get_next_line(int fd);
+void	ft_putstr_fd(char *s, int fd);
+
+int	ft_popen(const char *file, char *const argv[], char type)
+{
+	pid_t	pid;
+	int		fd[2];
+
+	if (!file || !argv)
+		return (-1);
+	if (pipe(fd) < 0)
+		return(-1);
+	if (type == 'r')
+	{
+		pid = fork();
+		if (pid < 0)
+			return (close(fd[0]), close(fd[1]),-1);
+		else if (pid == 0)
+		{
+			if (dup2(fd[1], 1) < 0)
+				exit(-1);
+			close(fd[0]);
+			close(fd[1]);
+			execvp(file, argv);
+			exit(-1);
+		}
+		close(fd[1]);
+		return (fd[0]);
+	}
+	else if (type == 'w')
+	{
+		pid = fork();
+		if (pid < 0)
+			return (close(fd[0]), close(fd[1]),-1);
+		else if (pid == 0)
+		{
+			if (dup2(fd[0], 0) < 0)
+				exit(-1);
+			close(fd[0]);
+			close(fd[1]);
+			execvp(file, argv);
+			exit(-1);
+		}
+		close(fd[0]);
+		return (fd[1]);
+	}
+	return (close(fd[0]), close(fd[1]),-1);
+}
+
+#include <stdio.h>
+int main() {
+	char *const av[] = {"ls", NULL};
+    int fd = ft_popen("ls", av, 'r');
+
+    char	*line;
+    while(line = get_next_line(fd))
+        ft_putstr_fd(line, 1);
+}
+
+// start gnl
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
@@ -164,54 +227,6 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	ft_popen(const char *file, char *const argv[], char type)
-{
-	pid_t	pid;
-	int		fd[2];
-
-	if (!file || !argv)
-		return (-1);
-	if (type == 'w')
-	{
-		pid = fork();
-		if (pid < 0)
-			return (-1);
-		else if (pid == 0)
-		{
-			if (pipe(fd) < 0)
-				exit(-1);
-			if (dup2(fd[1], 1) < 0)
-				exit(-1);
-			close(fd[0]);
-			close(fd[1]);
-			execvp(file, argv);
-			exit(-1);
-		}
-		close(fd[1]);
-		return (fd[0]);
-	}
-	else if (type == 'r')
-	{
-		pid = fork();
-		if (pid < 0)
-			return (-1);
-		else if (pid == 0)
-		{
-			if (pipe(fd) < 0)
-				exit(-1);
-			if (dup2(fd[0], 0) < 0)
-				exit(-1);
-			close(fd[0]);
-			close(fd[1]);
-			execvp(file, argv);
-			exit(-1);
-		}
-		close(fd[0]);
-		return (fd[1]);
-	}
-	return (-1);
-}
-
 void	ft_putstr_fd(char *s, int fd)
 {
 	while (*s)
@@ -220,13 +235,4 @@ void	ft_putstr_fd(char *s, int fd)
 		s++;
 	}
 }
-
-#include <stdio.h>
-int main() {
-	char *const av[] = {"ls", NULL};
-    int fd = ft_popen("ls", av, 'r');
-
-    char	*line;
-    while(line = get_next_line(fd))
-        ft_putstr_fd(line, 1);
-}
+// end gnl
