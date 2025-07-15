@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 11:34:51 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/15 12:16:11 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:43:50 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class ShrubberyCreationForm : public AForm {
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& assign);
 		~ShrubberyCreationForm();
 
-		bool execute(Bureaucrat const & executor) const;
+		bool	execute(Bureaucrat const & executor) const;
 };
 
 #endif

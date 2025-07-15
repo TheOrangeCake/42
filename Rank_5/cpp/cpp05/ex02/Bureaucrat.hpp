@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:40:43 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/14 12:09:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:46:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ class Bureaucrat {
 		void		demote();
 		void		demote(int grade);
 		void		signForm(AForm& form);
-		
+		void		executeForm(AForm const & form) const;
 		
 	class GradeTooHighException : public std::exception {
 		public:

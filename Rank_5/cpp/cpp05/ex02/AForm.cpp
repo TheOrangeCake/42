@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 09:33:34 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/15 12:23:03 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:55:28 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ bool AForm::requirementsCheck(Bureaucrat const & executor) const {
 		}
 		return (true);
 	} catch (AForm::GradeTooLowException& e) {
-		std::cerr << "Exception: " << e.what() << std::endl;
+		std::cerr << "Exception: " << e.what() << " Grade too low!" << std::endl;
 		return (false);
 	} catch (AForm::FormNotSignedException& e) {
-		std::cerr << "Exception: " << e.what() << std::endl;
+		std::cerr << "Exception: " << e.what() << " Form isn't signed!" << std::endl;
 		return (false);
 	}
 }

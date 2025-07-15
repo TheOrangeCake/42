@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 11:35:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/15 12:37:55 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:42:40 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,36 @@ bool ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 			std::cerr << "ofstream failed!" << std::endl;
 			return (false);
 		}
+		file << "|      _____ _                _     _                       " << std::endl;
+		file << "|     / ____| |              | |   | |                      " << std::endl;
+		file << "|    | (___ | |__  _ __ _   _| |__ | |__   ___ _ __ _   _   " << std::endl;
+		file << "|     \\___ \\| '_ \\| '__| | | | '_ \\| '_ \\ / _ \\ '__| | | |  " << std::endl;
+		file << "|     ____) | | | | |  | |_| | |_) | |_) |  __/ |  | |_| |  " << std::endl;
+		file << "|    |_____/|_| |_|_|   \\__,_|_.__/|_.__/ \\___|_|   \\__, |  " << std::endl;
+		file << "|                                                    __/ |  " << std::endl;
+		file << "|                                                   |___/   " << std::endl;
+		file << "|" << std::endl;
+		file << "|" << std::endl;
+		file << "|                             * *" << std::endl;
+		file << "|                          *    *  *" << std::endl;
+		file << "|                     *  *    *     *  *" << std::endl;
+		file << "|                    *     *    *  *    *" << std::endl;
+		file << "|                 * *   *    *    *    *   *" << std::endl;
+		file << "|                 *     *  *    * * .#  *   *" << std::endl;
+		file << "|                 *   *     * #.  .# *   *" << std::endl;
+		file << "|                  *     \"#.  #: #\" * *    *" << std::endl;
+		file << "|                 *   * * \"#. ##\"       *" << std::endl;
+		file << "|                   *       \"###\"" << std::endl;
+		file << "|                            \"##" << std::endl;
+		file << "|                              ##." << std::endl;
+		file << "|                              .##:" << std::endl;
+		file << "|                              :###" << std::endl;
+		file << "|################              ;###         ################" << std::endl;
+		file << "|################            ,####.         ################" << std::endl;
+		file << "|################/\\/\\/\\/\\/\\/.######.\\/\\/\\//\\##########NGUYEN" << std::endl;
 		file.close();
 		return (true);
 	} else {
-		std::cout << "Do nothing" << std::endl;
 		return (false);
 	}
 }

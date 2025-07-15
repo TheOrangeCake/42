@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:40:12 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/15 12:16:47 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/15 23:06:16 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,28 @@
 int	main(void)
 {
 	{
-		// Unsigned
+		std::cout << "----- Information -----" << std::endl;
 		Bureaucrat personA = Bureaucrat("Frimousse", 135);
+		Bureaucrat personB = Bureaucrat("Pookie", 149);
 		ShrubberyCreationForm  formA = ShrubberyCreationForm();
-		formA.execute(personA);
-		std::cout << "-----" << std::endl;
+		std::cout << formA << std::endl;
+		std::cout << personA << std::endl;
+		std::cout << personB << std::endl;
+		
+		// Unsigned
+		std::cout << "----- Unsigned error -----" << std::endl;
+		personA.executeForm(formA);
 
 		// Low grade
-		Bureaucrat personB = Bureaucrat("Pookie", 140);
-		formA.execute(personB);
-		std::cout << "-----" << std::endl;
+		std::cout << "----- Low grade error -----" << std::endl;
+		personB.signForm(formA);
+		personB.executeForm(formA);
 
 		// All ok
+		std::cout << "----- All ok -----" << std::endl;
 		formA.beSigned(personA);
-		std::cout << formA << std::endl;
-		formA.execute(personA);
-		std::cout << "-----" << std::endl;
+		// formA.execute(personA);
+		personA.executeForm(formA);
+		std::cout << std::endl;
 	}
 }
