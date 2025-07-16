@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 11:37:34 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:07:25 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/07/14 11:34:51 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/07/16 22:04:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 # include "Bureaucrat.hpp"
 # include "AForm.hpp"
 # include <iostream>
+# include <fstream>
 
 class Bureaucrat;
 
-class PresidentialPardonForm : public AForm {
+class ShrubberyCreationForm : public AForm {
 	private:
 		std::string target;
 	
 	public:
-		PresidentialPardonForm();
-		PresidentialPardonForm(std::string target);
-		PresidentialPardonForm(const PresidentialPardonForm& copy);
-		PresidentialPardonForm& operator=(const PresidentialPardonForm& assign);
-		~PresidentialPardonForm();
+		ShrubberyCreationForm();
+		ShrubberyCreationForm(std::string target);
+		ShrubberyCreationForm(const ShrubberyCreationForm& copy);
+		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& assign);
+		~ShrubberyCreationForm();
 
 		bool	requirementsCheck(Bureaucrat const & executor) const;
 };
-
 
 #endif

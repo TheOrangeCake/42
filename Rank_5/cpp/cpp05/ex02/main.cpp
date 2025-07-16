@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:40:12 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 15:38:51 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/16 22:32:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(void)
 
 		// All ok
 		std::cout << "----- All ok -----" << std::endl;
-		formA.beSigned(personA);
+		personA.signForm(formA);
 		// formA.execute(personA);
 		personA.executeForm(formA);
 		std::cout << std::endl;
@@ -63,7 +63,7 @@ int	main(void)
 
 		// All ok
 		std::cout << "----- All ok -----" << std::endl;
-		formA.beSigned(personA);
+		personA.signForm(formA);
 		// formA.execute(personA);
 		personA.executeForm(formA);
 		std::cout << std::endl;
@@ -88,13 +88,7 @@ int	main(void)
 
 		// All ok
 		std::cout << "----- All ok -----" << std::endl;
-		formA.beSigned(personA);
-		// formA.execute(personA);
-		personA.executeForm(formA);
-		personA.executeForm(formA);
-		personA.executeForm(formA);
-		personA.executeForm(formA);
-		personA.executeForm(formA);
+		personA.signForm(formA);
 		personA.executeForm(formA);
 		std::cout << std::endl;
 	}

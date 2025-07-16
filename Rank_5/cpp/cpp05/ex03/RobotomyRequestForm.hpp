@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 11:37:34 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:07:25 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/07/14 11:36:08 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/07/16 22:04:12 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 # include "Bureaucrat.hpp"
 # include "AForm.hpp"
 # include <iostream>
+# include <cstdlib>
 
 class Bureaucrat;
 
-class PresidentialPardonForm : public AForm {
+class RobotomyRequestForm : public AForm {
 	private:
 		std::string target;
 	
 	public:
-		PresidentialPardonForm();
-		PresidentialPardonForm(std::string target);
-		PresidentialPardonForm(const PresidentialPardonForm& copy);
-		PresidentialPardonForm& operator=(const PresidentialPardonForm& assign);
-		~PresidentialPardonForm();
+		RobotomyRequestForm();
+		RobotomyRequestForm(std::string target);
+		RobotomyRequestForm(const RobotomyRequestForm& copy);
+		RobotomyRequestForm& operator=(const RobotomyRequestForm& assign);
+		~RobotomyRequestForm();
 
 		bool	requirementsCheck(Bureaucrat const & executor) const;
 };
-
 
 #endif
