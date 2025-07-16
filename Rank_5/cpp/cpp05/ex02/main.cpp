@@ -6,13 +6,15 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:40:12 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/15 23:06:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:38:51 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int	main(void)
 {
@@ -38,6 +40,61 @@ int	main(void)
 		std::cout << "----- All ok -----" << std::endl;
 		formA.beSigned(personA);
 		// formA.execute(personA);
+		personA.executeForm(formA);
+		std::cout << std::endl;
+	}
+	{
+		std::cout << "----- Information -----" << std::endl;
+		Bureaucrat personA = Bureaucrat("Frimousse", 5);
+		Bureaucrat personB = Bureaucrat("Pookie", 149);
+		PresidentialPardonForm formA = PresidentialPardonForm("Mickey");
+		std::cout << formA << std::endl;
+		std::cout << personA << std::endl;
+		std::cout << personB << std::endl;
+		
+		// Unsigned
+		std::cout << "----- Unsigned error -----" << std::endl;
+		personA.executeForm(formA);
+
+		// Low grade
+		std::cout << "----- Low grade error -----" << std::endl;
+		personB.signForm(formA);
+		personB.executeForm(formA);
+
+		// All ok
+		std::cout << "----- All ok -----" << std::endl;
+		formA.beSigned(personA);
+		// formA.execute(personA);
+		personA.executeForm(formA);
+		std::cout << std::endl;
+	}
+	{
+		std::cout << "----- Information -----" << std::endl;
+		Bureaucrat personA = Bureaucrat("Frimousse", 5);
+		Bureaucrat personB = Bureaucrat("Pookie", 149);
+		RobotomyRequestForm formA = RobotomyRequestForm("Mickey");
+		std::cout << formA << std::endl;
+		std::cout << personA << std::endl;
+		std::cout << personB << std::endl;
+		
+		// Unsigned
+		std::cout << "----- Unsigned error -----" << std::endl;
+		personA.executeForm(formA);
+
+		// Low grade
+		std::cout << "----- Low grade error -----" << std::endl;
+		personB.signForm(formA);
+		personB.executeForm(formA);
+
+		// All ok
+		std::cout << "----- All ok -----" << std::endl;
+		formA.beSigned(personA);
+		// formA.execute(personA);
+		personA.executeForm(formA);
+		personA.executeForm(formA);
+		personA.executeForm(formA);
+		personA.executeForm(formA);
+		personA.executeForm(formA);
 		personA.executeForm(formA);
 		std::cout << std::endl;
 	}
