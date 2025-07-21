@@ -2,7 +2,7 @@
 
 NAME = scalar
 
-SOURCE = main.cpp ScalarConverter.cpp
+SOURCE = main.cpp ScalarConverter.cpp typeCheck.cpp convert.cpp
 
 OBJ_DIR = obj
 
