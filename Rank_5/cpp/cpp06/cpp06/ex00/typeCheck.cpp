@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:26:44 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/21 19:15:07 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/21 23:31:34 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,72 @@ bool checkSpecial(std::string input) {
 }
 
 bool checkChar(std::string input) {
-	(void)input;
+
+	if (input.length() == 1 && !isdigit(input[0]))
+		return (true);
+	if (input.length() == 3 && !isdigit(input[1])
+		&& input[0] == '\'' && input[2] == '\'')
+		return (true);
 	return (false);
 }
 
 bool checkInt(std::string input) {
-	(void)input;
-	return (false);
+	unsigned int	i;
+
+	i = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
+	while (i < input.length()) {
+		if (!isdigit(input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
-bool checkFloat(std::string input) {
-	(void)input;
-	return (false);
+bool checkFloat(std::string input, size_t decimal) {
+	unsigned int	i;
+
+	i = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
+	while (i < decimal) {
+		if (!isdigit(input[i]))
+			return (false);
+		i++;
+	}
+	i++;
+	while (i < input.length() - 1) {
+		if (!isdigit(input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
-bool checkDouble(std::string input) {
-	(void)input;
-	return (false);
+bool checkDouble(std::string input, size_t decimal) {
+	unsigned int	i;
+
+	i = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
+	while (i < decimal) {
+		if (!isdigit(input[i]))
+			return (false);
+		i++;
+	}
+	i++;
+	while (i < input.length()) {
+		if (!isdigit(input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 int typeCheck(std::string input) {
 	size_t	decimal;
 	size_t	f;
-	size_t	F;
 	
 	decimal = input.find('.');
 	if (decimal == std::string::npos) {
@@ -55,12 +98,11 @@ int typeCheck(std::string input) {
 			return (2);
 	} else {
 		f = input.find('f');
-		F = input.find('F');
-		if (f != std::string::npos || F != std::sting::npos) {
-			if (checkFloat(input))
+		if (f != std::string::npos) {
+			if (checkFloat(input, decimal))
 				return (3);
 		} else {
-			if (checkDouble(input))
+			if (checkDouble(input, decimal))
 				return (4);
 		}
 	}

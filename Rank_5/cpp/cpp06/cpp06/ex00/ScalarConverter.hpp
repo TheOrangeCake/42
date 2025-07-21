@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:40:13 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/21 18:37:17 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/22 00:08:47 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <iostream>
 # include <cctype>
 # include <cstdlib>
+# include <climits>
+# include <cerrno>
+# include <iomanip>
 
 class ScalarConverter {
 	private:
