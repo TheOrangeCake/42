@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:27:31 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/22 00:31:09 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/22 22:19:04 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,45 @@ void convertFloat(std::string input) {
 		} else {
 			std::cout << "int: " << static_cast<int>(f) << std::endl;
 		}
-		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
+		if (f > FLT_MAX || f < FLT_MIN) {
+			std::cout << "float: impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+		} else {
+			std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+			std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
+		}
 	}
 }
 
 void convertDouble(std::string input) {
-	(void)input;
-	std::cout << "this is a double" << std::endl;
+	double	d;
+
+	errno = 0;
+	d = strtod(input.c_str(), NULL);
+	if (errno == ERANGE) {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+	} else {
+		if (d < 0 || d > 127)
+			std::cout << "char: impossible" << std::endl;
+		else {
+			if (!isprint(d))
+				std::cout << "char: Non displayable" << std::endl;
+			else
+				std::cout << "char: \'" << static_cast<char>(d) << "\'"<< std::endl;
+		}
+		if (d > INT_MAX || d < INT_MIN) {
+			std::cout << "int: impossible" << std::endl;
+		} else {
+			std::cout << "int: " << static_cast<int>(d) << std::endl;
+		}
+		if (d > FLT_MAX || d < FLT_MIN) {
+			std::cout << "float: impossible" << std::endl;
+		} else {
+			std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+		}
+		std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+	}
 }
