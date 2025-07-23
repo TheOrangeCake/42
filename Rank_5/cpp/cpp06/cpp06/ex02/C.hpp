@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.hpp                                           :+:      :+:    :+:   */
+/*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 22:29:19 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/23 21:07:16 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/07/23 21:26:34 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/07/23 21:36:34 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-# define DATA_HPP
+#ifndef C_HPP
+# define C_HPP
+#include "Base.hpp"
 
-struct Data {
-	int			i;
-	std::string str;
+class C : public Base {
 };
 
 #endif
