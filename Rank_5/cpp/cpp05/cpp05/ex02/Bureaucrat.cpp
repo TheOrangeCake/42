@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:40:30 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:31:22 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:03:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void Bureaucrat::signForm(AForm& form) {
 }
 
 void Bureaucrat::executeForm(AForm const & form) const {
-	if (form.requirementsCheck(*this) == true) {
+	if (form.execute(*this) == true) {
 		std::cout << this->name << " executed " << form.getName() << std::endl;
 	} else {
 		std::cerr << this->name << " failed to execute " << form.getName() << std::endl;

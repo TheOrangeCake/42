@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 09:33:34 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:08:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 22:58:34 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,23 @@ bool AForm::beSigned(Bureaucrat& person) {
 	}
 }
 
-bool AForm::execute(Bureaucrat const & executor) const {
-	try {
-		if (executor.getGrade() > this->exeGrade) {
-			throw AForm::GradeTooLowException();
-		}
-		if (this->isSigned == false) {
-			throw AForm::FormNotSignedException();
-		}
-		return (true);
-	} catch (AForm::GradeTooLowException& e) {
-		std::cerr << "Exception: " << e.what() << " Grade too low!" << std::endl;
-		return (false);
-	} catch (AForm::FormNotSignedException& e) {
-		std::cerr << "Exception: " << e.what() << " Form isn't signed!" << std::endl;
-		return (false);
-	}
-}
+// bool AForm::execute(Bureaucrat const & executor) const {
+// 	try {
+// 		if (executor.getGrade() > this->exeGrade) {
+// 			throw AForm::GradeTooLowException();
+// 		}
+// 		if (this->isSigned == false) {
+// 			throw AForm::FormNotSignedException();
+// 		}
+// 		return (true);
+// 	} catch (AForm::GradeTooLowException& e) {
+// 		std::cerr << "Exception: " << e.what() << " Grade too low!" << std::endl;
+// 		return (false);
+// 	} catch (AForm::FormNotSignedException& e) {
+// 		std::cerr << "Exception: " << e.what() << " Form isn't signed!" << std::endl;
+// 		return (false);
+// 	}
+// }
 
 const char* AForm::GradeTooHighException::what() const throw() {
 	return ("GradeTooHighException.");

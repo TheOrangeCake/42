@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 11:37:34 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:03:17 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:03:07 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class PresidentialPardonForm : public AForm {
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& assign);
 		~PresidentialPardonForm();
 
-		bool	requirementsCheck(Bureaucrat const & executor) const;
+		bool	execute(Bureaucrat const & executor) const;
 };
 
 

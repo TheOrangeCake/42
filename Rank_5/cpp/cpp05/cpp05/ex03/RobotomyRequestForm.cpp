@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 11:36:59 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:04:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:05:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,29 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& a
 RobotomyRequestForm::~RobotomyRequestForm() {
 }
 
-bool RobotomyRequestForm::requirementsCheck(Bureaucrat const & executor) const {
+bool RobotomyRequestForm::execute(Bureaucrat const & executor) const {
 	int	random;
 
-	if (this->execute(executor) == true) {
+	try {
+		if (executor.getGrade() > this->getExeGrade()) {
+			throw AForm::GradeTooLowException();
+		}
+		if (this->getIsSigned() == false) {
+			throw AForm::FormNotSignedException();
+		}
 		std::cout << "Drilling... Brrrrrrrr... Brrrrrrrr" << std::endl;
-		srand(time(0));
+		srand(time(NULL));
 		random = rand() % 2;
 		if (random == 0)
 			std::cout << "-> " << this->target << " has been robotomized successfully" << std::endl;
 		else
 			std::cout << "-> The robotomy has failed!" << std::endl;
 		return (true);
-	} else {
+	} catch (AForm::GradeTooLowException& e) {
+		std::cerr << "Exception: " << e.what() << " Grade too low!" << std::endl;
+		return (false);
+	} catch (AForm::FormNotSignedException& e) {
+		std::cerr << "Exception: " << e.what() << " Form isn't signed!" << std::endl;
 		return (false);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 09:33:28 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:06:38 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 22:58:29 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ class AForm {
 		int 			getExeGrade() const;
 		void			setIsSigned(bool value);
 		bool 			beSigned(Bureaucrat& person);
-		virtual bool 	requirementsCheck(Bureaucrat const & executor) const =  0;
-		bool 			execute(Bureaucrat const & executor) const;
+		virtual bool 	execute(Bureaucrat const & executor) const = 0;
 
 		class GradeTooHighException : public std::exception {
 			public:

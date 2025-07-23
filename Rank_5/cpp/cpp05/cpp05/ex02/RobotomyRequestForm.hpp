@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 11:36:08 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:07:35 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:03:00 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class RobotomyRequestForm : public AForm {
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& assign);
 		~RobotomyRequestForm();
 
-		bool	requirementsCheck(Bureaucrat const & executor) const;
+		bool	execute(Bureaucrat const & executor) const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:40:12 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:35:05 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:11:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,4 @@ int	main(void)
 			delete rrf;
 		}
 	}
-	Bureaucrat personA = Bureaucrat("Frimousse", 5);
-	
 }

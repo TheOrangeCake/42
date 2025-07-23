@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 11:35:01 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:29:21 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:05:19 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,16 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 ShrubberyCreationForm::~ShrubberyCreationForm() {
 }
 
-bool ShrubberyCreationForm::requirementsCheck(Bureaucrat const & executor) const {
+bool ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	std::ofstream file;
 	
-	if (this->execute(executor) == true) {
+	try {
+		if (executor.getGrade() > this->getExeGrade()) {
+			throw AForm::GradeTooLowException();
+		}
+		if (this->getIsSigned() == false) {
+			throw AForm::FormNotSignedException();
+		}
 		file.open((this->target + "_shrubbery").c_str());
 		if (!file.is_open()) {
 			std::cerr << "ofstream failed!" << std::endl;
@@ -75,7 +81,11 @@ bool ShrubberyCreationForm::requirementsCheck(Bureaucrat const & executor) const
 		file << "|################/\\/\\/\\/\\/\\/.######.\\/\\/\\//\\##########NGUYEN" << std::endl;
 		file.close();
 		return (true);
-	} else {
+	} catch (AForm::GradeTooLowException& e) {
+		std::cerr << "Exception: " << e.what() << " Grade too low!" << std::endl;
+		return (false);
+	} catch (AForm::FormNotSignedException& e) {
+		std::cerr << "Exception: " << e.what() << " Form isn't signed!" << std::endl;
 		return (false);
 	}
 }

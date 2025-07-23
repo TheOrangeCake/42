@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 11:38:05 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/16 22:03:10 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:05:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,21 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 PresidentialPardonForm::~PresidentialPardonForm() {
 }
 
-bool PresidentialPardonForm::requirementsCheck(Bureaucrat const & executor) const {
-	if (this->execute(executor) == true) {
+bool PresidentialPardonForm::execute(Bureaucrat const & executor) const {
+	try {
+		if (executor.getGrade() > this->getExeGrade()) {
+			throw AForm::GradeTooLowException();
+		}
+		if (this->getIsSigned() == false) {
+			throw AForm::FormNotSignedException();
+		}
 		std::cout << this->target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 		return (true);
-	} else {
+	} catch (AForm::GradeTooLowException& e) {
+		std::cerr << "Exception: " << e.what() << " Grade too low!" << std::endl;
+		return (false);
+	} catch (AForm::FormNotSignedException& e) {
+		std::cerr << "Exception: " << e.what() << " Form isn't signed!" << std::endl;
 		return (false);
 	}
 }
