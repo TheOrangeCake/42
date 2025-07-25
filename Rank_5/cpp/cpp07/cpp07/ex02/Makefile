@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = base
+NAME = array
 
-SOURCE = main.cpp Base.cpp
+SOURCE = main.cpp
 
 OBJ_DIR = obj
 
