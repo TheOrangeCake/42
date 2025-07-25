@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 11:24:24 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/25 11:37:53 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/10/25 15:33:37 by masase            #+#    #+#             */
+/*   Updated: 2025/07/11 17:17:00 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#include "libft.h"
 
-template <typename T>
-void swap(T& a, T& b) {
-	T c;
-	c = a;
-	a = b;
-	b = c;
-}
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*dernier;
 
-template <typename T>
-T min(const T& a, const T& b) {
-	if (a < b) {
-		return (a);
-	} else {
-		return (b);
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
 	}
+	dernier = ft_lstlast(*lst);
+	dernier->next = new;
+	new->next = NULL;
 }
-
-template <typename T>
-T max(const T& a, const T& b) {
-	if (a > b) {
-		return (a);
-	} else {
-		return (b);
-	}
-}
-
-#endif

@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 11:24:24 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/25 11:37:53 by hoannguy         ###   ########.fr       */
+/*   Created: 2024/10/31 18:11:44 by maw               #+#    #+#             */
+/*   Updated: 2025/07/11 17:16:23 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#include "libft.h"
 
-template <typename T>
-void swap(T& a, T& b) {
-	T c;
-	c = a;
-	a = b;
-	b = c;
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	del(lst->content);
+	free(lst);
 }
 
-template <typename T>
-T min(const T& a, const T& b) {
-	if (a < b) {
-		return (a);
-	} else {
-		return (b);
-	}
-}
+// void	ft_free_content(void *content)
+// {
+//     free(content);
+// }
 
-template <typename T>
-T max(const T& a, const T& b) {
-	if (a > b) {
-		return (a);
-	} else {
-		return (b);
-	}
-}
+// int	main(void)
+// {
+//     t_list	*node = ft_lstnew(malloc(10));
 
-#endif
+//     ft_lstdelone(node, ft_free_content);
+//     return (0);
+// }

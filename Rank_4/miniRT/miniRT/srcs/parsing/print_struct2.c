@@ -1,42 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   print_struct2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 11:24:24 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/25 11:37:53 by hoannguy         ###   ########.fr       */
+/*   Created: 2025/07/11 17:02:49 by hoannguy          #+#    #+#             */
+/*   Updated: 2025/07/11 17:02:58 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#include "../../inc/minirt.h"
 
-template <typename T>
-void swap(T& a, T& b) {
-	T c;
-	c = a;
-	a = b;
-	b = c;
+void	print_camera_as_array(t_camera *cam)
+{
+	printf("Camera\n");
+	printf("Position: [%.2f, %.2f, %.2f]\n",
+		cam->pos.x, cam->pos.y, cam->pos.z);
+	printf("Orientation: [%.2f, %.2f, %.2f]\n",
+		cam->vector.a, cam->vector.b, cam->vector.c);
+	printf("Field of View: %d\n", cam->fov);
 }
-
-template <typename T>
-T min(const T& a, const T& b) {
-	if (a < b) {
-		return (a);
-	} else {
-		return (b);
-	}
-}
-
-template <typename T>
-T max(const T& a, const T& b) {
-	if (a > b) {
-		return (a);
-	} else {
-		return (b);
-	}
-}
-
-#endif
