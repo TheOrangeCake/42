@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:22:41 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/27 16:28:06 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/27 22:41:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 #define EASYFIND_TPP
 
 template <typename T>
-void easyfind(T a, int b) {
-	
+typename T::iterator easyfind(T& a, int b) {
+	typename T::iterator it = std::find(a.begin(), a.end(), b);
+	if (it == a.end()) {
+		throw std::logic_error("No occurence found");
+	} else {
+		return (it);
+	}
 }
 
 #endif
