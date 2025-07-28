@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := all
 
-NAME = whatever
+NAME = span
 
-SOURCE = main.cpp
+SOURCE = main.cpp Span.cpp
 
 OBJ_DIR = obj
 
