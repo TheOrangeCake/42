@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := all
 
-NAME = whatever
+NAME = mutant
 
 SOURCE = main.cpp
 
