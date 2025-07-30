@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:15:33 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/29 13:52:19 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:20:01 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ class MutantStack : public std::stack<T> {
 		virtual ~MutantStack();
 
 		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
 		iterator begin();
 		iterator end();
+		const_iterator begin() const;
+		const_iterator end() const;
 };
 
 #include "MutantStack.tpp"

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:21:09 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/29 15:07:42 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:19:32 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,15 @@ typename MutantStack<T>::iterator MutantStack<T>::end() {
 	return (this->c.end());
 }
 
+
+template <typename T>
+typename MutantStack<T>::const_iterator MutantStack<T>::begin() const {
+	return (this->c.begin());
+}
+
+template <typename T>
+typename MutantStack<T>::const_iterator MutantStack<T>::end() const {
+	return (this->c.end());
+}
 
 #endif

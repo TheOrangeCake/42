@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 19:14:22 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/29 15:12:34 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:24:10 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,24 @@ int main(void) {
 		std::cout << "Assign:\t";
 		printStack(mstack3, 1);
 	}
-
+	{
+		std::cout << "--- Test const_iterator ---" << std::endl;
+		MutantStack<std::string>	mstack;
+		mstack.push("I");
+		mstack.push("am");
+		mstack.push("at");
+		mstack.push("42");
+		mstack.push("Lausanne");
+		MutantStack<std::string>::const_iterator it = mstack.begin();
+		MutantStack<std::string>::const_iterator ite = mstack.end();
+		std::cout << "begin():\t" << *it << std::endl;
+		--ite;
+		std::cout << "end():\t\t" << *ite << std::endl;
+		std::cout << "Uncomment for compilation error" << std::endl;
+		// *it = "test";
+		// std::cout << "begin():\t" << *it << std::endl;
+		// *ite = "another test";
+		// std::cout << "end():\t" << *ite << std::endl;
+	}
 	return (0);
 }
