@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 13:46:32 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/27 16:04:23 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:06:39 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ Array<T>::~Array() {
 
 template <typename T>
 T& Array<T>::operator [](int index) {
+	if (index < 0 || index >= this->size()) {
+		throw std::exception();
+	}
+	return (this->array[index]);
+}
+
+template <typename T>
+const T& Array<T>::operator [](int index) const {
 	if (index < 0 || index >= this->size()) {
 		throw std::exception();
 	}

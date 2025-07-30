@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 13:46:20 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/07/27 14:44:55 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:06:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Array {
 		~Array();
 
 		T& operator [](int index);
+		const T& operator [](int index) const;
 		int size() const;
 };
 
