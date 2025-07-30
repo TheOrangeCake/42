@@ -78,7 +78,7 @@ int main(int, char**)
     std::cout << "--- Test modify values const ---" << std::endl;
     const Array<std::string> test = numbers;
     std::cout << "Read: " << test[0] << std::endl;
-    std::cout << "Write: unquote main for compilation error" << std::endl;
+    std::cout << "Write: uncomment main for compilation error" << std::endl;
     // test[0] = "test";
     // std::cout << "Test: " << test[0] << std::endl;
     delete [] mirror;
