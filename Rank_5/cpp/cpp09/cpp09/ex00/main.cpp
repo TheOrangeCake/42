@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:44:39 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/01 17:44:39 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/01 23:27:03 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int main(int ac, char **av) {
 	if (ac == 2) {
 		try {
 			BitcoinExchange	bitcoin;
+			std::cout << bitcoin.getDataBase() << std::endl;
 
-		} catch(BitcoinExchange::DataBaseException& e) {
+		} catch(std::exception& e) {
 			std::cerr << e.what() << std::endl;
 			return -1;
 		}
