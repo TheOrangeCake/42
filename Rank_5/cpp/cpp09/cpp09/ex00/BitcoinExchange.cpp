@@ -6,11 +6,26 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:45:14 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/13 17:08:41 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/13 17:12:31 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+
+BitcoinExchange::BitcoinExchange() {
+
+}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy) {
+	*this = copy;
+}
+BitcoinExchange& BitcoinExchange::operator =(const BitcoinExchange& assign) {
+	this->input = assign.input;
+	this->dataBase = assign.dataBase;
+	return *this;
+}
+BitcoinExchange::~BitcoinExchange() {
+
+}
 
 double BitcoinExchange::parseValue(std::string& input, int mode) {
 	std::stringstream	value(input);
@@ -179,10 +194,6 @@ int BitcoinExchange::handleData(std::string& data, int mode) {
 	return 0;
 }
 
-BitcoinExchange::BitcoinExchange() {
-
-}
-
 int BitcoinExchange::BitcoinHandler(const char *input, int mode) {
 	std::fstream	file;
 	char*			buffer;
@@ -221,20 +232,6 @@ int BitcoinExchange::BitcoinHandler(const char *input, int mode) {
 	if (this->handleData(data, mode) == -1)
 		return -1;
 	return 0;
-}
-
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy) {
-	*this = copy;
-}
-
-BitcoinExchange& BitcoinExchange::operator =(const BitcoinExchange& assign) {
-	this->input = assign.input;
-	this->dataBase = assign.dataBase;
-	return *this;
-}
-
-BitcoinExchange::~BitcoinExchange() {
-
 }
 
 double BitcoinExchange::getDataPrice(std::string& date) {

@@ -6,17 +6,15 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:45:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/13 16:40:26 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/13 17:17:45 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
-#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <map>
-#include <string>
 #include <sstream>
 #include <iomanip>
 
