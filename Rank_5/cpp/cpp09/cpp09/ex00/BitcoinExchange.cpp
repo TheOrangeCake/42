@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:45:14 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/01 23:34:36 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/13 13:35:18 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ std::string BitcoinExchange::parseDate(std::string& input) {
 	std::string::size_type	second_pos;
 	int						day;
 	std::stringstream		stream;
+	bool					leap;
 
 	first_pos = input.find("-");
 	if (first_pos == std::string::npos) {
@@ -62,12 +63,18 @@ std::string BitcoinExchange::parseDate(std::string& input) {
 	if (stream.fail() || day < 1 || day > 31) {
 		throw BitcoinExchange::DateFormatException();
 	}
-	// check day for month and leap year
-	
+	if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
+		throw BitcoinExchange::DateFormatException();
+	}
+	leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+	if ((month == 2 && leap == false && day > 28)
+	|| (month == 2 && leap == true && day > 29)) {
+		throw BitcoinExchange::DateFormatException();
+	}
 	return input;
 }
 
-void BitcoinExchange::parseDataBase(std::string& data) {
+int BitcoinExchange::parseDataBase(std::string& data) {
 	std::string::size_type	endline_pos;
 	std::string::size_type	comma_pos;
 	std::string				line;
@@ -76,28 +83,33 @@ void BitcoinExchange::parseDataBase(std::string& data) {
 
 	endline_pos = data.find("\n");
 	if (endline_pos == std::string::npos) {
-		throw BitcoinExchange::DatabaseFormatException();
+		std::cerr << "Error: fail to open or read database file!" << std::endl;
+		return -1;
 	}
 	data.erase(0, endline_pos + 1);
 	while (!data.empty()) {
 		endline_pos = data.find("\n");
 		if (endline_pos == std::string::npos) {
-			throw BitcoinExchange::DatabaseFormatException();
+			std::cerr << "Error: fail to open or read database file!" << std::endl;
+			return -1;
 		}
 		line = data.substr(0, endline_pos);
 		data.erase(0, endline_pos + 1);
 		comma_pos = line.find(",");
 		if (comma_pos == std::string::npos) {
-			throw BitcoinExchange::DatabaseFormatException();
+			std::cerr << "Error: fail to open or read database file!" << std::endl;
+			return -1;
 		}
 		try {
 			date = line.substr(0, comma_pos);
 			value = line.substr(comma_pos + 1);
 			setDataBase(parseDate(date), parseValue(value, DATABASE));
 		} catch (std::exception& e) {
-			throw BitcoinExchange::DatabaseFormatException();
+			std::cerr << e.what() << std::endl;
+			return -1;
 		}
 	}
+	return 0;
 }
 
 BitcoinExchange::BitcoinExchange() {
@@ -108,7 +120,8 @@ BitcoinExchange::BitcoinExchange() {
 
 	file.open("data.csv", std::fstream::in);
 	if (!file.is_open()) {
-		throw BitcoinExchange::DatabaseOpenException();
+		std::cerr << "Error: fail to open or read database file!" << std::endl;
+		throw std::exception();
 	}
 	file.seekg(0, file.end);
 	length = file.tellg();
@@ -118,15 +131,39 @@ BitcoinExchange::BitcoinExchange() {
 	file.read(buffer, length);
 	if (!file) {
 		delete[] buffer;
-		throw BitcoinExchange::DatabaseOpenException();
+		std::cerr << "Error: fail to open or read database file!" << std::endl;
+		throw std::exception();
 	}
 	data.assign(buffer);
 	delete[] buffer;
-	try {
-		this->parseDataBase(data);
-	} catch(std::exception& e) {
-		throw BitcoinExchange::DatabaseFormatException();
+	if (this->parseDataBase(data) == -1)
+		throw std::exception();
+}
+
+void BitcoinExchange::handleInput(const char *input) {
+	std::fstream	file;
+	char*			buffer;
+	long			length;
+	std::string		data;
+
+	file.open(input, std::fstream::in);
+	if (!file.is_open()) {
+		std::cerr << "Error: fail to open or read input file!" << std::endl;
+		throw std::exception();
 	}
+	file.seekg(0, file.end);
+	length = file.tellg();
+	file.seekg(0, file.beg);
+	buffer = new char[length + 1];
+	buffer[length] = '\0';
+	file.read(buffer, length);
+	if (!file) {
+		delete[] buffer;
+		std::cerr << "Error: fail to open or read input file!" << std::endl;
+		throw std::exception();
+	}
+	data.assign(buffer);
+	delete[] buffer;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy) {
@@ -143,13 +180,21 @@ BitcoinExchange::~BitcoinExchange() {
 
 }
 
-float BitcoinExchange::getDataPrice(std::string date) const {
-	float	price;
+float BitcoinExchange::getDataPrice(std::string& date) {
+	float									price;
+	std::map<std::string, float>::iterator	it;
 
-	(void)date;
-	price = -1.0f;
-	// get the date here, if date doesnt exist,
-	// then get the closest previous date.
+	if (this->dataBase.count(date) == 1)
+		price = this->dataBase[date];
+	else {
+		it = dataBase.lower_bound(date);
+		if (it == dataBase.begin()) {
+			return -1.0f;
+		} else {
+			--it;
+			price = it->second;
+		} 
+	}
 	return price;
 }
 
@@ -162,12 +207,6 @@ BitcoinExchange& BitcoinExchange::setDataBase(std::string date, float value) {
 	return *this;
 }
 
-const char* BitcoinExchange::DatabaseOpenException::what() const throw() {
-	return "Error: fail to open or read database file!";
-}
-const char* BitcoinExchange::DatabaseFormatException::what() const throw() {
-	return "Error: database format error!";
-}
 const char* BitcoinExchange::DateFormatException::what() const throw() {
 	return "Error: date format error!";
 }
@@ -179,6 +218,9 @@ const char* BitcoinExchange::ValueLowException::what() const throw() {
 }
 const char* BitcoinExchange::ValueHighException::what() const throw() {
 	return "Error: too large a number.";
+}
+const char* BitcoinExchange::InputFormatException::what() const throw() {
+	return "Error: input format error!";
 }
 
 std::ostream& operator <<(std::ostream& o, std::map<std::string, float> dataBase) {

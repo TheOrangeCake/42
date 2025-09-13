@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:45:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/01 23:22:16 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/13 13:34:25 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class BitcoinExchange {
 		std::map<std::string, float>	dataBase;
 		std::string						input;
 
-		void		parseDataBase(std::string& data);
+		int			parseDataBase(std::string& data);
 		std::string	parseDate(std::string& input);
 		float		parseValue(std::string& input, int flag);
 
@@ -36,18 +36,11 @@ class BitcoinExchange {
 		BitcoinExchange& operator =(const BitcoinExchange& assign);
 		~BitcoinExchange();
 
-		float							getDataPrice(std::string date) const;
+		float							getDataPrice(std::string& date);
 		std::map<std::string, float>	getDataBase() const;
 		BitcoinExchange&				setDataBase(std::string date, float value);
+		void							handleInput(const char *input);
 
-		class DatabaseOpenException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
-		class DatabaseFormatException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
 		class DateFormatException : public std::exception {
 			public :
 				virtual const char* what() const throw();
@@ -62,6 +55,10 @@ class BitcoinExchange {
 		};
 		class ValueHighException : public std::exception {
 			public :
+				virtual const char* what() const throw();
+		};
+		class InputFormatException : public std::exception {
+			public:
 				virtual const char* what() const throw();
 		};
 };
