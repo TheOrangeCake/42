@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:45:35 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/13 13:34:25 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:40:26 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@
 #include <map>
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 #define DATABASE 1
 #define INPUT 2
+
 class BitcoinExchange {
 	private:
-		std::map<std::string, float>	dataBase;
+		std::map<std::string, double>	dataBase;
 		std::string						input;
 
-		int			parseDataBase(std::string& data);
+		int			handleData(std::string& data, int mode);
+		int			handleDataBase(std::string& data);
+		void		handleInput(std::string& data);
 		std::string	parseDate(std::string& input);
-		float		parseValue(std::string& input, int flag);
+		double		parseValue(std::string& input, int flag);
 
 	public:
 		BitcoinExchange();
@@ -36,10 +40,10 @@ class BitcoinExchange {
 		BitcoinExchange& operator =(const BitcoinExchange& assign);
 		~BitcoinExchange();
 
-		float							getDataPrice(std::string& date);
-		std::map<std::string, float>	getDataBase() const;
-		BitcoinExchange&				setDataBase(std::string date, float value);
-		void							handleInput(const char *input);
+		double							getDataPrice(std::string& date);
+		std::map<std::string, double>	getDataBase() const;
+		BitcoinExchange&				setDataBase(std::string date, double value);
+		int								BitcoinHandler(const char *input, int mode);
 
 		class DateFormatException : public std::exception {
 			public :
