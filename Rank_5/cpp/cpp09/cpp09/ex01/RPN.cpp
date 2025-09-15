@@ -55,12 +55,11 @@ int RPN::first_second(std::string& input) {
 }
 
 int RPN::operation(const std::string& item) {
-	int	first;
-	int	second;
+	long	first;
+	long	second;
 
-	if (this->list.size() < 2) {
+	if (this->list.size() < 2)
 		return -1;
-	}
 	second = this->list.top();
 	this->list.pop();
 	first = this->list.top();
@@ -76,6 +75,8 @@ int RPN::operation(const std::string& item) {
 			return -1;
 		this->list.push(first / second);
 	}
+	if (this->list.top() > 2147483647 || this->list.top() < -2147483648)
+		return -1;
 	return 0;
 }
 
@@ -95,7 +96,6 @@ int RPN::doTheMagic(std::string& input) {
 		space_pos = input.find(" ");
 		if (space_pos == std::string::npos) {
 			item = input.substr(0);
-			
 			if (isOperator(item) == false || this->operation(item) == -1) {
 				return -1;
 			}
@@ -129,12 +129,12 @@ bool isOperator(const std::string& input) {
 	return false;
 }
 
-int str_to_int(std::string& input) {
+long str_to_int(std::string& input) {
 	std::stringstream	s(input);
-	int					n;
+	long				n;
 
 	s >> n;
-	if (s.fail() || !s.eof()) {
+	if (s.fail() || !s.eof() || n > 2147483647 || n < -2147483648) {
 		throw std::runtime_error("Error");
 	}
 	return n;

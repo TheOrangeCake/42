@@ -6,33 +6,41 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:44:39 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/14 21:00:44 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/15 23:32:48 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RPN.hpp"
+#include "PmergeMe.hpp"
 
 int main(int ac, char **av) {
-	RPN			rpn;
+	PmergeMe	item;
 	std::string	input;
 	int			i;
 
 	if (ac == 1) {
-		std::cerr << "Error: Missing arguments" << std::endl;
+		std::cerr << "Error: no input numbers!" << std::endl;
 		return -1;
 	}
-	i = 1;
-	if (ac > 2) {
+	if (ac == 2) {
+		input += av[1];
+	} else {
+		i = 1;
 		while (av[i] != NULL) {
 			input.append(av[i]).append(" ");
 			i++;
 		}
 		input.erase(input.size() - 1);
-	} else
-		input += av[i];
-	if (rpn.doTheMagic(input) == -1) {
-		std::cerr << "Error" << std::endl;
-		return -1;
 	}
+	if (item.populate(input) == -1)
+		return -1;
+	item.vSort();
+	// item.dSort();
+	item.printResult();
+	// std::cout << num_of_comp(10) << std::endl;
 	return 0;
 }
+
+// ./PmergeMe `shuf -i 1-1000 -n 10 | tr "\n" " " `
+
+// src: p287
+// https://books.google.ch/books?id=kM5v2YqMVuoC&pg=PA286&redir_esc=y#v=onepage&q&f=false

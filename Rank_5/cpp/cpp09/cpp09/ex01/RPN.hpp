@@ -18,7 +18,7 @@
 
 class RPN {
 	private:
-		std::stack<int>	list;
+		std::stack<long>	list;
 		
 		int	operation(const std::string& item);
 		int	first_second(std::string& input);
@@ -33,6 +33,6 @@ class RPN {
 };
 
 bool	isOperator(const std::string& input);
-int		str_to_int(std::string& input);
+long	str_to_int(std::string& input);
 
 #endif
