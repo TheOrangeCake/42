@@ -20,6 +20,9 @@
 #include <deque>
 #include <algorithm>
 
+#define VECTOR 1
+#define DEQUE 2
+
 struct pair {
 	int	a;
 	int	b;
@@ -28,12 +31,16 @@ struct pair {
 class PmergeMe {
 	private:
 		std::vector<int>	v_list;
-		double				v_time;
 		std::deque<int>		d_list;
+		double				v_time;
 		double				d_time;
 		std::string			input;
-		std::string			output;
-		int					num_comp;
+		std::string			v_output;
+		std::string			d_output;
+		int					v_num_comp;
+		int					d_num_comp;
+		int					v_max;
+		int					d_max;
 		std::vector<pair>	pairs;
 		int					odd;
 
@@ -47,12 +54,23 @@ class PmergeMe {
 		void	vSort();
 		void	dSort();
 		void	vFordJohnson(size_t n);
-		void	dFordJohnson();
+		void	dFordJohnson(size_t n);
+		void	savePair(int mode);
+		void	mainChain(int mode);
+		void	binaryInsert(int mode);
 		void	printResult() const;
-		int		getNumComp() const;
+		int		getVNumComp() const;
+		int		getDNumComp() const;
 };
 
 unsigned int	jacobsthal(int k);
 unsigned int	num_of_comp(const int elements);
+unsigned int	binary_search(int start, int end, int target, int num_comp);
 
 #endif
+
+
+	// for (std::vector<int>::iterator it = this->v_list.begin(); it != this->v_list.end(); ++it) {
+	// 	std::cout << *it << " ";
+	// }
+	// std::cout << std::endl;
