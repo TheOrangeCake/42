@@ -13,7 +13,7 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 #include <cmath>
-#include <ctime>
+#include <sys/time.h>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -32,17 +32,19 @@ class PmergeMe {
 	private:
 		std::vector<int>	v_list;
 		std::deque<int>		d_list;
-		double				v_time;
-		double				d_time;
+		long				v_time;
+		long				d_time;
 		std::string			input;
 		std::string			v_output;
 		std::string			d_output;
 		int					v_num_comp;
 		int					d_num_comp;
-		int					v_max;
-		int					d_max;
-		std::vector<pair>	pairs;
-		int					odd;
+		int					v_main_chain;
+		int					d_main_chain;
+		std::vector<pair>	v_pairs;
+		std::vector<pair>	d_pairs;
+		int					v_odd;
+		int					d_odd;
 
 	public:
 		PmergeMe();
@@ -50,22 +52,38 @@ class PmergeMe {
 		PmergeMe& operator =(const PmergeMe& assign);
 		~PmergeMe();
 
-		int		populate(const std::string& input);
-		void	vSort();
-		void	dSort();
-		void	vFordJohnson(size_t n);
-		void	dFordJohnson(size_t n);
-		void	savePair(int mode);
-		void	mainChain(int mode);
-		void	binaryInsert(int mode);
-		void	printResult() const;
-		int		getVNumComp() const;
-		int		getDNumComp() const;
+		void						vSort();
+		void						vFordJohnson();
+		void						vSavePair();
+		void						vMainChain();
+		void						vMergeSort(size_t left, size_t right);
+		void						vMerge(size_t left, size_t mid, size_t right);
+		void						vBinaryInsert();
+		void						vBinaryInsertRest(int old_jacobsthal);
+		std::vector<int>::iterator	v_binary_search(std::vector<int>::iterator end, int target);
+
+
+		void						dSort();
+		void						dFordJohnson();
+		void						dSavePair();
+		void						dMainChain();
+		void						dMergeSort(size_t left, size_t right);
+		void						dMerge(size_t left, size_t mid, size_t right);
+		void						dBinaryInsert();
+		void						dBinaryInsertRest(int old_jacobsthal);
+		std::deque<int>::iterator	d_binary_search(std::deque<int>::iterator end, int target);
+
+		int							populate(const std::string& input);
+		void						printResult();
+		bool						sorted(int mode);
+
+		int							getVNumComp() const;
+		int							getDNumComp() const;
+		int							getElements() const;
 };
 
-unsigned int	jacobsthal(int k);
-unsigned int	num_of_comp(const int elements);
-unsigned int	binary_search(int start, int end, int target, int num_comp);
+int	jacobsthal(int k);
+int	num_of_comp(const int elements);
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:44:39 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/16 11:19:43 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/17 11:37:27 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int main(int ac, char **av) {
 	item.vSort();
 	item.dSort();
 	item.printResult();
-	// std::cout << num_of_comp(10) << std::endl;
 	return 0;
 }
 
@@ -44,3 +43,5 @@ int main(int ac, char **av) {
 
 // src: p287
 // https://books.google.ch/books?id=kM5v2YqMVuoC&pg=PA286&redir_esc=y#v=onepage&q&f=false
+// 	// std::cout << "Number of comparison vector\t: " << item.getVNumComp() << " | Allow: " << num_of_comp(item.getElements()) << std::endl;
+	// std::cout << "Number of comparison deque\t: " << item.getDNumComp() << " | Allow: " << num_of_comp(item.getElements()) << std::endl;
