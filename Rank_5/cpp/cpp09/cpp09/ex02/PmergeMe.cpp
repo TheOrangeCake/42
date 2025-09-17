@@ -94,11 +94,11 @@ void PmergeMe::vBinaryInsertRest(int old_jacobsthal) {
 	int							index;
 
 	for (int k = old_jacobsthal; k < v_main_chain; k++) {
-			index = k - 1;
-			v_end = std::find(v_list.begin(), v_list.end(), v_pairs[index].b);
-			v_it = v_binary_search(v_end, v_pairs[index].a);
-			v_list.erase(std::find(v_end, v_list.end(), v_pairs[index].a));
-			v_list.insert(v_it, v_pairs[index].a);
+		index = k;
+		v_end = std::find(v_list.begin(), v_list.begin() + v_main_chain + k, v_pairs[index].b);
+		v_it = v_binary_search(v_end, v_pairs[index].a);
+		v_list.erase(v_list.begin() + v_main_chain + k);
+		v_list.insert(v_it, v_pairs[index].a);
 	}
 	if (v_odd != -1) {
 		v_it = v_binary_search(v_list.end(), v_odd);
@@ -114,21 +114,24 @@ void PmergeMe::vBinaryInsert() {
 	int							new_jacobsthal;
 	int							index;
 	int							i;
+	int							inserted_count;
 
 	old_jacobsthal = 0;
 	i = 2;
+	inserted_count = 0;
 	while (true) {
 		new_jacobsthal = jacobsthal(i);
 		if (new_jacobsthal > v_main_chain) {
 				vBinaryInsertRest(old_jacobsthal);
 			break;
 		}
-		for (int k = new_jacobsthal; k > old_jacobsthal; --k) {
-			index = k - 1;
-			v_end = std::find(v_list.begin(), v_list.end(), v_pairs[index].b);
+		for (int k = std::min(new_jacobsthal - 1, v_main_chain - 1); k >= old_jacobsthal; --k) {
+			index = k;
+			v_end = std::find(v_list.begin(), v_list.begin() + v_main_chain + inserted_count, v_pairs[index].b);
 			v_it = v_binary_search(v_end, v_pairs[index].a);
-			v_list.erase(std::find(v_end, v_list.end(), v_pairs[index].a));
+			v_list.erase(v_list.begin() + v_main_chain + inserted_count);
 			v_list.insert(v_it, v_pairs[index].a);
+			inserted_count++;
 		}
 		old_jacobsthal = new_jacobsthal;
 		i++;
@@ -252,11 +255,11 @@ void PmergeMe::dBinaryInsertRest(int old_jacobsthal) {
 	int							index;
 
 	for (int k = old_jacobsthal; k < d_main_chain; k++) {
-			index = k - 1;
-			d_end = std::find(d_list.begin(), d_list.end(), d_pairs[index].b);
-			d_it = d_binary_search(d_end, d_pairs[index].a);
-			d_list.erase(std::find(d_end, d_list.end(), d_pairs[index].a));
-			d_list.insert(d_it, d_pairs[index].a);
+		index = k;
+		d_end = std::find(d_list.begin(), d_list.begin() + d_main_chain + k, d_pairs[index].b);
+		d_it = d_binary_search(d_end, d_pairs[index].a);
+		d_list.erase(d_list.begin() + d_main_chain + k);
+		d_list.insert(d_it, d_pairs[index].a);
 	}
 	if (d_odd != -1) {
 		d_it = d_binary_search(d_list.end(), d_odd);
@@ -272,8 +275,10 @@ void PmergeMe::dBinaryInsert() {
 	int							new_jacobsthal;
 	int							index;
 	int							i;
+	int							inserted_count;
 
 	old_jacobsthal = 0;
+	inserted_count = 0;
 	i = 2;
 	while (true) {
 		new_jacobsthal = jacobsthal(i);
@@ -281,12 +286,13 @@ void PmergeMe::dBinaryInsert() {
 				dBinaryInsertRest(old_jacobsthal);
 			break;
 		}
-		for (int k = new_jacobsthal; k > old_jacobsthal; --k) {
-			index = k - 1;
-			d_end = std::find(d_list.begin(), d_list.end(), d_pairs[index].b);
+		for (int k = std::min(new_jacobsthal - 1, d_main_chain - 1); k >= old_jacobsthal; --k) {
+			index = k;
+			d_end = std::find(d_list.begin(), d_list.begin() + d_main_chain + inserted_count, d_pairs[index].b);
 			d_it = d_binary_search(d_end, d_pairs[index].a);
-			d_list.erase(std::find(d_end, d_list.end(), d_pairs[index].a));
+			d_list.erase(d_list.begin() + d_main_chain + inserted_count);
 			d_list.insert(d_it, d_pairs[index].a);
+			inserted_count++;
 		}
 		old_jacobsthal = new_jacobsthal;
 		i++;
@@ -436,16 +442,4 @@ int PmergeMe::getElements() const {
 
 int jacobsthal(int k) {
 	return static_cast<int>((std::pow(2, k + 1) + (k % 2 == 0 ? 1 : -1)) / 3);
-}
-
-int num_of_comp(const int elements) {
-	int		sum;
-	double	value;
-
-	sum = 0;
-	for (int k = 1; k <= elements; ++k) {
-		value = (3.0 / 4.0) * k;
-		sum += static_cast<int>(ceil(log2(value)));
-	}
-	return sum;
 }

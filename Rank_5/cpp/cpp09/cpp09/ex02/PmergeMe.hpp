@@ -83,12 +83,5 @@ class PmergeMe {
 };
 
 int	jacobsthal(int k);
-int	num_of_comp(const int elements);
 
 #endif
-
-
-	// for (std::vector<int>::iterator it = this->v_list.begin(); it != this->v_list.end(); ++it) {
-	// 	std::cout << *it << " ";
-	// }
-	// std::cout << std::endl;
