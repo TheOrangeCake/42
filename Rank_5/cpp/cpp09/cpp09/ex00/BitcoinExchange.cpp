@@ -6,7 +6,7 @@
 /*   By: hoannguy <hoannguy@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 17:45:14 by hoannguy          #+#    #+#             */
-/*   Updated: 2025/09/13 17:12:31 by hoannguy         ###   ########.fr       */
+/*   Updated: 2025/09/19 20:42:37 by hoannguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ double BitcoinExchange::getDataPrice(std::string& date) {
 	else {
 		it = dataBase.lower_bound(date);
 		if (it == dataBase.begin()) {
-			return -1.0f;
+			return it;
 		} else {
 			--it;
 			price = it->second;
