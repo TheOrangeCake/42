@@ -1,0 +1,82 @@
+services:
+
+  mariadb:
+    container_name: mariadb
+    init: true
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+    env_file:
+      - .env
+    build: requirements/mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - docker-network
+    image: mariadb
+
+  nginx:
+    container_name: nginx
+    init: true
+    restart: always
+    environment:
+      - DOMAIN_NAME=hoannguy.42.fr
+    env_file:
+      - .env
+    build: requirements/nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress:/var/www/html 
+    networks:
+      - docker-network
+    depends_on:
+      - wordpress
+    image: nginx
+
+  wordpress:
+    container_name: wordpress
+    init: true
+    restart: always
+    environment:
+      - DOMAIN_NAME=hoannguy.42.fr
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - WORDPRESS_TITLE=${WORDPRESS_TITLE}
+      - WORDPRESS_ADMIN_USER=${WORDPRESS_ADMIN_USER}
+      - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
+      - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+      - WORDPRESS_EMAIL=${WORDPRESS_EMAIL}
+    build: requirements/wordpress
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - docker-network
+    depends_on:
+      - mariadb
+    image: wordpress
+
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hoannguy/data/mariadb
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hoannguy/data/wordpress
+
+networks:
+  docker-network:
+    name: docker-network
+    driver: bridge
