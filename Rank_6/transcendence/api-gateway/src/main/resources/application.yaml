@@ -1,0 +1,81 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      enabled: false
+
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: regular-user-service
+              uri: http://regular-user-service:8085
+              predicates:
+                - Path=/api/regular-user/**
+              filters:
+                - StripPrefix=2
+
+            - id: auth-service
+              uri: http://auth-service:8081
+              predicates:
+                - Path=/api/auth/**
+              filters: []
+
+            - id: group-service
+              uri: http://group-service:8083
+              predicates:
+                - Path=/api/group/**
+              filters:
+                - StripPrefix=2
+
+            - id: api42-service
+              uri: http://api42-service:8084
+              predicates:
+                - Path=/api/api42/**
+              filters:
+                - StripPrefix=2
+
+            - id: api42-service-images
+              uri: http://api42-service:8084
+              predicates:
+                - Path=/images42/**
+              filters:
+                - StripPrefix=0
+
+            - id: ragular-user-service-images
+              uri: http://regular-user-service:8085
+              predicates:
+                - Path=/images-regular/**
+              filters:
+                - StripPrefix=0
+
+            # - id: chat-service
+            #   uri: http://chat-service:8082
+            #   predicates:
+            #     - Path=/api/chat/**
+            #   filters:
+            #     - StripPrefix=2
+
+            # - id: chat-socket
+            #   uri: http://chat-service:8082
+            #   predicates:
+            #     - Path=/ws-chat/**
+            #   filters: []
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,mappings,env,configprops
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway.server.mvc: DEBUG
+    org.springframework.web: DEBUG
+

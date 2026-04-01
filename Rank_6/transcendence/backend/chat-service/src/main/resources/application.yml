@@ -1,0 +1,23 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /api/chat
+
+spring:
+  application:
+    name: chat-service
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+  api42-service:
+    url: ${API42_SERVICE_URL:http://api42-service:8084}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    prometheus:
+      enabled: true

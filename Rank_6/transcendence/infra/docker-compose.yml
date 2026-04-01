@@ -1,0 +1,327 @@
+name: transcendence
+
+services:
+
+  vault:
+    image: hashicorp/vault:1.15
+    container_name: vault
+    cap_add:
+      - IPC_LOCK
+    user: "0"
+    ports:
+      - "8200:8200"
+    volumes:
+      - vault-data:/vault/file
+      - ./vault/config/vault.hcl:/vault/config/vault.hcl:ro
+    command: vault server -config=/vault/config/vault.hcl
+    healthcheck:
+      test: ["CMD", "vault", "status", "-address=http://127.0.0.1:8200"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+    networks:
+      - app_net
+
+  vault-init:
+    image: hashicorp/vault:1.15
+    container_name: vault-init
+    environment:
+      VAULT_ADDR: http://vault:8200
+      SEED_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      SEED_FORTYTWO_CLIENT_ID: ${FORTYTWO_CLIENT_ID}
+      SEED_FORTYTWO_CLIENT_SECRET: ${FORTYTWO_CLIENT_SECRET}
+      SEED_JWT_SECRET: ${JWT_SECRET}
+      SEED_API42_POSTGRES_PASSWORD: ${API42_POSTGRES_PASSWORD}
+      SEED_API42_NEXT_SECRET: ${API42_NEXT_SECRET}
+      SEED_REGULAR_USER_POSTGRES_PASSWORD: ${REGULAR_USER_POSTGRES_PASSWORD}
+      SEED_REGULAR_USER_JWT_KEY: ${REGULAR_USER_JWT_KEY}
+      SEED_REGULAR_USER_EMAIL: ${REGULAR_USER_EMAIL}
+      SEED_REGULAR_USER_APP_PASSWORD: ${REGULAR_USER_APP_PASSWORD}
+    volumes:
+      - ./vault/scripts/init.sh:/init.sh:ro
+      - vault-data:/vault/file
+      - vault-secrets:/vault/secrets
+    entrypoint: ["/bin/sh", "/init.sh"]
+    depends_on:
+      vault:
+        condition: service_started
+    networks:
+      - app_net
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: transcendence-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/postgres.env; set +a; exec docker-entrypoint.sh postgres"]
+    ports:
+      - "5435:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - vault-secrets:/vault/secrets:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+
+  api42-postgresql:
+    image: postgres:16-alpine
+    container_name: api42-postgresql
+    environment:
+      POSTGRES_DB: ${API42_POSTGRES_DB}
+      POSTGRES_USER: ${API42_POSTGRES_USER}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/api42-postgres.env; set +a; exec docker-entrypoint.sh postgres"]
+    volumes:
+      - api42-pg:/var/lib/postgresql/data
+      - vault-secrets:/vault/secrets:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${API42_POSTGRES_USER} -d ${API42_POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+
+  regular-user-postgresql:
+    image: postgres:16-alpine
+    container_name: regular-user-postgresql
+    environment:
+      POSTGRES_DB: ${REGULAR_USER_POSTGRES_DB}
+      POSTGRES_USER: ${REGULAR_USER_POSTGRES_USER}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/regular-user-postgres.env; set +a; exec docker-entrypoint.sh postgres"]
+    volumes:
+      - regular-user-pg:/var/lib/postgresql/data
+      - vault-secrets:/vault/secrets:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${REGULAR_USER_POSTGRES_USER} -d ${REGULAR_USER_POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+
+  frontend:
+    image: node:lts-slim
+    working_dir: /app
+    volumes:
+      - ../frontend:/app
+    command: sh -c "npm ci && npm run dev -- --host"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-gateway
+    networks:
+      - app_net
+    environment:
+    - VITE_API_URL=${VITE_API_URL}
+    - VITE_CHAT_URL=${VITE_CHAT_URL}
+
+  auth-service:
+    build:
+      context: ../backend/auth-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      FORTYTWO_REDIRECT_URI: ${FORTYTWO_REDIRECT_URI}
+      FRONTEND_BASE_URL: ${FRONTEND_BASE_URL}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/auth-service.env; set +a; exec java -jar /app/app.jar"]
+    volumes:
+      - vault-secrets:/vault/secrets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+
+  group-service:
+    build:
+      context: ../backend/group-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/group-service.env; set +a; exec java -jar /app/app.jar"]
+    volumes:
+      - vault-secrets:/vault/secrets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+
+  chat-service:
+    build:
+      context: ../backend/chat-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/chat-service.env; set +a; exec java -jar /app/app.jar"]
+    volumes:
+      - vault-secrets:/vault/secrets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+
+  api42-service:
+    build:
+      context: ../backend/api42-service
+      dockerfile: Dockerfile
+    container_name: api42-service
+#    ports:
+#      - "8084:8084"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      POSTGRES_HOST: api42-postgresql
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${API42_POSTGRES_DB}
+      POSTGRES_USER: ${API42_POSTGRES_USER}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/api42-service.env; set +a; exec java -jar /opt/app/app.jar"]
+    volumes:
+      - api42-images:/app/uploads
+      - vault-secrets:/vault/secrets:ro
+    depends_on:
+      api42-postgresql:
+        condition: service_healthy
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+    tty: true
+
+  regular-user-service:
+    build:
+      context: ../backend/regular-user-service
+      dockerfile: Dockerfile
+    container_name: regular-user-service
+#    ports:
+#      - "8085:8085"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      POSTGRES_HOST: regular-user-postgresql
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${REGULAR_USER_POSTGRES_DB}
+      POSTGRES_USER: ${REGULAR_USER_POSTGRES_USER}
+    entrypoint: ["/bin/sh", "-c", "set -a; . /vault/secrets/regular-user-service.env; set +a; exec java -jar /opt/app/app.jar"]
+    volumes:
+      - regular-user-images:/app/uploads
+      - vault-secrets:/vault/secrets:ro
+    depends_on:
+      regular-user-postgresql:
+        condition: service_healthy
+      vault-init:
+        condition: service_completed_successfully
+    networks:
+      - app_net
+    tty: true
+
+  api-gateway:
+    build:
+      context: ../api-gateway
+      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+    depends_on:
+      - auth-service
+      - group-service
+      - chat-service
+    networks:
+      - app_net
+
+  waf:
+    image: owasp/modsecurity-crs:nginx-alpine
+    container_name: waf
+    ports:
+      - "8080:80"
+      - "8443:443"
+    environment:
+      MODSEC_RULE_ENGINE: "On"
+      PARANOIA: "2"
+      BLOCKING_PARANOIA: "2"
+      ANOMALY_INBOUND: "5"
+      ANOMALY_OUTBOUND: "4"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/gateway.conf:ro
+      - ./nginx:/etc/nginx/certs:ro
+      - ./modsecurity/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf:ro
+      - ./modsecurity/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro
+    depends_on:
+      - api-gateway
+      - frontend
+    networks:
+      - app_net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - app_net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+    networks:
+      - app_net
+
+volumes:
+  pg_data:
+  api42-pg:
+  api42-images:
+  regular-user-pg:
+  regular-user-images:
+  vault-data:
+  vault-secrets:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  app_net:
+    driver: bridge

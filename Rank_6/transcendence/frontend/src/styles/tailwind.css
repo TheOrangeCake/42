@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Monda:wght@400..700&display=swap");
+@import "tailwindcss" important;
+
+@source "../src/**/*.{vue,js,ts,jsx,tsx}";
+
+@theme {
+    --font-monda: "Monda", sans-serif;
+}
+
+@layer base {
+    body {
+        font-family: var(--font-monda), sans-serif;
+    }
+}
+
+/* Font weights */
+@utility font-regular { font-weight: 400; }
+@utility font-medium { font-weight: 500; }
+@utility font-semibold { font-weight: 600; }
+@utility font-bold { font-weight: 700; }
+
+/* Desktop */
+@utility font-h1-desktop { font-size: 5rem; }
+@utility font-h2-desktop { font-size: 3rem; }
+@utility font-h3-desktop { font-size: 2.5rem; }
+@utility font-h4-desktop { font-size: 1.75rem; }
+@utility font-h5-desktop { font-size: 1.125rem; }
+@utility font-hero-desktop { font-size: 6rem; }
+@utility font-body1-desktop { font-size: 1.125rem; }
+@utility font-body2-desktop { font-size: 1rem; }
+
+/* Laptop */
+@utility font-h1-laptop { font-size: 3rem; }
+@utility font-h2-laptop { font-size: 2.5rem; }
+@utility font-h3-laptop { font-size: 2rem; }
+@utility font-h4-laptop { font-size: 1.5rem; }
+@utility font-h5-laptop { font-size: 1.125rem; }
+@utility font-hero-laptop { font-size: 5rem; }
+@utility font-body1-laptop { font-size: 1.125rem; }
+@utility font-body2-laptop { font-size: 1rem; }
+
+/* Tablet */
+@utility font-h1-tablet { font-size: 2.75rem; }
+@utility font-h2-tablet { font-size: 2.25rem; }
+@utility font-h3-tablet { font-size: 1.75rem; }
+@utility font-h4-tablet { font-size: 1.25rem; }
+@utility font-h5-tablet { font-size: 1.125rem; }
+@utility font-hero-tablet { font-size: 4rem; }
+@utility font-body1-tablet { font-size: 1.125rem; }
+@utility font-body2-tablet { font-size: 1rem; }
+
+/* Mobile */
+@utility font-h1-mobile { font-size: 2.25rem; }
+@utility font-h2-mobile { font-size: 1.75rem; }
+@utility font-h3-mobile { font-size: 1.5rem; }
+@utility font-h4-mobile { font-size: 1.25rem; }
+@utility font-h5-mobile { font-size: 1rem; }
+@utility font-hero-mobile { font-size: 3.25rem; }
+@utility font-body1-mobile { font-size: 1rem; }
+@utility font-body2-mobile { font-size: 0.875rem; }

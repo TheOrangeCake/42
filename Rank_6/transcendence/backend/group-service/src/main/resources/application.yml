@@ -1,0 +1,19 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /api/group
+
+spring:
+  application:
+    name: group-service
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    cookie-name: access_token
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus

@@ -1,0 +1,44 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api/auth
+    session:
+      cookie:
+        path: /
+  forward-headers-strategy: framework
+
+app:
+  allowed-campus-ids: [47]
+
+
+  jwt:
+    secret: ${JWT_SECRET}
+    cookie-name: access_token
+    ttl-minutes: 120
+  frontend:
+    base-url: ${FRONTEND_BASE_URL:http://localhost:8080}
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          42:
+            client-id: ${FORTYTWO_CLIENT_ID}
+            client-secret: ${FORTYTWO_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            redirect-uri: "${FORTYTWO_REDIRECT_URI}"
+            scope:
+              - public
+        provider:
+          42:
+            authorization-uri: https://api.intra.42.fr/oauth/authorize
+            token-uri: https://api.intra.42.fr/oauth/token
+            user-info-uri: https://api.intra.42.fr/v2/me
+            user-name-attribute: login
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus

@@ -1,0 +1,27 @@
+:root {
+  --color-black: #202020;
+
+  --color-red: #FF5959;
+
+  --color-green: #62D868;
+
+  --color-turquoise: #37E3F0;
+
+  --color-white: #F8F8F8;
+
+  --color-gray: #D9D9D9;
+
+   --color-darkGray: #5B5B5B;
+}
+
+html, body, #app {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #F8F8F8;
+  margin: 0;
+}
+
+

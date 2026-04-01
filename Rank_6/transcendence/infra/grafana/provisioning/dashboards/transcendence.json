@@ -1,0 +1,434 @@
+{
+  "title": "Transcendence",
+  "uid": "transcendence-overview",
+  "tags": ["transcendence", "spring-boot"],
+  "timezone": "browser",
+  "refresh": "30s",
+  "schemaVersion": 39,
+  "time": { "from": "now-1h", "to": "now" },
+  "panels": [
+    {
+      "type": "row",
+      "id": 1,
+      "title": "Service Health",
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 1 },
+      "collapsed": false
+    },
+    {
+      "type": "stat",
+      "id": 2,
+      "title": "api-gateway",
+      "gridPos": { "x": 0, "y": 1, "w": 4, "h": 3 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red", "index": 0 }, "1": { "text": "UP", "color": "green", "index": 1 } } }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
+        }
+      },
+      "targets": [{ "expr": "up{job=\"api-gateway\"}", "legendFormat": "api-gateway" }]
+    },
+    {
+      "type": "stat",
+      "id": 3,
+      "title": "auth-service",
+      "gridPos": { "x": 4, "y": 1, "w": 4, "h": 3 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red", "index": 0 }, "1": { "text": "UP", "color": "green", "index": 1 } } }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
+        }
+      },
+      "targets": [{ "expr": "max(up{job=\"auth-service\"})", "legendFormat": "auth-service" }]
+    },
+    {
+      "type": "stat",
+      "id": 4,
+      "title": "group-service",
+      "gridPos": { "x": 8, "y": 1, "w": 4, "h": 3 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red", "index": 0 }, "1": { "text": "UP", "color": "green", "index": 1 } } }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
+        }
+      },
+      "targets": [{ "expr": "max(up{job=\"group-service\"})", "legendFormat": "group-service" }]
+    },
+    {
+      "type": "stat",
+      "id": 5,
+      "title": "api42-service",
+      "gridPos": { "x": 12, "y": 1, "w": 4, "h": 3 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red", "index": 0 }, "1": { "text": "UP", "color": "green", "index": 1 } } }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
+        }
+      },
+      "targets": [{ "expr": "up{job=\"api42-service\"}", "legendFormat": "api42-service" }]
+    },
+    {
+      "type": "stat",
+      "id": 6,
+      "title": "regular-user-service",
+      "gridPos": { "x": 16, "y": 1, "w": 4, "h": 3 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red", "index": 0 }, "1": { "text": "UP", "color": "green", "index": 1 } } }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
+        }
+      },
+      "targets": [{ "expr": "up{job=\"regular-user-service\"}", "legendFormat": "regular-user-service" }]
+    },
+    {
+      "type": "stat",
+      "id": 8,
+      "title": "chat-service",
+      "gridPos": { "x": 20, "y": 1, "w": 4, "h": 3 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red", "index": 0 }, "1": { "text": "UP", "color": "green", "index": 1 } } }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
+        }
+      },
+      "targets": [{ "expr": "up{job=\"chat-service\"}", "legendFormat": "chat-service" }]
+    },
+
+    {
+      "type": "row",
+      "id": 10,
+      "title": "HTTP Traffic",
+      "gridPos": { "x": 0, "y": 4, "w": 24, "h": 1 },
+      "collapsed": false
+    },
+    {
+      "type": "timeseries",
+      "id": 11,
+      "title": "Request Rate (req/s)",
+      "gridPos": { "x": 0, "y": 5, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        { "expr": "sum by (job) (rate(http_server_requests_seconds_count{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}[2m]))", "legendFormat": "{{job}}" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 12,
+      "title": "5xx Error Rate (%)",
+      "gridPos": { "x": 12, "y": 5, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1,
+          "custom": { "lineWidth": 2, "fillOpacity": 10 },
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 0.01 }] },
+          "color": { "mode": "thresholds" }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "sum by (job) (rate(http_server_requests_seconds_count{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\",status=~\"5..\"}[2m])) / sum by (job) (rate(http_server_requests_seconds_count{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}[2m]))",
+          "legendFormat": "{{job}}"
+        }
+      ]
+    },
+
+    {
+      "type": "row",
+      "id": 20,
+      "title": "Latency",
+      "gridPos": { "x": 0, "y": 13, "w": 24, "h": 1 },
+      "collapsed": false
+    },
+    {
+      "type": "timeseries",
+      "id": 21,
+      "title": "P99 Latency (ms)",
+      "gridPos": { "x": 0, "y": 14, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, sum by (job, le) (rate(http_server_requests_seconds_bucket{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}[5m]))) * 1000",
+          "legendFormat": "p99 {{job}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 22,
+      "title": "P50 Latency (ms)",
+      "gridPos": { "x": 12, "y": 14, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (job, le) (rate(http_server_requests_seconds_bucket{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}[5m]))) * 1000",
+          "legendFormat": "p50 {{job}}"
+        }
+      ]
+    },
+
+    {
+      "type": "row",
+      "id": 30,
+      "title": "JVM & Resources",
+      "gridPos": { "x": 0, "y": 22, "w": 24, "h": 1 },
+      "collapsed": false
+    },
+    {
+      "type": "timeseries",
+      "id": 41,
+      "title": "Process CPU Usage",
+      "gridPos": { "x": 0, "y": 23, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "process_cpu_usage{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}",
+          "legendFormat": "{{job}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 31,
+      "title": "Heap Memory Used",
+      "gridPos": { "x": 12, "y": 23, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "sum by (job) (jvm_memory_used_bytes{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\", area=\"heap\"})",
+          "legendFormat": "{{job}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 42,
+      "title": "JVM Live Threads",
+      "gridPos": { "x": 0, "y": 31, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "sum by (job) (jvm_threads_live_threads{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"})",
+          "legendFormat": "{{job}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 61,
+      "title": "GC Pause Duration (avg, ms)",
+      "gridPos": { "x": 12, "y": 31, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_pause_seconds_sum{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}[2m]) / rate(jvm_gc_pause_seconds_count{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}[2m]) * 1000",
+          "legendFormat": "{{job}} ({{action}})"
+        }
+      ]
+    },
+
+    {
+      "type": "row",
+      "id": 50,
+      "title": "Database (HikariCP)",
+      "gridPos": { "x": 0, "y": 39, "w": 24, "h": 1 },
+      "collapsed": false
+    },
+    {
+      "type": "timeseries",
+      "id": 51,
+      "title": "Active DB Connections",
+      "gridPos": { "x": 0, "y": 40, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "sum by (job) (hikaricp_connections_active{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"})",
+          "legendFormat": "{{job}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 52,
+      "title": "Pending DB Connections",
+      "gridPos": { "x": 12, "y": 40, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        {
+          "expr": "sum by (job) (hikaricp_connections_pending{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"})",
+          "legendFormat": "{{job}}"
+        }
+      ]
+    },
+
+    {
+      "type": "row",
+      "id": 70,
+      "title": "HTTP Breakdown by Endpoint",
+      "gridPos": { "x": 0, "y": 48, "w": 24, "h": 1 },
+      "collapsed": true,
+      "panels": [
+        {
+          "type": "timeseries",
+          "id": 71,
+          "title": "Request Rate by URI",
+          "gridPos": { "x": 0, "y": 59, "w": 24, "h": 8 },
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "reqps",
+              "custom": { "lineWidth": 1, "fillOpacity": 5 }
+            }
+          },
+          "options": { "tooltip": { "mode": "multi" }, "legend": { "displayMode": "list", "placement": "right" } },
+          "targets": [
+            {
+              "expr": "sum by (job, uri, method, status) (rate(http_server_requests_seconds_count{job=~\"api-gateway|auth-service|group-service|api42-service|regular-user-service|chat-service\"}[2m]))",
+              "legendFormat": "[{{job}}] {{method}} {{uri}} {{status}}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "datasource",
+        "type": "datasource",
+        "query": "prometheus",
+        "current": { "text": "Prometheus", "value": "Prometheus" },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "refresh": 1
+      }
+    ]
+  }
+}
